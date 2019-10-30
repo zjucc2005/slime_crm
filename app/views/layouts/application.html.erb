@@ -10,7 +10,8 @@
     </head>
 
     <body>
-        <%= render :partial => 'shared/main_navbar.html.erb' %>
+        <!-- alert -->
+        <%= render(:partial => 'shared/main_navbar.html.erb') if signed_in? %>
         <%= yield %>
     </body>
 </html>

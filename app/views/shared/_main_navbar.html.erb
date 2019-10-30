@@ -1,6 +1,5 @@
-<% if signed_in? %>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <a class="navbar-brand" href="#">CRM</a>
+    <%= link_to 'CRM', root_path, :class => 'navbar-brand' %>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -8,13 +7,13 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Link</a>
+                <a class="nav-link <%= yield :nav_candidates %>" href="#">Candidate</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link <%= yield :nav_clients %>" href="#">Client</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link <%= yield :nav_projects %>" href="#">Project</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
@@ -27,4 +26,3 @@
         </ul>
     </div>
 </nav>
-<% end %>
