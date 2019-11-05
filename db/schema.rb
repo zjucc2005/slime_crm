@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_123855) do
+ActiveRecord::Schema.define(version: 2019_11_05_142519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "candidate_files", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.string "category"
+    t.string "file"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_candidate_files_on_candidate_id"
+  end
 
   create_table "candidates", force: :cascade do |t|
     t.string "name_cn"
@@ -50,6 +59,31 @@ ActiveRecord::Schema.define(version: 2019_10_28_123855) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "education_experiences", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.string "school"
+    t.string "major"
+    t.string "degree"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_education_experiences_on_candidate_id"
+  end
+
+  create_table "project_experiences", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.string "name"
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_project_experiences_on_candidate_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -77,6 +111,18 @@ ActiveRecord::Schema.define(version: 2019_10_28_123855) do
     t.datetime "date_of_resignation"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "work_experiences", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.string "company"
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_work_experiences_on_candidate_id"
   end
 
 end

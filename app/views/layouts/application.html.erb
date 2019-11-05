@@ -10,8 +10,15 @@
     </head>
 
     <body>
-        <!-- alert -->
-        <%= render(:partial => 'shared/main_navbar.html.erb') if signed_in? %>
-        <%= yield %>
+        <% if signed_in? %>
+            <%= render :partial => 'shared/main_navbar' %>
+            <div class="container-fluid main">
+                <%= display_flash_message %>
+                <%= yield %>
+            </div>
+        <% else %>
+            <%= display_flash_message %>
+            <%= yield %>
+        <% end %>
     </body>
 </html>
