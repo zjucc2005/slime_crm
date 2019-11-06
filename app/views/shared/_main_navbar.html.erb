@@ -1,28 +1,30 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-    <%= link_to 'CRM', root_path, :class => 'navbar-brand' %>
+<header class="header">
+    <nav class="navbar navbar-expand-lg bg-light navbar-light shadow fixed-top">
+        <%= link_to 'CRM Demo', root_path, :class => 'navbar-brand' %>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link <%= yield :nav_candidates %>" href="#">Candidate</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <%= yield :nav_clients %>" href="#">Client</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link <%= yield :nav_projects %>" href="#">Project</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-            <li class="nav-item">
-                <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => 'Sure to logout?' }, :class => 'nav-link' do %>
-                    Logout
-                <% end if signed_in? %>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link <%= yield :nav_candidates %>" href="#">Candidate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= yield :nav_clients %>" href="#">Client</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <%= yield :nav_projects %>" href="#">Project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
+                <li class="nav-item">
+                    <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => 'Sure to logout?' }, :class => 'nav-link' do %>
+                        Logout
+                    <% end if signed_in? %>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

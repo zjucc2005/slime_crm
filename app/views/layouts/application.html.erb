@@ -12,7 +12,7 @@
     <body>
         <% if signed_in? %>
             <%= render :partial => 'shared/main_navbar' %>
-            <div class="container-fluid main">
+            <div class="container-fluid main px-0">
                 <%= display_flash_message %>
                 <%= yield %>
             </div>
