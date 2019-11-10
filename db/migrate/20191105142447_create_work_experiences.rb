@@ -4,7 +4,8 @@ class CreateWorkExperiences < ActiveRecord::Migration[6.0]
       t.references :candidate
       t.datetime :started_at
       t.datetime :ended_at
-      t.string :company
+      t.string :company_cn
+      t.string :company_en
       t.string :title
       t.text :description
 

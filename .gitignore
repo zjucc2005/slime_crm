@@ -34,6 +34,11 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Ignore idea
+.idea
+.generators
+.rakeTasks
+
 # Ignore database config
 /config/database.yml
 /uploads
