@@ -1,0 +1,30 @@
+en:
+  # Attributes names common to most models
+  attributes:
+    id: "ID"
+    created_at: "Created at"
+    updated_at: "Updated at"
+
+  # Default error messages to most models
+  errors:
+    messages:
+      blank: "can't be blank"
+      required: "must exist"
+      taken: "has already been taken"
+
+  activerecord:
+    errors:
+      messages:
+        validation_failed: "Validation failed: %{errors}"
+        # Append our own errors here
+
+    # Translate model names
+    models:
+      user: "User"
+
+    # Translate model attribute names. Used in Model.human_attribute_name(attribute)
+    attributes:
+      user:
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"

@@ -15,4 +15,20 @@ module ApplicationHelper
       flash[category]
     end
   end
+
+  ##
+  # I18n for models
+  def mt(model, attr=nil)
+    if attr.nil?
+      I18n.t("activerecord.models.#{model}")
+    else
+      if I18n.exists?("activerecord.attributes.#{model}.#{attr}")
+        I18n.t("activerecord.attributes.#{model}.#{attr}")
+      elsif I18n.exists?("attributes.#{attr}")
+        I18n.t("attributes.#{attr}")
+      else
+        I18n.t("activerecord.attributes.#{model}.#{attr}")
+      end
+    end
+  end
 end

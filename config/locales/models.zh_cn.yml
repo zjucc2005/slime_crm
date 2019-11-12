@@ -1,0 +1,31 @@
+zh_cn:
+  # Attributes names common to most models
+  attributes:
+    id: "ID"
+    created_at: "创建时间"
+    updated_at: "更新时间"
+
+  # Default error messages to most models
+  errors:
+    messages:
+      blank: "不能为空"
+      required: "不能为空"
+      taken: "已被使用"
+
+  activerecord:
+    errors:
+      messages:
+        validation_failed: "验证失败: %{errors}"
+        # Append our own errors here
+
+    # Translate model names
+    models:
+      user: "用户"
+
+    # Translate model attribute names. Used in Model.human_attribute_name(attribute)
+    attributes:
+      user:
+        email: "Email"
+        password: "密码"
+        password_confirmation: "密码确认"
+
