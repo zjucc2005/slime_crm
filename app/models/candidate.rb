@@ -1,10 +1,7 @@
 # encoding: utf-8
 class Candidate < ApplicationRecord
   # Associations
-  has_many :candidate_files, :class_name => 'CandidateFile', :dependent => :destroy
-  has_many :work_experiences, :class_name => 'WorkExperience', :dependent => :destroy
-  has_many :project_experiences, :class_name => 'ProjectExperience', :dependent => :destroy
-  has_many :education_experiences, :class_name => 'EducationExperience', :dependent => :destroy
+  has_many :experiences, :class_name => 'CandidateExperience', :dependent => :destroy
 
   # Validations
   validates_inclusion_of :category, :in => %w[expert customer]
