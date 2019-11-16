@@ -1,0 +1,53 @@
+<!-- search modal -->
+<section id="search_wrapper">
+    <!-- fixed button -->
+    <button type="button" data-toggle="modal" data-target="#searchModal" class="float-search-btn btn-primary o-search-magnify-1 shadow"></button>
+    <!-- Modal-->
+    <div id="searchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+        <div role="document" class="modal-dialog" style="max-width: 800px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="exampleModalLabel" class="modal-title">Search</h4>
+                    <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                </div>
+
+                <%= form_tag candidates_path, :method => :get do %>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <%= label_tag :name, nil, :class => 'form-control-label text-uppercase' %>
+                                    <%= text_field_tag :login_name, params[:login_name], :class => 'form-control' %>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <%= label_tag :text, nil, :class => 'form-control-label text-uppercase' %>
+                                    <%= text_field_tag :nickname, params[:nickname], :class => 'form-control' %>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <%= label_tag :text, nil, :class => 'form-control-label text-uppercase' %>
+                                    <%= select_tag :user_role, options_for_select(%w[1 2 3], params[:user_role]),
+                                                                 :prompt => '', :class => 'form-control' %>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <%= label_tag :text, nil, :class => 'form-control-label text-uppercase' %>
+                                    <%= select_tag :status, options_for_select(User::STATUS.map{|k,v| [v,k]}, params[:status]),
+                                                                 :prompt => '', :class => 'form-control' %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                        <%= submit_tag :submit, :class => 'btn btn-primary' %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>

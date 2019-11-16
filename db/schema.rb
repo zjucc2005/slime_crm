@@ -10,10 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_27_092357) do
+ActiveRecord::Schema.define(version: 2019_11_16_022443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "candidate_experiences", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.string "category"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.string "org_cn"
+    t.string "org_en"
+    t.string "department"
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_candidate_experiences_on_candidate_id"
+  end
+
+  create_table "candidates", force: :cascade do |t|
+    t.string "category"
+    t.string "data_source"
+    t.bigint "owner_id"
+    t.string "name_cn"
+    t.string "name_en"
+    t.string "city"
+    t.string "email"
+    t.string "email1"
+    t.string "phone"
+    t.string "phone1"
+    t.string "industry"
+    t.string "title"
+    t.datetime "date_of_birth"
+    t.string "gender"
+    t.text "description"
+    t.boolean "is_available"
+    t.decimal "cpt", precision: 10, scale: 2
+    t.string "bank"
+    t.string "bank_card"
+    t.string "bank_user"
+    t.string "alipay_account"
+    t.string "alipay_user"
+    t.jsonb "property", default: {}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

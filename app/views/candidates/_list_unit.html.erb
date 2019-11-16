@@ -4,13 +4,14 @@
             <div class="col-lg-4 d-flex flex-column text-center text-md-left">
                 <div class="d-flex flex-column flex-lg-row align-items-center mb-3">
                     <div class="text text-center mr-3 mb-1 mb-lg-0">
-                        <span class="smaller text-gray"># 123456</span>
+                        <span class="smaller text-gray">#123456</span>
                     </div>
                     <div class="text text-center mr-3 mb-1 mb-lg-0">
-                        <h5 class="mb-0"><span class="status valid mr-2"></span>Candidate Name</h5>
+                        <h6 class="mb-0"><span class="status <%= cycle('valid', 'invalid') %> mr-2"></span>四个汉字</h6>
                     </div>
                     <div class="text">
-                        <span class="smaller mr-1 bg-red text-light roundy px-2 py-1">1500</span>
+                        <% cps = rand(10000) %>
+                        <span class="smaller mr-1 text-light roundy px-2 py-1 <%= cps_bg(cps) %>"><%= "¥#{cps}" %></span>
                         <span class="text-gray mr-1">/</span>
                         <span class="smaller mr-1 state">上海</span>
                         <span class="text-gray mr-1">/</span>
@@ -21,15 +22,15 @@
                 <div class="d-flex flex-column text-left">
                     <div class="text mb-1">
                         <span class="text-gray">2019-08-10</span>
-                        <span>上海失语国际贸易有限公司</span>
+                        <span><%= hl('上海失语国际贸易有限公司', params[:term]) %></span>
                     </div>
                     <div class="text mb-1">
                         <span class="text-gray">2019-08-10</span>
-                        <span>上海失语国际贸易有限公司</span>
+                        <span><%= hl('上海失语国际贸易有限公司', params[:term]) %></span>
                     </div>
                     <div class="text mb-1">
                         <span class="text-gray">2019-08-10</span>
-                        <span>上海失语国际贸易有限公司</span>
+                        <span><%= hl('上海失语国际贸易有限公司', params[:term]) %></span>
                     </div>
                 </div>
             </div>

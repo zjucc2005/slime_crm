@@ -28,3 +28,15 @@
 }
 .status.valid:before { background-color: #7CF29C !important; }
 .status.invalid:before { background-color: #F0404C !important }
+
+.float-search-btn{
+    position: fixed;
+    bottom: 2em;
+    right: 2em;
+    z-index: 1030;
+    font-size: 2em;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50px;
+}

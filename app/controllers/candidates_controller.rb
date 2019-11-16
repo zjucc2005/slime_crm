@@ -1,10 +1,23 @@
 # encoding: utf-8
 class CandidatesController < ApplicationController
+
   def index
-    # flash[:notice] = 'route ok!'
+    query = Candidate.all
+    # query code here >>
+
+    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   def new
-    render :plain => "url(:#{controller_name}, :#{action_name}) route ok!"
+    @candidate = Candidate.new
+  end
+
+  private
+  def load_candidate
+    @candidate = Candidate.find(params[:id])
+  end
+
+  def candidate_params
+    params.require(:candidate).permit!
   end
 end

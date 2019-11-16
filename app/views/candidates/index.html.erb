@@ -1,8 +1,21 @@
 <% provide :nav_candidates, 'active' %>
-<section class="">
+<!-- function buttons -->
+<section class="mb-2">
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 mb-0">
+            <div class="bg-white shadow roundy p-4 h-100 d-flex align-items-center justify-content-between">
+                <div class="icon text-white bg-violet"><i class="fas fa-server"></i></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
     <div class="row">
         <% 3.times do %>
             <%= render :partial => 'list_unit' %>
         <% end %>
     </div>
+
+    <%= render :partial => 'search_modal' %>
 </section>
