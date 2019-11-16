@@ -1,95 +1,69 @@
 <% provide :nav_candidates, 'active' %>
-<div class="px-4 py-4">
+<section class="">
     <div class="row">
-        <div class="col-lg-2 mb-4">
-            <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
-                  <div class="flex-grow-1 d-flex align-items-center">
-                    <div class="dot mr-3 bg-violet"></div>
-                    <div class="text">
-                      <h6 class="mb-0">Cases</h6><span class="text-gray">127 new cases</span>
-                    </div>
-                  </div>
-                  <div class="icon bg-violet text-white"><i class="fas fa-clipboard-check"></i></div>
-            </div>
-            <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
-                  <div class="flex-grow-1 d-flex align-items-center">
-                    <div class="dot mr-3 bg-green"></div>
-                    <div class="text">
-                      <h6 class="mb-0">Quotes</h6><span class="text-gray">214 new quotes</span>
-                    </div>
-                  </div>
-                  <div class="icon bg-green text-white"><i class="fas fa-dollar-sign"></i></div>
-            </div>
-            <div class="bg-white shadow roundy px-4 py-3 d-flex align-items-center justify-content-between mb-4">
-                  <div class="flex-grow-1 d-flex align-items-center">
-                    <div class="dot mr-3 bg-blue"></div>
-                    <div class="text">
-                      <h6 class="mb-0">Clients</h6><span class="text-gray">25 new clients</span>
-                    </div>
-                  </div>
-                  <div class="icon bg-blue text-white"><i class="fas fa-user-friends"></i></div>
-            </div>
-        </div>
+        <div class="col-lg-12">
+            <%= link_to 'javascript:void(0);', :class => 'message card px-5 py-3 mb-4 bg-hover-gradient-primary no-anchor-style' do %>
+                <div class="row">
+                    <div class="col-lg-4 d-flex flex-column text-center text-md-left">
+                        <div class="d-flex flex-column flex-lg-row align-items-center mb-3">
+                            <div class="text text-center mr-3 mb-1 mb-lg-0">
+                                <span class="smaller text-gray"># 123456</span>
+                            </div>
+                            <div class="text text-center mr-3 mb-1 mb-lg-0">
+                                <h5 class="mb-0"><span class="status valid mr-2"></span>Candidate Name</h5>
+                            </div>
+                            <div class="text">
+                                <span class="smaller mr-1 bg-red text-light roundy px-2 py-1">1500</span>
+                                <span class="text-gray mr-1">/</span>
+                                <span class="smaller mr-1 state">上海</span>
+                                <span class="text-gray mr-1">/</span>
+                                <span class="smaller mr-1">13312341234</span>
+                            </div>
+                        </div>
 
-        <div class="col-lg-10 mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <span class="text-uppercase mb-0">候选人列表</span>
-                    <%= link_to '新增候选人', new_candidate_path, :class => 'btn btn-sm btn-primary', :style => 'float: right;' %>
+                        <div class="d-flex flex-column text-left">
+                            <div class="text mb-1">
+                                <span class="text-gray">2019-08-10</span>
+                                <span>上海失语国际贸易有限公司</span>
+                            </div>
+                            <div class="text mb-1">
+                                <span class="text-gray">2019-08-10</span>
+                                <span>上海失语国际贸易有限公司</span>
+                            </div>
+                            <div class="text mb-1">
+                                <span class="text-gray">2019-08-10</span>
+                                <span>上海失语国际贸易有限公司</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 d-flex align-items-center flex-column text-center text-md-left">
+                        <p class="my-3 my-lg-0">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+                        </p>
+                    </div>
+                    <div class="col-lg-4 d-flex flex-column text-left">
+                        <div class="text mb-3">
+                            <span>访谈次数： </span>
+                            <span>20</span>，
+                            <span>最近访谈时间： </span>
+                            <span>2019-11-11 08:20:00</span>
+                        </div>
+                        <div class="text mb-1">
+                            <span class="text-gray">2019-08-10</span>
+                            <span>上海失语国际贸易有限公司</span>
+                        </div>
+                        <div class="text mb-1">
+                            <span class="text-gray">2019-08-10</span>
+                            <span>上海失语国际贸易有限公司</span>
+                        </div>
+                        <div class="text mb-1">
+                            <span class="text-gray">2019-08-10</span>
+                            <span>上海失语国际贸易有限公司</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                              <th>#</th>
-                              <th>First Name</th>
-                              <th>Last Name</th>
-                              <th>Username</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th scope="row">1</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">2</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">3</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter      </td>
-                            </tr>
-                            <tr>
-                              <th scope="row">4</th>
-                              <td>Mark</td>
-                              <td>Otto</td>
-                              <td>@mdo</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">5</th>
-                              <td>Jacob</td>
-                              <td>Thornton</td>
-                              <td>@fat</td>
-                            </tr>
-                            <tr>
-                              <th scope="row">6</th>
-                              <td>Larry</td>
-                              <td>the Bird</td>
-                              <td>@twitter</td>
-                            </tr>
-                          </tbody>
-                    </table>
-                </div>
-            </div>
+            <% end %>
         </div>
-
-        
     </div>
-</div>
+</section>

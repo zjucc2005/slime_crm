@@ -10,7 +10,7 @@ module ApplicationHelper
   def flash_tag(category)
     _type_ =  {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info' }[category]
     # render :partial => 'shared/flash', :locals => { :category => _type_, :message => message }
-    content_tag(:div, :class => "alert alert-#{_type_} alert-dismissible fade show") do
+    content_tag(:div, :class => "alert alert-#{_type_} alert-dismissible fade show mb-0") do
       button_tag('&times;'.html_safe, :type => 'button', :class => 'close', :data => { :dismiss => 'alert' }) +
       flash[category]
     end

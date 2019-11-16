@@ -10,87 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_05_144258) do
+ActiveRecord::Schema.define(version: 2019_11_16_022443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "candidate_files", force: :cascade do |t|
+  create_table "candidate_experiences", force: :cascade do |t|
     t.bigint "candidate_id"
     t.string "category"
-    t.string "file"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.string "org_cn"
+    t.string "org_en"
+    t.string "department"
+    t.string "title"
+    t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["candidate_id"], name: "index_candidate_files_on_candidate_id"
+    t.index ["candidate_id"], name: "index_candidate_experiences_on_candidate_id"
   end
 
   create_table "candidates", force: :cascade do |t|
+    t.string "category"
+    t.string "data_source"
+    t.bigint "owner_id"
     t.string "name_cn"
     t.string "name_en"
-    t.string "avatar"
-    t.string "category"
-    t.string "source_channel"
-    t.string "input_method"
-    t.bigint "created_by"
-    t.bigint "owner_id"
+    t.string "city"
     t.string "email"
     t.string "email1"
-    t.string "email2"
     t.string "phone"
     t.string "phone1"
-    t.string "phone2"
     t.string "industry"
     t.string "title"
-    t.decimal "annual_salary", precision: 10, scale: 2
     t.datetime "date_of_birth"
     t.string "gender"
-    t.string "city"
-    t.string "address"
     t.text "description"
-    t.jsonb "tags", default: []
-    t.string "linkedin"
-    t.string "interview_willingness"
-    t.decimal "expert_ratio", precision: 10, scale: 2
+    t.boolean "is_available"
+    t.decimal "cpt", precision: 10, scale: 2
     t.string "bank"
-    t.string "bank_account"
-    t.string "bank_card_number"
+    t.string "bank_card"
+    t.string "bank_user"
+    t.string "alipay_account"
+    t.string "alipay_user"
     t.jsonb "property", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "education_experiences", force: :cascade do |t|
-    t.bigint "candidate_id"
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.string "school"
-    t.string "major"
-    t.string "degree"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["candidate_id"], name: "index_education_experiences_on_candidate_id"
-  end
-
-  create_table "language_proficiencies", force: :cascade do |t|
-    t.bigint "candidate_id"
-    t.string "language"
-    t.string "level"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["candidate_id"], name: "index_language_proficiencies_on_candidate_id"
-  end
-
-  create_table "project_experiences", force: :cascade do |t|
-    t.bigint "candidate_id"
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.string "name"
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["candidate_id"], name: "index_project_experiences_on_candidate_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -120,18 +85,6 @@ ActiveRecord::Schema.define(version: 2019_11_05_144258) do
     t.datetime "date_of_resignation"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "work_experiences", force: :cascade do |t|
-    t.bigint "candidate_id"
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.string "company"
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["candidate_id"], name: "index_work_experiences_on_candidate_id"
   end
 
 end
