@@ -30,5 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 zh_cn:
+  true: "是"
+  false: "否"
+
+  back: "返回"
+  base_info: "基本信息"
   new: "新建%{model}"
   submit: "提交"
+  work_experience: "工作经历"

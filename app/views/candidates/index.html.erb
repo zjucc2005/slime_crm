@@ -5,7 +5,7 @@
         <div class="col-xl-6 mb-0">
             <div class="bg-white shadow roundy p-3 h-100 d-flex align-items-center justify-content-between">
                 <%= link_to new_candidate_path, :class => 'bg-primary text-white roundy p-2 text-uppercase' do %>
-                    <i class="o-user-details-1"></i> new
+                    <i class="o-id-card-1"></i> <%= "#{t(:new, :model => mt(:candidate))}" %>
                 <% end %>
             </div>
         </div>
@@ -23,7 +23,7 @@
 </section>
 
 <script>
-    $(document).ready(function(){
-        alert('cc');
-    })
+    // $(document).ready(function(){
+    //     alert('cc');
+    // })
 </script>

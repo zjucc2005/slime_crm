@@ -56,3 +56,13 @@ zh_cn:
         alipay_account: "支付宝帐号"
         alipay_user: "支付宝用户名"
         property: "其他属性"
+
+      candidate_experience:
+        category: "类型"
+        started_at: "开始时间"
+        ended_at: "结束时间"
+        org_cn: "公司(中文)"
+        org_en: "公司(英文)"
+        department: "部门"
+        title: "职位"
+        description: "描述"

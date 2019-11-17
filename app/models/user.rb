@@ -5,6 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
+  # Associations
+  has_many :candidates, :class_name => 'Candidate', :foreign_key => :owner_id
+
   # validations
   validates_inclusion_of :role, :in => %w[su admin consultant]
   validates_presence_of :name_cn

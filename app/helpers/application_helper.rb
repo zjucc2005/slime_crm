@@ -31,4 +31,10 @@ module ApplicationHelper
       end
     end
   end
+
+  ##
+  # boolean options for select tag
+  def boolean_options
+    [[I18n.t(:true), 1], [I18n.t(:false), 0]]
+  end
 end
