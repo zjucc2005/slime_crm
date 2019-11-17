@@ -21,6 +21,8 @@ en:
     # Translate model names
     models:
       user: "User"
+      candidate: "Candidate"
+      expert: "Expert"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -28,3 +30,29 @@ en:
         email: "Email"
         password: "Password"
         password_confirmation: "Password confirmation"
+
+      candidate:
+        category: "Category"
+        data_source: "Data source"
+        owner: "Owner"
+        name: "Name"
+        name_cn: "Name(CN)"
+        name_en: "Name(EN)"
+        city: "City"
+        email: "Email1"
+        email1: "Email2"
+        phone: "Phone1"
+        phone1: "Phone2"
+        industry: "Industry"
+        title: "Job title"
+        date_of_birth: "Date of birth"
+        gender: "Gender"
+        description: "Description"
+        is_available: "Available"
+        cpt: "Cost per time"
+        bank: "Bank name"
+        bank_card: "Bank card no."
+        bank_user: "Bank username"
+        alipay_account: "Alipay account"
+        alipay_user: "Alipay username"
+        property: "Property"

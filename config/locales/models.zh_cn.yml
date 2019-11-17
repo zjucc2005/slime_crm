@@ -21,6 +21,8 @@ zh_cn:
     # Translate model names
     models:
       user: "用户"
+      candidate: "候选人"
+      expert: "专家"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -29,3 +31,28 @@ zh_cn:
         password: "密码"
         password_confirmation: "密码确认"
 
+      candidate:
+        category: "候选人类型"
+        data_source: "数据来源"
+        owner: "创建人"
+        name: "姓名"
+        name_cn: "姓名(中文)"
+        name_en: "姓名(英文)"
+        city: "城市"
+        email: "邮箱1"
+        email1: "邮箱2"
+        phone: "电话1"
+        phone1: "电话2"
+        industry: "行业"
+        title: "职位"
+        date_of_birth: "出生日期"
+        gender: "性别"
+        description: "背景说明"
+        is_available: "访谈意愿"
+        cpt: "专家费率"
+        bank: "银行名称"
+        bank_card: "银行卡号"
+        bank_user: "银行用户名"
+        alipay_account: "支付宝帐号"
+        alipay_user: "支付宝用户名"
+        property: "其他属性"

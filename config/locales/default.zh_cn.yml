@@ -30,4 +30,5 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 zh_cn:
-  hello: "世界, 你好"
+  new: "新建%{model}"
+  submit: "提交"

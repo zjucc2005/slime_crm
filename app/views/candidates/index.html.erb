@@ -2,9 +2,11 @@
 <!-- function buttons -->
 <section class="mb-2">
     <div class="row">
-        <div class="col-xl-3 col-lg-6 mb-0">
-            <div class="bg-white shadow roundy p-4 h-100 d-flex align-items-center justify-content-between">
-                <div class="icon text-white bg-violet"><i class="fas fa-server"></i></div>
+        <div class="col-xl-6 mb-0">
+            <div class="bg-white shadow roundy p-3 h-100 d-flex align-items-center justify-content-between">
+                <%= link_to new_candidate_path, :class => 'bg-primary text-white roundy p-2 text-uppercase' do %>
+                    <i class="o-user-details-1"></i> new
+                <% end %>
             </div>
         </div>
     </div>
@@ -19,3 +21,9 @@
 
     <%= render :partial => 'search_modal' %>
 </section>
+
+<script>
+    $(document).ready(function(){
+        alert('cc');
+    })
+</script>
