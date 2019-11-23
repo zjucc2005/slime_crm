@@ -1,5 +1,13 @@
-<div class="bg-gray-500 roundy px-4 py-1 mr-0 mb-3 text-dark"><%= t(:base_info) %></div>
-<div class="row">
+<div class="badge badge-info mb-3 px-4"><%= t(:base_info) %></div>
+<div class="row border-bottom mb-3">
+
+    <div class="col-12">
+        <div class="form-group">
+            <span class="badge badge-primary"><%= show_category %></span>
+            <span class="badge badge-warning"><%= show_data_source %></span>
+        </div>
+    </div>
+
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
@@ -158,83 +166,4 @@
             <%= f.text_area :description, :class => 'form-control', :rows => 3 %>
         </div>
     </div>
-</div>
-
-<div class="bg-gray-500 roundy px-4 py-1 mr-0 mb-3 text-dark"><%= t(:work_experience) %></div>
-<div id="work_experience_wrapper">
-    <% 2.times do %>
-    <div id="exp_1" class="row border-bottom border-gray-500 mb-3">
-        <%= link_to '&times;'.html_safe, 'javascript:void(0);', :class => 'border border-gray-500 px-2', :style => 'position: absolute; z-index: 9;' %>
-        <div class="col-12 col-lg-6">
-            <div class="row">
-                <div class="col-6">
-                    <div class="input-group input-group-sm input-group-align mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><%= mt(:candidate_experience, :started_at) %></span>
-                        </div>
-                        <%= text_field_tag :started_at, nil, :class => 'form-control' %>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group input-group-sm input-group-align mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><%= mt(:candidate_experience, :ended_at) %></span>
-                        </div>
-                        <%= text_field_tag :ended_at, nil, :class => 'form-control' %>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group input-group-sm input-group-align mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><%= mt(:candidate_experience, :org_cn) %></span>
-                        </div>
-                        <%= text_field_tag :org_cn, nil, :class => 'form-control' %>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group input-group-sm input-group-align mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><%= mt(:candidate_experience, :org_en) %></span>
-                        </div>
-                        <%= text_field_tag :org_en, nil, :class => 'form-control' %>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group input-group-sm input-group-align mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><%= mt(:candidate_experience, :department) %></span>
-                        </div>
-                        <%= text_field_tag :department, nil, :class => 'form-control' %>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="input-group input-group-sm input-group-align mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><%= mt(:candidate_experience, :title) %></span>
-                        </div>
-                        <%= text_field_tag :title, nil, :class => 'form-control' %>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-lg-6">
-            <div class="input-group input-group-sm input-group-align mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:candidate_experience, :description) %></span>
-                </div>
-                <%= text_area_tag :description, nil, :class => 'form-control', :rows => 3 %>
-            </div>
-        </div>
-    </div>
-    <% end %>
-</div>
-
-<div id="new_work_experience" class="row border-bottom border-gray-500 mb-3">
-    <%= link_to 'Add', 'javascript:void(0);', :class => 'mb-3' %>
-</div>
-
-<div class="form-group">
-    <%= f.submit t(:submit), :class => 'btn btn-primary' %>
-    <%= link_to t(:back), candidates_path,:class => 'btn btn-secondary' %>
 </div>

@@ -23,6 +23,7 @@ zh_cn:
       user: "用户"
       candidate: "候选人"
       expert: "专家"
+      customer: "客户"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:

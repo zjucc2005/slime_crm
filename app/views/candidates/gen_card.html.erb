@@ -1,0 +1,18 @@
+<div id="candidate_card" class="row">
+    <% @candidates.each do |candidate| %>
+        <div class="col-lg-12">
+            <div class="card px-5 py-3 candidate-card">
+                <p><%= "Standard Expert" %> <%= "# #{candidate.uid}" %></p>
+                <p>【公司】 <%= candidate.latest_work_experience.try(:org_cn) %></p>
+                <p>【职位】 <%= candidate.latest_work_experience.try(:title) %></p>
+                <p>【背景】 <%= candidate.description %></p>
+                <p>【反馈】 <%= "专家可以通过访谈形式进行沟通" %></p>
+                <p>【方便时间】 <%= "提前约" %></p>
+                <p>【倍率】 <%= "1" %></p>
+            </div>
+        </div>
+    <% end %>
+</div>
+
+<%= button_tag '', :type => 'button', :class => 'float-btn btn-primary fa fa-clipboard shadow',
+               :onclick => 'clipCandidateCard();' %>

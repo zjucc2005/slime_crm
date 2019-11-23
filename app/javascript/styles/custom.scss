@@ -1,5 +1,6 @@
 .container-fluid.main {
     margin-top: 54px;
+    background: #EFEFEF;
 }
 
 .input-group.input-group-align .input-group-text {
@@ -30,17 +31,27 @@
     height: 10px;
     background-color: #ccc;
 }
-.status.valid:before { background-color: #7CF29C !important; }
-.status.invalid:before { background-color: #F0404C !important }
 
-.float-search-btn{
+
+.float-btn{
     position: fixed;
     bottom: 2em;
     right: 2em;
     z-index: 1030;
-    font-size: 2em;
+    font-size: 1.3em;
     width: 50px;
     height: 50px;
     border: none;
     border-radius: 50px;
 }
+
+.exp-add-btn {
+    line-height: 0.8em;
+}
+.exp-del-btn {
+    position: absolute;
+    z-index: 9;
+    line-height: 0.8em;
+}
+
+

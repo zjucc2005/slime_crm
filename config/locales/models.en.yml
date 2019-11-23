@@ -23,6 +23,7 @@ en:
       user: "User"
       candidate: "Candidate"
       expert: "Expert"
+      customer: "Customer"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:

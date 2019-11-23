@@ -1,12 +1,16 @@
+<% activate_sidebar %>
 <header class="header">
-    <nav class="navbar navbar-expand-lg bg-light navbar-light shadow fixed-top">
-        <%= link_to 'CRM Demo', root_path, :class => 'navbar-brand' %>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <%= link_to 'CRM', root_path, :class => 'navbar-brand' %>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <%= link_to t(:homepage), root_path, :class => "nav-link #{yield :nav_home}" %>
+                </li>
                 <li class="nav-item">
                     <%= link_to mt(:candidate), candidates_path, :class => "nav-link #{yield :nav_candidates}" %>
                 </li>
@@ -18,17 +22,19 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        Options
+                        <%= current_user.name_cn %>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Option 1</a>
+                        <a class="dropdown-item" href="#">我的账号</a>
                         <a class="dropdown-item" href="#">Option 2</a>
-                        <a class="dropdown-item" href="#">Option 3</a>
+                        <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => 'Sure to logout?' }, :class => 'dropdown-item' do %>
+                            <%= t('action.quit') %>
+                        <% end if signed_in? %>
                     </div>
                 </li>
                 <li class="nav-item">
                     <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => 'Sure to logout?' }, :class => 'nav-link' do %>
-                        Logout
+                        <%= t('action.quit') %>
                     <% end if signed_in? %>
                 </li>
             </ul>

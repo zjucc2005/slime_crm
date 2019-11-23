@@ -1,11 +1,13 @@
-<% provide :nav_candidates, 'active' %>
-<!-- function buttons -->
 <section class="mb-2">
     <div class="row">
-        <div class="col-xl-6 mb-0">
-            <div class="bg-white shadow roundy p-3 h-100 d-flex align-items-center justify-content-between">
-                <%= link_to new_candidate_path, :class => 'bg-primary text-white roundy p-2 text-uppercase' do %>
-                    <i class="o-id-card-1"></i> <%= "#{t(:new, :model => mt(:candidate))}" %>
+        <div class="col-12 mb-0">
+            <div class="card p-2 d-block">
+                <%= link_to new_candidate_path, :class => 'btn btn-primary' do %>
+                    <i class="fa fa-user-circle"></i> <%= "#{t('action.new', :model => mt(:expert))}" %>
+                <% end %>
+
+                <%= link_to '', :class => 'btn btn-secondary', :onclick => 'genCandidateCard();' do %>
+                    <i class="fa fa-drivers-license-o"></i> <%= t(:user_card) %>
                 <% end %>
             </div>
         </div>
@@ -14,16 +16,10 @@
 
 <section>
     <div class="row">
-        <% 3.times do %>
-            <%= render :partial => 'list_unit' %>
+        <% @candidates.each do |candidate| %>
+            <%= render :partial => 'list_unit', :locals => { :candidate => candidate } %>
         <% end %>
     </div>
 
     <%= render :partial => 'search_modal' %>
 </section>
-
-<script>
-    // $(document).ready(function(){
-    //     alert('cc');
-    // })
-</script>

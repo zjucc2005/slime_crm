@@ -1,0 +1,26 @@
+/* define base styles, for global use */
+
+.status.valid:before { background-color: #7CF29C !important; }
+.status.invalid:before { background-color: #F0404C !important }
+
+a {
+    color: #4680ff;
+    text-decoration: none;
+}
+.roundy { border-radius: 50px; }
+.text-smaller { font-size: 0.8rem; }
+.text { font-size: 0.9em; }
+.text-gray { color: #adb5bd  !important; }
+.text-red { color: #F0404C !important; }
+
+.bg-red { background-color: #F0404C !important; }
+
+/* custom checkbox */
+.candidate-checkbox { position: absolute !important; left: -15px; }
+input[type=checkbox].checkbox-square {
+    width: 24px;
+    height: 24px;
+    background: #eee;
+}
+
+.candidate-card p { margin-bottom: 0.5em; }

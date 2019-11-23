@@ -33,8 +33,18 @@ module ApplicationHelper
   end
 
   ##
+  # activate sidebar options
+  def activate_sidebar
+    nav_item = :"nav_#{controller_name}"
+    # special settings here >>
+
+    # >>
+    provide nav_item, 'active'
+  end
+
+  ##
   # boolean options for select tag
   def boolean_options
-    [[I18n.t(:true), 1], [I18n.t(:false), 0]]
+    [[I18n.t(:true), 'true'], [I18n.t(:false), 'false']]
   end
 end
