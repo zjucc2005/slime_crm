@@ -8,8 +8,8 @@ window.genCandidateCard = function(){
     }
 };
 
-window.clipCandidateCard = function(){
-    selectText('candidate_card');
+window.clipboard = function(element){
+    selectText(element);
     document.execCommand('copy');
 };
 

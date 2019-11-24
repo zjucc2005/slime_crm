@@ -25,17 +25,12 @@
                         <%= current_user.name_cn %>
                     </a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">我的账号</a>
-                        <a class="dropdown-item" href="#">Option 2</a>
-                        <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => 'Sure to logout?' }, :class => 'dropdown-item' do %>
-                            <%= t('action.quit') %>
+                        <a class="dropdown-item" href="#"><i class="fa fa-user-o"></i> 我的账号</a>
+                        <div class="dropdown-divider"></div>
+                        <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => t(:sure_to_logout) }, :class => 'dropdown-item' do %>
+                            <i class="fa fa-sign-out"></i> <%= t('action.quit') %>
                         <% end if signed_in? %>
                     </div>
-                </li>
-                <li class="nav-item">
-                    <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => 'Sure to logout?' }, :class => 'nav-link' do %>
-                        <%= t('action.quit') %>
-                    <% end if signed_in? %>
                 </li>
             </ul>
         </div>

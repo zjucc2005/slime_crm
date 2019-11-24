@@ -6,7 +6,20 @@ class CandidatesController < ApplicationController
   def index
     query = Candidate.all
     # query code here >>
-
+    if params[:term].present?
+      query = query.joins(:experiences).where('candidate_experiences.category': 'work').
+          where('UPPER(candidates.name_cn) LIKE :term OR
+                 UPPER(candidates.name_en) LIKE :term OR
+                 UPPER(candidates.description) LIKE :term OR
+                 UPPER(candidate_experiences.org_cn) LIKE :term OR
+                 UPPER(candidate_experiences.org_en) LIKE :term', { :term => "%#{params[:term].strip.upcase}%" })
+    end
+    if params[:name].present?
+      query = query.where('UPPER(name_cn) LIKE :name OR UPPER(name_en) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" })
+    end
+    %w[is_available].each do |field|
+      query = query.where(field.to_sym => params[field.to_sym].strip) if params[field.to_sym].present?
+    end
     @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
@@ -49,7 +62,6 @@ class CandidatesController < ApplicationController
   def update
     begin
       load_candidate
-      # render :json => params.to_json and return
 
       ActiveRecord::Base.transaction do
         @candidate.update!(candidate_params)                                   # update candidate

@@ -3,14 +3,16 @@ en:
   false: "No"
 
   base_info: "Base info"
+  candidate_card: "Candidate card"
   homepage: "Homepage"
   operation_succeeded: "Operation succeeded"
+  sure_to_logout: "Sure to logout?"
   work_experience: "Work experience"
-  user_card: "User card"
 
   action:
     add: "Add"
     back: "Back"
+    close: "Close"
     edit: "Edit %{model}"
     login: "Login"
     logout: "Logout"

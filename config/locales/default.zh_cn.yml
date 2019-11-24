@@ -3,14 +3,17 @@ zh_cn:
   false: "否"
 
   base_info: "基本信息"
+  candidate_card: "候选人卡片"
   homepage: "首页"
   operation_succeeded: "操作成功"
+  sure_to_logout: "确认退出吗?"
   work_experience: "工作经历"
   user_card: "用户卡片"
 
   action:
     add: "添加"
     back: "返回"
+    close: "关闭"
     edit: "编辑%{model}"
     login: "登录"
     logout: "注销"
