@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_11_24_141152) do
   end
 
   create_table "contracts", force: :cascade do |t|
+    t.bigint "owner_id"
     t.bigint "company_id"
     t.string "file"
     t.string "company_name"

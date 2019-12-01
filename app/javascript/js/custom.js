@@ -4,6 +4,10 @@ import './candidate'
 
 
 // ----------------------------------------------------------------------
+$(document).ready(function(){
+    setTimeout("$('.alert').css('display','none')",5000);
+});
+
 // select all checkbox
 window.selectAll = function(ele, name){
     name = name || 'uids';

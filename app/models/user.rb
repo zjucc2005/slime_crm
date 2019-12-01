@@ -8,6 +8,7 @@ class User < ApplicationRecord
   # Associations
   has_many :candidates, :class_name => 'Candidate', :foreign_key => :owner_id
   has_many :companies, :class_name => 'Company', :foreign_key => :owner_id
+  has_many :contracts, :class_name => 'Contract', :foreign_key => :owner_id
 
   # validations
   validates_inclusion_of :role, :in => %w[su admin consultant]

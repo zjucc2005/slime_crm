@@ -1,5 +1,9 @@
 /* define base styles, for global use */
 
+.input-group.input-group-align .input-group-text {
+    min-width: 105px;
+}
+
 .status.valid:before { background-color: #7CF29C !important; }
 .status.invalid:before { background-color: #F0404C !important }
 

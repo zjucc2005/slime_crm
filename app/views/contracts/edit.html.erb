@@ -5,18 +5,18 @@
                 <div class="card-header d-flex flex-row justify-content-between">
                     <h5 class="text-uppercase mb-0">
                         <i class="fa fa-bank"></i>
-                        <%= t('action.edit', :model => mt(:company)) %>
+                        <%= t('action.edit', :model => mt(:contract)) %>
                     </h5>
-                    <%= link_to '&times;'.html_safe, company_path(@company), :class => 'h5 mb-0 text-decoration-none' %>
+                    <%= link_to '&times;'.html_safe, company_path(@contract.company), :class => 'h5 mb-0 text-decoration-none' %>
                 </div>
 
                 <div class="card-body">
-                    <%= form_for @company do |f| %>
+                    <%= form_for @contract do |f| %>
                         <%= render :partial => 'form', :locals => { :f => f } %>
 
                         <div class="form-group mb-0">
                             <%= f.submit t('action.save'), :class => 'btn btn-primary' %>
-                            <%= link_to t('action.back'), company_path(@company),:class => 'btn btn-secondary' %>
+                            <%= link_to t('action.back'), company_path(@contract.company), :class => 'btn btn-secondary' %>
                         </div>
                     <% end %>
                 </div>

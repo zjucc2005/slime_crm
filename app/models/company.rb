@@ -13,6 +13,9 @@ class Company < ApplicationRecord
   # Hooks
   before_validation :setup, :on => :create
 
+  def is_client?
+    category == 'client'
+  end
 
   private
   def setup

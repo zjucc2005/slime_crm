@@ -20,6 +20,7 @@ zh_cn:
     logout: "注销"
     new: "新建%{model}"
     quit: "退出"
+    save: "保存"
     search: "搜索"
     submit: "提交"
 

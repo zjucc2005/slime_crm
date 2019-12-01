@@ -14,6 +14,7 @@ class CompaniesController < ApplicationController
   # GET /companies/:id
   def show
     load_company
+    load_contracts
   end
 
   # GET /companies/new
@@ -60,9 +61,19 @@ class CompaniesController < ApplicationController
     end
   end
 
+  # GET /companies/:id/new_contract
+  def new_contract
+    load_company
+    @contract = @company.contracts.new
+  end
+
   private
   def load_company
     @company = Company.find(params[:id])
+  end
+
+  def load_contracts
+    @contracts = @company.contracts
   end
 
   def company_params

@@ -81,3 +81,15 @@ en:
         bd: "BD"
         bd_started_at: "BD started at"
         bd_ended_at: "BD ended at"
+
+      contract:
+        owner: "Owner"
+        company_name: "Company name"
+        tax_id: "Tax ID"
+        address: "Address"
+        phone: "Phone"
+        is_tax_included: "Tax included"
+        is_invoice_needed: "Invoice needed"
+        bank: "Bank name"
+        bank_user: "Bank username"
+        client_finance_info: "Client finance info"

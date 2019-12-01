@@ -19,6 +19,7 @@ en:
     logout: "Logout"
     new: "New %{model}"
     quit: "Quit"
+    save: "Save"
     search: "Search"
     submit: "Submit"
 

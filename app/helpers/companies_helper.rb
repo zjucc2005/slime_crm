@@ -25,7 +25,7 @@ module CompaniesHelper
   ##
   # category display style
   def company_category_badge(category)
-    _style_ = { :normal => 'primary', :client => 'danger' }.stringify_keys
-    content_tag :span, Company::CATEGORY[category], :class => "badge badge-#{_style_[category]}"
+    dict = { :normal => 'primary', :client => 'danger' }.stringify_keys
+    content_tag :span, Company::CATEGORY[category], :class => "badge badge-#{dict[category]}"
   end
 end

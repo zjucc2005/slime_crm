@@ -48,6 +48,9 @@ module ApplicationHelper
     [[I18n.t(:true), 'true'], [I18n.t(:false), 'false']]
   end
 
+  def boolean_display(val)
+    I18n.t(val.to_s.to_sym)
+  end
 
   ##
   # show owner of instance

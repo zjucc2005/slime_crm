@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     get :gen_card,       on: :collection
   end
 
-  resources :companies
+  resources :companies do
+    get :new_contract,     on: :member
+    post :create_contract, on: :member
+  end
 
+  resources :contracts
 end
