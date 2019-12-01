@@ -48,7 +48,7 @@ class CandidatesController < ApplicationController
         render :new
       end
     rescue Exception => e
-      flash.now[:error] = "#{e.message}"
+      flash.now[:error] = e.message
       render :new
     end
   end
@@ -79,7 +79,7 @@ class CandidatesController < ApplicationController
       flash[:success] = t(:operation_succeeded)
       redirect_to edit_candidate_path(@candidate)
     rescue Exception => e
-      flash.now[:error] = "#{e.message}"
+      flash.now[:error] = e.message
       render :edit
     end
   end

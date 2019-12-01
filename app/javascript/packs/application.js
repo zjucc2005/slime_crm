@@ -19,4 +19,4 @@ const imagePath = (name) => images(name, true)
 import 'styles/application'
 import 'bootstrap'
 import 'jquery'
-import 'js/candidate'
+import 'js/custom'

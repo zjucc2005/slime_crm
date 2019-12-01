@@ -20,10 +20,6 @@ class Candidate < ApplicationRecord
   # Hooks
   before_validation :setup, :on => :create
 
-  def uid
-    sprintf('%06d', id)
-  end
-
   def latest_work_experience
     experiences.work.order(:started_at => :desc).first
   end

@@ -8,4 +8,7 @@ Rails.application.routes.draw do
     get :add_experience, on: :collection
     get :gen_card,       on: :collection
   end
+
+  resources :companies
+
 end

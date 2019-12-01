@@ -24,6 +24,8 @@ en:
       candidate: "Candidate"
       expert: "Expert"
       customer: "Customer"
+      company: "Company"
+      contract: "Contract"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -67,3 +69,15 @@ en:
         department: "Department"
         title: "Job title"
         description: "Description"
+
+      company:
+        category: "Category"
+        owner: "Owner"
+        name: "Company name"
+        name_abbr: "Company abbreviation"
+        industry: "Industry"
+        city: "City"
+        description: "Description"
+        bd: "BD"
+        bd_started_at: "BD started at"
+        bd_ended_at: "BD ended at"

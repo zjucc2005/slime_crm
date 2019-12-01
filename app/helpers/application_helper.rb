@@ -47,4 +47,29 @@ module ApplicationHelper
   def boolean_options
     [[I18n.t(:true), 'true'], [I18n.t(:false), 'false']]
   end
+
+
+  ##
+  # show owner of instance
+  def show_owner(instance)
+    owner = case action_name
+            when 'new' then current_user.name_cn
+            when 'show' then instance.owner.name_cn
+            when 'edit' then instance.owner.name_cn
+            else 'unknown'
+            end
+    "添加人: #{owner}"
+  end
+
+  ##
+  # show timestamps of instance
+  def show_timestamps(instance)
+    if action_name == 'new'
+
+    else
+      created_at = instance.created_at.strftime('%F %T')
+      updated_at = instance.updated_at.strftime('%F %T')
+      "创建时间: #{created_at}, 最近更新: #{updated_at}"
+    end
+  end
 end

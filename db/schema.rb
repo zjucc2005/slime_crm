@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_16_022443) do
+ActiveRecord::Schema.define(version: 2019_11_24_141152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,38 @@ ActiveRecord::Schema.define(version: 2019_11_16_022443) do
     t.jsonb "property", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "category"
+    t.bigint "owner_id"
+    t.string "name"
+    t.string "name_abbr"
+    t.string "industry"
+    t.string "city"
+    t.text "description"
+    t.bigint "bd_id"
+    t.datetime "bd_started_at"
+    t.datetime "bd_ended_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "contracts", force: :cascade do |t|
+    t.bigint "company_id"
+    t.string "file"
+    t.string "company_name"
+    t.string "tax_id"
+    t.string "address"
+    t.string "phone"
+    t.boolean "is_tax_included"
+    t.boolean "is_invoice_needed"
+    t.string "bank"
+    t.string "bank_user"
+    t.string "client_finance_info"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_contracts_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|
