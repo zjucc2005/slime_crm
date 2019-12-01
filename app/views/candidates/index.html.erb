@@ -16,8 +16,19 @@
 
 <section>
     <div class="row">
-        <% @candidates.each do |candidate| %>
-            <%= render :partial => 'list_unit', :locals => { :candidate => candidate } %>
+        <% if @candidates.any? %>
+            <% @candidates.each do |candidate| %>
+                <%= render :partial => 'list_unit', :locals => { :candidate => candidate } %>
+            <% end %>
+            <%= will_paginate @candidates %>
+        <% else %>
+            <div class="col-12 mb-0">
+                <div class="card p-2">
+                    <div class="p-4 text-center">
+                        <h5 class="text-gray"><%= t(:not_found) %></h5>
+                    </div>
+                </div>
+            </div>
         <% end %>
     </div>
 

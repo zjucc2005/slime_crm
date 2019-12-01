@@ -5,6 +5,7 @@ zh_cn:
   base_info: "基本信息"
   candidate_card: "候选人卡片"
   homepage: "首页"
+  not_found: "未找到信息"
   operation_succeeded: "操作成功"
   sure_to_logout: "确认退出吗?"
   work_experience: "工作经历"
@@ -21,3 +22,23 @@ zh_cn:
     quit: "退出"
     search: "搜索"
     submit: "提交"
+
+  will_paginate:
+    previous_label: "上一页"
+    next_label: "下一页"
+    page_gap: "&hellip;"
+    container_aria_label: "Pagination"
+    page_aria_label: "Page %{page}"
+
+    page_entries_info:
+      single_page:
+        zero:  "No %{model} found"
+        one:   "Displaying 1 %{model}"
+        other: "Displaying all %{count} %{model}"
+      single_page_html:
+        zero:  "No %{model} found"
+        one:   "Displaying <b>1</b> %{model}"
+        other: "Displaying <b>all&nbsp;%{count}</b> %{model}"
+
+      multi_page: "Displaying %{model} %{from} - %{to} of %{count} in total"
+      multi_page_html: "Displaying %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> of <b>%{count}</b> in total"

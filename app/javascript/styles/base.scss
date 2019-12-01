@@ -22,5 +22,52 @@ input[type=checkbox].checkbox-square {
     height: 24px;
     background: #eee;
 }
-
 .candidate-card p { margin-bottom: 0.5em; }
+
+/* pagination */
+.pagination {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    .btn {
+        color: #222;
+        cursor: pointer;
+        outline: none;
+        text-align: center;
+        border-radius: 4px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        transition: all .2s;
+        font-size: 14px;
+        min-width: 15px;
+        margin: 0 2px;
+        padding: 0 13px;
+        float: left;
+        display: block;
+        height: 38px;
+        line-height: 38px;
+        &:hover{
+            @extend .btn-active;
+        }
+    }
+    .btn-active {
+        background: #00a1d6;
+        color: #fff !important;
+        border: 1px solid #00a1d6;
+    }
+
+    .previous_page, .next_page {
+        @extend .btn;
+        &.disabled {
+            display: none;
+        }
+    }
+    a {
+        @extend .btn;
+    }
+    em.current {
+        @extend .btn;
+        @extend .btn-active;
+    }
+}
