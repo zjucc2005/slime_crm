@@ -8,7 +8,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><%= mt(:candidate_experience, :started_at) %><sup class="text-red">*</sup></span>
                     </div>
-                    <%= text_field_tag :"_work_exp[#{exp.id}][started_at]", exp.started_at, :required => true, :class => 'form-control' %>
+                    <%= text_field_tag :"_work_exp[#{exp.id}][started_at]", exp.started_at.try(:strftime, '%F'), :required => true, :class => 'form-control datepicker' %>
                 </div>
             </div>
             <div class="col-6">
@@ -16,7 +16,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><%= mt(:candidate_experience, :ended_at) %></span>
                     </div>
-                    <%= text_field_tag :"_work_exp[#{exp.id}][ended_at]", exp.ended_at, :class => 'form-control' %>
+                    <%= text_field_tag :"_work_exp[#{exp.id}][ended_at]", exp.ended_at.try(:strftime, '%F'), :class => 'form-control datepicker' %>
                 </div>
             </div>
             <div class="col-6">

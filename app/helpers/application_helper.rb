@@ -61,7 +61,7 @@ module ApplicationHelper
             when 'edit' then instance.owner.name_cn
             else 'unknown'
             end
-    "添加人: #{owner}"
+    "#{mt(:candidate, :owner)}: #{owner}"
   end
 
   ##

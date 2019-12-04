@@ -1,6 +1,6 @@
 // import all custom js files
 import './candidate'
-// import './company'
+import './jquery.datetimepicker'
 
 
 // ----------------------------------------------------------------------
@@ -15,4 +15,14 @@ window.selectAll = function(ele, name){
     for(let i=0; i<target.length; i++){
         target[i].checked = ele.checked;
     }
+};
+
+$.fn.datePicker = function(){
+    $(this).datetimepicker(
+        {
+            format: 'Y-m-d',
+            timepicker: false,
+            allowBlank: true
+        }
+    );
 };

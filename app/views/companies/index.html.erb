@@ -31,7 +31,7 @@
                         <% @companies.each do |company| %>
                             <tr>
                                 <td><%= check_box_tag :uids, company.id, false %></td>
-                                <td><%= company.uid %></td>
+                                <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
                                 <td><%= link_to company.name, company_path(company) %></td>
                                 <td><%= company.name_abbr %></td>
                                 <td><%= company.city %></td>
