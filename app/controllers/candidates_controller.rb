@@ -86,6 +86,8 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/add_experience
   def add_experience
+    @seq = "#{Time.now.to_i}#{sprintf('%02d', rand(100))}"
+
     respond_to do |f|
       f.js
     end

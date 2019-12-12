@@ -166,7 +166,7 @@
 		id:'',
 		roundTime:'round', // ceil, floor
 		className:'',
-		weekends: 	[],
+		weekends: [],
 		yearOffset:0
 	};
 	// fix for ie8
