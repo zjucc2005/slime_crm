@@ -1,3 +1,3 @@
-$('#work_exp_wrapper').append('<%= j(render :partial => 'form_work_exp_unit', :locals => { :i => @seq }) %>');
+$('#work_exp_wrapper').append('<%= j(render :partial => 'form_work_exp_unit_new', :locals => { :i => @seq }) %>');
 $('#work_exp_<%= @seq %>_started_at.datepicker').datePicker();
 $('#work_exp_<%= @seq %>_ended_at.datepicker').datePicker();
