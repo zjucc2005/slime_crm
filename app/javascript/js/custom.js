@@ -1,5 +1,5 @@
 // import all custom js files
-import './candidate'
+import './custom.candidate'
 import './jquery.datetimepicker'
 
 
@@ -12,7 +12,7 @@ $(document).ready(function(){
 window.selectAll = function(ele, name){
     name = name || 'uids';
     const target = $('input:checkbox[name=' + name + ']');
-    for(let i=0; i<target.length; i++){
+    for(var i=0; i<target.length; i++){
         target[i].checked = ele.checked;
     }
 };
@@ -22,6 +22,16 @@ $.fn.datePicker = function(){
         {
             format: 'Y-m-d',
             timepicker: false,
+            allowBlank: true
+        }
+    );
+};
+
+$.fn.datetimePicker = function(){
+    $(this).datetimepicker(
+        {
+            format: 'Y-m-d H:i',
+            timepicker: true,
             allowBlank: true
         }
     );

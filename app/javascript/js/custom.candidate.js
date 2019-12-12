@@ -27,9 +27,26 @@ function selectText(element) {
         selection.removeAllRanges();
         selection.addRange(range);
         /*if(selection.setBaseAndExtent){
-            selection.setBaseAndExtent(text, 0, text, 1);
-        }*/
+         selection.setBaseAndExtent(text, 0, text, 1);
+         }*/
     } else {
         alert("none");
     }
 }
+
+window.addCandidatePhone = function(){
+    $('#candidate_phone1').parent().show();
+    $('.phone-add-btn').hide();
+};
+window.delCandidatePhone = function(){
+    $('#candidate_phone1').val('').parent().hide();
+    $('.phone-add-btn').show();
+};
+window.addCandidateEmail = function(){
+    $('#candidate_email1').parent().show();
+    $('.email-add-btn').hide();
+};
+window.delCandidateEmail = function(){
+    $('#candidate_email1').val('').parent().hide();
+    $('.email-add-btn').show();
+};

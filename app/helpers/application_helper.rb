@@ -16,6 +16,10 @@ module ApplicationHelper
     end
   end
 
+  def fa_icon_tag(category)
+    content_tag :i, nil, :class => "fa fa-#{category}"
+  end
+
   ##
   # I18n for models
   def mt(model, attr=nil)

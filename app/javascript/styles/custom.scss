@@ -46,5 +46,20 @@
     z-index: 9;
     line-height: 0.8em;
 }
+.phone-add-btn {
+    position: absolute;
+    z-index: 9;
+    border-radius: 50px;
+    margin-top: 6px;
+}
+.phone-del-btn {
+    @extend .phone-add-btn;
+}
+.email-add-btn {
+    @extend .phone-add-btn;
+}
+.email-del-btn {
+    @extend .phone-del-btn;
+}
 
 
