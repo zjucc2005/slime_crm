@@ -78,9 +78,6 @@ en:
         industry: "Industry"
         city: "City"
         description: "Description"
-        bd: "BD"
-        bd_started_at: "BD started at"
-        bd_ended_at: "BD ended at"
 
       contract:
         owner: "Owner"

@@ -78,9 +78,6 @@ zh_cn:
         industry: "行业"
         city: "城市"
         description: "公司简介"
-        bd: "BD"
-        bd_started_at: "BD起始时间"
-        bd_ended_at: "BD结束时间"
 
       contract:
         owner: "创建人"

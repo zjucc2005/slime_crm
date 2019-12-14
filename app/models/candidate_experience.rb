@@ -1,5 +1,7 @@
 # encoding: utf-8
 class CandidateExperience < ApplicationRecord
+
+  # ENUM
   CATEGORIES = %w[work project education]
 
   # Associations

@@ -4,8 +4,9 @@ class Company < ApplicationRecord
   CATEGORY = { :normal => '普通', :client => '客户公司' }.stringify_keys
 
   # Associations
-  belongs_to :owner, :class_name => 'User', :optional => true
+  belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
   has_many :contracts, :class_name => 'Contract', :dependent => :destroy
+  has_many :clients, :class_name => 'Candidate'
 
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys
@@ -19,7 +20,7 @@ class Company < ApplicationRecord
 
   private
   def setup
-    self.category ||= 'normal'
+    self.category ||= 'client'
   end
 
 end

@@ -2,12 +2,13 @@
 class Candidate < ApplicationRecord
 
   # ENUM
-  CATEGORY = { :expert => '专家', :customer => '客户' }.stringify_keys
+  CATEGORY = { :expert => '专家', :client => '客户' }.stringify_keys
   DATA_SOURCE = { :manual => '手工录入', :excel => 'Excel导入', :plugin => '插件采集' }.stringify_keys
   GENDER = { :male => '男', :female => '女' }.stringify_keys
 
   # Associations
-  belongs_to :owner, :class_name => 'User'
+  belongs_to :creator, :class_name => 'User', :foreign_key => :created_by
+  belongs_to :company, :class_name => 'Company', :optional => true
   has_many :experiences, :class_name => 'CandidateExperience', :dependent => :destroy
 
   # Validations
