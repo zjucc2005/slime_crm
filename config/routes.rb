@@ -15,4 +15,8 @@ Rails.application.routes.draw do
   end
 
   resources :contracts
+
+  resources :projects
+
+  resources :location_data
 end

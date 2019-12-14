@@ -26,6 +26,7 @@ zh_cn:
       customer: "客户"
       company: "公司"
       contract: "合同"
+      location_datum: "行政区划数据"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -90,3 +91,12 @@ zh_cn:
         bank: "银行名称"
         bank_user: "银行用户名"
         client_finance_info: "客户财务信息"
+
+      location_datum:
+        name: "名称"
+        code: "编码"
+        level: "层级"
+        country: "国家"
+        province: "省份"
+        city: "城市"
+        district: "县区"

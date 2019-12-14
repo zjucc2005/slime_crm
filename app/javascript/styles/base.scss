@@ -19,6 +19,10 @@ a {
 
 .bg-red { background-color: #F0404C !important; }
 
+.dropdown-menu.fa-fixed .fa {
+    width: 24px;
+}
+
 /* custom checkbox */
 .candidate-checkbox { position: absolute !important; left: -15px; }
 input[type=checkbox].checkbox-square {

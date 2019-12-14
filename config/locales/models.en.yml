@@ -26,6 +26,7 @@ en:
       customer: "Customer"
       company: "Company"
       contract: "Contract"
+      location_datum: "Location datum"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -90,3 +91,12 @@ en:
         bank: "Bank name"
         bank_user: "Bank username"
         client_finance_info: "Client finance info"
+
+      location_datum:
+        name: "Name"
+        code: "Code"
+        level: "Level"
+        country: "Country"
+        province: "Province"
+        city: "City"
+        district: "District"
