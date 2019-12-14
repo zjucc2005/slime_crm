@@ -7,7 +7,7 @@
                         <i class="fa fa-bank"></i>
                         <%= t('action.edit', :model => mt(:company)) %>
                     </h5>
-                    <%= link_to '&times;'.html_safe, company_path(@company), :class => 'h5 mb-0 text-decoration-none' %>
+                    <%= link_to fa_icon_tag('remove'), company_path(@company), :class => 'h5 mb-0 text-decoration-none text-dark' %>
                 </div>
 
                 <div class="card-body">

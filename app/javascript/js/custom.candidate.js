@@ -35,18 +35,18 @@ function selectText(element) {
 }
 
 window.addCandidatePhone = function(){
-    $('#candidate_phone1').parent().show();
-    $('.phone-add-btn').hide();
+    $('#candidate_phone1').parent().parent().show();
+    $('.phone-add-btn').parent().parent().hide();
 };
 window.delCandidatePhone = function(){
-    $('#candidate_phone1').val('').parent().hide();
-    $('.phone-add-btn').show();
+    $('#candidate_phone1').parent().parent().hide();
+    $('.phone-add-btn').parent().parent().show();
 };
 window.addCandidateEmail = function(){
-    $('#candidate_email1').parent().show();
-    $('.email-add-btn').hide();
+    $('#candidate_email1').parent().parent().show();
+    $('.email-add-btn').parent().parent().hide();
 };
 window.delCandidateEmail = function(){
-    $('#candidate_email1').val('').parent().hide();
-    $('.email-add-btn').show();
+    $('#candidate_email1').parent().parent().hide();
+    $('.email-add-btn').parent().parent().show();
 };

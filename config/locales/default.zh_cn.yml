@@ -1,9 +1,10 @@
 zh_cn:
   true: "是"
   false: "否"
+  pending: "待定"
 
   base_info: "基本信息"
-  candidate_card: "候选人卡片"
+  expert_card: "专家卡片"
   homepage: "首页"
   not_found: "未找到信息"
   operation_succeeded: "操作成功"

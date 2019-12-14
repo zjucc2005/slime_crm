@@ -7,7 +7,7 @@
                         <i class="fa fa-user-circle"></i>
                         <%= t('action.new', :model => mt(:expert)) %>
                     </h5>
-                    <%= link_to '&times;'.html_safe, candidates_path, :class => 'h5 mb-0 text-decoration-none' %>
+                    <%= link_to fa_icon_tag('remove'), candidates_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
                 </div>
 
                 <div class="card-body">

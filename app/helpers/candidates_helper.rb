@@ -27,6 +27,10 @@ module CandidatesHelper
     show_timestamps(@candidate)
   end
 
+  def candidate_is_available_options
+    [[t(:true), 'true'], [t(:false), 'false'], [t(:pending), '']]
+  end
+
   def work_exps
     params[:work_exp] || []
   end

@@ -1,9 +1,10 @@
 en:
   true: "Yes"
   false: "No"
+  pending: "Pending"
 
   base_info: "Base info"
-  candidate_card: "Candidate card"
+  expert_card: "Expert card"
   homepage: "Homepage"
   not_found: "Not found"
   operation_succeeded: "Operation succeeded"

@@ -49,11 +49,11 @@ module ApplicationHelper
   ##
   # boolean options for select tag
   def boolean_options
-    [[I18n.t(:true), 'true'], [I18n.t(:false), 'false']]
+    [[t(:true), 'true'], [t(:false), 'false']]
   end
 
   def boolean_display(val)
-    I18n.t(val.to_s.to_sym)
+    t(val.to_s.to_sym)
   end
 
   ##
