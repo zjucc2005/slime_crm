@@ -12,6 +12,18 @@ class LocationDataController < ApplicationController
     end
   end
 
+  # GET /location_data/autocomplete_city.json
+  def autocomplete_city
+    @cities = LocationDatum.cities.where("name LIKE ?", "%#{params[:term].strip}%")
+    render :json => @cities.map{ |city|
+      if LocationDatum::DIRECT_CODE.include?(city.code[0, 2])
+        city.name
+      else
+        "#{city.parent.name}#{city.name}"
+      end
+    }
+  end
+
   private
   def load_each_level
     @parent = LocationDatum.find(params[:parent_id])

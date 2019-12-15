@@ -48,7 +48,7 @@
             <div class="input-group-prepend">
                 <span class="input-group-text"><%= mt(:company, :city) %></span>
             </div>
-            <%= f.text_field :city, :class => 'form-control' %>
+            <%= f.text_field :city, :class => 'form-control autocomplete-city' %>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -78,3 +78,7 @@
     </div>
 
 </div>
+
+<script>
+    $('.autocomplete-city').autocomplete({ source: '/location_data/autocomplete_city.json', delay: 500 });
+</script>

@@ -20,6 +20,8 @@ class LocationDatum < ApplicationRecord
   scope :cities,    -> { where(level: 2) }
   scope :districts, -> { where(level: 3) }
 
+  DIRECT_CODE = %w[11 12 31 50 81 82]  # 直辖市/港澳
+
   class << self
     ##
     # import china location data

@@ -22,5 +22,7 @@ Rails.application.routes.draw do
 
   resources :projects
 
-  resources :location_data
+  resources :location_data do
+    get :autocomplete_city, on: :collection
+  end
 end
