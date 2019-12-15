@@ -94,7 +94,13 @@ en:
         payment_way: "Payment way"
         is_tax_included: "Tax included"
         is_invoice_needed: "Invoice needed"
-        finance_info: "Finance info"
+        financial_info:
+          name_cn: "Contact name(CN)"
+          name_en: "Contact name(EN)"
+          phone: "Phone"
+          email: "Email"
+
+
 
       location_datum:
         name: "Name"

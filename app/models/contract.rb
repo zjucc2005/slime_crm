@@ -1,6 +1,12 @@
 # encoding: utf-8
 class Contract < ApplicationRecord
 
+  # ENUM
+  PAYMENT_TIME = {
+      :weekday => '工作日',
+      :natural => '自然日'
+  }.stringify_keys
+
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
   belongs_to :company, :class_name => 'Company'

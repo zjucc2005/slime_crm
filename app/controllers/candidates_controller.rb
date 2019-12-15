@@ -85,6 +85,21 @@ class CandidatesController < ApplicationController
     end
   end
 
+  # DELETE /candidates/:id
+  def destroy
+    begin
+      load_candidate
+
+      @candidate.destroy!
+      flash[:success] = t(:operation_succeeded)
+      redirect_back(fallback_location: root_path)
+    rescue Exception => e
+      logger.info "delete candidate failed: #{e.message}"
+      flash[:error] = t(:operation_failed)
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   # GET /candidates/add_experience
   def add_experience
     @seq = "#{Time.now.to_i}#{sprintf('%02d', rand(100))}"

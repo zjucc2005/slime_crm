@@ -123,7 +123,12 @@ zh_cn:
         payment_way: "出账方式"
         is_tax_included: "是否含税"
         is_invoice_needed: "是否需要开票"
-        finance_info: "财务信息"
+        financial_info:
+          name_cn: "联系人姓名(中文)"
+          name_en: "联系人姓名(英文)"
+          phone: "电话"
+          email: "邮箱"
+
 
       location_datum:
         name: "名称"

@@ -83,11 +83,11 @@ ActiveRecord::Schema.define(version: 2019_12_14_083633) do
     t.decimal "cpt", precision: 10, scale: 2
     t.integer "min_bill_duration"
     t.integer "follow_bill_duration"
-    t.datetime "payment_time"
+    t.string "payment_time"
     t.string "payment_way"
     t.boolean "is_tax_included"
     t.boolean "is_invoice_needed"
-    t.jsonb "financial_info"
+    t.jsonb "financial_info", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_contracts_on_company_id"
