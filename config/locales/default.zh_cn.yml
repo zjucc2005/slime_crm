@@ -4,9 +4,12 @@ zh_cn:
   pending: "待定"
 
   base_info: "基本信息"
+  company_signed: "已签约"
+  company_not_signed: "未签约"
   expert_card: "专家卡片"
   homepage: "首页"
   not_found: "未找到信息"
+  operation_failed: "操作失败"
   operation_succeeded: "操作成功"
   settings: "设置"
   sure_to_logout: "确认退出吗?"

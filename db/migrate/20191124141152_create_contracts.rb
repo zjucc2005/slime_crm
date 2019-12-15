@@ -8,7 +8,7 @@ class CreateContracts < ActiveRecord::Migration[6.0]
       t.datetime :started_at                          # 合同开始时间
       t.datetime :ended_at                            # 合同到期时间
 
-      t.decimal :rate, :precision => 10, :scale => 2  # 费率
+      t.decimal :cpt, :precision => 10, :scale => 2   # 费率
       t.integer :min_bill_duration                    # 最小收费时长
       t.integer :follow_bill_duration                 # 跟进收费时长
       t.datetime :payment_time                        # 账期

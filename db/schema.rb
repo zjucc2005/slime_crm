@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_083633) do
     t.string "file"
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.decimal "rate", precision: 10, scale: 2
+    t.decimal "cpt", precision: 10, scale: 2
     t.integer "min_bill_duration"
     t.integer "follow_bill_duration"
     t.datetime "payment_time"

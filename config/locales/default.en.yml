@@ -4,9 +4,12 @@ en:
   pending: "Pending"
 
   base_info: "Base info"
+  company_signed: "Signed"
+  company_not_signed: "Not signed"
   expert_card: "Expert card"
   homepage: "Homepage"
   not_found: "Not found"
+  operation_failed: "Operation failed"
   operation_succeeded: "Operation succeeded"
   settings: "Settings"
   sure_to_logout: "Sure to logout?"

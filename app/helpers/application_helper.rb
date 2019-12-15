@@ -20,6 +20,16 @@ module ApplicationHelper
     content_tag :i, nil, :class => "fa fa-#{category}"
   end
 
+  def model_error_tag(instance)
+    if instance.errors.any?
+      content_tag :ul, :class => 'model-error' do
+        instance.errors.full_messages.map do |message|
+          content_tag :li, message, :class => 'model-error-item'
+        end.join.html_safe
+      end
+    end
+  end
+
   ##
   # I18n for models
   def mt(model, attr=nil)
@@ -57,21 +67,23 @@ module ApplicationHelper
   end
 
   ##
-  # show owner of instance
-  def show_owner(instance)
-    owner = case action_name
+  # show creator of instance
+  def show_creator(instance)
+    creator = case action_name
             when 'new' then current_user.name_cn
-            when 'show' then instance.owner.name_cn
-            when 'edit' then instance.owner.name_cn
+            when 'create' then current_user.name_cn
+            when 'show' then instance.creator.name_cn
+            when 'edit' then instance.creator.name_cn
+            when 'update' then instance.creator.name_cn
             else 'unknown'
             end
-    "#{mt(:candidate, :owner)}: #{owner}"
+    "#{mt(:candidate, :created_by)}: #{creator}"
   end
 
   ##
   # show timestamps of instance
   def show_timestamps(instance)
-    if action_name == 'new'
+    if %w[new create].include? action_name
 
     else
       created_at = instance.created_at.strftime('%F %T')

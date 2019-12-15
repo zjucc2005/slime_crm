@@ -4,13 +4,43 @@ zh_cn:
     id: "ID"
     created_at: "创建时间"
     updated_at: "更新时间"
+    created_by: "创建者"
 
   # Default error messages to most models
   errors:
+    format: "%{attribute}%{message}"
+
     messages:
       blank: "不能为空"
       required: "不能为空"
       taken: "已被使用"
+      model_invalid: "验证失败: %{errors}"
+      inclusion: "未被包含在列表中"
+      exclusion: "被包含在列表中"
+      invalid: "验证不通过"
+      confirmation: "与%{attribute}不匹配"
+      accepted: "必须被接受"
+      empty: "不能为空"
+      present: "必须为空"
+      too_long:
+        one: "太长(最多1个字符)"
+        other: "太长(最多%{count}个字符)"
+      too_short:
+        one: "太短(最少1个字符)"
+        other: "太短(最少%{count}个字符)"
+      wrong_length:
+        one: "长度错误(必须为1个字符)"
+        other: "长度错误(必须为%{count}个字符)"
+      not_a_number: "必须为数字"
+      not_an_integer: "必须为整数"
+      greater_than: "必须大于%{count}"
+      greater_than_or_equal_to: "必须大于或等于%{count}"
+      equal_to: "必须等于%{count}"
+      less_than: "必须小于%{count}"
+      less_than_or_equal_to: "必须小于或等于%{count}"
+      other_than: "必须不等于%{count}"
+      odd: "必须为奇数"
+      even: "必须为偶数"
 
   activerecord:
     errors:
@@ -38,7 +68,6 @@ zh_cn:
       candidate:
         category: "候选人类型"
         data_source: "数据来源"
-        owner: "创建人"
         name: "姓名"
         name_cn: "姓名(中文)"
         name_en: "姓名(英文)"
@@ -48,7 +77,6 @@ zh_cn:
         phone: "电话1"
         phone1: "电话2"
         industry: "行业"
-        title: "职位"
         date_of_birth: "出生日期"
         gender: "性别"
         description: "背景说明"
@@ -60,6 +88,7 @@ zh_cn:
         alipay_account: "支付宝帐号"
         alipay_user: "支付宝用户名"
         property: "其他属性"
+        seat: "客户seat"
 
       candidate_experience:
         category: "类型"
@@ -73,24 +102,28 @@ zh_cn:
 
       company:
         category: "类型"
-        owner: "创建人"
         name: "公司名称"
         name_abbr: "公司简称"
+        tax_id: "税号"
         industry: "行业"
         city: "城市"
+        address: "地址"
+        phone: "联系电话"
         description: "公司简介"
+        is_signed: "是否签约"
 
       contract:
-        owner: "创建人"
-        company_name: "公司名称"
-        tax_id: "税号"
-        address: "地址"
-        phone: "电话"
+        file: "文件"
+        started_at: "合同开始时间"
+        ended_at: "合同结束时间"
+        cpt: "费率"
+        min_bill_duration: "最小收费时长(分钟)"
+        follow_bill_duration: "跟进收费时长(分钟)"
+        payment_time: "账期"
+        payment_way: "出账方式"
         is_tax_included: "是否含税"
         is_invoice_needed: "是否需要开票"
-        bank: "银行名称"
-        bank_user: "银行用户名"
-        client_finance_info: "客户财务信息"
+        finance_info: "财务信息"
 
       location_datum:
         name: "名称"

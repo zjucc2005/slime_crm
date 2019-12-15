@@ -6,12 +6,15 @@ class Contract < ApplicationRecord
   belongs_to :company, :class_name => 'Company'
 
   # Validations
-  validates_presence_of :started_at, :ended_at
+  validates_presence_of :file, :started_at, :ended_at
 
   mount_uploader :file, FileUploader
 
   # Hooks
   before_validation :setup, :on => :create
+
+  # Scopes
+  scope :available, -> { where('started_at <= :now AND ended_at >= :now', { :now => Time.now }) }
 
   private
   def setup

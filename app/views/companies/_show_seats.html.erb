@@ -1,13 +1,13 @@
-<div class="card mt-2">
+<div class="card">
     <div class="card-header d-flex flex-row justify-content-between">
         <h5 class="text-uppercase mb-0">
-            <i class="fa fa-file-text"></i>
-            <%= mt(:contract) %>
+            <%= fa_icon_tag('users') %>
+            <%= mt(:candidate, :seat) %>
         </h5>
     </div>
 
     <div class="card-body p-2">
-        <% if contracts.any? %>
+        <% if seats.any? %>
             <table class="table table-sm table-striped table-hover card-text">
                 <thead>
                 <tr>
@@ -40,7 +40,7 @@
             </table>
         <% else %>
             <div class="p-2 text-center">
-                <h5 class="text-gray"><%= t(:not_found) %></h5>
+                <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
             </div>
         <% end %>
     </div>

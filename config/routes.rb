@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resources :companies do
     get :new_contract,     on: :member
     post :create_contract, on: :member
+
+    get :new_seat,         on: :member
+    post :create_seat,     on: :member
   end
 
   resources :contracts

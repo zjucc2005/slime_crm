@@ -1,39 +1,16 @@
+<%= model_error_tag(@contract) %>
 <div class="row">
     <%= f.hidden_field :company_id, :required => true %>
 
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :company_name) %><sup class="text-red">*</sup></span>
+                <span class="input-group-text"><%= mt(:contract, :file) %><sup class="text-red">*</sup></span>
             </div>
-            <%= f.text_field :company_name, :value => @contract.company_name || @contract.company.name,
-                             :required => true, :class => 'form-control' %>
+            <%= f.file_field :file, :required => true, :class => '' %>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :tax_id) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :tax_id, :required => true, :class => 'form-control' %>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :address) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :address, :required => true, :class => 'form-control' %>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :phone) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :phone, :required => true, :class => 'form-control' %>
-        </div>
-    </div>
+
     <div class="col-lg-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
@@ -50,30 +27,5 @@
             <%= f.select :is_invoice_needed, boolean_options, {}, :required => true, :class => 'form-control' %>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :bank) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :bank, :required => true, :class => 'form-control' %>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :bank_user) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :bank_user, :required => true, :class => 'form-control' %>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :client_finance_info) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_area :client_finance_info, :required => true, :rows => 3, :class => 'form-control' %>
-        </div>
-    </div>
-
 
 </div>

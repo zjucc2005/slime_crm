@@ -1,23 +1,15 @@
+<%= model_error_tag(@company) %>
+
 <div class="row">
     <div class="col-12">
         <div class="form-group">
-            <span class="badge badge-light"><%= show_owner(@company) %></span>
+            <%= company_category_badge(@company.category) %>
+            <%= company_signed_badge(@company.is_signed?) %>
+            <span class="badge badge-light"><%= show_creator(@company) %></span>
             <span class="badge badge-light"><%= show_timestamps(@company) %></span>
         </div>
     </div>
 
-    <div class="col-12">
-        <div class="row">
-            <div class="col-lg-3 col-6">
-                <div class="input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:company, :category) %><sup class="text-red">*</sup></span>
-                    </div>
-                    <%= f.select :category, category_options, {}, :required => true, :class => 'form-control' %>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
@@ -38,6 +30,14 @@
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:company, :tax_id) %></span>
+            </div>
+            <%= f.text_field :tax_id, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
                 <span class="input-group-text"><%= mt(:company, :industry) %></span>
             </div>
             <%= f.text_field :industry, :class => 'form-control' %>
@@ -51,13 +51,29 @@
             <%= f.text_field :city, :class => 'form-control' %>
         </div>
     </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:company, :address) %></span>
+            </div>
+            <%= f.text_field :address, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:company, :phone) %></span>
+            </div>
+            <%= f.text_field :phone, :class => 'form-control' %>
+        </div>
+    </div>
 
     <div class="col-12">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text"><%= mt(:company, :description) %></span>
             </div>
-            <%= f.text_area :description, :rows => 3, :class => 'form-control' %>
+            <%= f.text_area :description, :rows => 5, :class => 'form-control' %>
         </div>
     </div>
 

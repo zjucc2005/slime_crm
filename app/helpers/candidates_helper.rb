@@ -19,8 +19,8 @@ module CandidatesHelper
     Candidate::DATA_SOURCE[data_source]
   end
 
-  def show_candidate_owner
-    show_owner(@candidate)
+  def show_candidate_creator
+    show_creator(@candidate)
   end
 
   def show_candidate_timestamps
