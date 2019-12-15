@@ -1,8 +1,7 @@
 <div class="card">
     <div class="card-header d-flex flex-row justify-content-between">
         <h5 class="text-uppercase mb-0">
-            <%= fa_icon_tag('users') %>
-            <%= mt(:candidate, :seat) %>
+            <%= fa_icon_tag('users') %> <%= mt(:candidate, :seat) %>
         </h5>
     </div>
 
@@ -11,29 +10,30 @@
             <table class="table table-sm table-striped table-hover card-text">
                 <thead>
                 <tr>
-                    <th><%= mt(:contract, :id) %></th>
-                    <th><%= mt(:contract, :company_name) %></th>
-                    <th><%= mt(:contract, :tax_id) %></th>
-                    <th><%= mt(:contract, :address) %></th>
-                    <th><%= mt(:contract, :phone) %></th>
-                    <th><%= mt(:contract, :is_tax_included) %></th>
-                    <th><%= mt(:contract, :is_invoice_needed) %></th>
-                    <th><%= mt(:contract, :owner) %></th>
-                    <th><%= mt(:contract, :created_at) %></th>
+                    <th><%= mt(:candidate, :id) %></th>
+                    <th><%= mt(:candidate, :name_cn) %></th>
+                    <th><%= mt(:candidate, :name_en) %></th>
+                    <th><%= mt(:candidate, :phone) %></th>
+                    <th><%= mt(:candidate, :phone1) %></th>
+                    <th><%= mt(:candidate, :email) %></th>
+                    <th><%= mt(:candidate, :email1) %></th>
+                    <th><%= mt(:candidate, :created_by) %></th>
+                    <th><%= mt(:candidate, :created_at) %></th>
                 </tr>
                 </thead>
                 <tbody>
-                <% contracts.each do |contract| %>
+                <% seats.each do |seat| %>
                     <tr>
-                        <td><%= content_tag :span, "# #{contract.uid}", :class => 'text-gray' %></td>
-                        <td><%= link_to contract.company_name, edit_contract_path(contract) %></td>
-                        <td><%= contract.tax_id %></td>
-                        <td><%= contract.address %></td>
-                        <td><%= contract.phone %></td>
-                        <td><%= boolean_display(contract.is_tax_included) %></td>
-                        <td><%= boolean_display(contract.is_invoice_needed) %></td>
-                        <td><%= contract.owner.name_cn %></td>
-                        <td><%= contract.created_at.strftime('%F %T') %></td>
+                        <td><%= content_tag :span, "# #{seat.uid}", :class => 'text-gray' %></td>
+                        <td><%= link_to seat.name_cn, edit_seat_candidate_path(seat) %></td>
+                        <td><%= seat.name_en %></td>
+                        <td><%= seat.phone %></td>
+                        <td><%= seat.phone1 %></td>
+                        <td><%= seat.email %></td>
+                        <td><%= seat.email1 %></td>
+                        <td><%= seat.creator.name_cn %></td>
+                        <td><%= seat.creator.created_at.strftime('%F %T') %></td>
+
                     </tr>
                 <% end %>
                 </tbody>

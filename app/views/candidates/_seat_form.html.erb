@@ -1,0 +1,61 @@
+<%= model_error_tag(@seat) %>
+<div class="badge badge-info mb-3 px-4"><%= t(:base_info) %></div>
+<div class="row">
+    <%= f.hidden_field :company_id, :required => true %>
+
+    <div class="col-12">
+        <div class="form-group">
+            <span class="badge badge-light"><%= show_creator(@seat) %></span>
+            <span class="badge badge-light"><%= show_timestamps(@seat) %></span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :name_cn) %><sup class="text-red">*</sup></span>
+            </div>
+            <%= f.text_field :name_cn, :required => true, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :name_en) %></span>
+            </div>
+            <%= f.text_field :name_en, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :phone) %><sup class="text-red">*</sup></span>
+            </div>
+            <%= f.text_field :phone, :required => true, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :phone1) %></span>
+            </div>
+            <%= f.text_field :phone1, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :email) %><sup class="text-red">*</sup></span>
+            </div>
+            <%= f.email_field :email, :required => true, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :email1) %></span>
+            </div>
+            <%= f.email_field :email1, :class => 'form-control' %>
+        </div>
+    </div>
+</div>

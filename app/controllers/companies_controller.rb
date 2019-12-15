@@ -68,6 +68,12 @@ class CompaniesController < ApplicationController
     @contract = @company.contracts.new
   end
 
+  # GET /companies/:id/new_seat
+  def new_seat
+    load_company
+    @seat = @company.seats.client.new
+  end
+
   private
   def load_company
     @company = Company.find(params[:id])

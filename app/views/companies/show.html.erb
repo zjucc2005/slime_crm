@@ -2,8 +2,7 @@
     <div class="card">
         <div class="card-header d-flex flex-row justify-content-between">
             <h5 class="text-uppercase mb-0">
-                <i class="fa fa-bank"></i>
-                <%= mt(:company) %>
+                <%= fa_icon_tag('bank') %> <%= mt(:company) %>
             </h5>
             <%= link_to fa_icon_tag('close'), companies_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
         </div>
@@ -17,10 +16,13 @@
                     </h6>
                     <div class="btn-group btn-group-sm">
                         <%= link_to new_contract_company_path(@company), :class => 'btn btn-success' do %>
-                            <i class="fa fa-plus"></i> <%= "#{t('action.new', :model => mt(:contract))}" %>
+                            <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:contract))}" %>
+                        <% end %>
+                        <%= link_to new_seat_company_path(@company), :class => 'btn btn-primary' do %>
+                            <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:candidate, :seat))}" %>
                         <% end %>
                         <%= link_to edit_company_path(@company), :class => 'btn btn-dark' do %>
-                            <i class="fa fa-edit"></i> <%= "#{t('action.edit', :model => mt(:company))}" %>
+                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:company))}" %>
                         <% end %>
                     </div>
                 </div>

@@ -21,6 +21,10 @@ class Candidate < ApplicationRecord
   # Hooks
   before_validation :setup, :on => :create
 
+  # Scopes
+  scope :expert, -> { where(category: 'expert') }
+  scope :client, -> { where(category: 'client') }
+
   def latest_work_experience
     experiences.work.order(:started_at => :desc).first
   end

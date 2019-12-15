@@ -9,7 +9,6 @@ module ApplicationHelper
 
   def flash_tag(category)
     _type_ =  {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info' }[category]
-    # render :partial => 'shared/flash', :locals => { :category => _type_, :message => message }
     content_tag(:div, :class => "alert alert-#{_type_} alert-dismissible fade show mb-0") do
       button_tag('&times;'.html_safe, :type => 'button', :class => 'close', :data => { :dismiss => 'alert' }) +
       flash[category]
@@ -69,14 +68,7 @@ module ApplicationHelper
   ##
   # show creator of instance
   def show_creator(instance)
-    creator = case action_name
-            when 'new' then current_user.name_cn
-            when 'create' then current_user.name_cn
-            when 'show' then instance.creator.name_cn
-            when 'edit' then instance.creator.name_cn
-            when 'update' then instance.creator.name_cn
-            else 'unknown'
-            end
+    creator = instance.creator.try(:name_cn) || current_user.name_cn
     "#{mt(:candidate, :created_by)}: #{creator}"
   end
 
@@ -86,9 +78,10 @@ module ApplicationHelper
     if %w[new create].include? action_name
 
     else
-      created_at = instance.created_at.strftime('%F %T')
-      updated_at = instance.updated_at.strftime('%F %T')
-      "创建时间: #{created_at}, 最近更新: #{updated_at}"
+      arr = []
+      arr << "#{mt(:candidate, :created_at)}: #{instance.created_at.strftime('%F %T')}" if instance.created_at
+      arr << "#{mt(:candidate, :updated_at)}: #{instance.updated_at.strftime('%F %T')}" if instance.updated_at
+      arr.join(', ')
     end
   end
 end

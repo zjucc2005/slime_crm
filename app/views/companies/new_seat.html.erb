@@ -4,14 +4,14 @@
             <div class="card">
                 <div class="card-header d-flex flex-row justify-content-between">
                     <h5 class="text-uppercase mb-0">
-                        <%= fa_icon_tag('file-text') %> <%= t('action.new', :model => mt(:contract)) %>
+                        <%= fa_icon_tag('users') %> <%= t('action.new', :model => mt(:candidate, :seat)) %>
                     </h5>
                     <%= link_to fa_icon_tag('close'), company_path(@company), :class => 'h5 mb-0 text-decoration-none text-dark' %>
                 </div>
 
                 <div class="card-body">
-                    <%= form_for @contract, :html => { :multipart => true } do |f| %>
-                        <%= render :partial => 'contracts/form', :locals => { :f => f } %>
+                    <%= form_for @seat, :url => create_seat_candidates_path, :html => { :multipart => true } do |f| %>
+                        <%= render :partial => 'candidates/seat_form', :locals => { :f => f } %>
 
                         <div class="form-group mb-0">
                             <%= f.submit t('action.submit'), :class => 'btn btn-primary' %>
