@@ -9,7 +9,6 @@ module ApplicationHelper
 
   def flash_tag(category)
     _type_ =  {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info' }[category]
-    # render :partial => 'shared/flash', :locals => { :category => _type_, :message => message }
     content_tag(:div, :class => "alert alert-#{_type_} alert-dismissible fade show mb-0") do
       button_tag('&times;'.html_safe, :type => 'button', :class => 'close', :data => { :dismiss => 'alert' }) +
       flash[category]
@@ -18,6 +17,16 @@ module ApplicationHelper
 
   def fa_icon_tag(category)
     content_tag :i, nil, :class => "fa fa-#{category}"
+  end
+
+  def model_error_tag(instance)
+    if instance.errors.any?
+      content_tag :ul, :class => 'model-error' do
+        instance.errors.full_messages.map do |message|
+          content_tag :li, message, :class => 'model-error-item'
+        end.join.html_safe
+      end
+    end
   end
 
   ##
@@ -49,34 +58,30 @@ module ApplicationHelper
   ##
   # boolean options for select tag
   def boolean_options
-    [[I18n.t(:true), 'true'], [I18n.t(:false), 'false']]
+    [[t(:true), 'true'], [t(:false), 'false']]
   end
 
   def boolean_display(val)
-    I18n.t(val.to_s.to_sym)
+    t(val.to_s.to_sym)
   end
 
   ##
-  # show owner of instance
-  def show_owner(instance)
-    owner = case action_name
-            when 'new' then current_user.name_cn
-            when 'show' then instance.owner.name_cn
-            when 'edit' then instance.owner.name_cn
-            else 'unknown'
-            end
-    "#{mt(:candidate, :owner)}: #{owner}"
+  # show creator of instance
+  def show_creator(instance)
+    creator = instance.creator.try(:name_cn) || current_user.name_cn
+    "#{mt(:candidate, :created_by)}: #{creator}"
   end
 
   ##
   # show timestamps of instance
   def show_timestamps(instance)
-    if action_name == 'new'
+    if %w[new create].include? action_name
 
     else
-      created_at = instance.created_at.strftime('%F %T')
-      updated_at = instance.updated_at.strftime('%F %T')
-      "创建时间: #{created_at}, 最近更新: #{updated_at}"
+      arr = []
+      arr << "#{mt(:candidate, :created_at)}: #{instance.created_at.strftime('%F %T')}" if instance.created_at
+      arr << "#{mt(:candidate, :updated_at)}: #{instance.updated_at.strftime('%F %T')}" if instance.updated_at
+      arr.join(', ')
     end
   end
 end

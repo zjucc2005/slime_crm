@@ -3,7 +3,8 @@ class CreateCandidates < ActiveRecord::Migration[6.0]
     create_table :candidates do |t|
       t.string :category
       t.string :data_source
-      t.bigint :owner_id
+      t.bigint :created_by
+      t.references :company
 
       t.string :name_cn
       t.string :name_en
@@ -13,7 +14,6 @@ class CreateCandidates < ActiveRecord::Migration[6.0]
       t.string :phone
       t.string :phone1
       t.string :industry
-      t.string :title
       t.datetime :date_of_birth
       t.string :gender
       t.text :description

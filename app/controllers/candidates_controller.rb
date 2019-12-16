@@ -4,7 +4,7 @@ class CandidatesController < ApplicationController
 
   # GET /candidates
   def index
-    query = Candidate.all
+    query = Candidate.expert
     # query code here >>
     if params[:term].present?
       query = query.joins(:experiences).where('candidate_experiences.category': 'work').
@@ -37,7 +37,7 @@ class CandidatesController < ApplicationController
         ActiveRecord::Base.transaction do
           @candidate.save!
 
-          params[:work_exp].each do |key, val|
+          (params[:work_exp] || {}).each do |key, val|
             @candidate.experiences.work.create!(val.permit(experience_fields))
           end
         end
@@ -45,6 +45,7 @@ class CandidatesController < ApplicationController
         flash[:success] = t(:operation_succeeded)
         redirect_to edit_candidate_path(@candidate)
       else
+        flash.now[:error] = t(:operation_failed)
         render :new
       end
     rescue Exception => e
@@ -84,13 +85,25 @@ class CandidatesController < ApplicationController
     end
   end
 
+  # DELETE /candidates/:id
+  def destroy
+    begin
+      load_candidate
+
+      @candidate.destroy!
+      flash[:success] = t(:operation_succeeded)
+      redirect_back(fallback_location: root_path)
+    rescue Exception => e
+      logger.info "delete candidate failed: #{e.message}"
+      flash[:error] = t(:operation_failed)
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
   # GET /candidates/add_experience
   def add_experience
     @seq = "#{Time.now.to_i}#{sprintf('%02d', rand(100))}"
-
-    respond_to do |f|
-      f.js
-    end
+    respond_to { |f| f.js }
   end
 
   # GET /candidates/gen_card
@@ -98,13 +111,61 @@ class CandidatesController < ApplicationController
     @candidates = Candidate.where(id: params[:uids])
   end
 
+  # POST /candidates/create_seat
+  def create_seat
+    begin
+      @company = Company.find(params[:candidate][:company_id])
+      @candidate = @company.seats.client.new(
+          candidate_params.merge({created_by: current_user.id, city: @company.city, cpt: 0})
+      )
+      if @candidate.save
+        flash[:success] = t(:operation_succeeded)
+        redirect_to company_path(@company)
+      else
+        flash.now[:error] = t(:operation_failed)
+        render 'companies/new_seat'
+      end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to companies_path
+    end
+  end
+
+  # GET /candidates/:id/edit_seat
+  def edit_seat
+    load_seat
+    @company = @seat.company
+  end
+
+  # PUT /candidates/:id/update_seat
+  def update_seat
+    begin
+      load_seat
+      @company = @seat.company
+
+      if @seat.update(candidate_params)
+        flash[:success] = t(:operation_succeeded)
+        redirect_to company_path(@company)
+      else
+        render :edit_seat
+      end
+    rescue Exception => e
+      flash.now[:error] = e.message
+      render :edit_seat
+    end
+  end
+
   private
   def load_candidate
     @candidate = Candidate.find(params[:id])
   end
 
+  def load_seat
+    @seat = Candidate.find(params[:id])
+  end
+
   def candidate_params
-    params.require(:candidate).permit(:name_cn, :name_en, :city, :email, :email1, :phone, :phone1, :industry, :title,
+    params.require(:candidate).permit(:name_cn, :name_en, :city, :email, :email1, :phone, :phone1, :industry, :company_id,
                                       :date_of_birth, :gender, :description, :is_available, :cpt,
                                       :bank, :bank_card, :bank_user, :alipay_account, :alipay_user)
   end

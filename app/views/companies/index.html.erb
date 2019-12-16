@@ -36,7 +36,10 @@
                                 <td><%= company.name_abbr %></td>
                                 <td><%= company.city %></td>
                                 <td><%= company.industry %></td>
-                                <td><%= company_category_badge(company.category) %></td>
+                                <td>
+                                    <%= company_category_badge(company.category) %>
+                                    <%= company_signed_badge(company.is_signed?) %>
+                                </td>
                             </tr>
                         <% end %>
                         </tbody>
@@ -48,7 +51,7 @@
             <div class="col-12 mb-2">
                 <div class="card p-2">
                     <div class="p-4 text-center">
-                        <h5 class="text-gray"><%= t(:not_found) %></h5>
+                        <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
                     </div>
                 </div>
             </div>

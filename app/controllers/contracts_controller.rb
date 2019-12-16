@@ -6,11 +6,14 @@ class ContractsController < ApplicationController
   def create
     begin
       @company = Company.find(params[:contract][:company_id])
-      @contract = @company.contracts.new(contract_params.merge(owner_id: current_user.id))
+      @contract = @company.contracts.new(
+          contract_params.merge({ created_by: current_user.id, financial_info: params[:financial_info].permit(financial_info_fields) })
+      )
       if @contract.save
         flash[:success] = t(:operation_succeeded)
         redirect_to company_path(@company)
       else
+        flash.now[:error] = t(:operation_failed)
         render 'companies/new_contract'
       end
     rescue Exception => e
@@ -29,7 +32,7 @@ class ContractsController < ApplicationController
     begin
       load_contract
 
-      if @contract.update(contract_params)
+      if @contract.update(contract_params.merge(financial_info: params[:financial_info].permit(financial_info_fields)))
         flash[:success] = t(:operation_succeeded)
         redirect_to edit_contract_path(@contract)
       else
@@ -48,7 +51,11 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:company_name, :tax_id, :address, :phone, :is_tax_included, :is_invoice_needed,
-                                     :bank, :bank_user, :client_finance_info)
+    params.require(:contract).permit(:file, :started_at, :ended_at, :cpt, :min_bill_duration, :follow_bill_duration,
+                                     :payment_time, :payment_way, :is_tax_included, :is_invoice_needed)
+  end
+
+  def financial_info_fields
+    [:name_cn, :name_en, :phone, :email]
   end
 end

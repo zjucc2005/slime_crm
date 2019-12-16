@@ -47,10 +47,7 @@
     line-height: 0.8em;
 }
 .phone-add-btn {
-    position: absolute;
-    z-index: 9;
-    border-radius: 50px;
-    margin-top: 6px;
+    color: #495057;
 }
 .phone-del-btn {
     @extend .phone-add-btn;

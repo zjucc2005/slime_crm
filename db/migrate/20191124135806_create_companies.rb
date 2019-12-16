@@ -1,17 +1,17 @@
 class CreateCompanies < ActiveRecord::Migration[6.0]
   def change
     create_table :companies do |t|
-      t.string :category
-      t.bigint :owner_id
+      t.string :category    # 公司类型
+      t.bigint :created_by  # 数据创建者
 
-      t.string :name
-      t.string :name_abbr
-      t.string :industry
-      t.string :city
-      t.text :description
-      t.bigint :bd_id
-      t.datetime :bd_started_at
-      t.datetime :bd_ended_at
+      t.string :name        # 公司名
+      t.string :name_abbr   # 公司简称
+      t.string :tax_id      # 税号
+      t.string :industry    # 行业
+      t.string :city        # 城市
+      t.string :address     # 地址
+      t.string :phone       # 联系电话
+      t.text :description   # 说明
 
       t.timestamps :null => false
     end

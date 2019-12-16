@@ -12,7 +12,7 @@
                     <%= link_to t(:homepage), root_path, :class => "nav-link #{yield :nav_home}" %>
                 </li>
                 <li class="nav-item">
-                    <%= link_to mt(:candidate), candidates_path, :class => "nav-link #{yield :nav_candidates}" %>
+                    <%= link_to mt(:expert), candidates_path, :class => "nav-link #{yield :nav_candidates}" %>
                 </li>
                 <li class="nav-item">
                     <%= link_to mt(:company), companies_path, :class => "nav-link #{yield :nav_companies}" %>
@@ -21,11 +21,14 @@
                     <a class="nav-link <%= yield :nav_projects %>" href="#">Project</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        <%= current_user.name_cn %>
+                    <a class="nav-link dropdown-toggle" href="#" id="settings-drop" data-toggle="dropdown">
+                        <%= t(:settings) %>
                     </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#"><i class="fa fa-user-o"></i> 我的账号</a>
+                    <div class="dropdown-menu fa-fixed">
+                        <%= link_to location_data_path, :class => 'dropdown-item' do %>
+                            <%= fa_icon_tag('location-arrow') %> <%= mt(:location_datum) %>
+                        <% end %>
+                        <a class="dropdown-item" href="#"><%= fa_icon_tag('user-o') %> 我的账号</a>
                         <div class="dropdown-divider"></div>
                         <%= link_to destroy_user_session_path, :method => :delete, :data => { :confirm => t(:sure_to_logout) }, :class => 'dropdown-item' do %>
                             <i class="fa fa-sign-out"></i> <%= t('action.quit') %>

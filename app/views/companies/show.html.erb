@@ -2,10 +2,9 @@
     <div class="card">
         <div class="card-header d-flex flex-row justify-content-between">
             <h5 class="text-uppercase mb-0">
-                <i class="fa fa-bank"></i>
-                <%= mt(:company) %>
+                <%= fa_icon_tag('bank') %> <%= mt(:company) %>
             </h5>
-            <%= link_to '&times;'.html_safe, companies_path, :class => 'h5 mb-0 text-decoration-none' %>
+            <%= link_to fa_icon_tag('close'), companies_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
         </div>
 
         <div class="card-body">
@@ -17,10 +16,13 @@
                     </h6>
                     <div class="btn-group btn-group-sm">
                         <%= link_to new_contract_company_path(@company), :class => 'btn btn-success' do %>
-                            <i class="fa fa-plus"></i> <%= "#{t('action.new', :model => mt(:contract))}" %>
+                            <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:contract))}" %>
+                        <% end %>
+                        <%= link_to new_seat_company_path(@company), :class => 'btn btn-primary' do %>
+                            <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:candidate, :seat))}" %>
                         <% end %>
                         <%= link_to edit_company_path(@company), :class => 'btn btn-dark' do %>
-                            <i class="fa fa-edit"></i> <%= "#{t('action.edit', :model => mt(:company))}" %>
+                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:company))}" %>
                         <% end %>
                     </div>
                 </div>
@@ -30,21 +32,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-group">
-                        <span class="badge badge-light"><%= show_owner(@company) %></span>
+                        <%= company_category_badge(@company.category) %>
+                        <%= company_signed_badge(@company.is_signed?) %>
+                        <span class="badge badge-light"><%= show_creator(@company) %></span>
                         <span class="badge badge-light"><%= show_timestamps(@company) %></span>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-lg-3 col-6">
-                            <div class="input-group input-group-sm input-group-align mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><%= mt(:company, :category) %></span>
-                                </div>
-                                <%= content_tag :span, company_category_badge(@company.category) ,:class => 'form-control' %>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -67,6 +58,14 @@
                 <div class="col-lg-3 col-6">
                     <div class="input-group input-group-sm input-group-align mb-3">
                         <div class="input-group-prepend">
+                            <span class="input-group-text"><%= mt(:company, :tax_id) %></span>
+                        </div>
+                        <%= content_tag :span, @company.tax_id, :class => 'form-control' %>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="input-group input-group-sm input-group-align mb-3">
+                        <div class="input-group-prepend">
                             <span class="input-group-text"><%= mt(:company, :industry) %></span>
                         </div>
                         <%= content_tag :span, @company.industry, :class => 'form-control' %>
@@ -80,19 +79,35 @@
                         <%= content_tag :span, @company.city, :class => 'form-control' %>
                     </div>
                 </div>
+                <div class="col-lg-3 col-6">
+                    <div class="input-group input-group-sm input-group-align mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><%= mt(:company, :address) %></span>
+                        </div>
+                        <%= content_tag :span, @company.address, :class => 'form-control' %>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <div class="input-group input-group-sm input-group-align mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><%= mt(:company, :phone) %></span>
+                        </div>
+                        <%= content_tag :span, @company.phone, :class => 'form-control' %>
+                    </div>
+                </div>
 
                 <div class="col-12">
-                    <div class="input-group input-group-sm input-group-align mb-2">
+                    <div class="input-group input-group-sm input-group-align mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><%= mt(:company, :description) %></span>
                         </div>
-                        <%= text_area_tag :description, @company.description, :rows => 3, :disabled => true, :class => 'form-control bg-white' %>
+                        <%= text_area_tag :description, @company.description, :rows => 5, :disabled => true, :class => 'form-control bg-white' %>
                     </div>
                 </div>
             </div>
 
-            <!-- contract card -->
-            <%= render :partial => 'show_contract',  :locals => { :contracts => @contracts } %>
+            <%= render :partial => 'show_contracts',  :locals => { :contracts => @contracts } %>
+            <%= render :partial => 'show_seats',  :locals => { :seats => @seats } %>
         </div>
     </div>
 </section>

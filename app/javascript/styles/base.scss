@@ -1,6 +1,6 @@
 /* define base styles, for global use */
 
-.input-group.input-group-align .input-group-text {
+.input-group.input-group-align .input-group-prepend .input-group-text {
     min-width: 105px;
 }
 
@@ -11,6 +11,10 @@ a {
     color: #4680ff;
     text-decoration: none;
 }
+.btn-xs {
+    @extend .btn-sm;
+    padding: 0.1rem 0.3rem;
+}
 .roundy { border-radius: 50px; }
 .text-smaller { font-size: 0.8rem; }
 .text { font-size: 0.9em; }
@@ -18,6 +22,21 @@ a {
 .text-red { color: #F0404C !important; }
 
 .bg-red { background-color: #F0404C !important; }
+
+.dropdown-menu.fa-fixed .fa {
+    width: 24px;
+}
+
+.model-error {
+    padding: .75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background-color: #f5c6cb;
+    border-radius: .25rem;
+    .model-error-item {
+        color: #721c24;
+    }
+}
 
 /* custom checkbox */
 .candidate-checkbox { position: absolute !important; left: -15px; }

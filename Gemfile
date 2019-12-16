@@ -32,6 +32,7 @@ gem 'devise', '~> 4.7'
 gem 'pg'
 gem 'carrierwave', '~> 2.0'
 gem 'will_paginate', '~> 3.2', '>= 3.2.1'
+gem 'roo', '~> 2.8', '>= 2.8.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

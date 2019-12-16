@@ -15,11 +15,12 @@ class CompaniesController < ApplicationController
   def show
     load_company
     load_contracts
+    load_seats
   end
 
   # GET /companies/new
   def new
-    @company = Company.new
+    @company = Company.client.new
   end
 
   # POST /companies
@@ -67,6 +68,12 @@ class CompaniesController < ApplicationController
     @contract = @company.contracts.new
   end
 
+  # GET /companies/:id/new_seat
+  def new_seat
+    load_company
+    @seat = @company.seats.client.new
+  end
+
   private
   def load_company
     @company = Company.find(params[:id])
@@ -76,9 +83,12 @@ class CompaniesController < ApplicationController
     @contracts = @company.contracts
   end
 
+  def load_seats
+    @seats = @company.seats
+  end
+
   def company_params
-    params.require(:company).permit(:category, :name, :name_abbr, :industry, :city, :description,
-                                    :bd_started_at, :bd_ended_at)
+    params.require(:company).permit(:name, :name_abbr, :tax_id, :industry, :city, :address, :phone, :description)
   end
 
 end
