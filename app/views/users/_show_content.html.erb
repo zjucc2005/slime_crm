@@ -1,0 +1,117 @@
+<div class="row border-bottom mb-3">
+    <div class="col-12">
+        <div class="form-group">
+            <%= user_role_badge(@user.role) %>
+            <%= user_status_badge(@user.status) %>
+            <span class="badge badge-light"><%= show_timestamps(@user) %></span>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :email) %></span>
+            </div>
+            <%= content_tag :span, @user.email, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :name_cn) %></span>
+            </div>
+            <%= content_tag :span, @user.name_cn, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :name_en) %></span>
+            </div>
+            <%= content_tag :span, @user.name_en, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :title) %></span>
+            </div>
+            <%= content_tag :span, @user.title, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :phone) %></span>
+            </div>
+            <%= content_tag :span, @user.phone, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :date_of_birth) %></span>
+            </div>
+            <%= content_tag :span, @user.date_of_birth.try(:strftime, '%F'), :class => 'form-control' %>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :role) %></span>
+            </div>
+            <%= content_tag :span, User::ROLES[@user.role], :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :status) %></span>
+            </div>
+            <%= content_tag :span, User::STATUS[@user.status], :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :date_of_employment) %></span>
+            </div>
+            <%= content_tag :span, @user.date_of_employment.try(:strftime, '%F'), :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :date_of_resignation) %></span>
+            </div>
+            <%= content_tag :span, @user.date_of_resignation.try(:strftime, '%F'), :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :sign_in_count) %></span>
+            </div>
+            <%= content_tag :span, @user.sign_in_count, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :current_sign_in_at) %></span>
+            </div>
+            <%= content_tag :span, @user.current_sign_in_at.try(:strftime, '%F'), :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :current_sign_in_ip) %></span>
+            </div>
+            <%= content_tag :span, @user.current_sign_in_ip, :class => 'form-control' %>
+        </div>
+    </div>
+</div>

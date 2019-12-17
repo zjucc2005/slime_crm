@@ -8,6 +8,9 @@ en:
   company_not_signed: "Not signed"
   expert_card: "Expert card"
   homepage: "Homepage"
+  inconsistent_password: "Two passwords must be consistent"
+  invalid_current_password: "Invalid current password"
+  my_account: "My account"
   not_found: "Not found"
   operation: "Operation"
   operation_failed: "Operation failed"
@@ -15,6 +18,7 @@ en:
   settings: "Settings"
   sure_to_delete: "Sure to delete?"
   sure_to_logout: "Sure to logout?"
+  user_account: "User account"
   work_experience: "Work experience"
 
   action:

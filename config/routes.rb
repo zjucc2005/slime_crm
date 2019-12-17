@@ -1,8 +1,21 @@
+# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
 Rails.application.routes.draw do
   devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   root to: 'home#index'
+
+  resources :users do
+    # get :account,            on: :member
+    # get :edit_account,       on: :member
+    # put :update_account,     on: :member
+
+    get :my_account,         on: :collection
+    get :edit_my_account,    on: :collection
+    put :update_my_account,  on: :collection
+    get :edit_my_password,   on: :collection
+    put :update_my_password, on: :collection
+  end
   
   resources :candidates do
     get :add_experience, on: :collection
