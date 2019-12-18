@@ -6,10 +6,6 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users do
-    # get :account,            on: :member
-    # get :edit_account,       on: :member
-    # put :update_account,     on: :member
-
     get :my_account,         on: :collection
     get :edit_my_account,    on: :collection
     put :update_my_account,  on: :collection

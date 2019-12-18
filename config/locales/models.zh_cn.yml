@@ -144,7 +144,6 @@ zh_cn:
           phone: "电话"
           email: "邮箱"
 
-
       location_datum:
         name: "名称"
         code: "编码"

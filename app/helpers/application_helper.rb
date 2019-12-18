@@ -79,8 +79,8 @@ module ApplicationHelper
 
     else
       arr = []
-      arr << "#{mt(:candidate, :created_at)}: #{instance.created_at.strftime('%F %T')}" if instance.created_at
-      arr << "#{mt(:candidate, :updated_at)}: #{instance.updated_at.strftime('%F %T')}" if instance.updated_at
+      arr << "#{mt(:user, :created_at)}: #{instance.created_at.strftime('%F %T')}" if instance.created_at
+      arr << "#{mt(:user, :updated_at)}: #{instance.updated_at.strftime('%F %T')}" if instance.updated_at
       arr.join(', ')
     end
   end

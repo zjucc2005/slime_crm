@@ -115,8 +115,6 @@ en:
           phone: "Phone"
           email: "Email"
 
-
-
       location_datum:
         name: "Name"
         code: "Code"

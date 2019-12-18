@@ -26,6 +26,6 @@ class User < ApplicationRecord
 
 
   ROLES = { :admin => '管理员', :pm => '项目经理', :pa => '项目助理', :finance => '财务' }.stringify_keys
-  STATUS = { :active => '在职', :inactive => '离职' }.stringify_keys
+  STATUS = { :active => '激活', :inactive => '未激活' }.stringify_keys
 
 end

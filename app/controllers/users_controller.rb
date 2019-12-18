@@ -5,12 +5,17 @@ class UsersController < ApplicationController
   # GET /users
   def index
     query = User.all
-    @users = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    @users = query.order(:created_at => :asc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /users/:id
   def show
     load_user
+  end
+
+  # GET /users/new
+  def new
+    @user = User.new
   end
 
   # GET /users/:id/edit
@@ -55,11 +60,12 @@ class UsersController < ApplicationController
       @user = current_user
 
       raise t(:invalid_current_password) unless @user.valid_password?(params[:current_password])
-      raise t(:inconsistent_password) unless params[:password] == params[:password_confirmation]
-      @user.update!(password: params[:password].strip)
-
-      flash[:success] = t('devise.passwords.updated_not_active')
-      redirect_to my_account_users_path
+      if @user.update(params.permit(:password, :password_confirmation))
+        flash[:success] = t('devise.passwords.updated_not_active')
+        redirect_to my_account_users_path
+      else
+        raise @user.errors.full_messages.join(', ')
+      end
     rescue Exception => e
       flash[:error] = e.message
       redirect_to edit_my_password_users_path
