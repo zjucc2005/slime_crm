@@ -25,7 +25,18 @@ class UsersController < ApplicationController
 
   # PUT /users/update_my_account
   def update_my_account
-
+    begin
+      @user = current_user
+      if @user.update(params.permit(:name_cn, :name_en, :phone, :date_of_birth))
+        flash[:success] = t(:operation_succeeded)
+      else
+        raise @user.errors.full_messages.join(', ')
+      end
+      redirect_to my_account_users_path
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to edit_my_account_users_path
+    end
   end
 
   # GET /users/edit_my_password
