@@ -21,13 +21,14 @@ en:
 
     # Translate model names
     models:
-      user: "User"
+      user: "User account"
       candidate: "Candidate"
       expert: "Expert"
       customer: "Customer"
       company: "Company"
       contract: "Contract"
       location_datum: "Location datum"
+      project: "Project"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:

@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-12 mb-0">
             <div class="card p-2 d-block">
-                <%= link_to new_company_path, :class => 'btn btn-primary' do %>
-                    <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:company))}" %>
+                <%= link_to new_project_path, :class => 'btn btn-primary' do %>
+                        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:project))}" %>
                 <% end %>
             </div>
         </div>
@@ -12,7 +12,7 @@
 
 <section>
     <div class="row">
-        <% if @companies.any? %>
+        <% if @companies.present? %>
             <div class="col-12 mb-2">
                 <div class="card p-2">
                     <table class="table table-sm table-striped table-hover card-text">
@@ -29,18 +29,18 @@
                         </thead>
                         <tbody>
                         <% @companies.each do |company| %>
-                            <tr>
-                                <td><%= check_box_tag :uids, company.id, false %></td>
-                                <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
-                                <td><%= link_to company.name, company_path(company) %></td>
-                                <td><%= company.name_abbr %></td>
-                                <td><%= company.city %></td>
-                                <td><%= company.industry %></td>
-                                <td>
-                                    <%= company_category_badge(company.category) %>
-                                    <%= company_signed_badge(company.is_signed?) %>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td><%= check_box_tag :uids, company.id, false %></td>
+                                    <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
+                                    <td><%= link_to company.name, company_path(company) %></td>
+                                    <td><%= company.name_abbr %></td>
+                                    <td><%= company.city %></td>
+                                    <td><%= company.industry %></td>
+                                    <td>
+                                        <%= company_category_badge(company.category) %>
+                                        <%= company_signed_badge(company.is_signed?) %>
+                                    </td>
+                                </tr>
                         <% end %>
                         </tbody>
                     </table>

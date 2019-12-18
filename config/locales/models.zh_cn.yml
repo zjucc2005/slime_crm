@@ -50,13 +50,14 @@ zh_cn:
 
     # Translate model names
     models:
-      user: "用户"
+      user: "用户帐号"
       candidate: "候选人"
       expert: "专家"
       customer: "客户"
       company: "公司"
       contract: "合同"
       location_datum: "行政区划数据"
+      project: "项目"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:

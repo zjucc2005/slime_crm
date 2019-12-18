@@ -4,6 +4,7 @@
             <h5 class="text-uppercase mb-0">
                 <%= fa_icon_tag('user') %> <%= t(:user_account) %>
             </h5>
+            <%= link_to fa_icon_tag('close'), users_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
         </div>
 
         <div class="card-body">
@@ -14,7 +15,7 @@
                     </h6>
                     <div class="btn-group btn-group-sm">
                         <%= link_to edit_user_path(@user), :class => 'btn btn-dark' do %>
-                                <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:user))}" %>
+                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:user))}" %>
                         <% end %>
                     </div>
                 </div>

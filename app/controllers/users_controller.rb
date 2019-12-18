@@ -2,6 +2,11 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  # GET /users
+  def index
+    query = User.all
+    @users = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+  end
 
   # GET /users/:id
   def show
