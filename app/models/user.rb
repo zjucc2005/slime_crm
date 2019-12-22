@@ -31,6 +31,10 @@ class User < ApplicationRecord
   ROLES = { :admin => '管理员', :pm => '项目经理', :pa => '项目助理', :finance => '财务' }.stringify_keys
   STATUS = { :active => '激活', :inactive => '未激活' }.stringify_keys
 
+  def admin?
+    role == 'admin'
+  end
+
   def is_available_role?
     %w[pm pa finance].include?(role)  # admin role is unique
   end

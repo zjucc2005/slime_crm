@@ -26,6 +26,12 @@ a {
 .dropdown-menu.fa-fixed .fa {
     width: 24px;
 }
+.dropdown-item {
+    &:hover{
+        background-color: #007bff;
+        color: #fff;
+    }
+}
 
 .model-error {
     padding: .75rem 1rem;

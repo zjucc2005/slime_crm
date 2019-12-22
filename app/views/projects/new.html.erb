@@ -4,19 +4,19 @@
             <div class="card">
                 <div class="card-header d-flex flex-row justify-content-between">
                     <h5 class="text-uppercase mb-0">
-                        <%= fa_icon_tag('bank') %>
-                        <%= t('action.new', :model => mt(:company)) %>
+                        <%= fa_icon_tag('map') %>
+                        <%= t('action.new', :model => mt(:project)) %>
                     </h5>
-                    <%= link_to fa_icon_tag('close'), companies_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
+                    <%= link_to fa_icon_tag('close'), projects_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
                 </div>
 
                 <div class="card-body">
-                    <%= form_for @company do |f| %>
+                    <%= form_for @project do |f| %>
                         <%= render :partial => 'form', :locals => { :f => f } %>
 
                         <div class="form-group mb-0">
                             <%= f.submit t('action.submit'), :class => 'btn btn-primary' %>
-                            <%= link_to t('action.back'), companies_path, :class => 'btn btn-secondary' %>
+                            <%= link_to t('action.back'), projects_path, :class => 'btn btn-secondary' %>
                         </div>
                     <% end %>
                 </div>

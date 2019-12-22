@@ -127,8 +127,11 @@ ActiveRecord::Schema.define(version: 2019_12_14_083633) do
     t.bigint "company_id"
     t.string "name"
     t.string "code"
+    t.string "status"
     t.text "requirement"
     t.string "industry"
+    t.datetime "started_at"
+    t.datetime "ended_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_projects_on_company_id"

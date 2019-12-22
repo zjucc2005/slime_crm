@@ -11,6 +11,7 @@ en:
   inconsistent_password: "Two passwords must be consistent"
   invalid_current_password: "Invalid current password"
   my_account: "My account"
+  not_authorized: "You are not authorized to access this page."
   not_found: "Not found"
   operation: "Operation"
   operation_failed: "Operation failed"

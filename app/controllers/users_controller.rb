@@ -41,6 +41,7 @@ class UsersController < ApplicationController
   # GET /users/:id/edit
   def edit
     load_user
+    not_authorized_to_edit_admin
   end
 
   # PATCH /users/:id
@@ -48,6 +49,7 @@ class UsersController < ApplicationController
     begin
       load_user
 
+      raise t(:not_authorized) if @user.admin?
       raise "Invalid role[#{@user.role}]" unless @user.is_available_role?
       if @user.update(update_user_params)
         flash[:success] = t(:operation_succeeded)
@@ -64,6 +66,7 @@ class UsersController < ApplicationController
   # GET/PUT /users/:id/edit_password
   def edit_password
     load_user
+    not_authorized_to_edit_admin
 
     if request.put?
       begin
@@ -137,5 +140,12 @@ class UsersController < ApplicationController
   def update_user_params
     params.require(:user).permit(:role, :status, :title, :date_of_employment, :date_of_resignation,
                                  :name_cn, :name_en, :phone, :date_of_birth)
+  end
+
+  def not_authorized_to_edit_admin
+    if @user.admin?
+      flash[:notice] = t(:not_authorized)
+      redirect_to root_path
+    end
   end
 end

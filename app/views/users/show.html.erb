@@ -16,10 +16,10 @@
                     <div class="btn-group btn-group-sm">
                         <%= link_to edit_password_user_path(@user), :class => 'btn btn-success' do %>
                             <%= fa_icon_tag('edit') %> <%= t(:reset_password) %>
-                        <% end %>
+                        <% end unless @user.admin? %>
                         <%= link_to edit_user_path(@user), :class => 'btn btn-dark' do %>
                             <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => mt(:user)) %>
-                        <% end %>
+                        <% end unless @user.admin? %>
                     </div>
                 </div>
             </div>

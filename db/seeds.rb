@@ -11,4 +11,4 @@ LocationDatum.data_seed
 
 # create admin
 User.create!(email: 'admin@dev.com', password: '111111', role: 'admin', status: 'active',
-             name_cn: '管理员', name_en: 'admin', date_of_employment: Time.now)
+             name_cn: '管理员', name_en: 'admin', date_of_employment: Time.now) unless User.exists?(role: 'admin')
