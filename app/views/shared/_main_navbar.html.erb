@@ -20,9 +20,11 @@
                 <li class="nav-item">
                     <%= link_to mt(:project), projects_path, :class => "nav-link #{yield :nav_projects}" %>
                 </li>
+                <% if can? :manage, User %>
                 <li class="nav-item">
                     <%= link_to mt(:user), users_path, :class => "nav-link #{yield :nav_users}" %>
                 </li>
+                <% end %>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="settings-drop" data-toggle="dropdown">
                         <%= t(:settings) %>

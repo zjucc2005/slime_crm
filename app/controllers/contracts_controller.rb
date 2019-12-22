@@ -1,5 +1,6 @@
 # encoding: utf-8
 class ContractsController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
 
   # POST /contracts

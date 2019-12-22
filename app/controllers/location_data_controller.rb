@@ -1,5 +1,6 @@
 # encoding: utf-8
 class LocationDataController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
 
   # GET /location_data?level=0
