@@ -16,6 +16,9 @@ class User < ApplicationRecord
   validates_inclusion_of :status, :in => %w[active inactive]
   validates_presence_of :name_cn
 
+  # Hooks
+  before_validation :setup, :on => [:create, :update]
+
   # Scopes
   scope :active,   -> { where(status: 'active') }
   scope :inactive, -> { where(status: 'inactive') }
@@ -28,4 +31,13 @@ class User < ApplicationRecord
   ROLES = { :admin => '管理员', :pm => '项目经理', :pa => '项目助理', :finance => '财务' }.stringify_keys
   STATUS = { :active => '激活', :inactive => '未激活' }.stringify_keys
 
+  def is_available_role?
+    %w[pm pa finance].include?(role)  # admin role is unique
+  end
+
+  private
+  def setup
+    self.status ||= 'inactive'
+    self.confirmed_at = (status == 'active' ? Time.now : nil)
+  end
 end

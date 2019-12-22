@@ -14,10 +14,10 @@
                     </h6>
                     <div class="btn-group btn-group-sm">
                         <%= link_to edit_my_password_users_path, :class => 'btn btn-success' do %>
-                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:user, :password))}" %>
+                            <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => mt(:user, :password)) %>
                         <% end %>
                         <%= link_to edit_my_account_users_path, :class => 'btn btn-dark' do %>
-                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => t(:my_account))}" %>
+                            <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => t(:my_account)) %>
                         <% end %>
                     </div>
                 </div>

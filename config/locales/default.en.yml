@@ -15,6 +15,7 @@ en:
   operation: "Operation"
   operation_failed: "Operation failed"
   operation_succeeded: "Operation succeeded"
+  reset_password: "Reset password"
   settings: "Settings"
   sure_to_delete: "Sure to delete?"
   sure_to_logout: "Sure to logout?"

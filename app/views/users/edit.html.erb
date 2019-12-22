@@ -2,19 +2,19 @@
     <div class="card">
         <div class="card-header d-flex flex-row justify-content-between">
             <h5 class="text-uppercase mb-0">
-                <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:user))}" %>
+                <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => mt(:user)) %>
             </h5>
-            <%= link_to fa_icon_tag('close'), users_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
+            <%= link_to fa_icon_tag('close'), user_path(@user), :class => 'h5 mb-0 text-decoration-none text-dark' %>
         </div>
 
         <div class="card-body">
-            <%= form_for @user, :url => admin_create_users_path do |f| %>
+            <%= form_for @user do |f| %>
                 <%= model_error_tag(@user) %>
-                <%= render :partial => 'form', :locals => { :f => f } %>
+                <%= render :partial => 'form_edit', :locals => { :f => f } %>
 
                 <div class="form-group mb-0">
                     <%= f.submit t('action.submit'), :class => 'btn btn-primary' %>
-                    <%= link_to t('action.back'), users_path, :class => 'btn btn-secondary' %>
+                    <%= link_to t('action.back'), user_path(@user), :class => 'btn btn-secondary' %>
                 </div>
             <% end %>
         </div>

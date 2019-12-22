@@ -18,9 +18,65 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  # POST /users, :create preserved for registration
+  # POST /users/admin_create
+  def admin_create
+    begin
+      @user = User.new(user_params)
+
+      raise "Invalid role[#{@user.role}]" unless @user.is_available_role?
+      if @user.save
+        flash[:success] = t(:operation_succeeded)
+        redirect_to users_path
+      else
+        render :new
+      end
+    rescue Exception => e
+      flash.now[:error] = e.message
+      render :new
+    end
+  end
+
   # GET /users/:id/edit
   def edit
     load_user
+  end
+
+  # PATCH /users/:id
+  def update
+    begin
+      load_user
+
+      raise "Invalid role[#{@user.role}]" unless @user.is_available_role?
+      if @user.update(update_user_params)
+        flash[:success] = t(:operation_succeeded)
+        redirect_to user_path(@user)
+      else
+        render :edit
+      end
+    rescue Exception => e
+      flash.now[:error] = e.message
+      render :edit
+    end
+  end
+
+  # GET/PUT /users/:id/edit_password
+  def edit_password
+    load_user
+
+    if request.put?
+      begin
+        if @user.update(params.permit(:password, :password_confirmation))
+          flash[:success] = t('devise.passwords.updated_not_active')
+          redirect_to user_path(@user)
+        else
+          raise @user.errors.full_messages.join(', ')
+        end
+      rescue Exception => e
+        flash[:error] = e.message
+        redirect_to edit_password_user_path(@user)
+      end
+    end
   end
 
   # GET /users/my_account
@@ -28,52 +84,57 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  # GET /users/edit_my_account
+  # GET/PUT /users/edit_my_account
   def edit_my_account
     @user = current_user
-  end
 
-  # PUT /users/update_my_account
-  def update_my_account
-    begin
-      @user = current_user
-      if @user.update(params.permit(:name_cn, :name_en, :phone, :date_of_birth))
-        flash[:success] = t(:operation_succeeded)
-      else
-        raise @user.errors.full_messages.join(', ')
+    if request.put?
+      begin
+        if @user.update(params.permit(:name_cn, :name_en, :phone, :date_of_birth))
+          flash[:success] = t(:operation_succeeded)
+        else
+          raise @user.errors.full_messages.join(', ')
+        end
+        redirect_to my_account_users_path
+      rescue Exception => e
+        flash[:error] = e.message
+        redirect_to edit_my_account_users_path
       end
-      redirect_to my_account_users_path
-    rescue Exception => e
-      flash[:error] = e.message
-      redirect_to edit_my_account_users_path
     end
   end
 
-  # GET /users/edit_my_password
+  # GET/PUT /users/edit_my_password
   def edit_my_password
     @user = current_user
-  end
 
-  # PUT /users/update_my_password
-  def update_my_password
-    begin
-      @user = current_user
-
-      raise t(:invalid_current_password) unless @user.valid_password?(params[:current_password])
-      if @user.update(params.permit(:password, :password_confirmation))
-        flash[:success] = t('devise.passwords.updated_not_active')
-        redirect_to my_account_users_path
-      else
-        raise @user.errors.full_messages.join(', ')
+    if request.put?
+      begin
+        raise t(:invalid_current_password) unless @user.valid_password?(params[:current_password])
+        if @user.update(params.permit(:password, :password_confirmation))
+          flash[:success] = t('devise.passwords.updated_not_active')
+          redirect_to my_account_users_path
+        else
+          raise @user.errors.full_messages.join(', ')
+        end
+      rescue Exception => e
+        flash[:error] = e.message
+        redirect_to edit_my_password_users_path
       end
-    rescue Exception => e
-      flash[:error] = e.message
-      redirect_to edit_my_password_users_path
     end
   end
 
   private
   def load_user
     @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :role, :status, :title, :date_of_employment,
+                                 :name_cn, :name_en, :phone, :date_of_birth)
+  end
+
+  def update_user_params
+    params.require(:user).permit(:role, :status, :title, :date_of_employment, :date_of_resignation,
+                                 :name_cn, :name_en, :phone, :date_of_birth)
   end
 end

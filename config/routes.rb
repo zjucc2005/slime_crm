@@ -6,11 +6,15 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :users do
+    post :admin_create,      on: :collection  # create users by admin
+    get :edit_password,      on: :member
+    put :edit_password,      on: :member
+
     get :my_account,         on: :collection
     get :edit_my_account,    on: :collection
-    put :update_my_account,  on: :collection
+    put :edit_my_account,    on: :collection
     get :edit_my_password,   on: :collection
-    put :update_my_password, on: :collection
+    put :edit_my_password,   on: :collection
   end
   
   resources :candidates do
