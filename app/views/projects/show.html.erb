@@ -1,0 +1,94 @@
+<section>
+    <div class="card">
+        <div class="card-header d-flex flex-row justify-content-between">
+            <h5 class="text-uppercase mb-0">
+                <%= fa_icon_tag('map') %> <%= mt(:project) %>
+            </h5>
+            <%= link_to fa_icon_tag('close'), projects_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-12 d-flex flex-row justify-content-between">
+                    <h6>
+                        <span class="text-gray mr-3"><%= "# #{@project.uid}" %></span>
+                        <span><%= @project.name %></span>
+                    </h6>
+                    <div class="btn-group btn-group-sm">
+                        <%#= link_to add_clients_project_path(@project), :class => 'btn btn-primary' do %>
+                            <%#= fa_icon_tag('plus') %> <%#= t('action.add', :model => t(:client_contact)) %>
+                        <%# end %>
+                        <%#= link_to new_contract_company_path(@company), :class => 'btn btn-success' do %>
+                            <%#= fa_icon_tag('plus') %> <%#= "#{t('action.new', :model => mt(:contract))}" %>
+                        <%# end %>
+                        <%#= link_to new_seat_company_path(@company), :class => 'btn btn-primary' do %>
+                            <%#= fa_icon_tag('plus') %> <%#= "#{t('action.new', :model => mt(:candidate, :seat))}" %>
+                        <%# end %>
+                        <%#= link_to edit_company_path(@company), :class => 'btn btn-dark' do %>
+                            <%#= fa_icon_tag('edit') %> <%#= "#{t('action.edit', :model => mt(:company))}" %>
+                        <%# end %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- main info -->
+            <div class="row">
+                <div class="col-12 form-group">
+                    <%= project_status_badge(@project.status) %>
+                    <span class="badge badge-light"><%= show_creator(@project) %></span>
+                    <span class="badge badge-light"><%= show_timestamps(@project) %></span>
+                </div>
+
+                <div class="col-12 input-group input-group-sm input-group-align mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project, :company) %></span>
+                    </div>
+                    <%= content_tag :span, @project.company.name, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project, :name) %></span>
+                    </div>
+                    <%= content_tag :span, @project.name, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project, :code) %></span>
+                    </div>
+                    <%= content_tag :span, @project.code, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project, :started_at) %></span>
+                    </div>
+                    <%= content_tag :span, @project.started_at.try(:strftime, '%F'), :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project, :ended_at) %></span>
+                    </div>
+                    <%= content_tag :span, @project.ended_at.try(:strftime, '%F'), :class => 'form-control' %>
+                </div>
+                <div class="col-12 input-group input-group-sm input-group-align mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project, :requirement) %></span>
+                    </div>
+                    <%= text_area_tag :requirement, @project.requirement, :rows => 5, :disabled => true, :class => 'form-control bg-white' %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <%= render :partial => 'projects/show/clients', :locals => { :clients => @project.clients } %>
+                    <%= render :partial => 'projects/show/users', :locals => { :users => @project.users } %>
+                    <%= render :partial => 'projects/show/experts', :locals => { :experts => @project.experts } %>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <%= render :partial => 'projects/show/interviews', :locals => { :interviews => [] } %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

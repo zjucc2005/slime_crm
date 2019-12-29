@@ -1,5 +1,6 @@
 // import all custom js files
 import './custom.candidate'
+import './custom.project'
 import './jquery.datetimepicker'
 
 
@@ -10,11 +11,14 @@ $(document).ready(function(){
 
 // select all checkbox
 window.selectAll = function(ele, name){
-    name = name || 'uids';
-    const target = $('input:checkbox[name=' + name + ']');
-    for(var i=0; i<target.length; i++){
-        target[i].checked = ele.checked;
-    }
+    name = name || 'uids[]';
+    const target = $('input:checkbox[name="' + name + '"]');
+    target.each(function(){
+        this.checked = ele.checked;
+    });
+    // for(var i=0; i<target.length; i++){
+    //     target[i].checked = ele.checked;
+    // }
 };
 
 $.fn.datePicker = function(){

@@ -1,0 +1,5 @@
+<div class="input-group-prepend">
+    <span class="input-group-text"><%= mt(:project, :client) %><sup class="text-red">*</sup></span>
+</div>
+<%= select_tag :client_id, options_for_select(@seat_options, params[:client_id]),
+               :multiple => true, :class => 'form-control h-100' %>

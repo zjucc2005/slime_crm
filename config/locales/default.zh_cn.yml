@@ -3,10 +3,14 @@ zh_cn:
   false: "否"
   pending: "待定"
 
+  add_to_project: "添加到项目"
   base_info: "基本信息"
+  cannot_delete: "不能删除"
+  client_contact: "客户联系人"
   company_signed: "已签约"
   company_not_signed: "未签约"
   expert_card: "专家卡片"
+  go_to_add: "去添加"
   homepage: "首页"
   inconsistent_password: "两次输入的密码不一致"
   invalid_current_password: "原密码错误"
@@ -24,7 +28,7 @@ zh_cn:
   work_experience: "工作经历"
 
   action:
-    add: "添加"
+    add: "添加%{model}"
     back: "返回"
     close: "关闭"
     delete: "删除"

@@ -3,10 +3,14 @@ en:
   false: "No"
   pending: "Pending"
 
+  add_to_project: "Add to project"
   base_info: "Base info"
+  cannot_delete: "Unable to delete"
+  client_contact: "Client contact"
   company_signed: "Signed"
   company_not_signed: "Not signed"
   expert_card: "Expert card"
+  go_to_add: "Go to add"
   homepage: "Homepage"
   inconsistent_password: "Two passwords must be consistent"
   invalid_current_password: "Invalid current password"
@@ -24,7 +28,7 @@ en:
   work_experience: "Work experience"
 
   action:
-    add: "Add"
+    add: "Add %{model}"
     back: "Back"
     close: "Close"
     delete: "Delete"

@@ -1,5 +1,5 @@
 window.genCandidateCard = function(){
-    var uids = $("input[name='uids']:checked");
+    var uids = $("input[name='uids[]']:checked");
     if(uids.length === 0){
         alert('请至少选择一位候选人');
     }else{

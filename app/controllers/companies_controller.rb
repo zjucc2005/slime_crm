@@ -75,6 +75,18 @@ class CompaniesController < ApplicationController
     @seat = @company.seats.client.new
   end
 
+  # GET /companies/:id/load_seat_options.js
+  def load_seat_options
+    begin
+      load_company
+      load_seats
+      @seat_options = @seats.map{|seat| [seat.name_cn, seat.id] }
+    rescue
+      @seat_options = []
+    end
+    respond_to { |f| f.js }
+  end
+
   private
   def load_company
     @company = Company.find(params[:id])

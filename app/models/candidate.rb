@@ -11,6 +11,9 @@ class Candidate < ApplicationRecord
   belongs_to :company, :class_name => 'Company', :optional => true
   has_many :experiences, :class_name => 'CandidateExperience', :dependent => :destroy
 
+  has_many :project_candidates, :class_name => 'ProjectCandidate'
+  has_many :projects, :class_name => 'Project', :through => :project_candidates
+
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys
   validates_inclusion_of :data_source, :in => DATA_SOURCE.keys

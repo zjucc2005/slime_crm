@@ -1,9 +1,14 @@
 # encoding: utf-8
 class ProjectCandidate < ApplicationRecord
 
+  # Associations
+  belongs_to :project, :class_name => 'Project'
+  belongs_to :candidate, :class_name => 'Candidate'
+
   # ENUM
   CATEGORY = {
-      :client => '客户联系人'
+      :expert => '专家',
+      :client => '客户'
   }.stringify_keys
 
   # Associations
@@ -15,6 +20,7 @@ class ProjectCandidate < ApplicationRecord
   before_validation :setup, :on => :create
 
   # Scopes
+  scope :expert, -> { where(category: 'expert') }
   scope :client, -> { where(category: 'client') }
 
   private

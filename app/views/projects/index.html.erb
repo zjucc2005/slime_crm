@@ -12,41 +12,40 @@
 
 <section>
     <div class="row">
-        <% if @companies.present? %>
+        <% if @projects.present? %>
             <div class="col-12 mb-2">
                 <div class="card p-2">
                     <table class="table table-sm table-striped table-hover card-text">
                         <thead>
                         <tr>
                             <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
-                            <th><%= mt(:company, :id) %></th>
-                            <th><%= mt(:company, :name) %></th>
-                            <th><%= mt(:company, :name_abbr) %></th>
-                            <th><%= mt(:company, :city) %></th>
-                            <th><%= mt(:company, :industry) %></th>
-                            <th><%= mt(:company, :category) %></th>
+                            <th><%= mt(:project, :id) %></th>
+                            <th><%= mt(:project, :name) %></th>
+                            <th><%= mt(:project, :code) %></th>
+                            <th><%= mt(:project, :started_at) %></th>
+                            <th><%= mt(:project, :ended_at) %></th>
+                            <th><%= mt(:project, :status) %></th>
+                            <th><%= mt(:project, :created_at) %></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <% @companies.each do |company| %>
-                                <tr>
-                                    <td><%= check_box_tag :uids, company.id, false %></td>
-                                    <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
-                                    <td><%= link_to company.name, company_path(company) %></td>
-                                    <td><%= company.name_abbr %></td>
-                                    <td><%= company.city %></td>
-                                    <td><%= company.industry %></td>
-                                    <td>
-                                        <%= company_category_badge(company.category) %>
-                                        <%= company_signed_badge(company.is_signed?) %>
-                                    </td>
-                                </tr>
+                        <% @projects.each do |project| %>
+                            <tr>
+                                <td><%= check_box_tag :'uids[]', project.id, false %></td>
+                                <td><%= content_tag :span, "# #{project.uid}", :class => 'text-gray' %></td>
+                                <td><%= link_to project.name, project_path(project) %></td>
+                                <td><%= project.code %></td>
+                                <td><%= project.started_at.try(:strftime, '%F') %></td>
+                                <td><%= project.ended_at.try(:strftime, '%F') %></td>
+                                <td><%= project_status_badge(project.status) %></td>
+                                <td><%= project.created_at.strftime('%F %T') %></td>
+                            </tr>
                         <% end %>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <%= will_paginate @companies %>
+            <%= will_paginate @projects %>
         <% else %>
             <div class="col-12 mb-2">
                 <div class="card p-2">

@@ -46,9 +46,9 @@
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:company, :city) %></span>
+                <span class="input-group-text"><%= mt(:company, :city) %><sup class="text-red">*</sup></span>
             </div>
-            <%= f.text_field :city, :class => 'form-control autocomplete-city' %>
+            <%= f.text_field :city, :required => true, :class => 'form-control autocomplete-city' %>
         </div>
     </div>
     <div class="col-lg-3 col-6">

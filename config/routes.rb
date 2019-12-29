@@ -27,13 +27,23 @@ Rails.application.routes.draw do
   end
 
   resources :companies do
-    get :new_contract,     on: :member
-    get :new_seat,         on: :member
+    get :new_contract,      on: :member
+    get :new_seat,          on: :member
+
+    get :load_seat_options, on: :member
   end
 
   resources :contracts
 
-  resources :projects
+  resources :projects do
+    get :add_clients, on: :member  # 添加客户
+    put :add_clients, on: :member
+
+    get :add_users,   on: :member  # 添加项目参与人. remote
+    put :add_users,   on: :member
+    get :add_experts, on: :member  # 添加专家, remote
+    put :add_experts, on: :member
+  end
 
   resources :location_data do
     get :autocomplete_city, on: :collection

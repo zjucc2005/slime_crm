@@ -1,0 +1,48 @@
+<div class="card mb-3">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+            <%= fa_icon_tag('user-circle') %> <%= mt(:expert) %>
+        </h5>
+        <%= link_to t(:go_to_add), candidates_path(project_id: @project.id, from_source: 'project') %>
+    </div>
+
+    <div class="card-body p-2">
+        <% if experts.any? %>
+            <table class="table table-sm table-striped table-hover card-text">
+                <thead>
+                <tr>
+                    <th><%= mt(:candidate, :id) %></th>
+                    <th><%= mt(:candidate, :name_cn) %></th>
+                    <th><%= mt(:candidate, :name_en) %></th>
+                    <th><%= mt(:candidate, :phone) %></th>
+                    <th><%= mt(:candidate, :phone1) %></th>
+                    <th><%= mt(:candidate, :email) %></th>
+                    <th><%= mt(:candidate, :email1) %></th>
+                    <th><%= mt(:candidate, :created_at) %></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% clients.each do |client| %>
+                    <tr>
+                        <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
+                        <td><%= client.name_cn %></td>
+                        <td><%= client.name_en %></td>
+                        <td><%= client.phone %></td>
+                        <td><%= client.phone1 %></td>
+                        <td><%= client.email %></td>
+                        <td><%= client.email1 %></td>
+                        <td><%= client.created_at.strftime('%F %T') %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <div class="p-2 text-center">
+                <h5 class="text-gray mb-0">
+                    <%= t(:not_found) %>,
+                    <%= link_to t(:go_to_add), candidates_path(project_id: @project.id, from_source: 'project') %>
+                </h5>
+            </div>
+        <% end %>
+    </div>
+</div>

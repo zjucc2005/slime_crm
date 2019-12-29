@@ -30,7 +30,7 @@
                         <tbody>
                         <% @companies.each do |company| %>
                             <tr>
-                                <td><%= check_box_tag :uids, company.id, false %></td>
+                                <td><%= check_box_tag :'uids[]', company.id, false %></td>
                                 <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
                                 <td><%= link_to company.name, company_path(company) %></td>
                                 <td><%= company.name_abbr %></td>

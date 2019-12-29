@@ -10,7 +10,7 @@ class Company < ApplicationRecord
 
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys
-  validates_presence_of :name
+  validates_presence_of :name, :city
   validates_uniqueness_of :name
   validates_length_of :name, :minimum => 10
 
@@ -19,6 +19,7 @@ class Company < ApplicationRecord
 
   # Scopes
   scope :client, -> { where(category: 'client') }
+  scope :signed, -> { joins(:contracts).where('contracts.started_at <= :now AND contracts.ended_at >= :now', { :now => Time.now }).distinct }
 
   def is_client?
     category == 'client'

@@ -4,7 +4,7 @@
             <div class="col-lg-4 d-flex flex-column text-center text-md-left">
                 <div class="d-flex flex-column flex-lg-row align-items-center mb-3">
                     <div class="candidate-checkbox">
-                        <%= check_box_tag :uids, candidate.id, false, :class => 'checkbox-square' %>
+                        <%= check_box_tag :'uids[]', candidate.id, false, :class => 'checkbox-square' %>
                     </div>
                     <div class="text-center mr-3 mb-1 mb-lg-0">
                         <span class="text-smaller text-gray"><%= "# #{ candidate.uid}" %></span>

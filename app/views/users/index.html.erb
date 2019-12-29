@@ -5,6 +5,10 @@
                 <%= link_to new_user_path, :class => 'btn btn-primary' do %>
                     <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:user))}" %>
                 <% end %>
+
+                <%= link_to '', :class => 'btn btn-secondary', :onclick => 'addUserToProject();' do %>
+                    <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
+                <% end %>
             </div>
         </div>
     </div>
@@ -32,7 +36,7 @@
                         <tbody>
                         <% @users.each do |user| %>
                             <tr>
-                                <td><%= check_box_tag :uids, user.id, false %></td>
+                                <td><%= check_box_tag :'uids[]', user.id, false %></td>
                                 <td><%= content_tag :span, "# #{user.uid}", :class => 'text-gray' %></td>
                                 <td><%= link_to user.email, user_path(user) %></td>
                                 <td><%= user.name_cn %></td>
@@ -59,3 +63,5 @@
         <% end %>
     </div>
 </section>
+
+<%= render :partial => 'users/index/project_modal' %>

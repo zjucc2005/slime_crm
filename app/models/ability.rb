@@ -50,9 +50,9 @@ class Ability
     cannot :destroy, User
     can :manage, Candidate
     can :manage, Company
-    can :manage, Project
-
+    can :manage, Contract
     can :manage, LocationDatum
+    can :manage, Project
   end
 
   def pm_ability
