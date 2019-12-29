@@ -11,27 +11,26 @@
             <table class="table table-sm table-striped table-hover card-text">
                 <thead>
                 <tr>
-                    <th><%= mt(:candidate, :id) %></th>
-                    <th><%= mt(:candidate, :name_cn) %></th>
-                    <th><%= mt(:candidate, :name_en) %></th>
-                    <th><%= mt(:candidate, :phone) %></th>
-                    <th><%= mt(:candidate, :phone1) %></th>
-                    <th><%= mt(:candidate, :email) %></th>
-                    <th><%= mt(:candidate, :email1) %></th>
-                    <th><%= mt(:candidate, :created_at) %></th>
+                    <th><%= mt(:user, :id) %></th>
+                    <th><%= mt(:user, :email) %></th>
+                    <th><%= mt(:user, :name_cn) %></th>
+                    <th><%= mt(:user, :role) %></th>
+                    <th><%= t(:operation) %></th>
                 </tr>
                 </thead>
                 <tbody>
-                <% clients.each do |client| %>
+                <% users.each do |user| %>
                     <tr>
-                        <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
-                        <td><%= client.name_cn %></td>
-                        <td><%= client.name_en %></td>
-                        <td><%= client.phone %></td>
-                        <td><%= client.phone1 %></td>
-                        <td><%= client.email %></td>
-                        <td><%= client.email1 %></td>
-                        <td><%= client.created_at.strftime('%F %T') %></td>
+                        <td><%= content_tag :span, "# #{user.uid}", :class => 'text-gray' %></td>
+                        <td><%= user.email %></td>
+                        <td><%= user.name_cn %></td>
+                        <td><%= user_role_badge(user.role) %></td>
+                        <td>
+                            <%= link_to delete_user_project_path(@project, user_id: user.id), :method => :delete,
+                                        :class => 'btn btn-danger btn-xs', :data => { :confirm => t(:sure_to_delete) } do %>
+                                <%= fa_icon_tag('remove') %>
+                            <% end %>
+                        </td>
                     </tr>
                 <% end %>
                 </tbody>

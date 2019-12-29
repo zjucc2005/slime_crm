@@ -80,6 +80,53 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET/PUT /projects/add_users
+  def add_users
+    if request.get?
+      @project_options = Project.where(status: %w[initialized ongoing]).pluck(:name, :id)
+    elsif request.put?
+      begin
+        @project = Project.find(params[:project_id])
+        raise t(:not_authorized) unless @project.can_edit?
+
+        ActiveRecord::Base.transaction do
+          (params[:uids] || []).each do |user_id|
+            user = User.find(user_id)
+            @project.project_users.find_or_create_by!(category: user.role, user_id: user_id)
+          end
+        end
+        flash[:success] = t(:operation_succeeded)
+        redirect_to project_path(@project)
+      rescue Exception => e
+        flash[:error] = e.message
+        redirect_to projects_path
+      end
+    end
+  end
+
+  # GET/PUT /projects/add_experts
+  def add_experts
+    if request.get?
+      @project_options = Project.where(status: %w[initialized ongoing]).pluck(:name, :id)
+    elsif request.put?
+      begin
+        @project = Project.find(params[:project_id])
+        raise t(:not_authorized) unless @project.can_edit?
+
+        ActiveRecord::Base.transaction do
+          (params[:uids] || []).each do |candidate_id|
+            @project.project_candidates.expert.find_or_create_by!(candidate_id: candidate_id)
+          end
+        end
+        flash[:success] = t(:operation_succeeded)
+        redirect_to project_path(@project)
+      rescue Exception => e
+        flash[:error] = e.message
+        redirect_to projects_path
+      end
+    end
+  end
+
   # GET/PUT /projects/:id/add_clients
   def add_clients
     begin
@@ -98,6 +145,48 @@ class ProjectsController < ApplicationController
         flash[:success] = t(:operation_succeeded)
         redirect_to project_path(@project)
       end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
+  # DELETE /projects/:id/delete_user?user_id=1
+  def delete_user
+    begin
+      load_project
+      raise t(:not_authorized) unless @project.can_edit?
+      @project.project_users.find_by(user_id: params[:user_id]).destroy
+      flash[:success] = t(:operation_succeeded)
+      redirect_to project_path(@project)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
+  # DELETE /projects/:id/delete_expert?expert_id=1
+  def delete_expert
+    begin
+      load_project
+      raise t(:not_authorized) unless @project.can_edit?
+      @project.project_candidates.find_by(candidate_id: params[:expert_id]).destroy
+      flash[:success] = t(:operation_succeeded)
+      redirect_to project_path(@project)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
+  # DELETE /projects/:id/delete_client?client_id=1
+  def delete_client
+    begin
+      load_project
+      raise t(:not_authorized) unless @project.can_edit?
+      @project.project_candidates.find_by(candidate_id: params[:client_id]).destroy
+      flash[:success] = t(:operation_succeeded)
+      redirect_to project_path(@project)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to projects_path

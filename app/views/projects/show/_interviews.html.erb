@@ -3,7 +3,7 @@
         <h5 class="text-uppercase mb-0">
             <%= fa_icon_tag('street-view') %> 访谈
         </h5>
-        <%= link_to t(:go_to_add), add_clients_project_path(@project) %>
+        <%= link_to t(:go_to_add), '#', :onclick => 'alert("开发中")' %>
     </div>
 
     <div class="card-body p-2">
@@ -32,7 +32,7 @@
             <div class="p-2 text-center">
                 <h5 class="text-gray mb-0">
                     <%= t(:not_found) %>,
-                    <%= link_to t(:go_to_add), add_clients_project_path(@project) %>
+                    <%= link_to t(:go_to_add), '#', :onclick => 'alert("开发中")' %>
                 </h5>
             </div>
         <% end %>

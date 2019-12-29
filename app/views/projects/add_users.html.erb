@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+            <%= fa_icon_tag('map') %>
+            <%= t(:add_to_project) %>
+        </h5>
+        <%= link_to fa_icon_tag('close'), 'javascript:history.go(-1);', :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_tag add_users_projects_path, :method => :put do %>
+            <% params[:uids].each do |uid| %>
+                <%= hidden_field_tag :'uids[]', uid %>
+            <% end %>
+
+            <div class="row">
+                <div class="col-12 form-group">
+                    <span class="badge badge-light"><%= "选择了#{params[:uids].length}位用户" %></span>
+                </div>
+
+                <div class="col-12 form-group input-group input-group-sm input-group-align">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project) %><sup class="text-red">*</sup></span>
+                    </div>
+                    <%= select_tag :project_id, options_for_select(@project_options, params[:project_id]),
+                                   :prompt => default_prompt, :required => true, :class => 'form-control' %>
+                </div>
+
+                <div class="col-12 form-group">
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
+                    <%= link_to t('action.back'), 'javascript:history.go(-1);', :class => 'btn btn-secondary' %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

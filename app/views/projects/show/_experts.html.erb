@@ -12,26 +12,25 @@
                 <thead>
                 <tr>
                     <th><%= mt(:candidate, :id) %></th>
-                    <th><%= mt(:candidate, :name_cn) %></th>
-                    <th><%= mt(:candidate, :name_en) %></th>
+                    <th><%= mt(:candidate, :name) %></th>
                     <th><%= mt(:candidate, :phone) %></th>
-                    <th><%= mt(:candidate, :phone1) %></th>
                     <th><%= mt(:candidate, :email) %></th>
-                    <th><%= mt(:candidate, :email1) %></th>
-                    <th><%= mt(:candidate, :created_at) %></th>
+                    <th><%= t(:operation) %></th>
                 </tr>
                 </thead>
                 <tbody>
-                <% clients.each do |client| %>
+                <% experts.each do |expert| %>
                     <tr>
-                        <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
-                        <td><%= client.name_cn %></td>
-                        <td><%= client.name_en %></td>
-                        <td><%= client.phone %></td>
-                        <td><%= client.phone1 %></td>
-                        <td><%= client.email %></td>
-                        <td><%= client.email1 %></td>
-                        <td><%= client.created_at.strftime('%F %T') %></td>
+                        <td><%= content_tag :span, "# #{expert.uid}", :class => 'text-gray' %></td>
+                        <td><%= "#{expert.name_cn}#{expert.name_en.present? ? "(#{expert.name_en})" : nil }" %></td>
+                        <td><%= expert.phone %><br><%= expert.phone1 %></td>
+                        <td><%= expert.email %><br><%= expert.email1 %></td>
+                        <td>
+                            <%= link_to delete_expert_project_path(@project, expert_id: expert.id), :method => :delete,
+                                        :class => 'btn btn-danger btn-xs', :data => { :confirm => t(:sure_to_delete) } do %>
+                                <%= fa_icon_tag('remove') %>
+                            <% end %>
+                        </td>
                     </tr>
                 <% end %>
                 </tbody>

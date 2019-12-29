@@ -36,13 +36,15 @@ Rails.application.routes.draw do
   resources :contracts
 
   resources :projects do
-    get :add_clients, on: :member  # 添加客户
+    get :add_users,   on: :collection   # 添加项目参与人
+    put :add_users,   on: :collection
+    get :add_experts, on: :collection   # 添加专家
+    put :add_experts, on: :collection
+    get :add_clients, on: :member       # 添加客户
     put :add_clients, on: :member
-
-    get :add_users,   on: :member  # 添加项目参与人. remote
-    put :add_users,   on: :member
-    get :add_experts, on: :member  # 添加专家, remote
-    put :add_experts, on: :member
+    delete :delete_user,   on: :member  # 删除项目参与人
+    delete :delete_expert, on: :member  # 删除专家
+    delete :delete_client, on: :member  # 删除客户
   end
 
   resources :location_data do

@@ -9,6 +9,10 @@
                 <%= link_to '', :class => 'btn btn-secondary', :onclick => 'genCandidateCard();' do %>
                     <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
                 <% end %>
+
+                <%= link_to '', :class => 'btn btn-secondary', :onclick => 'addExpertToProject();' do %>
+                    <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
+                <% end %>
             </div>
         </div>
     </div>
@@ -34,3 +38,6 @@
 
     <%= render :partial => 'search_modal' %>
 </section>
+
+<%= hidden_field_tag :from_source, params[:from_source] %>
+<%= hidden_field_tag :project_id, params[:project_id] %>
