@@ -15,6 +15,7 @@ class Project < ApplicationRecord
   has_many :candidates, :class_name => 'Candidate', :through => :project_candidates
   has_many :project_users, :class_name => 'ProjectUser'
   has_many :users, :class_name => 'User', :through => :project_users
+  has_many :project_tasks, :class_name => 'ProjectTask'
 
   # Validations
   validates_presence_of :name, :code

@@ -13,6 +13,7 @@ class Candidate < ApplicationRecord
 
   has_many :project_candidates, :class_name => 'ProjectCandidate'
   has_many :projects, :class_name => 'Project', :through => :project_candidates
+  has_many :project_tasks, :class_name => 'ProjectTask'
 
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys
