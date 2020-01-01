@@ -90,9 +90,8 @@ class ProjectsController < ApplicationController
         raise t(:not_authorized) unless @project.can_edit?
 
         ActiveRecord::Base.transaction do
-          (params[:uids] || []).each do |user_id|
-            user = User.find(user_id)
-            @project.project_users.find_or_create_by!(category: user.role, user_id: user_id)
+          User.where(id: params[:uids], role: %w[pm pa]).each do |user|
+            @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
           end
         end
         flash[:success] = t(:operation_succeeded)

@@ -24,6 +24,7 @@ en:
   settings: "Settings"
   sure_to_delete: "Sure to delete?"
   sure_to_logout: "Sure to logout?"
+  sure_to_remove: "Sure to remove?"
   user_account: "User account"
   work_experience: "Work experience"
 
@@ -37,6 +38,7 @@ en:
     logout: "Logout"
     new: "New %{model}"
     quit: "Quit"
+    remove: "Remove"
     save: "Save"
     search: "Search"
     submit: "Submit"

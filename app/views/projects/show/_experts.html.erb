@@ -26,10 +26,8 @@
                         <td><%= expert.phone %><br><%= expert.phone1 %></td>
                         <td><%= expert.email %><br><%= expert.email1 %></td>
                         <td>
-                            <%= link_to delete_expert_project_path(@project, expert_id: expert.id), :method => :delete,
-                                        :class => 'btn btn-danger btn-xs', :data => { :confirm => t(:sure_to_delete) } do %>
-                                <%= fa_icon_tag('remove') %>
-                            <% end %>
+                            <%= link_to t('action.remove'), delete_expert_project_path(@project, expert_id: expert.id),
+                                        :method => :delete, :data => { :confirm => t(:sure_to_delete) } %>
                         </td>
                     </tr>
                 <% end %>

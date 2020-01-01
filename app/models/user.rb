@@ -38,6 +38,10 @@ class User < ApplicationRecord
     role == 'admin'
   end
 
+  def is_role?(*args)
+    args.include?(role)
+  end
+
   def is_available_role?
     %w[pm pa finance].include?(role)  # admin role is unique
   end

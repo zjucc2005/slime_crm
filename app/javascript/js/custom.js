@@ -4,9 +4,12 @@ import './custom.project'
 import './jquery.datetimepicker'
 
 
-// ----------------------------------------------------------------------
-$(document).ready(function(){
+// DOMContentLoaded events ----------------------------------------------------------------------
+$(document).on('turbolinks:load', function(){
     setTimeout("$('.alert').css('display','none')",5000);
+    $('.datetimepicker').datetimePicker();
+    $('.datepicker').datePicker();
+    $('.select2').select2();
 });
 
 // select all checkbox

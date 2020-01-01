@@ -26,10 +26,8 @@
                         <td><%= client.phone %><br><%= client.phone1 %></td>
                         <td><%= client.email %><br><%= client.email1 %></td>
                         <td>
-                            <%= link_to delete_client_project_path(@project, client_id: client.id), :method => :delete,
-                                        :class => 'btn btn-danger btn-xs', :data => { :confirm => t(:sure_to_delete) } do %>
-                                <%= fa_icon_tag('remove') %>
-                            <% end %>
+                            <%= link_to t('action.remove'), delete_client_project_path(@project, client_id: client.id),
+                                        :method => :delete, :data => { :confirm => t(:sure_to_remove) }  %>
                         </td>
                     </tr>
                 <% end %>
