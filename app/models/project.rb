@@ -11,9 +11,9 @@ class Project < ApplicationRecord
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by
   belongs_to :company, :class_name => 'Company'
-  has_many :project_candidates, :class_name => 'ProjectCandidate'
+  has_many :project_candidates, :class_name => 'ProjectCandidate', :dependent => :destroy
   has_many :candidates, :class_name => 'Candidate', :through => :project_candidates
-  has_many :project_users, :class_name => 'ProjectUser'
+  has_many :project_users, :class_name => 'ProjectUser', :dependent => :destroy
   has_many :users, :class_name => 'User', :through => :project_users
   has_many :project_tasks, :class_name => 'ProjectTask'
 
@@ -57,7 +57,27 @@ class Project < ApplicationRecord
   end
 
   def can_destroy?
-    true
+    %w[initialized].include?(status)
+  end
+
+  def can_start?
+    %w[initialized].include?(status)
+  end
+
+  def can_close?
+    %w[ongoing].include?(status)
+  end
+
+  def start!
+    self.status = 'ongoing'
+    self.started_at ||= Time.now
+    self.save!
+  end
+
+  def close!
+    self.status = 'finished'
+    self.ended_at ||= Time.now
+    self.save!
   end
 
   private

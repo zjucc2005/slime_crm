@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_141722) do
     t.bigint "candidate_id"
     t.string "status"
     t.decimal "cpt", precision: 10, scale: 2
+    t.decimal "fee", precision: 10, scale: 2
     t.integer "duration"
     t.datetime "started_at"
     t.datetime "ended_at"

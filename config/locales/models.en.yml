@@ -29,6 +29,7 @@ en:
       contract: "Contract"
       location_datum: "Location datum"
       project: "Project"
+      project_task: "Project task"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -135,3 +136,14 @@ en:
         ended_at: "Ended at"
         client: "Client"
         expert: "Expert"
+        start: "Start project"
+        close: "Close project"
+
+      project_task:
+        category: "Category"
+        status: "Status"
+        cpt: "cpt"
+        fee: "Fee"
+        duration: "Duration"
+        started_at: "Started at"
+        ended_at: "Ended at"

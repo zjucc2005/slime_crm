@@ -42,9 +42,19 @@ Rails.application.routes.draw do
     put :add_experts, on: :collection
     get :add_clients, on: :member       # 添加客户
     put :add_clients, on: :member
+    get :add_project_task, on: :member
+    put :add_project_task, on: :member
+
     delete :delete_user,   on: :member  # 删除项目参与人
     delete :delete_expert, on: :member  # 删除专家
     delete :delete_client, on: :member  # 删除客户
+
+    put :start, on: :member
+    put :close, on: :member
+  end
+
+  resources :project_tasks do
+
   end
 
   resources :location_data do

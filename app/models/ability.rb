@@ -53,6 +53,7 @@ class Ability
     can :manage, Contract
     can :manage, LocationDatum
     can :manage, Project
+    can :manage, ProjectTask
   end
 
   def pm_ability

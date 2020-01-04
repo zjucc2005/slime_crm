@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     begin
-      @project = current_user.projects.new(project_params)
+      @project = Project.new(project_params.merge(created_by: current_user.id))
 
       if @project.save
         flash[:success] = t(:operation_succeeded)
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
     begin
       load_project
 
-      if @project.update(project_params)
+      if @project.update(project_params_update)
         flash[:success] = t(:operation_succeeded)
         redirect_to project_path(@project)
       else
@@ -150,6 +150,29 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET/PUT /projects/:id/add_project_task
+  def add_project_task
+    begin
+      load_project
+      @project_task = @project.project_tasks.new
+
+      if request.put?
+        raise t(:not_authorized) unless @project.can_edit?
+
+        @project_task = @project.project_tasks.new(project_task_params.merge(created_by: current_user.id))
+        if @project_task.save
+          flash[:success] = t(:operation_succeeded)
+          redirect_to project_path(@project)
+        else
+          render :add_project_task
+        end
+      end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
   # DELETE /projects/:id/delete_user?user_id=1
   def delete_user
     begin
@@ -192,6 +215,34 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # PUT /project/:id/start
+  def start
+    begin
+      load_project
+      raise t(:not_authorized) unless @project.can_start?
+      @project.start!
+      flash[:success] = t(:operation_succeeded)
+      redirect_to project_path(@project)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
+  # PUT /projects/:id/close
+  def close
+    begin
+      load_project
+      raise t(:not_authorized) unless @project.can_close?
+      @project.close!
+      flash[:success] = t(:operation_succeeded)
+      redirect_to project_path(@project)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
   private
   def load_project
     @project = Project.find(params[:id])
@@ -199,6 +250,14 @@ class ProjectsController < ApplicationController
 
   def project_params
     params.require(:project).permit(:company_id, :name, :code, :industry, :requirement, :started_at, :ended_at)
+  end
+
+  def project_params_update
+    params.require(:project).permit(:name, :code, :industry, :requirement, :started_at, :ended_at)
+  end
+
+  def project_task_params
+    params.require(:project_task).permit(:category, :candidate_id, :started_at, :ended_at, :cpt)
   end
 
   # 加载客户公司

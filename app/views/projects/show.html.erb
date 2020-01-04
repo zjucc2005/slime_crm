@@ -16,18 +16,18 @@
                         <span><%= @project.name %></span>
                     </h6>
                     <div class="btn-group btn-group-sm">
-                        <%#= link_to add_clients_project_path(@project), :class => 'btn btn-primary' do %>
-                            <%#= fa_icon_tag('plus') %> <%#= t('action.add', :model => t(:client_contact)) %>
-                        <%# end %>
-                        <%#= link_to new_contract_company_path(@company), :class => 'btn btn-success' do %>
-                            <%#= fa_icon_tag('plus') %> <%#= "#{t('action.new', :model => mt(:contract))}" %>
-                        <%# end %>
-                        <%#= link_to new_seat_company_path(@company), :class => 'btn btn-primary' do %>
-                            <%#= fa_icon_tag('plus') %> <%#= "#{t('action.new', :model => mt(:candidate, :seat))}" %>
-                        <%# end %>
-                        <%#= link_to edit_company_path(@company), :class => 'btn btn-dark' do %>
-                            <%#= fa_icon_tag('edit') %> <%#= "#{t('action.edit', :model => mt(:company))}" %>
-                        <%# end %>
+                        <%= link_to start_project_path(@project), :method => :put, :class => 'btn btn-success', :data => { :confirm => t(:sure)}  do %>
+                            <%= fa_icon_tag('edit') %> <%= mt(:project, :start) %>
+                        <% end if @project.can_start? %>
+                        <%= link_to close_project_path(@project), :method => :put, :class => 'btn btn-warning', :data => { :confirm => t(:sure)}  do %>
+                            <%= fa_icon_tag('edit') %> <%= mt(:project, :close) %>
+                        <% end if @project.can_close? %>
+                        <%= link_to edit_project_path(@project), :class => 'btn btn-dark' do %>
+                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:project))}" %>
+                        <% end if @project.can_edit? %>
+                        <%= link_to project_path(@project), :method => :delete, :class => 'btn btn-danger', :data => { :confirm => t(:sure_to_delete)} do %>
+                            <%= fa_icon_tag('remove') %> <%= "#{t('action.delete', :model => mt(:project))}" %>
+                        <% end if @project.can_destroy? %>
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                     <%= render :partial => 'projects/show/experts', :locals => { :experts => @project.experts } %>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <%= render :partial => 'projects/show/interviews', :locals => { :interviews => [] } %>
+                    <%= render :partial => 'projects/show/project_tasks', :locals => { :project_tasks => @project.project_tasks } %>
                 </div>
             </div>
 

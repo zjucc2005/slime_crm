@@ -3,7 +3,7 @@
         <h5 class="text-uppercase mb-0">
             <%= fa_icon_tag('user-circle') %> <%= mt(:expert) %>
         </h5>
-        <%= link_to t(:go_to_add), candidates_path(project_id: @project.id, from_source: 'project') %>
+        <%= link_to(t(:go_to_add), candidates_path(project_id: @project.id, from_source: 'project')) if @project.can_edit? %>
     </div>
 
     <div class="card-body p-2">
@@ -15,7 +15,7 @@
                     <th><%= mt(:candidate, :name) %></th>
                     <th><%= mt(:candidate, :phone) %></th>
                     <th><%= mt(:candidate, :email) %></th>
-                    <th><%= t(:operation) %></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,8 +26,8 @@
                         <td><%= expert.phone %><br><%= expert.phone1 %></td>
                         <td><%= expert.email %><br><%= expert.email1 %></td>
                         <td>
-                            <%= link_to t('action.remove'), delete_expert_project_path(@project, expert_id: expert.id),
-                                        :method => :delete, :data => { :confirm => t(:sure_to_delete) } %>
+                            <%= link_to(t('action.remove'), delete_expert_project_path(@project, expert_id: expert.id),
+                                        :method => :delete, :data => { :confirm => t(:sure_to_delete) }) if @project.can_edit? %>
                         </td>
                     </tr>
                 <% end %>
@@ -37,7 +37,7 @@
             <div class="p-2 text-center">
                 <h5 class="text-gray mb-0">
                     <%= t(:not_found) %>,
-                    <%= link_to t(:go_to_add), candidates_path(project_id: @project.id, from_source: 'project') %>
+                    <%= link_to(t(:go_to_add), candidates_path(project_id: @project.id, from_source: 'project')) if @project.can_edit? %>
                 </h5>
             </div>
         <% end %>

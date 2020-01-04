@@ -11,12 +11,19 @@ class ProjectTask < ApplicationRecord
 
   # Validations
   validates_presence_of :started_at, :ended_at, :duration
+  validates_inclusion_of :category, :in => CATEGORY.keys
+  validates_inclusion_of :status, :in => STATUS.keys
 
-  before_validation :setup, :on => :create
+  before_validation :setup, :on => [:create, :update]
+  # Scopes
+  scope :interview, -> { where( category: 'interview') }
+
 
   private
   def setup
-    self.category ||= 'interview'
     self.status ||= 'ongoing'
+    self.cpt    ||= self.candidate.cpt
+    self.duration = ((ended_at - started_at) / 60.0).to_i
+    self.fee      = cpt * (duration / 60.0).ceil
   end
 end

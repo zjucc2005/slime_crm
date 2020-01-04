@@ -1,60 +1,47 @@
-<section class="mb-2">
-    <div class="row">
-        <div class="col-12 mb-0">
-            <div class="card p-2 d-block">
-                <%= link_to new_company_path, :class => 'btn btn-primary' do %>
-                    <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:company))}" %>
-                <% end %>
-            </div>
+<div class="card p-2 d-block mb-2">
+    <%= link_to new_company_path, :class => 'btn btn-primary' do %>
+        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:company))}" %>
+    <% end %>
+</div>
+
+
+<% if @companies.any? %>
+    <div class="card p-2">
+        <table class="table table-sm table-striped table-hover card-text">
+            <thead>
+            <tr>
+                <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
+                <th><%= mt(:company, :id) %></th>
+                <th><%= mt(:company, :name) %></th>
+                <th><%= mt(:company, :name_abbr) %></th>
+                <th><%= mt(:company, :city) %></th>
+                <th><%= mt(:company, :industry) %></th>
+                <th><%= mt(:company, :category) %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @companies.each do |company| %>
+                <tr>
+                    <td><%= check_box_tag :'uids[]', company.id, false %></td>
+                    <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
+                    <td><%= link_to company.name, company_path(company) %></td>
+                    <td><%= company.name_abbr %></td>
+                    <td><%= company.city %></td>
+                    <td><%= company.industry %></td>
+                    <td>
+                        <%= company_category_badge(company.category) %>
+                        <%= company_signed_badge(company.is_signed?) %>
+                    </td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+    <%= will_paginate @companies %>
+<% else %>
+    <div class="card p-2">
+        <div class="p-4 text-center">
+            <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
         </div>
     </div>
-</section>
-
-<section>
-    <div class="row">
-        <% if @companies.any? %>
-            <div class="col-12 mb-2">
-                <div class="card p-2">
-                    <table class="table table-sm table-striped table-hover card-text">
-                        <thead>
-                        <tr>
-                            <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
-                            <th><%= mt(:company, :id) %></th>
-                            <th><%= mt(:company, :name) %></th>
-                            <th><%= mt(:company, :name_abbr) %></th>
-                            <th><%= mt(:company, :city) %></th>
-                            <th><%= mt(:company, :industry) %></th>
-                            <th><%= mt(:company, :category) %></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% @companies.each do |company| %>
-                            <tr>
-                                <td><%= check_box_tag :'uids[]', company.id, false %></td>
-                                <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
-                                <td><%= link_to company.name, company_path(company) %></td>
-                                <td><%= company.name_abbr %></td>
-                                <td><%= company.city %></td>
-                                <td><%= company.industry %></td>
-                                <td>
-                                    <%= company_category_badge(company.category) %>
-                                    <%= company_signed_badge(company.is_signed?) %>
-                                </td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <%= will_paginate @companies %>
-        <% else %>
-            <div class="col-12 mb-2">
-                <div class="card p-2">
-                    <div class="p-4 text-center">
-                        <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
-                    </div>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</section>
+<% end %>

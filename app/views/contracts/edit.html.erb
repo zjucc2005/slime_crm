@@ -1,26 +1,20 @@
-<section>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header d-flex flex-row justify-content-between">
-                    <h5 class="text-uppercase mb-0">
-                        <i class="fa fa-bank"></i>
-                        <%= t('action.edit', :model => mt(:contract)) %>
-                    </h5>
-                    <%= link_to fa_icon_tag('close'), company_path(@contract.company), :class => 'h5 mb-0 text-decoration-none text-dark' %>
-                </div>
-
-                <div class="card-body">
-                    <%= form_for @contract do |f| %>
-                        <%= render :partial => 'form', :locals => { :f => f } %>
-
-                        <div class="form-group mb-0">
-                            <%= f.submit t('action.save'), :class => 'btn btn-primary' %>
-                            <%= link_to t('action.back'), company_path(@contract.company), :class => 'btn btn-secondary' %>
-                        </div>
-                    <% end %>
-                </div>
-            </div>
-        </div>
+<div class="card">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+            <i class="fa fa-bank"></i>
+            <%= t('action.edit', :model => mt(:contract)) %>
+        </h5>
+        <%= link_to fa_icon_tag('close'), company_path(@contract.company), :class => 'h5 mb-0 text-decoration-none text-dark' %>
     </div>
-</section>
+
+    <div class="card-body">
+        <%= form_for @contract do |f| %>
+            <%= render :partial => 'form', :locals => { :f => f } %>
+
+            <div class="form-group mb-0">
+                <%= f.submit t('action.save'), :class => 'btn btn-primary' %>
+                <%= link_to t('action.back'), company_path(@contract.company), :class => 'btn btn-secondary' %>
+            </div>
+        <% end %>
+    </div>
+</div>

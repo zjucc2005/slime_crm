@@ -1,44 +1,41 @@
-<section>
-
-    <div class="card">
-        <div class="card-header d-flex flex-row justify-content-between">
-            <h5 class="text-uppercase mb-0">
-                <%= fa_icon_tag('location-arrow') %> <%= mt(:location_datum) %>
-            </h5>
-        </div>
-        <div class="card-body p-2">
-            <ol class="breadcrumb">
-                <%= content_tag :li, :class => 'breadcrumb-item' do %>
-                    <%= link_to t(:homepage), location_data_path %>
-                <% end %>
-                <% (@parent.level + 1).times do |i| %>
-                    <% datum = instance_variable_get("@level_#{i}") %>
-                    <% if datum %>
-                        <%= content_tag :li, :class => 'breadcrumb-item' do %>
-                            <%= link_to datum.name, location_data_path(level: datum.level + 1, parent_id: datum.id) %>
-                        <% end %>
-                    <% end %>
-                <% end if @parent %>
-            </ol>
-
-            <table class="table table-sm table-striped table-hover card-text">
-                <thead>
-                <tr>
-                    <th><%= mt(:location_datum, :name) %></th>
-                    <th><%= mt(:location_datum, :code) %></th>
-                    <th><%= mt(:location_datum, :level) %></th>
-                </tr>
-                </thead>
-                <tbody>
-                <% @location_data.each do |datum| %>
-                    <tr>
-                        <td><%= link_to datum.name, location_data_path(level: datum.level + 1, parent_id: datum.id) %></td>
-                        <td><%= datum.code %></td>
-                        <td><%= datum.level %></td>
-                    </tr>
-                <% end %>
-                </tbody>
-            </table>
-        </div>
+<div class="card">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+            <%= fa_icon_tag('location-arrow') %> <%= mt(:location_datum) %>
+        </h5>
     </div>
-</section>
+    <div class="card-body p-2">
+        <ol class="breadcrumb">
+            <%= content_tag :li, :class => 'breadcrumb-item' do %>
+                <%= link_to t(:homepage), location_data_path %>
+            <% end %>
+            <% (@parent.level + 1).times do |i| %>
+                <% datum = instance_variable_get("@level_#{i}") %>
+                <% if datum %>
+                    <%= content_tag :li, :class => 'breadcrumb-item' do %>
+                        <%= link_to datum.name, location_data_path(level: datum.level + 1, parent_id: datum.id) %>
+                    <% end %>
+                <% end %>
+            <% end if @parent %>
+        </ol>
+
+        <table class="table table-sm table-striped table-hover card-text">
+            <thead>
+            <tr>
+                <th><%= mt(:location_datum, :name) %></th>
+                <th><%= mt(:location_datum, :code) %></th>
+                <th><%= mt(:location_datum, :level) %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @location_data.each do |datum| %>
+                <tr>
+                    <td><%= link_to datum.name, location_data_path(level: datum.level + 1, parent_id: datum.id) %></td>
+                    <td><%= datum.code %></td>
+                    <td><%= datum.level %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

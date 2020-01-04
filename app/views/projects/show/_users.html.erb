@@ -3,7 +3,7 @@
         <h5 class="text-uppercase mb-0">
             <%= fa_icon_tag('users') %> <%= mt(:user) %>
         </h5>
-        <%= link_to t(:go_to_add), users_path(project_id: @project.id, from_source: 'project') %>
+        <%= link_to(t(:go_to_add), users_path(project_id: @project.id, from_source: 'project')) if @project.can_edit? %>
     </div>
 
     <div class="card-body p-2">
@@ -26,8 +26,8 @@
                         <td><%= user.name_cn %></td>
                         <td><%= user_role_badge(user.role) %></td>
                         <td>
-                            <%= link_to t('action.remove'), delete_user_project_path(@project, user_id: user.id),
-                                        :method => :delete, :data => { :confirm => t(:sure_to_delete) } %>
+                            <%= link_to(t('action.remove'), delete_user_project_path(@project, user_id: user.id),
+                                        :method => :delete, :data => { :confirm => t(:sure_to_delete) }) if @project.can_edit? %>
                         </td>
                     </tr>
                 <% end %>
@@ -37,7 +37,7 @@
             <div class="p-2 text-center">
                 <h5 class="text-gray mb-0">
                     <%= t(:not_found) %>,
-                    <%= link_to t(:go_to_add), users_path(project_id: @project.id, from_source: 'project') %>
+                    <%= link_to(t(:go_to_add), users_path(project_id: @project.id, from_source: 'project')) if @project.can_edit? %>
                 </h5>
             </div>
         <% end %>

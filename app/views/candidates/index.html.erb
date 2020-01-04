@@ -1,43 +1,31 @@
-<section class="mb-2">
-    <div class="row">
-        <div class="col-12 mb-0">
-            <div class="card p-2 d-block">
-                <%= link_to new_candidate_path, :class => 'btn btn-primary' do %>
-                    <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:expert))}" %>
-                <% end %>
+<div class="card p-2 d-block mb-2">
+    <%= link_to new_candidate_path, :class => 'btn btn-primary' do %>
+        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:expert))}" %>
+    <% end %>
 
-                <%= link_to '', :class => 'btn btn-secondary', :onclick => 'genCandidateCard();' do %>
-                    <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
-                <% end %>
+    <%= link_to '', :class => 'btn btn-secondary', :onclick => 'genExpertCard();' do %>
+        <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
+    <% end %>
 
-                <%= link_to '', :class => 'btn btn-secondary', :onclick => 'addExpertToProject();' do %>
-                    <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
-                <% end %>
-            </div>
+    <%= link_to '', :class => 'btn btn-secondary', :onclick => 'addExpertToProject();' do %>
+        <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
+    <% end %>
+</div>
+
+<% if @candidates.any? %>
+    <% @candidates.each do |candidate| %>
+        <%= render :partial => 'list_unit', :locals => { :candidate => candidate } %>
+    <% end %>
+    <%= will_paginate @candidates %>
+<% else %>
+    <div class="card p-2">
+        <div class="p-4 text-center">
+            <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
         </div>
     </div>
-</section>
+<% end %>
 
-<section>
-    <div class="row">
-        <% if @candidates.any? %>
-            <% @candidates.each do |candidate| %>
-                <%= render :partial => 'list_unit', :locals => { :candidate => candidate } %>
-            <% end %>
-            <%= will_paginate @candidates %>
-        <% else %>
-            <div class="col-12 mb-0">
-                <div class="card p-2">
-                    <div class="p-4 text-center">
-                        <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
-                    </div>
-                </div>
-            </div>
-        <% end %>
-    </div>
-
-    <%= render :partial => 'search_modal' %>
-</section>
+<%= render :partial => 'search_modal' %>
 
 <%= hidden_field_tag :from_source, params[:from_source] %>
 <%= hidden_field_tag :project_id, params[:project_id] %>

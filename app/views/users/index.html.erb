@@ -1,68 +1,54 @@
-<section class="mb-2">
-    <div class="row">
-        <div class="col-12 mb-0">
-            <div class="card p-2 d-block">
-                <%= link_to new_user_path, :class => 'btn btn-primary' do %>
-                    <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:user))}" %>
-                <% end %>
+<div class="card p-2 d-block mb-2">
+    <%= link_to new_user_path, :class => 'btn btn-primary' do %>
+        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:user))}" %>
+    <% end %>
 
-                <%= link_to '', :class => 'btn btn-secondary', :onclick => 'addUserToProject();' do %>
-                    <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
-                <% end %>
-            </div>
+    <%= link_to '', :class => 'btn btn-secondary', :onclick => 'addUserToProject();' do %>
+        <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
+    <% end %>
+</div>
+
+<% if @users.any? %>
+    <div class="card p-2 mb-2">
+        <table class="table table-sm table-striped table-hover card-text">
+            <thead>
+            <tr>
+                <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
+                <td><%= mt(:user, :id) %></td>
+                <th><%= mt(:user, :email) %></th>
+                <th><%= mt(:user, :name_cn) %></th>
+                <th><%= mt(:user, :phone) %></th>
+                <th><%= mt(:user, :title) %></th>
+                <th><%= mt(:user, :role) %></th>
+                <th><%= mt(:user, :status) %></th>
+                <th><%= mt(:user, :created_at) %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @users.each do |user| %>
+                <tr>
+                    <td><%= check_box_tag :'uids[]', user.id, false %></td>
+                    <td><%= content_tag :span, "# #{user.uid}", :class => 'text-gray' %></td>
+                    <td><%= link_to user.email, user_path(user) %></td>
+                    <td><%= user.name_cn %></td>
+                    <td><%= user.phone %></td>
+                    <td><%= user.title %></td>
+                    <td><%= user_role_badge(user.role) %></td>
+                    <td><%= user_status_badge(user.status) %></td>
+                    <td><%= user.created_at.strftime('%F %T') %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+    <%= will_paginate @users %>
+<% else %>
+    <div class="card p-2">
+        <div class="p-4 text-center">
+            <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
         </div>
     </div>
-</section>
-
-<section>
-    <div class="row">
-        <% if @users.any? %>
-            <div class="col-12 mb-2">
-                <div class="card p-2">
-                    <table class="table table-sm table-striped table-hover card-text">
-                        <thead>
-                        <tr>
-                            <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
-                            <td><%= mt(:user, :id) %></td>
-                            <th><%= mt(:user, :email) %></th>
-                            <th><%= mt(:user, :name_cn) %></th>
-                            <th><%= mt(:user, :phone) %></th>
-                            <th><%= mt(:user, :title) %></th>
-                            <th><%= mt(:user, :role) %></th>
-                            <th><%= mt(:user, :status) %></th>
-                            <th><%= mt(:user, :created_at) %></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% @users.each do |user| %>
-                            <tr>
-                                <td><%= check_box_tag :'uids[]', user.id, false %></td>
-                                <td><%= content_tag :span, "# #{user.uid}", :class => 'text-gray' %></td>
-                                <td><%= link_to user.email, user_path(user) %></td>
-                                <td><%= user.name_cn %></td>
-                                <td><%= user.phone %></td>
-                                <td><%= user.title %></td>
-                                <td><%= user_role_badge(user.role) %></td>
-                                <td><%= user_status_badge(user.status) %></td>
-                                <td><%= user.created_at.strftime('%F %T') %></td>
-                            </tr>
-                        <% end %>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <%= will_paginate @users %>
-        <% else %>
-            <div class="col-12 mb-2">
-                <div class="card p-2">
-                    <div class="p-4 text-center">
-                        <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
-                    </div>
-                </div>
-            </div>
-        <% end %>
-    </div>
-</section>
+<% end %>
 
 <%= hidden_field_tag :from_source, params[:from_source] %>
 <%= hidden_field_tag :project_id, params[:project_id] %>
