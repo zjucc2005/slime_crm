@@ -41,15 +41,15 @@
             </p>
         </div>
         <div class="col-lg-4 d-flex flex-column text-left">
-            <div class="text mb-3">
+            <div class="text mb-3">git
                 <span>访谈次数： </span>
                 <span><%= candidate.project_tasks.interview.count %></span>，
                 <span>最近访谈时间： </span>
-                <span><%= candidate.project_tasks.interview.maximum(:started_at).try(:strftime, '%F %T') %></span>
+                <span><%= candidate.project_tasks.interview.maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
             </div>
-            <% candidate.project_tasks.interview.limit(3).each do |task| %>
+            <% candidate.project_tasks.interview.order(:started_at => :desc).limit(3).each do |task| %>
                 <div class="text mb-1">
-                    <span class="text-gray mr-1"><%= "#{task.started_at.strftime('%F %T')} ~ #{task.ended_at.strftime('%F %T')}" %></span>
+                    <span class="text-gray mr-1"><%= "#{task.started_at.strftime('%F %H:%M')} ~ #{task.ended_at.strftime('%F %T')}" %></span>
                     <span>费率： <%= task.cpt %></span>
                 </div>
             <% end %>
