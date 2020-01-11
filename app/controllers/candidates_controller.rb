@@ -156,6 +156,46 @@ class CandidatesController < ApplicationController
     end
   end
 
+  # POST /candidates/import_expert
+  def import_expert
+    begin
+      sheet = open_spreadsheet(params[:file])
+
+      # render :json => sheet.to_json and return
+
+      ActiveRecord::Base.transaction do
+        2.upto(sheet.last_row) do |i|
+          row = sheet.row(i)
+          name        = row[1].to_s.strip
+          next if name.blank?
+          description = row[2].to_s.strip
+          emails      = row[3].to_s.split
+          phones      = row[4].to_s.split
+          cpt         = row[5].to_s.match(/\d+/).to_s.to_i
+          currency    = row[5].to_s.match(/(RMB|USD)/).to_s
+          first_name, last_name = Candidate.name_split(name)
+          current_user.candidates.expert.create!(
+              data_source: 'excel',
+              first_name: first_name,
+              last_name: last_name,
+              phone: phones[0],
+              phone1: phones[1],
+              email: emails[0],
+              email1: emails[1],
+              description: description,
+              cpt: cpt,
+              currency: currency.present? ? currency : 'RMB'
+          )
+        end
+      end
+      flash[:notice] = t(:operation_succeeded)
+      redirect_to candidates_path
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to candidates_path
+    end
+  end
+
   private
   def load_candidate
     @candidate = Candidate.find(params[:id])
@@ -166,12 +206,12 @@ class CandidatesController < ApplicationController
   end
 
   def candidate_params
-    params.require(:candidate).permit(:name_cn, :name_en, :city, :email, :email1, :phone, :phone1, :industry, :company_id,
-                                      :date_of_birth, :gender, :description, :is_available, :cpt,
+    params.require(:candidate).permit(:first_name, :last_name, :nickname, :city, :email, :email1, :phone, :phone1, :industry, :company_id,
+                                      :date_of_birth, :gender, :description, :is_available, :cpt, :currency,
                                       :bank, :bank_card, :bank_user, :alipay_account, :alipay_user)
   end
 
   def experience_fields
-    [:started_at, :ended_at, :org_cn, :org_en, :department, :title, :description]
+    [:started_at, :ended_at, :org_cn, :org_en, :title, :description]
   end
 end

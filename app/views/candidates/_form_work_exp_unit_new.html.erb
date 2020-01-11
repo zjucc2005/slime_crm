@@ -40,14 +40,6 @@
             <div class="col-6">
                 <div class="input-group input-group-sm input-group-align mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_experience, :department) %></span>
-                    </div>
-                    <%= text_field_tag :"work_exp[#{i}][department]", (params[:work_exp][i.to_s][:department] rescue nil), :class => 'form-control' %>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
                         <span class="input-group-text"><%= mt(:candidate_experience, :title) %></span>
                     </div>
                     <%= text_field_tag :"work_exp[#{i}][title]", (params[:work_exp][i.to_s][:title] rescue nil), :class => 'form-control' %>

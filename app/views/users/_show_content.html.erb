@@ -77,6 +77,14 @@
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:user, :candidate_access_limit) %></span>
+            </div>
+            <%= content_tag :span, @user.candidate_access_limit, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
                 <span class="input-group-text"><%= mt(:user, :date_of_employment) %></span>
             </div>
             <%= content_tag :span, @user.date_of_employment.try(:strftime, '%F'), :class => 'form-control' %>

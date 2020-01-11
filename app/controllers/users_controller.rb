@@ -134,12 +134,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :role, :status, :title, :date_of_employment,
-                                 :name_cn, :name_en, :phone, :date_of_birth)
+                                 :name_cn, :name_en, :phone, :date_of_birth, :candidate_access_limit)
   end
 
   def update_user_params
     params.require(:user).permit(:role, :status, :title, :date_of_employment, :date_of_resignation,
-                                 :name_cn, :name_en, :phone, :date_of_birth)
+                                 :name_cn, :name_en, :phone, :date_of_birth, :candidate_access_limit)
   end
 
   def not_authorized_to_edit_admin

@@ -14,17 +14,25 @@
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :name_cn) %><sup class="text-red">*</sup></span>
+                <span class="input-group-text"><%= mt(:candidate, :last_name) %><sup class="text-red">*</sup></span>
             </div>
-            <%= f.text_field :name_cn, :required => true, :class => 'form-control' %>
+            <%= f.text_field :last_name, :required => true, :class => 'form-control' %>
         </div>
     </div>
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :name_en) %></span>
+                <span class="input-group-text"><%= mt(:candidate, :first_name) %></span>
             </div>
-            <%= f.text_field :name_en, :class => 'form-control' %>
+            <%= f.text_field :first_name, :class => 'form-control' %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :nickname) %></span>
+            </div>
+            <%= f.text_field :nickname, :class => 'form-control' %>
         </div>
     </div>
     <div class="col-lg-3 col-6">
@@ -122,7 +130,6 @@
             <%= f.select :is_available, candidate_is_available_options, { :include_blank => false }, :class => 'form-control' %>
         </div>
     </div>
-
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">
@@ -131,6 +138,15 @@
             <%= f.number_field :cpt, :required => true, :min => 0, :step => 1, :class => 'form-control' %>
         </div>
     </div>
+    <div class="col-lg-3 col-6">
+        <div class="input-group input-group-sm input-group-align mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><%= mt(:candidate, :currency) %><sup class="text-red">*</sup></span>
+            </div>
+            <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control' %>
+        </div>
+    </div>
+
     <div class="col-lg-3 col-6">
         <div class="input-group input-group-sm input-group-align mb-3">
             <div class="input-group-prepend">

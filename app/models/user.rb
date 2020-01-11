@@ -14,11 +14,13 @@ class User < ApplicationRecord
 
   has_many :project_users, :class_name => 'ProjectUser'
   has_many :in_projects, :class_name => 'Project', :through => :project_users  # 用户参与的项目
+  has_many :candidate_access_logs, :class_name => 'CandidateAccessLog'
 
   # validations
   validates_inclusion_of :role, :in => %w[su admin pm pa finance]
   validates_inclusion_of :status, :in => %w[active inactive]
   validates_presence_of :name_cn
+  validates_numericality_of :candidate_access_limit, :greater_than_or_equal_to => 0
 
   # Hooks
   before_validation :setup, :on => [:create, :update]
@@ -47,9 +49,19 @@ class User < ApplicationRecord
     %w[pm pa finance].include?(role)  # admin role is unique
   end
 
+  def can_access_candidate?
+    if admin?
+      true
+    else
+      now = Time.now
+      candidate_access_logs.where('created_at BETWEEN ? AND ?', now.beginning_of_day, now.end_of_day).count < candidate_access_limit
+    end
+  end
+
   private
   def setup
     self.status ||= 'inactive'
     self.confirmed_at = (status == 'active' ? Time.now : nil)
+    self.candidate_access_limit ||= 0
   end
 end

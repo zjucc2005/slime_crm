@@ -6,14 +6,14 @@
                     <%= check_box_tag :'uids[]', candidate.id, false, :class => 'checkbox-square' %>
                 </div>
                 <div class="text-center mr-3 mb-1 mb-lg-0">
-                    <span class="text-smaller text-gray"><%= "# #{ candidate.uid}" %></span>
+                    <span class="text-smaller text-gray"><%= "# #{ candidate.uid }" %></span>
                 </div>
                 <div class="text-center mr-3 mb-1 mb-lg-0">
                     <h6 class="mb-0">
                         <span class="status <%= candidate.is_available ? 'valid' : 'invalid' %> mr-2"></span>
                         <%= link_to edit_candidate_path(candidate) do %>
-                            <span><%= candidate.name_cn %></span>
-                            <span class="d-lg-none">(<%= candidate.name_en %>)</span>
+                            <span><%= candidate.name %></span>
+                            <span class="d-lg-none">(<%= candidate.nickname %>)</span>
                         <% end %>
                     </h6>
                 </div>
@@ -36,12 +36,12 @@
             </div>
         </div>
         <div class="col-lg-4 d-flex align-items-center flex-column text-left">
-            <p class="my-3 my-lg-0 text">
-                <%= hl(truncate(candidate.description, length: 160), params[:term]) %>
-            </p>
+            <div class="my-3 my-lg-0 text text-limit-length" style="height: 100px;">
+                <%= hl(candidate.description, params[:term]) %>
+            </div>
         </div>
         <div class="col-lg-4 d-flex flex-column text-left">
-            <div class="text mb-3">git
+            <div class="text mb-3">
                 <span>访谈次数： </span>
                 <span><%= candidate.project_tasks.interview.count %></span>，
                 <span>最近访谈时间： </span>

@@ -6,8 +6,10 @@ class CreateCandidates < ActiveRecord::Migration[6.0]
       t.bigint :created_by
       t.references :company
 
-      t.string :name_cn
-      t.string :name_en
+      t.string :name
+      t.string :first_name
+      t.string :last_name
+      t.string :nickname
       t.string :city
       t.string :email
       t.string :email1
@@ -20,6 +22,7 @@ class CreateCandidates < ActiveRecord::Migration[6.0]
 
       t.boolean :is_available
       t.decimal :cpt, :precision => 10, :scale => 2
+      t.string :currency
       t.string :bank
       t.string :bank_card
       t.string :bank_user

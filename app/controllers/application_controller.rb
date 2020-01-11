@@ -9,4 +9,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  private
+  def open_spreadsheet(file)
+    begin
+      Roo::Spreadsheet.open file
+    rescue
+      raise '文件格式错误'
+    end
+  end
+
 end

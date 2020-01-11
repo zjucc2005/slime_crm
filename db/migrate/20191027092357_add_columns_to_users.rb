@@ -9,5 +9,6 @@ class AddColumnsToUsers < ActiveRecord::Migration[6.0]
     add_column :users, :date_of_birth, :datetime
     add_column :users, :date_of_employment, :datetime
     add_column :users, :date_of_resignation, :datetime
+    add_column :users, :candidate_access_limit, :integer
   end
 end

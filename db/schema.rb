@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_30_141722) do
+ActiveRecord::Schema.define(version: 2020_01_11_064416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "candidate_access_logs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "candidate_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_candidate_access_logs_on_candidate_id"
+    t.index ["user_id"], name: "index_candidate_access_logs_on_user_id"
+  end
 
   create_table "candidate_experiences", force: :cascade do |t|
     t.bigint "candidate_id"
@@ -35,8 +44,10 @@ ActiveRecord::Schema.define(version: 2019_12_30_141722) do
     t.string "data_source"
     t.bigint "created_by"
     t.bigint "company_id"
-    t.string "name_cn"
-    t.string "name_en"
+    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "nickname"
     t.string "city"
     t.string "email"
     t.string "email1"
@@ -48,6 +59,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_141722) do
     t.text "description"
     t.boolean "is_available"
     t.decimal "cpt", precision: 10, scale: 2
+    t.string "currency"
     t.string "bank"
     t.string "bank_card"
     t.string "bank_user"
@@ -180,6 +192,7 @@ ActiveRecord::Schema.define(version: 2019_12_30_141722) do
     t.datetime "date_of_birth"
     t.datetime "date_of_employment"
     t.datetime "date_of_resignation"
+    t.integer "candidate_access_limit"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -21,6 +21,10 @@ a {
 .text-gray { color: #adb5bd  !important; }
 .text-red { color: #F0404C !important; }
 
+.text-limit-length {
+  text-overflow: ellipsis;
+}
+
 .bg-red { background-color: #F0404C !important; }
 
 .dropdown-menu.fa-fixed .fa {

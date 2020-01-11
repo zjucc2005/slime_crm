@@ -1,0 +1,28 @@
+<%= button_tag :type => 'button', :class => 'btn btn-primary', :data => { :toggle => 'modal', :target => '#importExpertModal'}  do %>
+    <%= fa_icon_tag('table') %> <%= t(:import_expert) %>
+<% end %>
+
+<div class="modal fade" id="importExpertModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%= t(:import_expert) %></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <%= form_tag import_expert_candidates_path, :method => :post, :multipart => true do %>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>选择Excel文件</label>
+                        <%= file_field_tag :file, :class => 'form-control-file' %>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= t('action.close') %></button>
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

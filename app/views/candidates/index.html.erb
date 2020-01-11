@@ -2,6 +2,7 @@
     <%= link_to new_candidate_path, :class => 'btn btn-primary' do %>
         <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:expert))}" %>
     <% end %>
+    <%= render :partial => 'candidates/widgets/btn_import_expert' %>
 
     <%= link_to '', :class => 'btn btn-secondary', :onclick => 'genExpertCard();' do %>
         <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>

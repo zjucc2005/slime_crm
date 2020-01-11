@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     post :create_seat,   on: :collection
     get :edit_seat,      on: :member
     put :update_seat,    on: :member
+
+    post :import_expert, on: :collection  # import experts with excel
   end
 
   resources :companies do
