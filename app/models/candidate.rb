@@ -15,6 +15,7 @@ class Candidate < ApplicationRecord
   has_many :project_candidates, :class_name => 'ProjectCandidate'
   has_many :projects, :class_name => 'Project', :through => :project_candidates
   has_many :project_tasks, :class_name => 'ProjectTask'
+  has_many :candidate_access_logs, :class_name => 'CandidateAccessLog'
 
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys

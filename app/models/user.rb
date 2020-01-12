@@ -49,13 +49,18 @@ class User < ApplicationRecord
     %w[pm pa finance].include?(role)  # admin role is unique
   end
 
+  # 是否能访问候选人数据
   def can_access_candidate?
-    if admin?
-      true
-    else
-      now = Time.now
-      candidate_access_logs.where('created_at BETWEEN ? AND ?', now.beginning_of_day, now.end_of_day).count < candidate_access_limit
+    admin? ? true : candidate_access_logs.today.count < candidate_access_limit
+  end
+
+  # 访问候选人记录，每日每个候选人最多一条记录
+  def access_candidate(candidate)
+    raise I18n.t(:not_authorized) unless can_access_candidate?
+    unless candidate_access_logs.today.exists?(candidate_id: candidate.id)
+      candidate_access_logs.create!(candidate_id: candidate.id)
     end
+    true
   end
 
   private

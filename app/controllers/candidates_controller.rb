@@ -184,7 +184,8 @@ class CandidatesController < ApplicationController
               email1: emails[1],
               description: description,
               cpt: cpt,
-              currency: currency.present? ? currency : 'RMB'
+              currency: currency.present? ? currency : 'RMB',
+              is_available: true
           )
         end
       end
@@ -199,6 +200,7 @@ class CandidatesController < ApplicationController
   private
   def load_candidate
     @candidate = Candidate.find(params[:id])
+    current_user.access_candidate(@candidate)  # 访问次数统计/访问权限
   end
 
   def load_seat

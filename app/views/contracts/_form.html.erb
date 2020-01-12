@@ -2,16 +2,10 @@
 <div class="row border-bottom mb-3">
     <%= f.hidden_field :company_id, :required => true %>
 
-    <div class="col-lg-12">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:contract, :file) %><sup class="text-red">*</sup></span>
-            </div>
-            <% if @contract.file.present? %>
-                <%= content_tag :span, @contract.file.identifier, :class => 'form-control' %>
-            <% end %>
-            <%= f.file_field :file, :required => (action_name != 'edit'), :class => 'form-control' %>
-        </div>
+    <div class="col-lg-12 form-group">
+        <%= f.label :file, mt(:contract, :file) %>
+        <%= link_to @contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end %>
+        <%= f.file_field :file, :required => (action_name != 'edit'), :class => 'form-control-file' %>
     </div>
 
     <div class="col-lg-3 col-6">
