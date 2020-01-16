@@ -53,12 +53,15 @@ class Ability
     can :manage, Contract
     can :manage, LocationDatum
     can :manage, Project
+    can :manage, ProjectRequirement
     can :manage, ProjectTask
   end
 
   def pm_ability
     can_edit_my_account
     can :manage, Candidate
+    can :manage, Project
+    can :manage, ProjectRequirement
     can :read, LocationDatum
   end
 

@@ -173,6 +173,29 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET/PUT /projects/:id/add_project_requirement
+  def add_project_requirement
+    begin
+      load_project
+      @project_requirement = @project.project_requirements.new
+
+      if request.put?
+        raise t(:not_authorized) unless @project.can_edit?
+
+        @project_requirement = @project.project_requirements.new(project_requirement_params.merge(created_by: current_user.id))
+        if @project_requirement.save
+          flash[:success] = t(:operation_succeeded)
+          redirect_to project_path(@project)
+        else
+          render :add_project_requirement
+        end
+      end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
   # DELETE /projects/:id/delete_user?user_id=1
   def delete_user
     begin
@@ -258,6 +281,10 @@ class ProjectsController < ApplicationController
 
   def project_task_params
     params.require(:project_task).permit(:category, :candidate_id, :started_at, :ended_at, :cpt)
+  end
+
+  def project_requirement_params
+    params.require(:project_requirement).permit(:content)
   end
 
   # 加载客户公司

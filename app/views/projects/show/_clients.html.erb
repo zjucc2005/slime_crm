@@ -27,7 +27,7 @@
                         <td><%= client.email %><br><%= client.email1 %></td>
                         <td>
                             <%= link_to(t('action.remove'), delete_client_project_path(@project, client_id: client.id),
-                                        :method => :delete, :data => { :confirm => t(:sure_to_remove) }) if @project.can_edit?  %>
+                                        :method => :delete, :data => { :confirm => t(:sure_to_remove) }) if @project.can_edit? %>
                         </td>
                     </tr>
                 <% end %>

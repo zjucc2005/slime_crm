@@ -70,15 +70,12 @@
                     </div>
                     <%= content_tag :span, @project.ended_at.try(:strftime, '%F'), :class => 'form-control' %>
                 </div>
-                <div class="col-12 input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project, :requirement) %></span>
-                    </div>
-                    <%= text_area_tag :requirement, @project.requirement, :rows => 5, :disabled => true, :class => 'form-control bg-white' %>
-                </div>
             </div>
 
             <div class="row">
+                <div class="col-12">
+                    <%= render :partial => 'projects/show/project_requirements', :locals => { :project_requirements => @project.project_requirements } %>
+                </div>
                 <div class="col-lg-6 col-12">
                     <%= render :partial => 'projects/show/clients', :locals => { :clients => @project.clients } %>
                     <%= render :partial => 'projects/show/users', :locals => { :users => @project.users } %>

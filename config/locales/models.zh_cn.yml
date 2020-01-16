@@ -58,6 +58,7 @@ zh_cn:
       contract: "合同"
       location_datum: "行政区划数据"
       project: "项目"
+      project_requirement: "项目需求"
       project_task: "项目任务"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
@@ -162,7 +163,6 @@ zh_cn:
         code: "项目编码"
         company: "客户公司"
         status: "状态"
-        requirement: "项目需求"
         industry: "行业"
         started_at: "开始时间"
         ended_at: "结束时间"
@@ -170,6 +170,10 @@ zh_cn:
         expert: "专家"
         start: "启动项目"
         close: "结束项目"
+
+      project_requirement:
+        status: "状态"
+        content: "内容"
 
       project_task:
         category: "类型"

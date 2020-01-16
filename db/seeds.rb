@@ -12,3 +12,10 @@ LocationDatum.data_seed
 # create admin
 User.create!(email: 'admin@dev.com', password: '111111', role: 'admin', status: 'active',
              name_cn: '管理员', name_en: 'admin', date_of_employment: Time.now) unless User.exists?(role: 'admin')
+User.create!(email: 'pm@dev.com', password: '111111', role: 'pm', status: 'active',
+             name_cn: '项目经理', name_en: 'pm', date_of_employment: Time.now, candidate_access_limit: 200) unless User.exists?(role: 'pm')
+User.create!(email: 'pa@dev.com', password: '111111', role: 'pa', status: 'active',
+             name_cn: '项目助理', name_en: 'pa', date_of_employment: Time.now, candidate_access_limit: 200) unless User.exists?(role: 'pa')
+User.create!(email: 'finance@dev.com', password: '111111', role: 'finance', status: 'active',
+             name_cn: '财务', name_en: 'pa', date_of_employment: Time.now, candidate_access_limit: 0) unless User.exists?(role: 'finance')
+

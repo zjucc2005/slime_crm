@@ -1,0 +1,50 @@
+<div class="card mb-3">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+            <%= fa_icon_tag('tasks') %> <%= mt(:project_requirement) %>
+        </h5>
+        <%= link_to(t(:go_to_add), add_project_requirement_project_path(@project)) if @project.can_add_requirement? %>
+    </div>
+
+    <div class="card-body p-2">
+        <% if project_requirements.any? %>
+            <table class="table table-sm table-striped card-text">
+                <thead>
+                <tr>
+                    <th><%= mt(:project_requirement, :content) %></th>
+                    <th><%= mt(:project_requirement, :status) %></th>
+                    <th><%= mt(:project_requirement, :created_by) %></th>
+                    <th><%= mt(:project_requirement, :created_at) %></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% project_requirements.each do |requirement| %>
+                    <tr>
+                        <td><%= project_requirement_content_raw(requirement.content) %></td>
+                        <td><%= project_requirement_status_badge(requirement.status) %></td>
+                        <td><%= requirement.creator.name_cn %></td>
+                        <td class="text-nowrap"><%= requirement.created_at.strftime('%F %H:%M') %></td>
+                        <td class="text-nowrap">
+                            <%= link_to edit_project_requirement_path(requirement), :class => 'btn btn-edit btn-xs' do %>
+                                <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => nil) %>
+                            <% end if requirement.can_edit? %>
+                        </td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        <% else %>
+                <div class="p-2 text-center">
+                    <h5 class="text-gray mb-0">
+                        <% if @project.can_add_requirement? %>
+                            <%= t(:not_found) %>,
+                            <%= link_to(t(:go_to_add), add_project_requirement_project_path(@project)) %>
+                        <% else %>
+                            项目启动后才能添加需求
+                        <% end %>
+                    </h5>
+                </div>
+        <% end %>
+    </div>
+</div>

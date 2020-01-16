@@ -15,6 +15,7 @@ class Project < ApplicationRecord
   has_many :candidates, :class_name => 'Candidate', :through => :project_candidates
   has_many :project_users, :class_name => 'ProjectUser', :dependent => :destroy
   has_many :users, :class_name => 'User', :through => :project_users
+  has_many :project_requirements, :class_name => 'ProjectRequirement'
   has_many :project_tasks, :class_name => 'ProjectTask'
 
   # Validations
@@ -65,6 +66,12 @@ class Project < ApplicationRecord
   end
 
   def can_close?
+    %w[ongoing].include?(status) &&
+      project_requirements.where(status: 'finished').count > 0 &&
+      project_requirements.where(status: 'ongoing').count == 0
+  end
+
+  def can_add_requirement?
     %w[ongoing].include?(status)
   end
 

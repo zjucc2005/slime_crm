@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_11_064416) do
+ActiveRecord::Schema.define(version: 2020_01_16_064518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,6 +124,16 @@ ActiveRecord::Schema.define(version: 2020_01_11_064416) do
     t.index ["project_id"], name: "index_project_candidates_on_project_id"
   end
 
+  create_table "project_requirements", force: :cascade do |t|
+    t.bigint "created_by"
+    t.bigint "project_id"
+    t.string "status"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_project_requirements_on_project_id"
+  end
+
   create_table "project_tasks", force: :cascade do |t|
     t.bigint "created_by"
     t.string "category"
@@ -157,7 +167,6 @@ ActiveRecord::Schema.define(version: 2020_01_11_064416) do
     t.string "name"
     t.string "code"
     t.string "status"
-    t.text "requirement"
     t.string "industry"
     t.datetime "started_at"
     t.datetime "ended_at"

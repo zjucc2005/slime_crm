@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     put :add_clients, on: :member
     get :add_project_task, on: :member
     put :add_project_task, on: :member
+    get :add_project_requirement, on: :member
+    put :add_project_requirement, on: :member
 
     delete :delete_user,   on: :member  # 删除项目参与人
     delete :delete_expert, on: :member  # 删除专家
@@ -54,6 +56,8 @@ Rails.application.routes.draw do
     put :start, on: :member
     put :close, on: :member
   end
+
+  resources :project_requirements
 
   resources :project_tasks do
 

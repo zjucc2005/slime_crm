@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+          <%= fa_icon_tag('tasks') %> <%= t('action.edit', :model => mt(:project_requirement)) %>
+        </h5>
+        <%= link_to fa_icon_tag('close'), project_path(@project_requirement.project), :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_for @project_requirement do |f| %>
+            <%= model_error_tag(@project_requirement) %>
+
+            <div class="row">
+                <div class="col-12 form-group">
+                    <span class="badge badge-light"><%= show_creator(@project_requirement) %></span>
+                    <span class="badge badge-light"><%= show_timestamps(@project_requirement) %></span>
+                </div>
+
+                <div class="col-12 form-group input-group input-group-sm input-group-align">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project_requirement, :content) %><sup class="text-red">*</sup></span>
+                    </div>
+                    <%= f.text_area :content, :required => true, :rows => 5, :class => 'form-control' %>
+                </div>
+
+                <div class="col-12 form-group input-group input-group-sm input-group-align">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><%= mt(:project_requirement, :status) %><sup class="text-red">*</sup></span>
+                    </div>
+                    <%= f.select :status, ProjectRequirement::STATUS.to_a.map(&:reverse), { :prompt => default_prompt }, :class => 'form-control' %>
+                </div>
+            </div>
+
+            <div class="form-group mb-0">
+                <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), project_path(@project_requirement.project), :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -4,7 +4,7 @@
 
     <div class="col-lg-12 form-group">
         <%= f.label :file, mt(:contract, :file) %>
-        <%= link_to @contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end %>
+        <%= link_to @contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end if @contract.file.present? %>
         <%= f.file_field :file, :required => (action_name != 'edit'), :class => 'form-control-file' %>
     </div>
 

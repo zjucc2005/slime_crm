@@ -11,10 +11,7 @@ a {
     color: #4680ff;
     text-decoration: none;
 }
-.btn-xs {
-    @extend .btn-sm;
-    padding: 0.1rem 0.3rem;
-}
+
 .roundy { border-radius: 50px; }
 .text-smaller { font-size: 0.8rem; }
 .text { font-size: 0.9em; }
@@ -46,6 +43,29 @@ a {
     .model-error-item {
         color: #721c24;
     }
+}
+/* .btn */
+.btn-submit {
+  @extend .btn-primary
+}
+.btn-back {
+  @extend .btn-secondary
+}
+.btn-edit {
+  @extend .btn-dark
+}
+.btn-xs {
+  @extend .btn-sm;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+/* .table */
+.table{
+  th {
+    white-space: nowrap;
+  }
 }
 
 /* custom checkbox */
