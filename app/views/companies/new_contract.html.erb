@@ -10,7 +10,7 @@
         <%= form_for @contract, :html => { :multipart => true } do |f| %>
             <%= render :partial => 'contracts/form', :locals => { :f => f } %>
 
-            <div class="form-group mb-0">
+            <div class="form-group mt-3 mb-0">
                 <%= f.submit t('action.submit'), :class => 'btn btn-primary' %>
                 <%= link_to t('action.back'), company_path(@company), :class => 'btn btn-secondary' %>
             </div>

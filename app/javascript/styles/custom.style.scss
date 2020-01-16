@@ -123,24 +123,24 @@ input[type=checkbox].checkbox-square {
 /* .select2 */
 .select2-container {
   width: 100% !important;
+  font-size: 14px;
 
   .select2-selection--single {
     background-color: #f0f1f3;
     border-color: #f0f1f3;
-    height: 50px;
+    height: 35px;
 
     .select2-selection__rendered {
-      line-height: 50px;
-      color: #b4b4b4;
-      padding-left: 20px;
+      line-height: 34px;
+      color: #495057;
+      padding-left: 15px;
       padding-right: 30px;
-      font-size: 15px;
     }
 
     .select2-selection__arrow {
-      height: 50px;
+      height: 35px;
       top: 0;
-      right: 15px;
+      right: 10px;
     }
   }
 
@@ -152,6 +152,119 @@ input[type=checkbox].checkbox-square {
   &.select2-container--open {
     .select2-selection--single {
       border: 1px solid #aaaaaa;
+    }
+  }
+}
+
+/* form */
+.form-group {
+  label {
+    font-size: 15px;
+  }
+
+  input.form-control-lg {
+    height: 50px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    background-color: #f0f1f3;
+    color: #111111;
+    border-radius: 4px;
+    border: none;
+    padding: 5px 15px;
+
+    &:disabled, &[readonly] {
+      cursor: not-allowed;
+    }
+  }
+
+  select.form-control-lg {
+    &:not([size]):not([multiple]){
+      height: 50px;
+    }
+  }
+
+  .input-group {
+    .input-group-prepend, .input-group-append {
+      .input-group-text {
+        border: none;
+        background-color: #f0f1f3;
+      }
+    }
+
+    &.input-group-control {
+      .input-group-prepend {
+        border-right: 1px solid #fff;
+      }
+      .input-group-text {
+        border-right: 1px solid #fff !important;
+        color: #646464;
+      }
+    }
+  }
+
+  .form-group-range {
+    @extend .row;
+    & .form-group-range-input:first-child {
+      @extend .col-6;
+    }
+    & .form-group-range-input:last-child{
+      @extend .col-6;
+    }
+    .form-group-range-divider {
+      position: absolute;
+      margin-top: 12px;
+      margin-left: -6px;
+      left: 50%;
+    }
+  }
+}
+
+.form-file-upload {
+  display: flex;
+  font-size: 15px;
+  position: relative;
+  background-color: #f0f1f3;
+  border-radius: 4px;
+  border: none;
+  height: 50px;
+
+  input[type=file] {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .label, .file-name {
+    padding: 12px 15px;
+    white-space: nowrap;
+  }
+  .label {
+    border-right: 1px solid #fff;
+  }
+  .file-name {
+    overflow: hidden;
+  }
+}
+
+.form-group-scan {
+  margin-bottom: 1rem;
+  label{
+    position: absolute;
+    font-size: 3rem;
+    padding-left: 1.2rem;
+    padding-top: 0.25rem;
+    color: #999;
+  }
+  .form-control {
+    padding: 0.5rem 1.2rem;
+    font-size: 3rem;
+    line-height: 2;
+    &.prepend-label {
+      padding-left: 4.8rem;
     }
   }
 }

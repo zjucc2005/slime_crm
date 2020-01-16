@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 2020_01_16_064518) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.decimal "cpt", precision: 10, scale: 2
-    t.integer "min_bill_duration"
-    t.integer "follow_bill_duration"
+    t.string "base_duration"
+    t.integer "progressive_duration"
     t.string "payment_time"
     t.string "payment_way"
     t.boolean "is_tax_included"

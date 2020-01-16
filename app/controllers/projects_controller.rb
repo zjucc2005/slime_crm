@@ -272,7 +272,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:company_id, :name, :code, :industry, :requirement, :started_at, :ended_at)
+    params.require(:project).permit(:company_id, :name, :code, :industry)
   end
 
   def project_params_update
