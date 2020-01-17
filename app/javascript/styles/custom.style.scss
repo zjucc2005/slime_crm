@@ -71,6 +71,9 @@ a {
 
 /* .table */
 .table{
+  &.nowrap {
+    white-space: nowrap;
+  }
   th {
     white-space: nowrap;
   }
@@ -286,6 +289,16 @@ input[type=checkbox].checkbox-square {
   border: none;
   box-shadow: 0 2px 8px 2px rgba(203,214,228,0.5);
 
+  &.card-inner {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    box-shadow: none;
+    .card-header {
+      padding: 0.5rem 1rem;
+    }
+    .card-body {
+      padding: 0;
+    }
+  }
   .card-header {
     background-color: #ffffff;
   }

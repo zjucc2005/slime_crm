@@ -21,7 +21,7 @@ class Candidate < ApplicationRecord
   validates_inclusion_of :category, :in => CATEGORY.keys
   validates_inclusion_of :data_source, :in => DATA_SOURCE.keys
   validates_inclusion_of :gender, :in => GENDER.keys, :allow_nil => true
-  validates_inclusion_of :currency, :in => CURRENCY.keys
+  validates_inclusion_of :currency, :in => CURRENCY.keys, :allow_nil => true
   validates_presence_of :name, :first_name
   validates_presence_of :cpt
 

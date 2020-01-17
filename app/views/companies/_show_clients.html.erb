@@ -1,0 +1,49 @@
+<div class="card card-inner">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+            <%= fa_icon_tag('users') %> <%= mt(:candidate, :seat) %>
+        </h5>
+    </div>
+
+    <div class="card-body">
+        <% if clients.any? %>
+            <table class="table table-sm table-striped nowrap card-text">
+                <thead>
+                <tr>
+                    <th><%= mt(:candidate, :id) %></th>
+                    <th><%= mt(:candidate, :name) %></th>
+                    <th><%= mt(:candidate, :phone) %></th>
+                    <th><%= mt(:candidate, :email) %></th>
+                    <th><%= mt(:candidate, :created_by) %></th>
+                    <th><%= mt(:candidate, :created_at) %></th>
+                    <th><%= t(:operation) %></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% clients.each do |client| %>
+                    <tr>
+                        <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
+                        <td><%= client.name %></td>
+                        <td><%= client.phone %></td>
+                        <td><%= client.email %></td>
+                        <td><%= client.creator.name_cn %></td>
+                        <td><%= client.created_at.strftime('%F %T') %></td>
+                        <td>
+                            <%= link_to edit_client_candidate_path(client), :class => 'btn btn-edit btn-xs' do %>
+                                <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => nil) %>
+                            <% end %>
+                            <%= link_to candidate_path(client), :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t(:sure_to_delete) } do %>
+                                <%= fa_icon_tag('trash') %> <%= t('action.delete', :model => nil) %>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        <% else %>
+            <div class="p-2 text-center">
+                <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+            </div>
+        <% end %>
+    </div>
+</div>

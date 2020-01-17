@@ -7,12 +7,12 @@
     </div>
 
     <div class="card-body">
-        <%= form_for @seat, :url => update_seat_candidate_path(@seat), :method => :put, :html => { :multipart => true } do |f| %>
-            <%= render :partial => 'candidates/seat_form', :locals => { :f => f } %>
+        <%= form_for @client, :url => update_client_candidate_path(@client), :method => :put do |f| %>
+            <%= render :partial => 'candidates/client_form', :locals => { :f => f } %>
 
             <div class="form-group mb-0">
-                <%= f.submit t('action.submit'), :class => 'btn btn-primary' %>
-                <%= link_to t('action.back'), company_path(@company), :class => 'btn btn-secondary' %>
+                <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), company_path(@company), :class => 'btn btn-back' %>
             </div>
         <% end %>
     </div>

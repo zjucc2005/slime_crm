@@ -6,7 +6,7 @@ class Company < ApplicationRecord
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
   has_many :contracts, :class_name => 'Contract', :dependent => :destroy
-  has_many :seats, :class_name => 'Candidate'
+  has_many :candidates, :class_name => 'Candidate'
 
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys

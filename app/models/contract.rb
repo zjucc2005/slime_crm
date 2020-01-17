@@ -22,6 +22,11 @@ class Contract < ApplicationRecord
   # Scopes
   scope :available, -> { where('started_at <= :now AND ended_at >= :now', { :now => Time.now }) }
 
+  # 收费时长整合 base + progressive
+  def charge_duration
+    "#{base_duration}+#{progressive_duration}"
+  end
+
   private
   def setup
     self.started_at ||= Time.now

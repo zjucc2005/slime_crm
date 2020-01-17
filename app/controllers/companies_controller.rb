@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
   def show
     load_company
     load_contracts
-    load_seats
+    load_clients
   end
 
   # GET /companies/new
@@ -69,20 +69,20 @@ class CompaniesController < ApplicationController
     @contract = @company.contracts.new
   end
 
-  # GET /companies/:id/new_seat
-  def new_seat
+  # GET /companies/:id/new_client
+  def new_client
     load_company
-    @seat = @company.seats.client.new
+    @client = @company.candidates.client.new
   end
 
-  # GET /companies/:id/load_seat_options.js
-  def load_seat_options
+  # GET /companies/:id/load_client_options.js
+  def load_client_options
     begin
       load_company
-      load_seats
-      @seat_options = @seats.map{|seat| [seat.name_cn, seat.id] }
+      load_clients
+      @client_options = @clients.map{|client| [client.name, seat.id] }
     rescue
-      @seat_options = []
+      @client_options = []
     end
     respond_to { |f| f.js }
   end
@@ -96,8 +96,8 @@ class CompaniesController < ApplicationController
     @contracts = @company.contracts
   end
 
-  def load_seats
-    @seats = @company.seats
+  def load_clients
+    @clients = @company.candidates
   end
 
   def company_params

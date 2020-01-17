@@ -35,7 +35,7 @@ class ContractsController < ApplicationController
 
       if @contract.update(contract_params.merge(financial_info: params[:financial_info].permit(financial_info_fields)))
         flash[:success] = t(:operation_succeeded)
-        redirect_to edit_contract_path(@contract)
+        redirect_to company_path(@contract.company)
       else
         render :edit
       end
@@ -52,7 +52,7 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:file, :started_at, :ended_at, :cpt, :min_bill_duration, :follow_bill_duration,
+    params.require(:contract).permit(:file, :started_at, :ended_at, :cpt, :base_duration, :progressive_duration,
                                      :payment_time, :payment_way, :is_tax_included, :is_invoice_needed)
   end
 

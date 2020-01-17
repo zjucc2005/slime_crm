@@ -112,19 +112,19 @@ class CandidatesController < ApplicationController
     @candidates = Candidate.where(id: params[:uids])
   end
 
-  # POST /candidates/create_seat
-  def create_seat
+  # POST /candidates/create_client
+  def create_client
     begin
       @company = Company.find(params[:candidate][:company_id])
-      @candidate = @company.seats.client.new(
+      @client = @company.candidates.client.new(
           candidate_params.merge({created_by: current_user.id, city: @company.city, cpt: 0})
       )
-      if @candidate.save
+      if @client.save
         flash[:success] = t(:operation_succeeded)
         redirect_to company_path(@company)
       else
         flash.now[:error] = t(:operation_failed)
-        render 'companies/new_seat'
+        render 'companies/new_client'
       end
     rescue Exception => e
       flash[:error] = e.message
@@ -132,27 +132,27 @@ class CandidatesController < ApplicationController
     end
   end
 
-  # GET /candidates/:id/edit_seat
-  def edit_seat
-    load_seat
-    @company = @seat.company
+  # GET /candidates/:id/edit_client
+  def edit_client
+    load_client
+    @company = @client.company
   end
 
-  # PUT /candidates/:id/update_seat
-  def update_seat
+  # PUT /candidates/:id/update_client
+  def update_client
     begin
-      load_seat
-      @company = @seat.company
+      load_client
+      @company = @client.company
 
-      if @seat.update(candidate_params)
+      if @client.update(candidate_params)
         flash[:success] = t(:operation_succeeded)
         redirect_to company_path(@company)
       else
-        render :edit_seat
+        render :edit_client
       end
     rescue Exception => e
       flash.now[:error] = e.message
-      render :edit_seat
+      render :edit_client
     end
   end
 
@@ -203,8 +203,8 @@ class CandidatesController < ApplicationController
     current_user.access_candidate(@candidate)  # 访问次数统计/访问权限
   end
 
-  def load_seat
-    @seat = Candidate.find(params[:id])
+  def load_client
+    @client = Candidate.find(params[:id])
   end
 
   def candidate_params

@@ -1,0 +1,35 @@
+<%= model_error_tag(@client) %>
+<div class="badge badge-info mb-3 px-4"><%= t(:base_info) %></div>
+<div class="row">
+    <%= f.hidden_field :company_id, :required => true %>
+
+    <div class="col-12 form-group">
+        <span class="badge badge-light"><%= show_creator(@client) %></span>
+        <span class="badge badge-light"><%= show_timestamps(@client) %></span>
+    </div>
+
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :last_name, mt(:candidate, :name) %><span class="text-red">*</span>
+        <div class="form-group-range">
+            <div class="form-group-range-input">
+                <%= f.text_field :last_name, :required => true, :class => 'form-control', :placeholder => "#{mt(:candidate, :last_name)}*" %>
+            </div>
+            <div class="form-group-range-input">
+                <%= f.text_field :first_name, :class => 'form-control', :placeholder => mt(:candidate, :first_name) %>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :nickname, mt(:candidate, :nickname) %>
+        <%= f.text_field :nickname, :class => 'form-control' %>
+    </div>
+
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :phone, mt(:candidate, :phone) %><span class="text-red">*</span>
+        <%= f.text_field :phone, :required => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :email, mt(:candidate, :email) %><span class="text-red">*</span>
+        <%= f.email_field :email, :required => true, :class => 'form-control' %>
+    </div>
+</div>

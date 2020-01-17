@@ -21,18 +21,18 @@ Rails.application.routes.draw do
     get :add_experience, on: :collection
     get :gen_card,       on: :collection
 
-    post :create_seat,   on: :collection
-    get :edit_seat,      on: :member
-    put :update_seat,    on: :member
+    post :create_client, on: :collection
+    get :edit_client,    on: :member
+    put :update_client,  on: :member
 
     post :import_expert, on: :collection  # import experts with excel
   end
 
   resources :companies do
-    get :new_contract,      on: :member
-    get :new_seat,          on: :member
+    get :new_contract,        on: :member
+    get :new_client,          on: :member
 
-    get :load_seat_options, on: :member
+    get :load_client_options, on: :member
   end
 
   resources :contracts

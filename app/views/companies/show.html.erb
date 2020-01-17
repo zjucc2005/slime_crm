@@ -17,7 +17,7 @@
                     <%= link_to new_contract_company_path(@company), :class => 'btn btn-success' do %>
                         <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:contract))}" %>
                     <% end %>
-                    <%= link_to new_seat_company_path(@company), :class => 'btn btn-primary' do %>
+                    <%= link_to new_client_company_path(@company), :class => 'btn btn-primary' do %>
                         <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:candidate, :seat))}" %>
                     <% end %>
                     <%= link_to edit_company_path(@company), :class => 'btn btn-dark' do %>
@@ -106,6 +106,6 @@
         </div>
 
         <%= render :partial => 'show_contracts',  :locals => { :contracts => @contracts } %>
-        <%= render :partial => 'show_seats',  :locals => { :seats => @seats } %>
+        <%= render :partial => 'show_clients',  :locals => { :clients => @clients } %>
     </div>
 </div>

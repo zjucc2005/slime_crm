@@ -1,23 +1,23 @@
-<div class="card mb-3">
+<div class="card card-inner mb-3">
     <div class="card-header d-flex flex-row justify-content-between">
         <h5 class="text-uppercase mb-0">
             <%= fa_icon_tag('file-text') %> <%= mt(:contract) %>
         </h5>
     </div>
 
-    <div class="card-body p-2">
+    <div class="card-body table-responsive">
         <% if contracts.any? %>
-            <table class="table table-sm table-striped table-hover card-text">
+            <table class="table table-sm table-striped nowrap card-text">
                 <thead>
                 <tr>
                     <th><%= mt(:contract, :id) %></th>
                     <th><%= mt(:contract, :started_at) %></th>
                     <th><%= mt(:contract, :ended_at) %></th>
-                    <th><%= mt(:contract, :cpt) %></th>
-                    <th><%= mt(:contract, :min_bill_duration) %></th>
-                    <th><%= mt(:contract, :follow_bill_duration) %></th>
-                    <th><%= mt(:contract, :payment_time) %></th>
                     <th><%= mt(:contract, :file) %></th>
+                    <th><%= mt(:contract, :cpt) %></th>
+                    <th><%= mt(:contract, :charge_duration) %></th>
+                    <th><%= mt(:contract, :payment_time) %></th>
+
                     <th><%= mt(:contract, :is_tax_included) %></th>
                     <th><%= mt(:contract, :is_invoice_needed) %></th>
                     <th><%= mt(:contract, :created_by) %></th>
@@ -31,18 +31,17 @@
                         <td><%= content_tag :span, "# #{contract.uid}", :class => 'text-gray' %></td>
                         <td><%= contract.started_at.strftime('%F') %></td>
                         <td><%= contract.ended_at.strftime('%F') %></td>
-                        <td><%= contract.cpt %></td>
-                        <td><%= contract.min_bill_duration %></td>
-                        <td><%= contract.follow_bill_duration %></td>
-                        <td><%= Contract::PAYMENT_TIME[contract.payment_time] %></td>
                         <td><%= link_to contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end %></td>
+                        <td><%= contract.cpt %></td>
+                        <td><%= contract.charge_duration %></td>
+                        <td><%= Contract::PAYMENT_TIME[contract.payment_time] %></td>
                         <td><%= boolean_display(contract.is_tax_included) %></td>
                         <td><%= boolean_display(contract.is_invoice_needed) %></td>
                         <td><%= contract.creator.name_cn %></td>
-                        <td><%= contract.created_at.strftime('%F %T') %></td>
+                        <td><%= contract.created_at.strftime('%F %H:%M') %></td>
                         <td>
-                            <%= link_to edit_contract_path(contract), :class => 'btn btn-dark btn-xs' do %>
-                                <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => mt(:contract)) %>
+                            <%= link_to edit_contract_path(contract), :class => 'btn btn-edit btn-xs' do %>
+                                <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => nil) %>
                             <% end %>
                         </td>
                     </tr>

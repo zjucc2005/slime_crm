@@ -109,6 +109,7 @@ en:
         started_at: "Started at"
         ended_at: "Ended at"
         cpt: "Cost per time"
+        charge_duration: "Charge duration(min)"
         base_duration: "Base duration(min)"
         progressive_duration: "Progressive duration(min)"
         payment_time: "Payment time"
