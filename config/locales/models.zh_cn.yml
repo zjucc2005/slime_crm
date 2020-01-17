@@ -119,6 +119,7 @@ zh_cn:
         department: "部门"
         title: "职位"
         description: "描述"
+        duration: "起止时间"
 
       company:
         category: "类型"

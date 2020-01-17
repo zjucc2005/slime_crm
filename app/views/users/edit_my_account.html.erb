@@ -1,60 +1,36 @@
-<section>
-    <div class="card">
-        <div class="card-header d-flex flex-row justify-content-between">
-            <h5 class="text-uppercase mb-0">
-                <%= fa_icon_tag('user') %> <%= t(:my_account) %> - <%= "#{t('action.edit', :model => t(:my_account))}" %>
-            </h5>
-            <%= link_to fa_icon_tag('close'), my_account_users_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
-        </div>
-
-        <div class="card-body">
-            <%= form_tag edit_my_account_users_path, :method => :put do %>
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="input-group input-group-sm input-group-align mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><%= mt(:user, :name_cn) %><sup class="text-red">*</sup></span>
-                            </div>
-                            <%= text_field_tag :name_cn, @user.name_cn, :required => true, :class => 'form-control' %>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="input-group input-group-sm input-group-align mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><%= mt(:user, :name_en) %></span>
-                            </div>
-                            <%= text_field_tag :name_en, @user.name_en, :class => 'form-control' %>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="input-group input-group-sm input-group-align mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><%= mt(:user, :phone) %></span>
-                            </div>
-                            <%= text_field_tag :phone, @user.phone, :class => 'form-control' %>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="input-group input-group-sm input-group-align mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><%= mt(:user, :date_of_birth) %></span>
-                            </div>
-                            <%= text_field_tag :date_of_birth, @user.date_of_birth.try(:strftime, '%F'), :class => 'form-control datepicker' %>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group mb-0">
-                    <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
-                    <%= link_to t('action.back'), my_account_users_path, :class => 'btn btn-secondary' %>
-                </div>
-            <% end %>
-        </div>
+<div class="card">
+    <div class="card-header d-flex flex-row justify-content-between">
+        <h5 class="text-uppercase mb-0">
+            <%= fa_icon_tag('user') %> <%= t(:my_account) %> - <%= "#{t('action.edit', :model => t(:my_account))}" %>
+        </h5>
+        <%= link_to fa_icon_tag('close'), my_account_users_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
     </div>
-</section>
+
+    <div class="card-body">
+        <%= form_tag edit_my_account_users_path, :method => :put do %>
+            <div class="row">
+                <div class="col-lg-3 col-6 form-group">
+                    <%= label_tag :name_cn, mt(:user, :name_cn) %><span class="text-red">*</span>
+                    <%= text_field_tag :name_cn, @user.name_cn, :required => true, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= label_tag :name_en, mt(:user, :name_en) %>
+                    <%= text_field_tag :name_en, @user.name_en, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= label_tag :phone, mt(:user, :phone) %>
+                    <%= text_field_tag :phone, @user.phone, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= label_tag :date_of_birth, mt(:user, :date_of_birth) %>
+                    <%= text_field_tag :date_of_birth, @user.date_of_birth.try(:strftime, '%F'), :class => 'form-control datepicker' %>
+                </div>
+            </div>
+
+            <div class="form-group mb-0">
+                <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), my_account_users_path, :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -1,4 +1,12 @@
 /* define base styles, for global use */
+body {
+  background: #EFEFEF;
+}
+
+.container-fluid.main {
+  margin-top: 54px;
+  padding: 0.75rem 0.75rem;
+}
 
 .input-group.input-group-align .input-group-prepend .input-group-text {
     min-width: 105px;
@@ -177,6 +185,10 @@ input[type=checkbox].checkbox-square {
     &:disabled, &[readonly] {
       cursor: not-allowed;
     }
+    &:disabled {
+      background-color: #343a40;
+      color: #FFFFFF;
+    }
   }
 
   select.form-control-lg {
@@ -214,7 +226,7 @@ input[type=checkbox].checkbox-square {
     }
     .form-group-range-divider {
       position: absolute;
-      margin-top: 12px;
+      margin-top: 5px;
       margin-left: -6px;
       left: 50%;
     }
@@ -265,6 +277,29 @@ input[type=checkbox].checkbox-square {
     line-height: 2;
     &.prepend-label {
       padding-left: 4.8rem;
+    }
+  }
+}
+
+/* .card */
+.card {
+  border: none;
+  box-shadow: 0 2px 8px 2px rgba(203,214,228,0.5);
+
+  .card-header {
+    background-color: #ffffff;
+  }
+}
+
+/* .modal */
+.modal {
+  .modal-dialog {
+    max-width: 800px;
+  }
+
+  .modal-header {
+    .close {
+      line-height: 1.5;
     }
   }
 }

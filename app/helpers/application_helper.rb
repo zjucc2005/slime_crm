@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def flash_tag(category)
     _type_ =  {:error => 'danger', :warning => 'warning', :success => 'success', :notice => 'info' }[category]
-    content_tag(:div, :class => "alert alert-#{_type_} alert-dismissible fade show mb-0") do
+    content_tag(:div, :class => "alert alert-#{_type_} alert-dismissible fade show mb-2") do
       button_tag('&times;'.html_safe, :type => 'button', :class => 'close', :data => { :dismiss => 'alert' }) +
       flash[category]
     end

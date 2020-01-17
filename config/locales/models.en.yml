@@ -90,6 +90,7 @@ en:
         department: "Department"
         title: "Job title"
         description: "Description"
+        duration: "Duration"
 
       company:
         category: "Category"

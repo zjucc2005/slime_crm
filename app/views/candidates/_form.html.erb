@@ -2,200 +2,98 @@
 <div class="badge badge-info mb-3 px-4"><%= t(:base_info) %></div>
 <div class="row border-bottom mb-3">
 
-    <div class="col-12">
-        <div class="form-group">
-            <span class="badge badge-primary"><%= show_candidate_category %></span>
-            <span class="badge badge-warning"><%= show_candidate_data_source %></span>
-            <span class="badge badge-light"><%= show_candidate_creator %></span>
-            <span class="badge badge-light"><%= show_candidate_timestamps %></span>
-        </div>
+    <div class="col-12 form-group">
+        <span class="badge badge-primary"><%= show_candidate_category %></span>
+        <span class="badge badge-warning"><%= show_candidate_data_source %></span>
+        <span class="badge badge-light"><%= show_candidate_creator %></span>
+        <span class="badge badge-light"><%= show_candidate_timestamps %></span>
     </div>
 
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :last_name) %><sup class="text-red">*</sup></span>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :last_name, mt(:candidate, :name) %><span class="text-red">*</span>
+        <div class="form-group-range">
+            <div class="form-group-range-input">
+                <%= f.text_field :last_name, :required => true, :class => 'form-control', :placeholder => mt(:candidate, :last_name) %>
             </div>
-            <%= f.text_field :last_name, :required => true, :class => 'form-control' %>
+            <div class="form-group-range-input">
+                <%= f.text_field :first_name, :class => 'form-control', :placeholder => mt(:candidate, :first_name) %>
+            </div>
         </div>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :first_name) %></span>
-            </div>
-            <%= f.text_field :first_name, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :nickname, mt(:candidate, :nickname) %>
+        <%= f.text_field :nickname, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :nickname) %></span>
-            </div>
-            <%= f.text_field :nickname, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :gender, mt(:candidate, :gender) %>
+        <%= f.select :gender, Candidate::GENDER.to_a.map(&:reverse), { :include_blank => false }, :class => 'form-control select2' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :gender) %></span>
-            </div>
-            <%= f.select :gender, Candidate::GENDER.to_a.map(&:reverse), { :include_blank => false }, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :date_of_birth, mt(:candidate, :date_of_birth) %>
+        <%= f.text_field :date_of_birth, :value => @candidate.date_of_birth.try(:strftime, '%F') ,:class => 'form-control datepicker', :placeholder => 'yyyy-mm-dd' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :date_of_birth) %></span>
-            </div>
-            <%= f.text_field :date_of_birth, :value => @candidate.date_of_birth.try(:strftime, '%F') ,:class => 'form-control datepicker' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :city, mt(:candidate, :city) %><span class="text-red">*</span>
+        <%= f.text_field :city, :required => true, :class => 'form-control autocomplete-city' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :city) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :city, :required => true, :class => 'form-control autocomplete-city' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :industry, mt(:candidate, :industry) %>
+        <%= f.text_field :industry, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :industry) %></span>
-            </div>
-            <%= f.text_field :industry, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :phone, mt(:candidate, :phone) %><span class="text-red">*</span>
+        <%= f.text_field :phone, :required => true, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :phone) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :phone, :required => true, :class => 'form-control' %>
-            <!--<div class="input-group-append">-->
-                <!--<span class="input-group-text">-->
-                    <!--<%= link_to fa_icon_tag('plus'), 'javascript:void(0);', :class => 'phone-add-btn', :onclick => 'addCandidatePhone();' %>-->
-                <!--</span>-->
-            <!--</div>-->
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :phone1, mt(:candidate, :phone1) %>
+        <%= f.text_field :phone1, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :phone1) %></span>
-            </div>
-            <%= f.text_field :phone1, :class => 'form-control' %>
-            <!--<div class="input-group-append">-->
-                <!--<span class="input-group-text">-->
-                    <!--<%= link_to fa_icon_tag('remove'), 'javascript:void(0);', :class => 'phone-del-btn', :onclick => 'delCandidatePhone();' %>-->
-                <!--</span>-->
-            <!--</div>-->
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :email, mt(:candidate, :email) %><span class="text-red">*</span>
+        <%= f.email_field :email, :required => true, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :email) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.email_field :email, :required => true, :class => 'form-control' %>
-            <!--<div class="input-group-append">-->
-                <!--<span class="input-group-text">-->
-                    <!--<%= link_to fa_icon_tag('plus'), 'javascript:void(0);', :class => 'email-add-btn', :onclick => 'addCandidateEmail();' %>-->
-                <!--</span>-->
-            <!--</div>-->
-        </div>
-    </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :email1) %></span>
-            </div>
-            <%= f.email_field :email1, :class => 'form-control' %>
-            <!--<div class="input-group-append">-->
-                <!--<span class="input-group-text">-->
-                    <!--<%= link_to fa_icon_tag('remove'), 'javascript:void(0);', :class => 'email-del-btn', :onclick => 'delCandidateEmail();' %>-->
-                <!--</span>-->
-            <!--</div>-->
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :email1, mt(:candidate, :email1) %>
+        <%= f.email_field :email1, :class => 'form-control' %>
     </div>
 </div>
 
 <div class="row border-bottom mb-3">
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :is_available) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.select :is_available, candidate_is_available_options, { :include_blank => false }, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :is_available, mt(:candidate, :is_available) %><span class="text-red">*</span>
+        <%= f.select :is_available, candidate_is_available_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :cpt) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.number_field :cpt, :required => true, :min => 0, :step => 1, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :cpt, mt(:candidate, :cpt) %><span class="text-red">*</span>
+        <%= f.number_field :cpt, :required => true, :min => 0, :step => 1, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :currency) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :currency, mt(:candidate, :currency) %><span class="text-red">*</span>
+        <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
-
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :bank) %></span>
-            </div>
-            <%= f.text_field :bank, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :bank, mt(:candidate, :bank) %>
+        <%= f.text_field :bank, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :bank_card) %></span>
-            </div>
-            <%= f.text_field :bank_card, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :bank_card, mt(:candidate, :bank_card) %>
+        <%= f.text_field :bank_card, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :bank_user) %></span>
-            </div>
-            <%= f.text_field :bank_user, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :bank_user, mt(:candidate, :bank_user) %>
+        <%= f.text_field :bank_user, :class => 'form-control' %>
     </div>
-
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :alipay_account) %></span>
-            </div>
-            <%= f.text_field :alipay_account, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :alipay_account, mt(:candidate, :alipay_account) %>
+        <%= f.text_field :alipay_account, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :alipay_user) %></span>
-            </div>
-            <%= f.text_field :alipay_user, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :alipay_user, mt(:candidate, :alipay_user) %>
+        <%= f.text_field :alipay_user, :class => 'form-control' %>
     </div>
-
-    <div class="col-lg-6 col-12">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate, :description) %></span>
-            </div>
-            <%= f.text_area :description, :class => 'form-control', :rows => 5 %>
-        </div>
+    <div class="col-12 form-group">
+        <%= f.label :description, mt(:candidate, :description) %>
+        <%= f.text_area :description, :class => 'form-control', :rows => 4 %>
     </div>
 </div>
 

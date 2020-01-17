@@ -5,10 +5,12 @@ en:
 
   add_to_project: "Add to project"
   base_info: "Base info"
+  begin: "Begin"
   cannot_delete: "Unable to delete"
   client_contact: "Client contact"
   company_signed: "Signed"
   company_not_signed: "Not signed"
+  end: "End"
   expert_card: "Expert card"
   go_to_add: "Go to add"
   homepage: "Homepage"

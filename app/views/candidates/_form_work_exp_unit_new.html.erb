@@ -1,60 +1,38 @@
 <div id="<%= "work_exp_#{i}" %>" class="row border-bottom border-gray-500 mb-3">
     <%= link_to '&times;'.html_safe, 'javascript:void(0);', :onclick => "$('#work_exp_#{i}').remove();",
                 :class => 'btn btn-danger btn-sm p-1 exp-del-btn' %>
-    <div class="col-12 col-lg-6">
-        <div class="row">
-            <div class="col-6">
-                <div class="input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_experience, :started_at) %><sup class="text-red">*</sup></span>
-                    </div>
-                    <%= text_field_tag :"work_exp[#{i}][started_at]", (params[:work_exp][i.to_s][:started_at] rescue nil),
-                                       :required => true, :class => 'form-control datepicker' %>
-                </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= label_tag :duration, mt(:candidate_experience, :duration) %><span class="text-red">*</span>
+        <div class="form-group-range">
+            <div class="form-group-range-input">
+                <%= text_field_tag :"work_exp[#{i}][started_at]", (params[:work_exp][i.to_s][:started_at] rescue nil),
+                                    :required => true, :class => 'form-control datepicker', :placeholder => "#{t(:begin)}*" %>
             </div>
-            <div class="col-6">
-                <div class="input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_experience, :ended_at) %></span>
-                    </div>
-                    <%= text_field_tag :"work_exp[#{i}][ended_at]", (params[:work_exp][i.to_s][:ended_at] rescue nil), :class => 'form-control datepicker' %>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_experience, :org_cn) %><sup class="text-red">*</sup></span>
-                    </div>
-                    <%= text_field_tag :"work_exp[#{i}][org_cn]", (params[:work_exp][i.to_s][:org_cn] rescue nil),
-                                       :required => true, :class => 'form-control' %>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_experience, :org_en) %></span>
-                    </div>
-                    <%= text_field_tag :"work_exp[#{i}][org_en]", (params[:work_exp][i.to_s][:org_en] rescue nil), :class => 'form-control' %>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_experience, :title) %></span>
-                    </div>
-                    <%= text_field_tag :"work_exp[#{i}][title]", (params[:work_exp][i.to_s][:title] rescue nil), :class => 'form-control' %>
-                </div>
+            <span class="form-group-range-divider">
+                <i class="fa fa-arrow-right"></i>
+            </span>
+            <div class="form-group-range-input">
+                <%= text_field_tag :"work_exp[#{i}][ended_at]", (params[:work_exp][i.to_s][:ended_at] rescue nil),
+                                   :class => 'form-control datepicker', :placeholder => t(:end) %>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-lg-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:candidate_experience, :description) %></span>
-            </div>
-            <%= text_area_tag :"work_exp[#{i}][description]", (params[:work_exp][i.to_s][:description] rescue nil), :class => 'form-control', :rows => 3 %>
-        </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= label_tag :org_cn, mt(:candidate_experience, :org_cn) %><span class="text-red">*</span>
+        <%= text_field_tag :"work_exp[#{i}][org_cn]", (params[:work_exp][i.to_s][:org_cn] rescue nil), :required => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= label_tag :org_en, mt(:candidate_experience, :org_en) %>
+        <%= text_field_tag :"work_exp[#{i}][org_en]", (params[:work_exp][i.to_s][:org_en] rescue nil), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= label_tag :title, mt(:candidate_experience, :title) %>
+        <%= text_field_tag :"work_exp[#{i}][title]", (params[:work_exp][i.to_s][:title] rescue nil), :class => 'form-control' %>
+    </div>
+    <div class="col-12 form-group">
+        <%= label_tag :description, mt(:candidate_experience, :description) %>
+        <%= text_area_tag :"work_exp[#{i}][description]", (params[:work_exp][i.to_s][:description] rescue nil), :class => 'form-control', :rows => 3 %>
     </div>
 </div>
 <script>$('.datepicker').datePicker();</script>

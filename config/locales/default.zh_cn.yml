@@ -5,10 +5,12 @@ zh_cn:
 
   add_to_project: "添加到项目"
   base_info: "基本信息"
+  begin: "开始"
   cannot_delete: "不能删除"
   client_contact: "客户联系人"
   company_signed: "已签约"
   company_not_signed: "未签约"
+  end: "结束"
   expert_card: "专家卡片"
   go_to_add: "去添加"
   homepage: "首页"

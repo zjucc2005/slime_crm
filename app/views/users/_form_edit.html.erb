@@ -1,102 +1,48 @@
-<div class="row border-bottom mb-3">
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :email) %></span>
-            </div>
-            <%= content_tag :span, @user.email, :class => 'form-control bg-dark text-light border-dark' %>
-        </div>
+<div class="row">
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :email, mt(:user, :email) %>
+        <%= f.text_field :email, :disabled => true, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :name_cn) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.text_field :name_cn, :required => true, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :name_cn, mt(:user, :name_cn) %><span class="text-red">*</span>
+        <%= f.text_field :name_cn, :required => true, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :name_en) %></span>
-            </div>
-            <%= f.text_field :name_en, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :name_en, mt(:user, :name_en) %>
+        <%= f.text_field :name_en, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :title) %></span>
-            </div>
-            <%= f.text_field :title, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :title, mt(:user, :title) %>
+        <%= f.text_field :title, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :phone) %></span>
-            </div>
-            <%= f.text_field :phone, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :phone, mt(:user, :phone) %>
+        <%= f.text_field :phone, :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :date_of_birth) %></span>
-            </div>
-            <%= f.text_field :date_of_birth, :value => @user.date_of_birth.try(:strftime, '%F'),
-                             :class => 'form-control datepicker' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :date_of_birth, mt(:user, :date_of_birth) %>
+        <%= f.text_field :date_of_birth, :value => @user.date_of_birth.try(:strftime, '%F'), :class => 'form-control datepicker' %>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :role) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.select :role, user_role_options, { :include_blank => false }, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :role, mt(:user, :role) %><span class="text-red">*</span>
+        <%= f.select :role, user_role_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :status) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.select :status, user_status_options, { :include_blank => false }, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :status, mt(:user, :status) %><span class="text-red">*</span>
+        <%= f.select :status, user_status_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :candidate_access_limit) %><sup class="text-red">*</sup></span>
-            </div>
-            <%= f.number_field :candidate_access_limit, :class => 'form-control' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :candidate_access_limit, mt(:user, :candidate_access_limit) %><span class="text-red">*</span>
+        <%= f.number_field :candidate_access_limit, :class => 'form-control' %>
     </div>
-
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :date_of_employment) %></span>
-            </div>
-            <%= f.text_field :date_of_employment, :value => @user.date_of_employment.try(:strftime, '%F'),
-                             :class => 'form-control datepicker' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :date_of_employment, mt(:user, :date_of_employment) %>
+        <%= f.text_field :date_of_employment, :value => @user.date_of_employment.try(:strftime, '%F'), :class => 'form-control datepicker' %>
     </div>
-    <div class="col-lg-3 col-6">
-        <div class="input-group input-group-sm input-group-align mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><%= mt(:user, :date_of_resignation) %></span>
-            </div>
-            <%= f.text_field :date_of_resignation, :value => @user.date_of_resignation.try(:strftime, '%F'),
-                             :class => 'form-control datepicker' %>
-        </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :date_of_resignation, mt(:user, :date_of_resignation) %>
+        <%= f.text_field :date_of_resignation, :value => @user.date_of_resignation.try(:strftime, '%F'), :class => 'form-control datepicker' %>
     </div>
-
-
 </div>
-
-<script>
-    $('.datepicker').datePicker();
-</script>
