@@ -3,6 +3,9 @@
         <h5 class="text-uppercase mb-0">
             <%= fa_icon_tag('file-text') %> <%= mt(:contract) %>
         </h5>
+        <%= link_to new_contract_company_path(@company), :class => 'btn btn-primary btn-xs' do %>
+          <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:contract))}" %>
+        <% end %>
     </div>
 
     <div class="card-body table-responsive">
@@ -17,12 +20,11 @@
                     <th><%= mt(:contract, :cpt) %></th>
                     <th><%= mt(:contract, :charge_duration) %></th>
                     <th><%= mt(:contract, :payment_time) %></th>
-
                     <th><%= mt(:contract, :is_tax_included) %></th>
                     <th><%= mt(:contract, :is_invoice_needed) %></th>
                     <th><%= mt(:contract, :created_by) %></th>
                     <th><%= mt(:contract, :created_at) %></th>
-                    <th><%= t(:operation) %></th>
+                    <th class="action"><%= t(:operation) %></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -39,7 +41,7 @@
                         <td><%= boolean_display(contract.is_invoice_needed) %></td>
                         <td><%= contract.creator.name_cn %></td>
                         <td><%= contract.created_at.strftime('%F %H:%M') %></td>
-                        <td>
+                        <td class="action">
                             <%= link_to edit_contract_path(contract), :class => 'btn btn-edit btn-xs' do %>
                                 <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => nil) %>
                             <% end %>

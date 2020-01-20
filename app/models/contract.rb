@@ -12,7 +12,8 @@ class Contract < ApplicationRecord
   belongs_to :company, :class_name => 'Company'
 
   # Validations
-  validates_presence_of :file, :started_at, :ended_at
+  validates_presence_of :file, :started_at, :ended_at, :base_duration, :progressive_duration
+  validates_format_of :base_duration, :with => /\A\d+(,\d+)*\Z/, :error => :invalid_format, :message => :invalid_format
 
   mount_uploader :file, FileUploader
 

@@ -12,6 +12,7 @@ en:
       blank: "can't be blank"
       required: "must exist"
       taken: "has already been taken"
+      invalid_format: "is invalid format"
 
   activerecord:
     errors:

@@ -14,12 +14,6 @@
                     <span><%= @company.name %></span>
                 </h6>
                 <div class="btn-group btn-group-sm">
-                    <%= link_to new_contract_company_path(@company), :class => 'btn btn-success' do %>
-                        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:contract))}" %>
-                    <% end %>
-                    <%= link_to new_client_company_path(@company), :class => 'btn btn-primary' do %>
-                        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:candidate, :seat))}" %>
-                    <% end %>
                     <%= link_to edit_company_path(@company), :class => 'btn btn-dark' do %>
                         <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:company))}" %>
                     <% end %>
@@ -105,7 +99,7 @@
             </div>
         </div>
 
-        <%= render :partial => 'show_contracts',  :locals => { :contracts => @contracts } %>
-        <%= render :partial => 'show_clients',  :locals => { :clients => @clients } %>
+        <%= render :partial => 'companies/show/contracts',  :locals => { :contracts => @contracts } %>
+        <%= render :partial => 'companies/show/clients',  :locals => { :clients => @clients } %>
     </div>
 </div>

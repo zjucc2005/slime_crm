@@ -64,7 +64,7 @@ a {
 }
 .btn-xs {
   @extend .btn-sm;
-  padding: 0.1rem 0.3rem;
+  padding: 0.2rem 0.3rem;
   font-size: 0.8rem;
   line-height: 1.2;
 }
@@ -76,6 +76,13 @@ a {
   }
   th {
     white-space: nowrap;
+  }
+  th.action {
+    width: 10%;
+    text-align: center;
+  }
+  td.action {
+    text-align: center;
   }
 }
 

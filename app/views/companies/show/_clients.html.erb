@@ -3,6 +3,9 @@
         <h5 class="text-uppercase mb-0">
             <%= fa_icon_tag('users') %> <%= mt(:candidate, :seat) %>
         </h5>
+        <%= link_to new_client_company_path(@company), :class => 'btn btn-primary btn-xs' do %>
+            <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:candidate, :seat))}" %>
+        <% end %>
     </div>
 
     <div class="card-body">
@@ -16,7 +19,7 @@
                     <th><%= mt(:candidate, :email) %></th>
                     <th><%= mt(:candidate, :created_by) %></th>
                     <th><%= mt(:candidate, :created_at) %></th>
-                    <th><%= t(:operation) %></th>
+                    <th class="action"><%= t(:operation) %></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,7 +31,7 @@
                         <td><%= client.email %></td>
                         <td><%= client.creator.name_cn %></td>
                         <td><%= client.created_at.strftime('%F %T') %></td>
-                        <td>
+                        <td class="action">
                             <%= link_to edit_client_candidate_path(client), :class => 'btn btn-edit btn-xs' do %>
                                 <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => nil) %>
                             <% end %>

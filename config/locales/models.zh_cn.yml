@@ -18,6 +18,7 @@ zh_cn:
       inclusion: "未被包含在列表中"
       exclusion: "被包含在列表中"
       invalid: "验证不通过"
+      invalid_format: "格式不符"
       confirmation: "与%{attribute}不匹配"
       accepted: "必须被接受"
       empty: "不能为空"
