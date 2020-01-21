@@ -74,6 +74,7 @@ class Project < ApplicationRecord
   def can_add_requirement?
     %w[ongoing].include?(status)
   end
+  alias :can_add_task? :can_add_requirement?
 
   def start!
     self.status = 'ongoing'

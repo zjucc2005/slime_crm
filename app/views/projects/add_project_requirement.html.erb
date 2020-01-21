@@ -1,9 +1,7 @@
 <div class="card">
-    <div class="card-header d-flex flex-row justify-content-between">
-        <h5 class="text-uppercase mb-0">
-          <%= fa_icon_tag('tasks') %> <%= t('action.add', :model => mt(:project_requirement)) %>
-        </h5>
-        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    <div class="card-header">
+        <h5><%= fa_icon_tag('tasks') %> <%= t('action.add_model', :model => mt(:project_requirement)) %></h5>
+        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">
@@ -16,10 +14,8 @@
                     <span class="badge badge-light"><%= show_timestamps(@project_requirement) %></span>
                 </div>
 
-                <div class="col-12 form-group input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project_requirement, :content) %><sup class="text-red">*</sup></span>
-                    </div>
+                <div class="col-12 form-group">
+                    <%= f.label :content, mt(:project_requirement, :content) %><span class="text-red">*</span>
                     <%= f.text_area :content, :required => true, :rows => 5, :class => 'form-control' %>
                 </div>
             </div>

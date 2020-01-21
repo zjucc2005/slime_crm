@@ -11,19 +11,25 @@
                 <li class="nav-item">
                     <%= link_to t(:homepage), root_path, :class => "nav-link #{yield :nav_home}" %>
                 </li>
-                <li class="nav-item">
-                    <%= link_to mt(:expert), candidates_path, :class => "nav-link #{yield :nav_candidates}" %>
-                </li>
-                <li class="nav-item">
-                    <%= link_to mt(:company), companies_path, :class => "nav-link #{yield :nav_companies}" %>
-                </li>
-                <li class="nav-item">
-                    <%= link_to mt(:project), projects_path, :class => "nav-link #{yield :nav_projects}" %>
-                </li>
-                <% if can? :manage, User %>
-                <li class="nav-item">
-                    <%= link_to mt(:user), users_path, :class => "nav-link #{yield :nav_users}" %>
-                </li>
+                <% if can? :index, Candidate %>
+                    <li class="nav-item">
+                        <%= link_to mt(:expert), candidates_path, :class => "nav-link #{yield :nav_candidates}" %>
+                    </li>
+                <% end %>
+                <% if can? :index, Company %>
+                    <li class="nav-item">
+                        <%= link_to mt(:company), companies_path, :class => "nav-link #{yield :nav_companies}" %>
+                    </li>
+                <% end %>
+                <% if can? :index, Project %>
+                    <li class="nav-item">
+                        <%= link_to mt(:project), projects_path, :class => "nav-link #{yield :nav_projects}" %>
+                    </li>
+                <% end %>
+                <% if can? :index, User %>
+                    <li class="nav-item">
+                        <%= link_to mt(:user), users_path, :class => "nav-link #{yield :nav_users}" %>
+                    </li>
                 <% end %>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="settings-drop" data-toggle="dropdown">

@@ -1,18 +1,18 @@
 <div class="card">
-    <div class="card-header d-flex flex-row justify-content-between">
-        <h5 class="text-uppercase mb-0">
-            <%= fa_icon_tag('users') %> <%= t('action.new', :model => mt(:candidate, :seat)) %>
-        </h5>
-        <%= link_to fa_icon_tag('close'), company_path(@company), :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    <div class="card-header">
+        <h5><%= fa_icon_tag('users') %> <%= t('action.new_model', :model => mt(:candidate, :seat)) %></h5>
+        <%= link_to fa_icon_tag('close'), 'javascript:history.go(-1);', :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">
         <%= form_for @client, :url => create_client_candidates_path, :method => :post do |f| %>
+            <%= hidden_field_tag :return_to, params[:return_to] %>
+
             <%= render :partial => 'candidates/client_form', :locals => { :f => f } %>
 
             <div class="form-group mb-0">
                 <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
-                <%= link_to t('action.back'), company_path(@company), :class => 'btn btn-back' %>
+                <%= link_to t('action.back'), 'javascript:history.go(-1);', :class => 'btn btn-back' %>
             </div>
         <% end %>
     </div>

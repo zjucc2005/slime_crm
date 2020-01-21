@@ -6,6 +6,9 @@ class UsersController < ApplicationController
   # GET /users
   def index
     query = User.all
+    %w[role status].each do |field|
+      query = query.where(field.to_sym => params[field]) if params[field].present?
+    end
     @users = query.order(:created_at => :asc).paginate(:page => params[:page], :per_page => 20)
   end
 

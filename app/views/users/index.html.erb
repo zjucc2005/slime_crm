@@ -1,7 +1,7 @@
 <div class="card p-2 d-block mb-2">
     <%= link_to new_user_path, :class => 'btn btn-primary' do %>
-        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:user))}" %>
-    <% end %>
+        <%= fa_icon_tag('plus') %> <%= "#{t('action.new_model', :model => mt(:user))}" %>
+    <% end if can? :new, User %>
 
     <%= link_to '', :class => 'btn btn-secondary', :onclick => 'addUserToProject();' do %>
         <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>

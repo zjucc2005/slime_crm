@@ -121,7 +121,11 @@ class CandidatesController < ApplicationController
       )
       if @client.save
         flash[:success] = t(:operation_succeeded)
-        redirect_to company_path(@company)
+        if params[:return_to].present?
+          redirect_to params[:return_to]
+        else
+          redirect_to company_path(@company)
+        end
       else
         flash.now[:error] = t(:operation_failed)
         render 'companies/new_client'

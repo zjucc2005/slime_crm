@@ -1,9 +1,9 @@
-<div class="card mb-3">
-    <div class="card-header d-flex flex-row justify-content-between">
-        <h5 class="text-uppercase mb-0">
-            <%= fa_icon_tag('street-view') %> <%= mt(:project_task) %>
-        </h5>
-        <%= link_to(t(:go_to_add), add_project_task_project_path(@project)) if @project.can_edit? %>
+<div class="card card-inner mb-3">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('street-view') %> <%= mt(:project_task) %></h5>
+        <%= link_to add_project_task_project_path(@project), :class => 'btn btn-primary btn-xs' do %>
+            <%= fa_icon_tag('plus') %> <%= t('action.add') %>
+        <% end if @project.can_add_task? %>
     </div>
 
     <div class="card-body p-2">
@@ -35,8 +35,12 @@
         <% else %>
             <div class="p-2 text-center">
                 <h5 class="text-gray mb-0">
-                    <%= t(:not_found) %>,
-                    <%= link_to(t(:go_to_add), add_project_task_project_path(@project)) if @project.can_edit? %>
+                    <% if @project.can_add_task? %>
+                        <%= t(:not_found) %>,
+                        <%= link_to(t(:go_to_add), add_project_task_project_path(@project)) %>
+                    <% else %>
+                        启动项目后才能添加任务
+                    <% end %>
                 </h5>
             </div>
         <% end %>

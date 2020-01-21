@@ -67,6 +67,9 @@ class Ability
 
   def pa_ability
     can_edit_my_account
+    can :index, User
+    can :read, Candidate
+    can :read, Project
     can :read, LocationDatum
   end
 

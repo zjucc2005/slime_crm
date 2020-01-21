@@ -1,9 +1,7 @@
 <div class="card">
-    <div class="card-header d-flex flex-row justify-content-between">
-        <h5 class="text-uppercase mb-0">
-            <%= fa_icon_tag('map') %> <%= t('action.add', :model => mt(:project_task)) %>
-        </h5>
-        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    <div class="card-header">
+        <h5><%= fa_icon_tag('map') %> <%= t('action.add_model', :model => mt(:project_task)) %></h5>
+        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">
@@ -16,33 +14,23 @@
                     <span class="badge badge-light"><%= show_timestamps(@project_task) %></span>
                 </div>
 
-                <div class="col-3 form-group input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project_task, :category) %><sup class="text-red">*</sup></span>
-                    </div>
-                    <%= f.select :category, project_task_category_options, { :include_blank => false }, :class => 'form-control' %>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :category, mt(:project_task, :category) %><span class="text-red">*</span>
+                    <%= f.select :category, project_task_category_options, { :include_blank => false }, :class => 'form-control select2' %>
                 </div>
-                <div class="col-3 form-group input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:expert) %><sup class="text-red">*</sup></span>
-                    </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
                     <%= f.select :candidate_id, project_task_candidate_options, { :prompt => default_prompt },
-                                 :required => true, :class => 'form-control' %>
+                                 :required => true, :class => 'form-control select2' %>
                 </div>
-                <div class="col-3 form-group input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project_task, :started_at) %><sup class="text-red">*</sup></span>
-                    </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :started_at, mt(:project_task, :started_at) %><span class="text-red">*</span>
                     <%= f.text_field :started_at, :required => true, :class => 'form-control datetimepicker' %>
                 </div>
-                <div class="col-3 form-group input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project_task, :ended_at) %><sup class="text-red">*</sup></span>
-                    </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :ended_at, mt(:project_task, :ended_at) %><span class="text-red">*</span>
                     <%= f.text_field :ended_at, :required => true, :class => 'form-control datetimepicker' %>
                 </div>
-
-
             </div>
 
             <div class="form-group mb-0">

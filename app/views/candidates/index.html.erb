@@ -1,6 +1,6 @@
 <div class="card p-2 d-block mb-2">
     <%= link_to new_candidate_path, :class => 'btn btn-primary' do %>
-        <%= fa_icon_tag('plus') %> <%= "#{t('action.new', :model => mt(:expert))}" %>
+        <%= fa_icon_tag('plus') %> <%= "#{t('action.new_model', :model => mt(:expert))}" %>
     <% end %>
     <%= render :partial => 'candidates/widgets/btn_import_expert' %>
 

@@ -1,10 +1,7 @@
 <div class="card">
-    <div class="card-header d-flex flex-row justify-content-between">
-        <h5 class="text-uppercase mb-0">
-            <i class="fa fa-bank"></i>
-            <%= t('action.edit', :model => mt(:contract)) %>
-        </h5>
-        <%= link_to fa_icon_tag('close'), company_path(@contract.company), :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    <div class="card-header">
+        <h5><%= fa_icon_tag('bank') %> <%= t('action.edit_model', :model => mt(:contract)) %></h5>
+        <%= link_to fa_icon_tag('close'), company_path(@contract.company), :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">
@@ -12,8 +9,8 @@
             <%= render :partial => 'form', :locals => { :f => f } %>
 
             <div class="form-group mb-0">
-                <%= f.submit t('action.save'), :class => 'btn btn-primary' %>
-                <%= link_to t('action.back'), company_path(@contract.company), :class => 'btn btn-secondary' %>
+                <%= f.submit t('action.save'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), company_path(@contract.company), :class => 'btn btn-back' %>
             </div>
         <% end %>
     </div>

@@ -1,10 +1,7 @@
 <div class="card">
-    <div class="card-header d-flex flex-row justify-content-between">
-        <h5 class="text-uppercase mb-0">
-            <i class="fa fa-user-circle"></i>
-            <%= t('action.new', :model => mt(:expert)) %>
-        </h5>
-        <%= link_to fa_icon_tag('close'), candidates_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    <div class="card-header">
+        <h5><%= fa_icon_tag('user-circle') %> <%= t('action.new_model', :model => mt(:expert)) %></h5>
+        <%= link_to fa_icon_tag('close'), candidates_path, :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">

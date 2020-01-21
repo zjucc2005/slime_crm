@@ -1,20 +1,17 @@
-<section>
-    <div class="card">
-        <div class="card-header d-flex flex-row justify-content-between">
-            <h5 class="text-uppercase mb-0">
-                <%= fa_icon_tag('map') %> <%= mt(:project) %>
-            </h5>
-            <%= link_to fa_icon_tag('close'), projects_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
-        </div>
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('map') %> <%= mt(:project) %></h5>
+        <%= link_to fa_icon_tag('close'), projects_path, :class => 'card-header-close' %>
+    </div>
 
-        <div class="card-body">
-
-            <div class="row">
-                <div class="col-12 d-flex flex-row justify-content-between">
-                    <h6>
-                        <span class="text-gray mr-3"><%= "# #{@project.uid}" %></span>
-                        <span><%= @project.name %></span>
-                    </h6>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@project.uid}" %></span>
+                    <span><%= @project.name %></span>
+                </h6>
+                <% if can? :edit, Project %>
                     <div class="btn-group btn-group-sm">
                         <%= link_to start_project_path(@project), :method => :put, :class => 'btn btn-success', :data => { :confirm => t(:sure)}  do %>
                             <%= fa_icon_tag('edit') %> <%= mt(:project, :start) %>
@@ -29,63 +26,63 @@
                             <%= fa_icon_tag('remove') %> <%= "#{t('action.delete', :model => mt(:project))}" %>
                         <% end if @project.can_destroy? %>
                     </div>
-                </div>
+                <% end %>
             </div>
-
-            <!-- main info -->
-            <div class="row">
-                <div class="col-12 form-group">
-                    <%= project_status_badge(@project.status) %>
-                    <span class="badge badge-light"><%= show_creator(@project) %></span>
-                    <span class="badge badge-light"><%= show_timestamps(@project) %></span>
-                </div>
-
-                <div class="col-12 input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project, :company) %></span>
-                    </div>
-                    <%= content_tag :span, @project.company.name, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project, :name) %></span>
-                    </div>
-                    <%= content_tag :span, @project.name, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project, :code) %></span>
-                    </div>
-                    <%= content_tag :span, @project.code, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project, :started_at) %></span>
-                    </div>
-                    <%= content_tag :span, @project.started_at.try(:strftime, '%F'), :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project, :ended_at) %></span>
-                    </div>
-                    <%= content_tag :span, @project.ended_at.try(:strftime, '%F'), :class => 'form-control' %>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <%= render :partial => 'projects/show/project_requirements', :locals => { :project_requirements => @project.project_requirements } %>
-                </div>
-                <div class="col-lg-6 col-12">
-                    <%= render :partial => 'projects/show/clients', :locals => { :clients => @project.clients } %>
-                    <%= render :partial => 'projects/show/users', :locals => { :users => @project.users } %>
-                    <%= render :partial => 'projects/show/experts', :locals => { :experts => @project.experts } %>
-                </div>
-                <div class="col-lg-6 col-12">
-                    <%= render :partial => 'projects/show/project_tasks', :locals => { :project_tasks => @project.project_tasks } %>
-                </div>
-            </div>
-
         </div>
+
+        <!-- main info -->
+        <div class="row">
+            <div class="col-12 form-group">
+                <%= project_status_badge(@project.status) %>
+                <span class="badge badge-light"><%= show_creator(@project) %></span>
+                <span class="badge badge-light"><%= show_timestamps(@project) %></span>
+            </div>
+
+            <div class="col-12 input-group input-group-sm input-group-align mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project, :company) %></span>
+                </div>
+                <%= content_tag :span, @project.company.name, :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project, :name) %></span>
+                </div>
+                <%= content_tag :span, @project.name, :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project, :code) %></span>
+                </div>
+                <%= content_tag :span, @project.code, :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project, :started_at) %></span>
+                </div>
+                <%= content_tag :span, @project.started_at.try(:strftime, '%F'), :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project, :ended_at) %></span>
+                </div>
+                <%= content_tag :span, @project.ended_at.try(:strftime, '%F'), :class => 'form-control' %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <%= render :partial => 'projects/show/project_requirements', :locals => { :project_requirements => @project.project_requirements } %>
+            </div>
+            <div class="col-lg-6 col-12">
+                <%= render :partial => 'projects/show/users', :locals => { :users => @project.users } %>
+                <%= render :partial => 'projects/show/clients', :locals => { :clients => @project.clients } %>
+                <%= render :partial => 'projects/show/experts', :locals => { :experts => @project.experts } %>
+            </div>
+            <div class="col-lg-6 col-12">
+                <%= render :partial => 'projects/show/project_tasks', :locals => { :project_tasks => @project.project_tasks } %>
+            </div>
+        </div>
+
     </div>
-</section>
+</div>

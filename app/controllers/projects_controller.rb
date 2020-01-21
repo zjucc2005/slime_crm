@@ -130,7 +130,7 @@ class ProjectsController < ApplicationController
   def add_clients
     begin
       load_project
-      @clients = @project.company.seats
+      @clients = @project.company.candidates
 
       if request.put?
         raise t(:not_authorized) unless @project.can_edit?
@@ -157,7 +157,7 @@ class ProjectsController < ApplicationController
       @project_task = @project.project_tasks.new
 
       if request.put?
-        raise t(:not_authorized) unless @project.can_edit?
+        raise t(:not_authorized) unless @project.can_add_task?
 
         @project_task = @project.project_tasks.new(project_task_params.merge(created_by: current_user.id))
         if @project_task.save
@@ -180,7 +180,7 @@ class ProjectsController < ApplicationController
       @project_requirement = @project.project_requirements.new
 
       if request.put?
-        raise t(:not_authorized) unless @project.can_edit?
+        raise t(:not_authorized) unless @project.can_add_requirement?
 
         @project_requirement = @project.project_requirements.new(project_requirement_params.merge(created_by: current_user.id))
         if @project_requirement.save

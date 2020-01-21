@@ -78,11 +78,12 @@ a {
     white-space: nowrap;
   }
   th.action {
-    width: 10%;
+    min-width: 10%;
     text-align: center;
   }
   td.action {
-    text-align: center;
+    text-align: right;
+    white-space: nowrap;
   }
 }
 
@@ -300,14 +301,30 @@ input[type=checkbox].checkbox-square {
     border: 1px solid rgba(0, 0, 0, 0.125);
     box-shadow: none;
     .card-header {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.3rem 0.5rem 1rem;
     }
     .card-body {
       padding: 0;
+      font-size: 0.9rem;
     }
   }
   .card-header {
     background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    h5{
+      text-transform: uppercase;
+      margin-bottom: 0;
+    }
+    .card-header-close {
+      font-size: 1.25rem;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 0;
+      text-decoration: none;
+      color: #343a40;
+    }
   }
 }
 

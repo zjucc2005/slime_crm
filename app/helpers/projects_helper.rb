@@ -20,7 +20,7 @@ module ProjectsHelper
   end
 
   def project_task_candidate_options
-    @project.experts.pluck(:name_cn, :id)
+    @project.experts.pluck(:name, :id)
   end
 
   def project_task_category_badge(category)

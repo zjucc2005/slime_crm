@@ -1,24 +1,23 @@
 <div class="card">
-    <div class="card-header d-flex flex-row justify-content-between">
-        <h5 class="text-uppercase mb-0">
-            <%= fa_icon_tag('map') %> <%= t('action.add', :model => t(:client_contact)) %>
-        </h5>
-        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'h5 mb-0 text-decoration-none text-dark' %>
+    <div class="card-header">
+        <h5><%= fa_icon_tag('map') %> <%= t('action.add_model', :model => t(:client_contact)) %></h5>
+        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">
+        <%= link_to new_client_company_path(@project.company, return_to: request.path), :class => 'btn btn-primary mb-3' do %>
+            <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => t(:client_contact)) %>
+        <% end if can?(:manage, Project) %>
+
         <%= form_tag add_clients_project_path(@project), :method => :put do %>
         <table class="table table-sm table-striped table-hover border card-text">
             <thead>
             <tr>
                 <th>#</th>
                 <th><%= mt(:candidate, :id) %></th>
-                <th><%= mt(:candidate, :name_cn) %></th>
-                <th><%= mt(:candidate, :name_en) %></th>
+                <th><%= mt(:candidate, :name) %></th>
                 <th><%= mt(:candidate, :phone) %></th>
-                <th><%= mt(:candidate, :phone1) %></th>
                 <th><%= mt(:candidate, :email) %></th>
-                <th><%= mt(:candidate, :email1) %></th>
                 <th><%= mt(:candidate, :created_at) %></th>
             </tr>
             </thead>
@@ -27,12 +26,9 @@
                 <tr>
                     <td><%= check_box_tag :'uids[]', client.id, @project.clients.include?(client) %></td>
                     <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
-                    <td><%= client.name_cn %></td>
-                    <td><%= client.name_en %></td>
+                    <td><%= client.name %></td>
                     <td><%= client.phone %></td>
-                    <td><%= client.phone1 %></td>
                     <td><%= client.email %></td>
-                    <td><%= client.email1 %></td>
                     <td><%= client.created_at.strftime('%F %T') %></td>
                 </tr>
             <% end %>

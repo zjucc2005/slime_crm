@@ -1,30 +1,26 @@
-<section>
-    <div class="card">
-        <div class="card-header d-flex flex-row justify-content-between">
-            <h5 class="text-uppercase mb-0">
-                <%= fa_icon_tag('user') %> <%= t(:user_account) %>
-            </h5>
-            <%= link_to fa_icon_tag('close'), users_path, :class => 'h5 mb-0 text-decoration-none text-dark' %>
-        </div>
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('user') %> <%= t(:user_account) %></h5>
+        <%= link_to fa_icon_tag('close'), users_path, :class => 'card-header-close' %>
+    </div>
 
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 d-flex flex-row justify-content-between">
-                    <h6>
-                        <span class="text-gray mr-3"><%= "# #{@user.uid}" %></span>
-                    </h6>
-                    <div class="btn-group btn-group-sm">
-                        <%= link_to edit_password_user_path(@user), :class => 'btn btn-success' do %>
-                            <%= fa_icon_tag('edit') %> <%= t(:reset_password) %>
-                        <% end unless @user.admin? %>
-                        <%= link_to edit_user_path(@user), :class => 'btn btn-dark' do %>
-                            <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => mt(:user)) %>
-                        <% end unless @user.admin? %>
-                    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@user.uid}" %></span>
+                </h6>
+                <div class="btn-group btn-group-sm">
+                    <%= link_to edit_password_user_path(@user), :class => 'btn btn-success' do %>
+                        <%= fa_icon_tag('edit') %> <%= t(:reset_password) %>
+                    <% end unless @user.admin? %>
+                    <%= link_to edit_user_path(@user), :class => 'btn btn-dark' do %>
+                        <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => mt(:user)) %>
+                    <% end unless @user.admin? %>
                 </div>
             </div>
-
-            <%= render :partial => 'show_content' %>
         </div>
+
+        <%= render :partial => 'show_content' %>
     </div>
-</section>
+</div>
