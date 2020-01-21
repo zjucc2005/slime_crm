@@ -24,6 +24,11 @@ class CandidatesController < ApplicationController
     @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
+  # GET /candidates/:id
+  def show
+    load_candidate
+  end
+
   # GET /candidates/new
   def new
     @candidate = Candidate.new

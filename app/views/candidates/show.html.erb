@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('user-circle') %> <%= mt(:expert) %></h5>
+        <%= link_to fa_icon_tag('close'), candidates_path, :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
+                    <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
+                </h6>
+                <div class="btn-group btn-group-sm">
+                    <%= link_to edit_candidate_path(@candidate), :class => 'btn btn-dark' do %>
+                        <%= fa_icon_tag('edit') %> <%= "#{t('action.edit_model', :model => mt(:expert))}" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="badge badge-info mb-3 px-4"><%= t(:base_info) %></div>
+        <div class="row border-bottom mb-3">
+            <div class="col-12 form-group">
+                <span class="badge badge-primary"><%= show_candidate_category %></span>
+                <span class="badge badge-warning"><%= show_candidate_data_source %></span>
+                <span class="badge badge-light"><%= show_candidate_creator %></span>
+                <span class="badge badge-light"><%= show_candidate_timestamps %></span>
+            </div>
+
+            <!-- content -->
+        </div>
+    </div>
+</div>

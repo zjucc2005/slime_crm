@@ -11,7 +11,7 @@
                 <div class="text-center mr-3 mb-1 mb-lg-0">
                     <h6 class="mb-0">
                         <span class="status <%= candidate.is_available ? 'valid' : 'invalid' %> mr-2"></span>
-                        <%= link_to edit_candidate_path(candidate) do %>
+                        <%= link_to candidate_path(candidate) do %>
                             <span><%= candidate.name %></span>
                             <span class="d-lg-none">(<%= candidate.nickname %>)</span>
                         <% end %>

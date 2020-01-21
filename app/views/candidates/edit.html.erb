@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <h5><%= fa_icon_tag('user-circle') %> <%= t('action.edit_model', :model => mt(:expert)) %></h5>
-        <%= link_to fa_icon_tag('close'), candidates_path, :class => 'card-header-close' %>
+        <%= link_to fa_icon_tag('close'), candidate_path(@candidate), :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">
@@ -10,8 +10,8 @@
             <%= render :partial => 'form_work_exp' %>
 
             <div class="form-group mb-0">
-                <%= f.submit t('action.save'), :class => 'btn btn-primary' %>
-                <%= link_to t('action.back'), candidates_path,:class => 'btn btn-secondary' %>
+                <%= f.submit t('action.save'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), candidate_path(@candidate), :class => 'btn btn-back' %>
             </div>
         <% end %>
     </div>
