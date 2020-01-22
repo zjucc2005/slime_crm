@@ -3,6 +3,13 @@ class ProjectTask < ApplicationRecord
   # ENUM
   CATEGORY = { :interview => '访谈' }.stringify_keys
   STATUS = { :ongoing  => '进展中', :finished => '已结束'}.stringify_keys
+  INTERVIEW_FORM = {
+    :'face-to-face' => '面谈',
+    :'call'         => '电话',
+    :'video-call'   => '视频通话',
+    :'email'        => '邮件',
+    :'others'       => '其他'
+  }
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true

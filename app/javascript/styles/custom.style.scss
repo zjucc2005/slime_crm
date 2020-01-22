@@ -52,6 +52,24 @@ a {
         color: #721c24;
     }
 }
+/* .header */
+.header {
+  .navbar {
+    .notifications {
+      display: none;
+      @extend .d-lg-block;
+
+      .candidate-access-limit {
+        background: #FFFFFF;
+        padding: 0.1rem 0.6rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+
 /* .btn */
 .btn-submit {
   @extend .btn-primary

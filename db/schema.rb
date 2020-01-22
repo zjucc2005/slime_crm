@@ -140,11 +140,16 @@ ActiveRecord::Schema.define(version: 2020_01_16_064518) do
     t.bigint "project_id"
     t.bigint "candidate_id"
     t.string "status"
-    t.decimal "cpt", precision: 10, scale: 2
-    t.decimal "fee", precision: 10, scale: 2
+    t.decimal "charge_rate", precision: 8, scale: 4
+    t.decimal "base_price", precision: 10, scale: 2
+    t.decimal "actual_price", precision: 10, scale: 2
+    t.string "interview_form"
     t.integer "duration"
     t.datetime "started_at"
     t.datetime "ended_at"
+    t.decimal "cost", precision: 10, scale: 2
+    t.string "payment_method"
+    t.jsonb "payment_info"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["candidate_id"], name: "index_project_tasks_on_candidate_id"

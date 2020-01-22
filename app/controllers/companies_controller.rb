@@ -27,7 +27,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   def create
     begin
-      @company = current_user.companies.new(company_params)
+      @company = Company.new(company_params.merge(created_by: current_user.id))
 
       if @company.save
         flash[:success] = t(:operation_succeeded)

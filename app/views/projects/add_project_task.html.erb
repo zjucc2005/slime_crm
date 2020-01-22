@@ -24,12 +24,13 @@
                                  :required => true, :class => 'form-control select2' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :started_at, mt(:project_task, :started_at) %><span class="text-red">*</span>
-                    <%= f.text_field :started_at, :required => true, :class => 'form-control datetimepicker' %>
+                    <%= f.label :interview_form, mt(:project_task, :interview_form) %><span class="text-red">*</span>
+                    <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
+                                 :required => true, :class => 'form-control select2' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :ended_at, mt(:project_task, :ended_at) %><span class="text-red">*</span>
-                    <%= f.text_field :ended_at, :required => true, :class => 'form-control datetimepicker' %>
+                    <%= f.label :started_at, mt(:project_task, :started_at) %><span class="text-red">*</span>
+                    <%= f.text_field :started_at, :required => true, :class => 'form-control datetimepicker' %>
                 </div>
             </div>
 

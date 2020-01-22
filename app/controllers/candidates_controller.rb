@@ -37,7 +37,7 @@ class CandidatesController < ApplicationController
   # POST /candidates
   def create
     begin
-      @candidate = current_user.candidates.new(candidate_params)
+      @candidate = Candidate.new(candidate_params.merge(created_by: current_user.id))
 
       if @candidate.valid?
         ActiveRecord::Base.transaction do
@@ -183,7 +183,8 @@ class CandidatesController < ApplicationController
           cpt         = row[5].to_s.match(/\d+/).to_s.to_i
           currency    = row[5].to_s.match(/(RMB|USD)/).to_s
           first_name, last_name = Candidate.name_split(name)
-          current_user.candidates.expert.create!(
+          Candidate.expert.create!(
+              created_by: current_user.id,
               data_source: 'excel',
               first_name: first_name,
               last_name: last_name,
