@@ -71,26 +71,6 @@
         <%= f.label :currency, mt(:candidate, :currency) %><span class="text-red">*</span>
         <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
-    <div class="col-lg-3 col-6 form-group">
-        <%= f.label :bank, mt(:candidate, :bank) %>
-        <%= f.text_field :bank, :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 form-group">
-        <%= f.label :bank_card, mt(:candidate, :bank_card) %>
-        <%= f.text_field :bank_card, :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 form-group">
-        <%= f.label :bank_user, mt(:candidate, :bank_user) %>
-        <%= f.text_field :bank_user, :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 form-group">
-        <%= f.label :alipay_account, mt(:candidate, :alipay_account) %>
-        <%= f.text_field :alipay_account, :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 form-group">
-        <%= f.label :alipay_user, mt(:candidate, :alipay_user) %>
-        <%= f.text_field :alipay_user, :class => 'form-control' %>
-    </div>
     <div class="col-12 form-group">
         <%= f.label :description, mt(:candidate, :description) %>
         <%= f.text_area :description, :class => 'form-control', :rows => 4 %>

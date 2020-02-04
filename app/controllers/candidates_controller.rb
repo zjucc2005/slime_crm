@@ -132,12 +132,11 @@ class CandidatesController < ApplicationController
           redirect_to company_path(@company)
         end
       else
-        flash.now[:error] = t(:operation_failed)
         render 'companies/new_client'
       end
     rescue Exception => e
       flash[:error] = e.message
-      redirect_to companies_path
+      redirect_to root_path
     end
   end
 
@@ -207,6 +206,34 @@ class CandidatesController < ApplicationController
     end
   end
 
+  # GET /candidates/:id/new_payment_info
+  def new_payment_info
+    load_candidate
+    @payment_info = @candidate.payment_infos.new
+  end
+
+  # POST /candidates/:id/create_payment_info
+  def create_payment_info
+    begin
+      load_candidate
+
+      @payment_info = @candidate.payment_infos.new(candidate_payment_info_params.merge({created_by: current_user.id}))
+      if @payment_info.save
+        flash[:success] = t(:operation_succeeded)
+        if params[:return_to].present?
+          redirect_to params[:return_to]
+        else
+          redirect_to candidate_path(@candidate)
+        end
+      else
+        render :new_payment_info
+      end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to root_path
+    end
+  end
+
   private
   def load_candidate
     @candidate = Candidate.find(params[:id])
@@ -225,5 +252,9 @@ class CandidatesController < ApplicationController
 
   def experience_fields
     [:started_at, :ended_at, :org_cn, :org_en, :title, :description]
+  end
+
+  def candidate_payment_info_params
+    params.require(:candidate_payment_info).permit(:category, :bank, :account, :username)
   end
 end

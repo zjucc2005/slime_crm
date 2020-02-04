@@ -24,6 +24,7 @@ en:
     models:
       user: "User account"
       candidate: "Candidate"
+      candidate_payment_info: "Candidate payment info"
       expert: "Expert"
       client: "Client"
       company: "Company"
@@ -92,6 +93,12 @@ en:
         title: "Job title"
         description: "Description"
         duration: "Duration"
+
+      candidate_payment_info:
+        category: "Category"
+        bank: "Bank"
+        account: "Account"
+        username: "Username"
 
       company:
         category: "Category"
@@ -162,3 +169,4 @@ en:
         cost: "Cost"
         payment_method: "Payment method of cost"
         payment_info: "Payment info of cost"
+        payment_memo: "Payment memo"

@@ -53,6 +53,7 @@ zh_cn:
     models:
       user: "用户帐号"
       candidate: "候选人"
+      candidate_payment_info: "支付信息"
       expert: "专家"
       client: "客户"
       company: "公司"
@@ -121,6 +122,12 @@ zh_cn:
         title: "职位"
         description: "描述"
         duration: "起止时间"
+
+      candidate_payment_info:
+        category: "类型"
+        bank: "银行名"
+        account: "帐号/卡号"
+        username: "用户名"
 
       company:
         category: "类型"
@@ -191,3 +198,4 @@ zh_cn:
         cost: "成本"
         payment_method: "成本支付方式"
         payment_info: "成本支付信息"
+        payment_memo: "成本支付备注"

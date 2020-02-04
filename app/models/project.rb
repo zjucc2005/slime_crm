@@ -30,13 +30,13 @@ class Project < ApplicationRecord
   def clients
     Candidate.joins(:project_candidates).where(
         :'project_candidates.project_id' => self.id,
-        :'project_candidates.category'   => 'client')
+        :'project_candidates.category'   => 'client').order(:'project_candidates.created_at' => :asc)
   end
 
   def experts
     Candidate.joins(:project_candidates).where(
         :'project_candidates.project_id' => self.id,
-        :'project_candidates.category'   => 'expert')
+        :'project_candidates.category'   => 'expert').order(:'project_candidates.created_at' => :asc)
   end
 
   # has_many :pm_users / :pa_users 作为 has_many :users 的补充, 依据 project_users.category

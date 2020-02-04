@@ -19,6 +19,10 @@ module ProjectsHelper
     ProjectTask::CATEGORY.to_a.map(&:reverse)
   end
 
+  def project_task_status_options
+    ProjectTask::STATUS.select{|k,v| %w[finished cancelled].include?(k)}.to_a.map(&:reverse)
+  end
+
   def project_task_candidate_options
     @project.experts.pluck(:name, :id)
   end
@@ -26,6 +30,17 @@ module ProjectsHelper
   def project_task_category_badge(category)
     dict = { :interview => 'primary' }.stringify_keys
     content_tag :span, ProjectTask::CATEGORY[category] || category, :class => "badge badge-#{dict[category] || 'secondary'}"
+  end
+
+  def project_task_interview_form_badge(category)
+    dict = {
+      :'face-to-face' => 'secondary',
+      :'call'         => 'secondary',
+      :'video-call'   => 'secondary',
+      :'email'        => 'secondary',
+      :'others'       => 'secondary'
+    }.stringify_keys
+    content_tag :span, ProjectTask::INTERVIEW_FORM[category] || category, :class => "badge badge-#{dict[category] || 'secondary' }"
   end
 
 end

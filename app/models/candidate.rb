@@ -11,6 +11,7 @@ class Candidate < ApplicationRecord
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by
   belongs_to :company, :class_name => 'Company', :optional => true
   has_many :experiences, :class_name => 'CandidateExperience', :dependent => :destroy
+  has_many :payment_infos, :class_name => 'CandidatePaymentInfo', :dependent => :destroy
 
   has_many :project_candidates, :class_name => 'ProjectCandidate'
   has_many :projects, :class_name => 'Project', :through => :project_candidates

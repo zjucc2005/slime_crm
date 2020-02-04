@@ -35,6 +35,14 @@ module CandidatesHelper
     params[:work_exp] || []
   end
 
+  def candidate_payment_info_category_badge(category)
+    dict = {
+      :alipay => 'primary',
+      :unionpay => 'danger'
+    }.stringify_keys
+    content_tag :span, CandidatePaymentInfo::CATEGORY[category] || category, :class => "badge badge-#{dict[category] || 'secondary'}"
+  end
+
   # ========================================
   ##
   # background color for cps

@@ -280,7 +280,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:category, :candidate_id, :started_at, :ended_at, :cpt)
+    params.require(:project_task).permit(:category, :candidate_id, :interview_form, :started_at)
   end
 
   def project_requirement_params

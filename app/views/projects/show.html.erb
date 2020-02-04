@@ -20,10 +20,10 @@
                             <%= fa_icon_tag('edit') %> <%= mt(:project, :close) %>
                         <% end if @project.can_close? %>
                         <%= link_to edit_project_path(@project), :class => 'btn btn-dark' do %>
-                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit', :model => mt(:project))}" %>
+                            <%= fa_icon_tag('edit') %> <%= "#{t('action.edit_model', :model => mt(:project))}" %>
                         <% end if @project.can_edit? %>
                         <%= link_to project_path(@project), :method => :delete, :class => 'btn btn-danger', :data => { :confirm => t(:sure_to_delete)} do %>
-                            <%= fa_icon_tag('remove') %> <%= "#{t('action.delete', :model => mt(:project))}" %>
+                            <%= fa_icon_tag('remove') %> <%= "#{t('action.delete_model', :model => mt(:project))}" %>
                         <% end if @project.can_destroy? %>
                     </div>
                 <% end %>
@@ -80,7 +80,7 @@
                 <%= render :partial => 'projects/show/experts', :locals => { :experts => @project.experts } %>
             </div>
             <div class="col-lg-6 col-12">
-                <%= render :partial => 'projects/show/project_tasks', :locals => { :project_tasks => @project.project_tasks } %>
+                <%= render :partial => 'projects/show/project_tasks', :locals => { :project_tasks => @project.project_tasks.order(:created_at => :desc) } %>
             </div>
         </div>
 

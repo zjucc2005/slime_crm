@@ -23,11 +23,6 @@ class CreateCandidates < ActiveRecord::Migration[6.0]
       t.boolean :is_available
       t.decimal :cpt, :precision => 10, :scale => 2
       t.string :currency
-      t.string :bank
-      t.string :bank_card
-      t.string :bank_user
-      t.string :alipay_account
-      t.string :alipay_user
       t.jsonb :property, :default => {}
 
       t.timestamps :null => false

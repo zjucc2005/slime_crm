@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_064518) do
+ActiveRecord::Schema.define(version: 2020_02_03_070658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,18 @@ ActiveRecord::Schema.define(version: 2020_01_16_064518) do
     t.index ["candidate_id"], name: "index_candidate_experiences_on_candidate_id"
   end
 
+  create_table "candidate_payment_infos", force: :cascade do |t|
+    t.bigint "candidate_id"
+    t.string "category"
+    t.bigint "created_by"
+    t.string "bank"
+    t.string "account"
+    t.string "username"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["candidate_id"], name: "index_candidate_payment_infos_on_candidate_id"
+  end
+
   create_table "candidates", force: :cascade do |t|
     t.string "category"
     t.string "data_source"
@@ -60,11 +72,6 @@ ActiveRecord::Schema.define(version: 2020_01_16_064518) do
     t.boolean "is_available"
     t.decimal "cpt", precision: 10, scale: 2
     t.string "currency"
-    t.string "bank"
-    t.string "bank_card"
-    t.string "bank_user"
-    t.string "alipay_account"
-    t.string "alipay_user"
     t.jsonb "property", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

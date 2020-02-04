@@ -26,6 +26,9 @@ Rails.application.routes.draw do
     put :update_client,  on: :member
 
     post :import_expert, on: :collection  # import experts with excel
+
+    get :new_payment_info,     on: :member
+    post :create_payment_info, on: :member
   end
 
   resources :companies do
@@ -60,7 +63,7 @@ Rails.application.routes.draw do
   resources :project_requirements
 
   resources :project_tasks do
-
+    get :get_base_price, on: :member  # 计算基础价格(实时)
   end
 
   resources :location_data do

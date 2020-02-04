@@ -6,7 +6,7 @@
         <% end if @project.can_add_task? %>
     </div>
 
-    <div class="card-body p-2">
+    <div class="card-body table-responsive">
         <% if project_tasks.any? %>
             <table class="table table-sm table-striped table-hover card-text">
                 <thead>
@@ -14,9 +14,10 @@
                     <th><%= mt(:project_task, :id) %></th>
                     <th><%= mt(:project_task, :category) %></th>
                     <th><%= mt(:expert) %></th>
-                    <th><%= mt(:project_task, :cpt) %></th>
+                    <th><%= mt(:project_task, :interview_form) %></th>
                     <th><%= mt(:project_task, :started_at) %></th>
-                    <th><%= mt(:project_task, :ended_at) %></th>
+                    <th><%= mt(:project_task, :duration) %></th>
+                    <th class="action"><%= t(:operation) %></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,10 +25,15 @@
                     <tr>
                         <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
                         <td><%= project_task_category_badge(task.category) %></td>
-                        <td><%= task.candidate.name_cn %></td>
-                        <td><%= task.cpt %></td>
-                        <td><%= task.started_at.strftime('%F %T') %></td>
-                        <td><%= task.ended_at.strftime('%F %T') %></td>
+                        <td><%= task.candidate.name %></td>
+                        <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+                        <td><%= task.started_at.strftime('%F %H:%M') %></td>
+                        <td><%= task.duration %></td>
+                        <td class="action">
+                            <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
+                                <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
+                            <% end if task.status == 'ongoing' %>
+                        </td>
                     </tr>
                 <% end %>
                 </tbody>

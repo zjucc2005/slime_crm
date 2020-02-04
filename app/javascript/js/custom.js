@@ -9,6 +9,9 @@ $(document).on('turbolinks:load', function(){
     setTimeout("$('.alert').css('display','none')",5000);
     $('.datetimepicker').datetimePicker();
     $('.datepicker').datePicker();
+    if($('.select2-container').length){
+        $('.select2-container').remove();  // turbolinks:reload + select2 重复加载bug修复
+    }
     $('.select2').select2();
 });
 

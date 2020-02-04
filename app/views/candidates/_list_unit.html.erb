@@ -49,8 +49,8 @@
             </div>
             <% candidate.project_tasks.interview.order(:started_at => :desc).limit(3).each do |task| %>
                 <div class="text mb-1">
-                    <span class="text-gray mr-1"><%= "#{task.started_at.strftime('%F %H:%M')} ~ #{task.ended_at.strftime('%F %T')}" %></span>
-                    <span>费率： <%= task.cpt %></span>
+                    <span class="text-gray mr-1"><%= "#{task.started_at.strftime('%F %H:%M')} ~ #{task.ended_at.try(:strftime, '%F %H:%M')}" %></span>
+                    <span>费率： N/A</span>
                 </div>
             <% end %>
         </div>
