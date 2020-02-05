@@ -17,7 +17,9 @@ class CreateProjectTasks < ActiveRecord::Migration[6.0]
       t.datetime :ended_at      # 访谈结束时间
       t.decimal :cost, :precision => 10, :scale => 2  # 成本, 即支付给专家的费用
       t.string :payment_method  # 成本支付方式
-      t.jsonb :payment_info     # 支付信息(快照信息)
+      t.jsonb :payment_info, :default => {}  # 支付信息(快照信息)
+      t.string :charge_status   # 收费状态
+      t.string :payment_status  # 成本支付状态
 
       t.timestamps :null => false
     end

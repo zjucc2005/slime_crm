@@ -1,0 +1,59 @@
+<div class="card p-2 d-block mb-2">
+    <%= link_to '', :class => 'btn btn-warning' do %>
+        <%= fa_icon_tag('file-excel-o') %> <%= t('action.export_excel') %>(dev)
+    <% end %>
+</div>
+
+<% if @project_tasks.any? %>
+    <div class="card p-2 table-responsive">
+        <table class="table table-sm table-striped nowrap border-bottom card-text">
+            <thead>
+            <tr>
+                <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
+                <th><%= mt(:project_task, :id) %></th>
+                <th><%= mt(:project, :code) %></th>
+                <th><%= mt(:company, :name_abbr) %></th>
+                <th><%= mt(:project_task, :category) %></th>
+                <th><%= mt(:expert) %></th>
+                <th><%= mt(:project_task, :interview_form) %></th>
+                <th><%= mt(:project_task, :actual_price) %></th>
+                <th><%= mt(:project_task, :charge_status) %></th>
+                <th><%= mt(:project_task, :cost) %></th>
+                <th><%= mt(:project_task, :payment_status) %></th>
+                <th><%= mt(:project_task, :created_at) %></th>
+                <th class="action"><%= t(:operation) %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @project_tasks.each do |task| %>
+                <tr>
+                    <td><%= check_box_tag :'uids[]', task.id, false %></td>
+                    <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
+                    <td><%= truncate(task.project.code, length: 10) %></td>
+                    <td><%= truncate(task.project.company.name_abbr, length: 10) %></td>
+                    <td><%= project_task_category_badge(task.category) %></td>
+                    <td><%= task.candidate.name %></td>
+                    <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+                    <td><%= task.actual_price %></td>
+                    <td><%= project_task_charge_status_badge(task.charge_status) %></td>
+                    <td><%= task.cost %></td>
+                    <td><%= project_task_payment_status_badge(task.payment_status) %></td>
+                    <td><%= task.created_at.strftime('%F %T') %></td>
+                    <th class="action">
+                        <%= link_to finance_path(task), :class => 'btn btn-primary btn-xs' do %>
+                            <%= fa_icon_tag('file') %> <%= t('action.detail') %>
+                        <% end %>
+                    </th>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+        <%= will_paginate @project_tasks %>
+    </div>
+<% else %>
+    <div class="card p-2">
+        <div class="p-4 text-center">
+            <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+        </div>
+    </div>
+<% end %>

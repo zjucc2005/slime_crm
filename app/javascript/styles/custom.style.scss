@@ -116,6 +116,7 @@ input[type=checkbox].checkbox-square {
 
 /* pagination */
 .pagination {
+    justify-content: center;
     .btn {
         color: #222;
         cursor: pointer;
@@ -308,6 +309,11 @@ input[type=checkbox].checkbox-square {
       padding-left: 4.8rem;
     }
   }
+}
+
+/* .input-group */
+.input-group {
+  margin-bottom: 1rem;
 }
 
 /* .card */

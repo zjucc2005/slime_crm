@@ -13,14 +13,8 @@ class ProjectTasksController < ApplicationController
     begin
       load_project_task
 
-      # init append_params
-      append_params = Hash.new
-      append_params[:ended_at]     = project_task_params[:started_at].to_time + project_task_params[:duration].to_i * 60
-      append_params[:charge_rate]  = @project_task.active_contract.cpt
-      append_params[:base_price]   = @project_task.active_contract.base_price(project_task_params[:duration].to_i)
-      append_params[:actual_price] = project_task_params[:actual_price].present? ? project_task_params[:actual_price] : append_params[:base_price]
-
       # construct payment_info_params
+      append_params = Hash.new
       if project_task_params[:cost].to_i > 0
         cpi = CandidatePaymentInfo.find(params[:candidate_payment_info_id])
         append_params[:payment_method] = cpi.category
@@ -32,6 +26,10 @@ class ProjectTasksController < ApplicationController
           :username     => cpi.username,
           :memo         => params[:payment_memo]
         }
+      else
+        append_params[:payment_method] = nil
+        append_params[:payment_info] = {}
+        append_params[:payment_status] = 'free'
       end
 
       if @project_task.update(project_task_params.merge(append_params))

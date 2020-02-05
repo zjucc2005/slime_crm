@@ -40,8 +40,10 @@ zh_cn:
     close: "关闭"
     delete: "删除"
     delete_model: "删除%{model}"
+    detail: "详情"
     edit: "编辑"
     edit_model: "编辑%{model}"
+    export_excel: "导出Excel"
     login: "登录"
     logout: "注销"
     new: "新建"
@@ -51,6 +53,7 @@ zh_cn:
     save: "保存"
     search: "搜索"
     submit: "提交"
+    update: "更新"
 
   will_paginate:
     previous_label: "上一页"

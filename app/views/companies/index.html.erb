@@ -1,13 +1,13 @@
 <div class="card p-2 d-block mb-2">
     <%= link_to new_company_path, :class => 'btn btn-primary' do %>
-        <%= fa_icon_tag('plus') %> <%= "#{t('action.new_model', :model => mt(:company))}" %>
+        <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:company)) %>
     <% end %>
 </div>
 
 
 <% if @companies.any? %>
     <div class="card p-2">
-        <table class="table table-sm table-striped table-hover card-text">
+        <table class="table table-sm table-striped card-text">
             <thead>
             <tr>
                 <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>

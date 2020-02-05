@@ -66,6 +66,8 @@ Rails.application.routes.draw do
     get :get_base_price, on: :member  # 计算基础价格(实时)
   end
 
+  resources :finance
+
   resources :location_data do
     get :autocomplete_city, on: :collection
   end

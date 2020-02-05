@@ -1,0 +1,46 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('file') %> <%= t('action.update') %></h5>
+        <%= link_to fa_icon_tag('close'), finance_path(@project_task), :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@project_task.uid}" %></span>
+                </h6>
+            </div>
+        </div>
+
+        <%= form_for @project_task, :url => finance_path(@project_task), :method => :put do |f| %>
+            <%= model_error_tag(@project_task) %>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <span class="badge badge-light"><%= show_creator(@project_task) %></span>
+                    <span class="badge badge-light"><%= show_timestamps(@project_task) %></span>
+                </div>
+
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :actual_price %>
+                    <%= f.number_field :actual_price, :min => 1, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :charge_status %>
+                    <%= f.select :charge_status, ProjectTask::CHARGE_STATUS.to_a.map(&:reverse), { :include_blank => false },
+                                 :class => 'form-control select2' %>
+                </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :payment_status %>
+                    <%= f.select :payment_status, ProjectTask::PAYMENT_STATUS.to_a.map(&:reverse), { :include_blank => false },
+                                 :class => 'form-control select2' %>
+                </div>
+
+                <div class="col-12 form-group mb-0">
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
+                    <%= link_to t('action.back'), finance_path(@project_task), :class => 'btn btn-secondary' %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

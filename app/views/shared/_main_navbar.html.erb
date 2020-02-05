@@ -26,6 +26,11 @@
                         <%= link_to mt(:project), projects_path, :class => "nav-link #{yield :nav_projects}" %>
                     </li>
                 <% end %>
+                <% if can? :index, Finance %>
+                    <li class="nav-item">
+                        <%= link_to mt(:finance), finance_index_path, :class => "nav-link #{yield :nav_finance}" %>
+                    </li>
+                <% end %>
                 <% if can? :index, User %>
                     <li class="nav-item">
                         <%= link_to mt(:user), users_path, :class => "nav-link #{yield :nav_users}" %>

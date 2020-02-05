@@ -62,6 +62,7 @@ zh_cn:
       project: "项目"
       project_requirement: "项目需求"
       project_task: "项目任务"
+      finance: "财务"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -199,3 +200,5 @@ zh_cn:
         payment_method: "成本支付方式"
         payment_info: "成本支付信息"
         payment_memo: "成本支付备注"
+        charge_status: "收费状态"
+        payment_status: "支付状态"

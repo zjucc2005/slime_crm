@@ -156,7 +156,9 @@ ActiveRecord::Schema.define(version: 2020_02_03_070658) do
     t.datetime "ended_at"
     t.decimal "cost", precision: 10, scale: 2
     t.string "payment_method"
-    t.jsonb "payment_info"
+    t.jsonb "payment_info", default: {}
+    t.string "charge_status"
+    t.string "payment_status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["candidate_id"], name: "index_project_tasks_on_candidate_id"

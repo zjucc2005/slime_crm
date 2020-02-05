@@ -55,6 +55,7 @@ class Ability
     can :manage, Project
     can :manage, ProjectRequirement
     can :manage, ProjectTask
+    can :manage, Finance
   end
 
   def pm_ability

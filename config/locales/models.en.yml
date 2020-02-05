@@ -33,6 +33,7 @@ en:
       project: "Project"
       project_requirement: "Project requirement"
       project_task: "Project task"
+      finance: "Finance"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -170,3 +171,5 @@ en:
         payment_method: "Payment method of cost"
         payment_info: "Payment info of cost"
         payment_memo: "Payment memo"
+        charge_status: "Charge status"
+        payment_status: "Payment status"
