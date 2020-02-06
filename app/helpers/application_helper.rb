@@ -54,34 +54,4 @@ module ApplicationHelper
     # >>
     provide nav_item, 'active'
   end
-
-  ##
-  # boolean options for select tag
-  def boolean_options
-    [[t(:true), 'true'], [t(:false), 'false']]
-  end
-
-  def boolean_display(val)
-    t(val.to_s.to_sym)
-  end
-
-  ##
-  # show creator of instance
-  def show_creator(instance)
-    creator = instance.creator.try(:name_cn) || current_user.name_cn
-    "#{mt(:candidate, :created_by)}: #{creator}"
-  end
-
-  ##
-  # show timestamps of instance
-  def show_timestamps(instance)
-    if %w[new create].include? action_name
-
-    else
-      arr = []
-      arr << "#{mt(:user, :created_at)}: #{instance.created_at.strftime('%F %T')}" if instance.created_at
-      arr << "#{mt(:user, :updated_at)}: #{instance.updated_at.strftime('%F %T')}" if instance.updated_at
-      arr.join(', ')
-    end
-  end
 end

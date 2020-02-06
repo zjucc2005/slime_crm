@@ -8,8 +8,11 @@
 
     <div class="col-lg-4 col-12 form-group">
         <%= f.label :company_id, mt(:project, :company) %><span class="text-red">*</span>
-        <%= f.select :company_id, @signed_company_options, { :prompt => default_prompt }, :class => 'form-control select2',
-                     :disabled => %w[edit update].include?(action_name) %>
+        <% if %w[new create].include?(action_name) %>
+            <%= f.select :company_id, @signed_company_options, { :prompt => default_prompt }, :class => 'form-control select2' %>
+        <% else %>
+            <%= text_field_tag :company_id, @project.company.name, :disabled => true, :class => 'form-control' %>
+        <% end %>
     </div>
     <div class="col-lg-4 col-12 form-group">
         <%= f.label :name, mt(:project, :name) %><span class="text-red">*</span>

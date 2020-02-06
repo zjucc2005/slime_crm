@@ -19,14 +19,6 @@ module CandidatesHelper
     Candidate::DATA_SOURCE[data_source]
   end
 
-  def show_candidate_creator
-    show_creator(@candidate)
-  end
-
-  def show_candidate_timestamps
-    show_timestamps(@candidate)
-  end
-
   def candidate_is_available_options
     [[t(:true), 'true'], [t(:false), 'false'], [t(:pending), '']]
   end

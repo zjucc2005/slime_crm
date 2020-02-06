@@ -5,8 +5,8 @@
     <div class="col-12 form-group">
         <span class="badge badge-primary"><%= show_candidate_category %></span>
         <span class="badge badge-warning"><%= show_candidate_data_source %></span>
-        <span class="badge badge-light"><%= show_candidate_creator %></span>
-        <span class="badge badge-light"><%= show_candidate_timestamps %></span>
+        <span class="badge badge-light"><%= show_creator(@candidate) %></span>
+        <span class="badge badge-light"><%= show_timestamps(@candidate) %></span>
     </div>
 
     <div class="col-lg-3 col-6 form-group">
