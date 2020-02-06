@@ -50,6 +50,10 @@ class Candidate < ApplicationRecord
     experiences.work.order(:started_at => :desc).first
   end
 
+  def normal_project_task_count
+    project_tasks.where(status: %w[ongoing finished]).count
+  end
+
   private
   def setup
     self.category    ||= 'expert'  # init category

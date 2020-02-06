@@ -206,6 +206,12 @@ class CandidatesController < ApplicationController
     end
   end
 
+  # GET /candidates/:id/payment_infos
+  def payment_infos
+    load_candidate
+    @payment_infos = @candidate.payment_infos
+  end
+
   # GET /candidates/:id/new_payment_info
   def new_payment_info
     load_candidate
@@ -232,6 +238,13 @@ class CandidatesController < ApplicationController
       flash[:error] = e.message
       redirect_to root_path
     end
+  end
+
+  # GET /candidates/:id/project_tasks
+  def project_tasks
+    load_candidate
+    query = @candidate.project_tasks.where(status: %w[ongoing finished])
+    @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   private

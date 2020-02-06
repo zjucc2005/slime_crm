@@ -43,9 +43,9 @@
         <div class="col-lg-4 d-flex flex-column text-left">
             <div class="text mb-3">
                 <span>访谈次数： </span>
-                <span><%= candidate.project_tasks.interview.count %></span>，
+                <span><%= candidate.normal_project_task_count %></span>，
                 <span>最近访谈时间： </span>
-                <span><%= candidate.project_tasks.interview.maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
+                <span><%= candidate.project_tasks.maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
             </div>
             <% candidate.project_tasks.interview.order(:started_at => :desc).limit(3).each do |task| %>
                 <div class="text mb-1">

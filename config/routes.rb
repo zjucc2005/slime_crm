@@ -27,8 +27,10 @@ Rails.application.routes.draw do
 
     post :import_expert, on: :collection  # import experts with excel
 
+    get :payment_infos,        on: :member
     get :new_payment_info,     on: :member
     post :create_payment_info, on: :member
+    get :project_tasks,        on: :member
   end
 
   resources :companies do

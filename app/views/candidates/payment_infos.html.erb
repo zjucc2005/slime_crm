@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('user-circle') %> <%= mt(:candidate_payment_info) %></h5>
+        <%= link_to fa_icon_tag('close'), candidate_path(@candidate), :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
+                    <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
+                </h6>
+            </div>
+        </div>
+
+        <div class="p-1 table-responsive">
+            <table class="table table-sm table-striped border nowrap card-text">
+                <thead>
+                <tr>
+                    <th><%= mt(:candidate_payment_info, :category) %></th>
+                    <th><%= mt(:candidate_payment_info, :bank) %></th>
+                    <th><%= mt(:candidate_payment_info, :account) %></th>
+                    <th><%= mt(:candidate_payment_info, :username) %></th>
+                    <th><%= mt(:candidate_payment_info, :created_by) %></th>
+                    <th><%= mt(:candidate_payment_info, :created_at) %></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @payment_infos.each do |payment_info| %>
+                    <tr>
+                        <td><%= candidate_payment_info_category_badge(payment_info.category) %></td>
+                        <td><%= payment_info.bank %></td>
+                        <td><%= payment_info.account %></td>
+                        <td><%= payment_info.username %></td>
+                        <td><%= payment_info.creator.name_cn %></td>
+                        <td><%= payment_info.created_at.strftime('%F %T') %></td>
+                    </tr>
+                <% end %>
+                <tr>
+                    <td colspan="7" align="center">
+                        <%= link_to new_payment_info_candidate_path(@candidate, return_to: request.path), :class => 'btn btn-primary btn-xs' do %>
+                                <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:candidate_payment_info)) %>
+                        <% end %>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

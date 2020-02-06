@@ -72,13 +72,17 @@ a {
 
 /* .btn */
 .btn-submit {
-  @extend .btn-primary
+  @extend .btn-primary;
 }
 .btn-back {
-  @extend .btn-secondary
+  @extend .btn-secondary;
 }
 .btn-edit {
-  @extend .btn-dark
+  @extend .btn-dark;
+}
+.btn-default {
+  @extend .btn-light;
+  border-color: #ddd;
 }
 .btn-xs {
   @extend .btn-sm;

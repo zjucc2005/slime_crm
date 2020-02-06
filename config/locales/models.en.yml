@@ -83,6 +83,7 @@ en:
         alipay_user: "Alipay username"
         property: "Property"
         seat: "Client seat"
+        interview_task: "Interview task"
 
       candidate_experience:
         category: "Category"

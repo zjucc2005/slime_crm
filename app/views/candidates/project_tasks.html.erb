@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('list') %> <%= mt(:candidate, :interview_task) %></h5>
+        <%= link_to fa_icon_tag('close'), candidate_path(@candidate), :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
+                    <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
+                </h6>
+            </div>
+        </div>
+
+        <div class="p-1 table-responsive">
+            <table class="table table-sm table-striped border nowrap card-text">
+                <thead>
+                <tr>
+                    <th><%= mt(:project_task, :id) %></th>
+                    <th><%= mt(:project_task, :started_at) %></th>
+                    <th><%= mt(:project_task, :ended_at) %></th>
+                    <th><%= mt(:project_task, :duration) %></th>
+                    <th><%= mt(:project_task, :category) %></th>
+                    <th><%= mt(:project_task, :interview_form) %></th>
+                    <th><%= mt(:project_task, :status) %></th>
+                    <th><%= mt(:project, :code) %></th>
+                    <th><%= mt(:company, :name_abbr) %></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% @project_tasks.each do |task| %>
+                    <tr>
+                        <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
+                        <td><%= task.started_at.try(:strftime, '%F %H:%M') %></td>
+                        <td><%= task.ended_at.try(:strftime, '%F %H:%M') %></td>
+                        <td><%= task.duration %></td>
+                        <td><%= project_task_category_badge(task.category) %></td>
+                        <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+                        <td><%= ProjectTask::STATUS[task.status] %></td>
+                        <td><%= truncate(task.project.code, length: 10) %></td>
+                        <td><%= truncate(task.project.company.name_abbr, length: 10) %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <%= will_paginate @project_tasks %>
+        </div>
+    </div>
+</div>

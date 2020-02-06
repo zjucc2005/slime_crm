@@ -5,6 +5,15 @@
     </div>
 
     <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
+                    <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
+                </h6>
+            </div>
+        </div>
+
         <%= form_for @payment_info, :url => create_payment_info_candidate_path(@candidate), :method => :post do |f| %>
             <%= hidden_field_tag :return_to, params[:return_to] %>
 
