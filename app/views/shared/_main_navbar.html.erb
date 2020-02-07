@@ -57,10 +57,10 @@
         </div>
         <% if signed_in? %>
             <div class="notifications">
-                <div class="candidate-access-limit">
+                <div class="candidate-access-limit" id="candidate-access-limit">
                     <%= "#{current_user.candidate_access_logs.today.count} / #{current_user.candidate_access_limit}" %>
                 </div>
             </div>
-        <% end %>
+        <% end if false %>
     </nav>
 </header>

@@ -1,7 +1,7 @@
 <div class="card px-5 py-3 mb-2">
     <div class="row">
         <div class="col-lg-4 d-flex flex-column text-center text-md-left">
-            <div class="d-flex flex-column flex-lg-row align-items-center mb-3">
+            <div class="d-flex flex-column flex-lg-row align-items-center mb-1">
                 <div class="candidate-checkbox">
                     <%= check_box_tag :'uids[]', candidate.id, false, :class => 'checkbox-square' %>
                 </div>
@@ -13,22 +13,27 @@
                         <span class="status <%= candidate.is_available ? 'valid' : 'invalid' %> mr-2"></span>
                         <%= link_to candidate_path(candidate) do %>
                             <span><%= candidate.name %></span>
-                            <span class="d-lg-none">(<%= candidate.nickname %>)</span>
                         <% end %>
                     </h6>
                 </div>
-                <div class="text">
-                    <span class="text-smaller mr-1 text-light roundy px-2 py-1 <%= cps_bg(candidate.cpt) %>"><%= "¥#{candidate.cpt}" %></span>
+
+            </div>
+
+            <div class="d-flex flex-column mb-1">
+                <div class="text-smaller">
+                    <span class="mr-1 text-light roundy px-1 py-0 <%= cps_bg(candidate.cpt) %>"><%= "¥#{candidate.cpt}" %></span>
                     <span class="text-gray mr-1">/</span>
-                    <span class="text-smaller mr-1"><%= candidate.city %></span>
+                    <span class="mr-1"><%= candidate.city || '-' %></span>
                     <span class="text-gray mr-1">/</span>
-                    <span class="text-smaller mr-1"><%= candidate.phone %></span>
+                    <%= content_tag :span, :id => "show_phone_wrapper_#{candidate.id}", :class => 'mr-1' do %>
+                        <%= link_to '查看联系方式', show_phone_candidate_path(candidate), :remote => true %>
+                    <% end %>
                 </div>
             </div>
 
             <div class="d-flex flex-column text-left">
                 <% candidate.experiences.work.order(:started_at => :desc).limit(3).each do |exp| %>
-                    <div class="text mb-1">
+                    <div class="text-smaller">
                         <span class="text-gray mr-1"><%= exp.started_at.strftime('%F') %></span>
                         <span><%= hl(exp.org_cn, params[:term]) %></span>
                     </div>
@@ -36,21 +41,22 @@
             </div>
         </div>
         <div class="col-lg-4 d-flex align-items-center flex-column text-left">
-            <div class="my-3 my-lg-0 text text-limit-length" style="height: 100px;">
-                <%= hl(candidate.description, params[:term]) %>
+            <div class="my-3 my-lg-0 text-smaller text-limit-length">
+                <%= hl(truncate(candidate.description, length: 150), params[:term]) %>
             </div>
         </div>
         <div class="col-lg-4 d-flex flex-column text-left">
-            <div class="text mb-3">
+            <div class="text-smaller mb-3">
                 <span>访谈次数： </span>
                 <span><%= candidate.normal_project_task_count %></span>，
                 <span>最近访谈时间： </span>
                 <span><%= candidate.project_tasks.maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
             </div>
-            <% candidate.project_tasks.interview.order(:started_at => :desc).limit(3).each do |task| %>
-                <div class="text mb-1">
-                    <span class="text-gray mr-1"><%= "#{task.started_at.strftime('%F %H:%M')} ~ #{task.ended_at.try(:strftime, '%F %H:%M')}" %></span>
-                    <span>费率： N/A</span>
+            <% candidate.project_tasks.interview.order(:started_at => :desc).limit(4).each do |task| %>
+                <div class="text-smaller">
+                    <span class="text-gray mr-1"><%= task.started_at.strftime('%F %H:%M') %></span>
+                    <span><%= mt(:project_task, :duration) %>: <%= task.duration %></span>,
+                    <span><%= mt(:project, :code) %>: <%= task.project.code %></span>
                 </div>
             <% end %>
         </div>

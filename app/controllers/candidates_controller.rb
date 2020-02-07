@@ -26,7 +26,12 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/:id
   def show
-    load_candidate
+    begin
+      load_candidate
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to candidates_path
+    end
   end
 
   # GET /candidates/new
@@ -62,7 +67,12 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/:id/edit
   def edit
-    load_candidate
+    begin
+      load_candidate
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to candidates_path
+    end
   end
 
   # PUT /candidates/:id
@@ -84,10 +94,10 @@ class CandidatesController < ApplicationController
         end
       end
       flash[:success] = t(:operation_succeeded)
-      redirect_to edit_candidate_path(@candidate)
+      redirect_to candidate_path(@candidate)
     rescue Exception => e
-      flash.now[:error] = e.message
-      render :edit
+      flash[:error] = e.message
+      redirect_to candiates_path
     end
   end
 
@@ -115,6 +125,17 @@ class CandidatesController < ApplicationController
   # GET /candidates/gen_card
   def gen_card
     @candidates = Candidate.where(id: params[:uids])
+  end
+
+  # GET /candidates/:id/show_phone.js, remote: true
+  def show_phone
+    begin
+      load_candidate
+      @response = { :status => 'succ' }
+    rescue Exception => e
+      @response = { :status => 'fail', :reason => e.message }
+    end
+    respond_to{|f| f.js }
   end
 
   # POST /candidates/create_client
@@ -208,14 +229,24 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/:id/payment_infos
   def payment_infos
-    load_candidate
-    @payment_infos = @candidate.payment_infos
+    begin
+      load_candidate
+      @payment_infos = @candidate.payment_infos
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to candidates_path
+    end
   end
 
   # GET /candidates/:id/new_payment_info
   def new_payment_info
-    load_candidate
-    @payment_info = @candidate.payment_infos.new
+    begin
+      load_candidate
+      @payment_info = @candidate.payment_infos.new
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to candidates_path
+    end
   end
 
   # POST /candidates/:id/create_payment_info
@@ -242,9 +273,14 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/:id/project_tasks
   def project_tasks
-    load_candidate
-    query = @candidate.project_tasks.where(status: %w[ongoing finished])
-    @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    begin
+      load_candidate
+      query = @candidate.project_tasks.where(status: %w[ongoing finished])
+      @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to candidates_path
+    end
   end
 
   private
