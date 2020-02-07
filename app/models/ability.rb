@@ -51,31 +51,43 @@ class Ability
     can :manage, Candidate
     can :manage, Company
     can :manage, Contract
-    can :manage, LocationDatum
     can :manage, Project
     can :manage, ProjectRequirement
     can :manage, ProjectTask
     can :manage, Finance
+
+    can :manage, LocationDatum
   end
 
   def pm_ability
     can_edit_my_account
+    can :index, User
     can :manage, Candidate
+    can [:new_client], Company
     can :manage, Project
     can :manage, ProjectRequirement
+    can [:edit, :update, :get_base_price], ProjectTask
+    cannot :manage, Finance
+
     can :read, LocationDatum
   end
 
   def pa_ability
     can_edit_my_account
     can :index, User
-    can :read, Candidate
-    can :read, Project
+    can :manage, Candidate
+    can [:new_client], Company
+    can [:index, :show, :add_users, :delete_user, :add_clients, :delete_client, :add_experts, :delete_expert,
+         :add_project_task], Project
+    can [:edit, :update, :get_base_price], ProjectTask
+
     can :read, LocationDatum
   end
 
   def finance_ability
     can_edit_my_account
+    can :manage, Finance
+
     can :read, LocationDatum
   end
 

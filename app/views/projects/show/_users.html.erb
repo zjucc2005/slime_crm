@@ -3,7 +3,7 @@
         <h5><%= fa_icon_tag('users') %> <%= mt(:user) %></h5>
         <%= link_to users_path(project_id: @project.id, from_source: 'project', role: %w[pm pa]), :class => 'btn btn-primary btn-xs' do %>
             <%= fa_icon_tag('plus') %> <%= t('action.add') %>
-        <% end if @project.can_edit? %>
+        <% end if can?(:index, User) && @project.can_edit? %>
     </div>
 
     <div class="card-body table_responsive">
@@ -30,7 +30,7 @@
                                         :method => :delete, :data => { :confirm => t(:sure_to_remove) },
                                         :class => 'btn btn-danger btn-xs' do %>
                                 <%= fa_icon_tag('times') %> <%= t('action.remove') %>
-                            <% end if @project.can_edit? %>
+                            <% end if can?(:delete_user, Project) && @project.can_edit? %>
                         </td>
                     </tr>
                 <% end %>
@@ -38,10 +38,7 @@
             </table>
         <% else %>
             <div class="p-2 text-center">
-                <h5 class="text-gray mb-0">
-                    <%= t(:not_found) %>,
-                    <%= link_to(t(:go_to_add), users_path(project_id: @project.id, from_source: 'project')) if @project.can_edit? %>
-                </h5>
+                <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
             </div>
         <% end %>
     </div>

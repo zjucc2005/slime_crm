@@ -15,16 +15,16 @@
                     <div class="btn-group btn-group-sm">
                         <%= link_to start_project_path(@project), :method => :put, :class => 'btn btn-success', :data => { :confirm => t(:sure)}  do %>
                             <%= fa_icon_tag('edit') %> <%= mt(:project, :start) %>
-                        <% end if @project.can_start? %>
+                        <% end if can?(:start, Project) && @project.can_start? %>
                         <%= link_to close_project_path(@project), :method => :put, :class => 'btn btn-warning', :data => { :confirm => t(:sure)}  do %>
                             <%= fa_icon_tag('edit') %> <%= mt(:project, :close) %>
-                        <% end if @project.can_close? %>
+                        <% end if can?(:close, Project) && @project.can_close? %>
                         <%= link_to edit_project_path(@project), :class => 'btn btn-dark' do %>
                             <%= fa_icon_tag('edit') %> <%= "#{t('action.edit_model', :model => mt(:project))}" %>
-                        <% end if @project.can_edit? %>
+                        <% end if can?(:edit, Project) && @project.can_edit? %>
                         <%= link_to project_path(@project), :method => :delete, :class => 'btn btn-danger', :data => { :confirm => t(:sure_to_delete)} do %>
                             <%= fa_icon_tag('remove') %> <%= "#{t('action.delete_model', :model => mt(:project))}" %>
-                        <% end if @project.can_destroy? %>
+                        <% end if can?(:destroy, Project) && @project.can_destroy? %>
                     </div>
                 <% end %>
             </div>
