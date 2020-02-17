@@ -1,3 +1,4 @@
+# encoding: utf-8
 module DefaultHelper
 
   def default_prompt

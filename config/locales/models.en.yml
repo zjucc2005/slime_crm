@@ -34,6 +34,7 @@ en:
       project_requirement: "Project requirement"
       project_task: "Project task"
       finance: "Finance"
+      card_template: "Card template"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -101,6 +102,11 @@ en:
         bank: "Bank"
         account: "Account"
         username: "Username"
+
+      card_template:
+        category: "Category"
+        name: "Name"
+        content: "Content"
 
       company:
         category: "Category"

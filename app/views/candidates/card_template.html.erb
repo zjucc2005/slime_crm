@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('drivers-license-o') %> <%= mt(:card_template) %></h5>
+        <%= link_to fa_icon_tag('close'), candidates_path, :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_tag gen_card_candidates_path, :method => :get do %>
+            <% params[:uids].each do |uid| %>
+                <%= hidden_field_tag :'uids[]', uid %>
+            <% end %>
+
+            <div class="row">
+                <div class="col-12 form-group">
+                    <span class="badge badge-light"><%= "选择了#{params[:uids].length}位专家" %></span>
+                </div>
+                <div class="col-12 form-group">
+                    <%= label_tag :card_template_id, mt(:card_template) %><span class="text-red">*</span>
+                    <%= select_tag :card_template_id, options_for_select(@card_template_options, params[:card_template_id]),
+                                   :prompt => default_prompt, :required => true, :class => 'form-control select2' %>
+                </div>
+                <div class="col-12 form-group justify-content-end mb-0">
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                    <%= link_to t('action.back'), candidates_path, :class => 'btn btn-back' %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>

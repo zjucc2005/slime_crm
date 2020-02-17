@@ -1,0 +1,37 @@
+<div class="card p-2 d-block mb-2">
+    <%= link_to new_card_template_path, :class => 'btn btn-primary' do %>
+        <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:card_template)) %>
+    <% end %>
+</div>
+
+<% if @card_templates.any? %>
+    <div class="card p-2">
+        <table class="table table-sm table-striped nowrap card-text">
+            <thead>
+            <tr>
+                <th><%= mt(:card_template, :id) %></th>
+                <th><%= mt(:card_template, :name) %></th>
+                <th><%= mt(:card_template, :content) %></th>
+                <th><%= mt(:card_template, :created_at) %></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @card_templates.each do |template| %>
+                <tr>
+                    <td><%= content_tag :span, "# #{template.uid}", :class => 'text-gray' %></td>
+                    <td><%= link_to template.name, edit_card_template_path(template) %></td>
+                    <td><%= truncate(template.content, length: 50) %></td>
+                    <td><%= template.created_at.strftime('%F %T') %></td>
+                </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+    <%= will_paginate @card_templates %>
+<% else %>
+    <div class="card p-2">
+        <div class="p-4 text-center">
+            <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+        </div>
+    </div>
+<% end %>

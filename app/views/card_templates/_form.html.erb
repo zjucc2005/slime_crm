@@ -1,0 +1,12 @@
+<%= model_error_tag(@card_template) %>
+
+<div class="row">
+    <div class="col-12 form-group">
+        <%= f.label :name %><span class="text-red">*</span>
+        <%= f.text_field :name, :required => true, :class => 'form-control' %>
+    </div>
+    <div class="col-12 form-group">
+        <%= f.label :content %><span class="text-red">*</span>
+        <%= f.text_area :content, :rows => 12, :required => true, :class => 'form-control' %>
+    </div>
+</div>

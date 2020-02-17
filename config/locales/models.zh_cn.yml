@@ -63,6 +63,7 @@ zh_cn:
       project_requirement: "项目需求"
       project_task: "项目任务"
       finance: "财务"
+      card_template: "卡片模板"
 
     # Translate model attribute names. Used in Model.human_attribute_name(attribute)
     attributes:
@@ -130,6 +131,11 @@ zh_cn:
         bank: "银行名"
         account: "帐号/卡号"
         username: "用户名"
+
+      card_template:
+        category: "类型"
+        name: "名称"
+        content: "内容"
 
       company:
         category: "类型"

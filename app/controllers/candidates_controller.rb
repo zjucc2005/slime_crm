@@ -122,11 +122,6 @@ class CandidatesController < ApplicationController
     respond_to { |f| f.js }
   end
 
-  # GET /candidates/gen_card
-  def gen_card
-    @candidates = Candidate.where(id: params[:uids])
-  end
-
   # GET /candidates/:id/show_phone.js, remote: true
   def show_phone
     begin
@@ -136,6 +131,18 @@ class CandidatesController < ApplicationController
       @response = { :status => 'fail', :reason => e.message }
     end
     respond_to{|f| f.js }
+  end
+
+  # GET /candidates/card_template
+  def card_template
+    @candidates = Candidate.where(id: params[:uids])
+    @card_template_options = CardTemplate.where(category: 'Candidate').order(:created_at => :desc).pluck(:name, :id)
+  end
+
+  # GET /candidates/gen_card
+  def gen_card
+    @card_template = CardTemplate.find(params[:card_template_id])
+    @candidates = Candidate.where(id: params[:uids])
   end
 
   # POST /candidates/create_client

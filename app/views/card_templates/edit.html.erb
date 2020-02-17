@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('drivers-license-o') %> <%= t('action.edit_model', :model => mt(:card_template)) %></h5>
+        <%= link_to fa_icon_tag('close'), card_templates_path, :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_for @card_template do |f| %>
+            <%= render :partial => 'form', :locals => { :f => f } %>
+
+            <div class="form-group mb-0">
+                <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), card_templates_path, :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -7,7 +7,7 @@ module ProjectsHelper
   end
 
   def project_requirement_content_raw(content)
-    content.gsub("\n", '<br>').html_safe
+    content.gsub(/(\r\n)|\n/, '<br>').html_safe
   end
 
   def project_requirement_status_badge(status)

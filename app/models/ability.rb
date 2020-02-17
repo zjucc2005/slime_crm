@@ -57,6 +57,7 @@ class Ability
     can :manage, Finance
 
     can :manage, LocationDatum
+    can :manage, CardTemplate
   end
 
   def pm_ability

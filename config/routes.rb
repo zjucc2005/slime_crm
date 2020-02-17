@@ -19,8 +19,9 @@ Rails.application.routes.draw do
   
   resources :candidates do
     get :add_experience, on: :collection
-    get :gen_card,       on: :collection
     get :show_phone,     on: :member      # show candidate phone.js
+    get :card_template,  on: :collection
+    get :gen_card,       on: :collection
 
     post :create_client, on: :collection
     get :edit_client,    on: :member
@@ -74,4 +75,6 @@ Rails.application.routes.draw do
   resources :location_data do
     get :autocomplete_city, on: :collection
   end
+
+  resources :card_templates
 end
