@@ -33,6 +33,7 @@ gem 'pg'
 gem 'carrierwave', '~> 2.0'
 gem 'will_paginate', '~> 3.2', '>= 3.2.1'
 gem 'roo', '~> 2.8', '>= 2.8.2'
+gem 'spreadsheet', '~> 1.2', '>= 1.2.6'
 gem 'cancancan', '~> 3.0', '>= 3.0.1'
 
 group :development, :test do
@@ -58,4 +59,5 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# The dependency tzinfo-data (>= 0) will be unused by any of the platforms Bundler is installing for.
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

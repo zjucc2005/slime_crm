@@ -1,0 +1,68 @@
+<div id="search_wrapper">
+    <%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#searchModal'} do %>
+        <%= fa_icon_tag('search') %> <%= t('action.search') %>
+    <% end %>
+
+    <div id="searchModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><%= t('action.search') %></h4>
+                    <button type="button" data-dismiss="modal" class="close">&times;</button>
+                </div>
+
+                <%= form_tag finance_index_path, :method => :get do %>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-12 form-group">
+                                <%= label_tag :created_at, mt(:project_task, :created_at) %>
+                                <div class="form-group-range">
+                                    <div class="form-group-range-input">
+                                        <%= text_field_tag :created_at_ge, params[:created_at_ge], :class => 'form-control datepicker', :placeholder => t(:begin) %>
+                                    </div>
+                                    <span class="form-group-range-divider"><i class="fa fa-arrow-right"></i></span>
+                                    <div class="form-group-range-input">
+                                        <%= text_field_tag :created_at_le, params[:created_at_le], :class => 'form-control datepicker', :placeholder => t(:end) %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :project, mt(:project) %>
+                                <%= text_field_tag :project, params[:project], :class => 'form-control', :placeholder => '项目名称/编码' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :company, mt(:company) %>
+                                <%= text_field_tag :company, params[:company], :class => 'form-control', :placeholder => '公司名称/简称' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :category, mt(:project_task, :category) %>
+                                <%= select_tag :category, options_for_select(ProjectTask::CATEGORY.to_a.map(&:reverse), params[:category]),
+                                               :prompt => default_prompt, :class => 'from-control select2' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :interview_form, mt(:project_task, :interview_form) %>
+                                <%= select_tag :interview_form, options_for_select(ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), params[:interview_form]),
+                                               :prompt => default_prompt, :class => 'from-control select2' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :charge_status, mt(:project_task, :charge_status) %>
+                                <%= select_tag :charge_status, options_for_select(ProjectTask::CHARGE_STATUS.to_a.map(&:reverse), params[:charge_status]),
+                                               :prompt => default_prompt, :class => 'form-control select2' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :payment_status, mt(:project_task, :payment_status) %>
+                                <%= select_tag :payment_status, options_for_select(ProjectTask::PAYMENT_STATUS.to_a.map(&:reverse), params[:payment_status]),
+                                               :prompt => default_prompt, :class => 'form-control select2' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
+                        <%= submit_tag t('action.search_and_export'), :class => 'btn btn-warning' %>
+                        <%= submit_tag t('action.search'), :class => 'btn btn-submit' %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

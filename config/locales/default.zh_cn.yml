@@ -52,6 +52,7 @@ zh_cn:
     remove: "移除"
     save: "保存"
     search: "搜索"
+    search_and_export: "搜索并导出"
     submit: "提交"
     update: "更新"
 

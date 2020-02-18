@@ -8,15 +8,12 @@ class CandidatesController < ApplicationController
     query = Candidate.expert
     # query code here >>
     if params[:term].present?
-      query = query.joins(:experiences).where('candidate_experiences.category': 'work').
-          where('UPPER(candidates.name_cn) LIKE :term OR
-                 UPPER(candidates.name_en) LIKE :term OR
-                 UPPER(candidates.description) LIKE :term OR
-                 UPPER(candidate_experiences.org_cn) LIKE :term OR
-                 UPPER(candidate_experiences.org_en) LIKE :term', { :term => "%#{params[:term].strip.upcase}%" })
+      query = query.where('UPPER(name) LIKE UPPER(:term) OR
+                           UPPER(nickname) LIKE UPPER(:term) OR
+                           UPPER(description) LIKE UPPER(:term)', { :term => "%#{params[:term].strip.upcase}%" })
     end
     if params[:name].present?
-      query = query.where('UPPER(name_cn) LIKE :name OR UPPER(name_en) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" })
+      query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" })
     end
     %w[is_available].each do |field|
       query = query.where(field.to_sym => params[field.to_sym].strip) if params[field.to_sym].present?
