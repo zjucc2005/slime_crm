@@ -20,10 +20,12 @@
                 <tr>
                     <th><%= mt(:candidate_payment_info, :category) %></th>
                     <th><%= mt(:candidate_payment_info, :bank) %></th>
+                    <th><%= mt(:candidate_payment_info, :sub_branch) %></th>
                     <th><%= mt(:candidate_payment_info, :account) %></th>
                     <th><%= mt(:candidate_payment_info, :username) %></th>
                     <th><%= mt(:candidate_payment_info, :created_by) %></th>
                     <th><%= mt(:candidate_payment_info, :created_at) %></th>
+                    <th class="action"><%= t(:operation) %></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,17 +33,29 @@
                     <tr>
                         <td><%= candidate_payment_info_category_badge(payment_info.category) %></td>
                         <td><%= payment_info.bank %></td>
+                        <td><%= payment_info.sub_branch %></td>
                         <td><%= payment_info.account %></td>
                         <td><%= payment_info.username %></td>
                         <td><%= payment_info.creator.name_cn %></td>
                         <td><%= payment_info.created_at.strftime('%F %T') %></td>
+                        <td class="action">
+                            <div class="btn-group">
+                                <%= link_to edit_candidate_payment_info_path(payment_info), :class => 'btn btn-dark btn-xs' do %>
+                                    <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
+                                <% end if can?(:edit, CandidatePaymentInfo) %>
+                                <%= link_to candidate_payment_info_path(payment_info), :method => :delete, :class => 'btn btn-danger btn-xs',
+                                            :data => { :confirm => t(:sure_to_delete) } do %>
+                                    <%= fa_icon_tag('trash') %> <%= t('action.delete') %>
+                                <% end if can?(:destroy, CandidatePaymentInfo) %>
+                            </div>
+                        </td>
                     </tr>
                 <% end %>
                 <tr>
-                    <td colspan="7" align="center">
+                    <td colspan="8" align="center">
                         <%= link_to new_payment_info_candidate_path(@candidate, return_to: request.path), :class => 'btn btn-primary btn-xs' do %>
                                 <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:candidate_payment_info)) %>
-                        <% end %>
+                        <% end if can?(:new_payment_info, Candidate) %>
                     </td>
                 </tr>
                 </tbody>

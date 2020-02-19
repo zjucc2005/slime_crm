@@ -308,6 +308,6 @@ class CandidatesController < ApplicationController
   end
 
   def candidate_payment_info_params
-    params.require(:candidate_payment_info).permit(:category, :bank, :account, :username)
+    params.require(:candidate_payment_info).permit(:category, :bank, :sub_branch, :account, :username)
   end
 end

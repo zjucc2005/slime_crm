@@ -21,6 +21,10 @@
         <%= f.number_field :cpt, :min => 0, :required => true, :class => 'form-control', :placeholder => '每60分钟的费用' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
+        <%= f.label :currency %><span class="text-red">*</span>
+        <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control select2' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
         <%= f.label :base_duration, mt(:contract, :base_duration) %><span class="text-red">*</span>
         <%= f.text_field :base_duration, :min => 0, :required => true, :class => 'form-control', :placeholder => '范例: 30,45,60 (用半角逗号隔开)' %>
     </div>

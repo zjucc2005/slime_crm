@@ -45,14 +45,13 @@ class ContractsController < ApplicationController
     end
   end
 
-
   private
   def load_contract
     @contract = Contract.find(params[:id])
   end
 
   def contract_params
-    params.require(:contract).permit(:file, :started_at, :ended_at, :cpt, :base_duration, :progressive_duration,
+    params.require(:contract).permit(:file, :started_at, :ended_at, :cpt, :currency, :base_duration, :progressive_duration,
                                      :payment_time, :payment_way, :is_tax_included, :is_invoice_needed)
   end
 

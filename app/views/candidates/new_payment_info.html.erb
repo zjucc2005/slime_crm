@@ -15,28 +15,7 @@
         </div>
 
         <%= form_for @payment_info, :url => create_payment_info_candidate_path(@candidate), :method => :post do |f| %>
-            <%= hidden_field_tag :return_to, params[:return_to] %>
-
-            <div class="row">
-                <div class="col-lg-3 col-6 form-group">
-                    <%= f.label :category %><span class="text-red">*</span>
-                    <%= f.select :category, CandidatePaymentInfo::CATEGORY.to_a.map(&:reverse),
-                                 { :prompt => default_prompt }, :required => true, :class => 'form-control select2' %>
-                </div>
-
-                <div class="col-lg-3 col-6 form-group">
-                    <%= f.label :bank %>
-                    <%= f.text_field :bank, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 form-group">
-                    <%= f.label :account %><span class="text-red">*</span>
-                    <%= f.text_field :account, :required => true, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 form-group">
-                    <%= f.label :username %><span class="text-red">*</span>
-                    <%= f.text_field :username, :required => true, :class => 'form-control' %>
-                </div>
-            </div>
+            <%= render :partial => 'candidate_payment_infos/form', :locals => { :f => f } %>
 
             <div class="form-group mb-0">
                 <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
@@ -45,14 +24,3 @@
         <% end %>
     </div>
 </div>
-
-<script>
-    $('#candidate_payment_info_category').change(function(){
-        let bank = $('#candidate_payment_info_bank');
-        if(this.value == 'alipay'){
-            bank.parent().hide();
-        }else{
-            bank.parent().show();
-        }
-    });
-</script>

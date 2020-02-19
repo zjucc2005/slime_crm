@@ -7,9 +7,10 @@ class CreateProjectTasks < ActiveRecord::Migration[6.0]
       t.references :candidate
       t.string :status
 
-      t.decimal :charge_rate,  :precision => 8,  :scale => 4  # 收费倍率, 类似折扣
-      t.decimal :base_price,   :precision => 10, :scale => 2  # 基础价格
-      t.decimal :actual_price, :precision => 10, :scale => 2  # 实际价格 = 基础价格 * 收费倍率
+      t.decimal :charge_rate,  :precision => 8,  :scale => 4    # 收费倍率, 类似折扣
+      t.decimal :base_price,   :precision => 10, :scale => 2    # 基础价格
+      t.decimal :actual_price, :precision => 10, :scale => 2    # 实际价格 = 基础价格 * 收费倍率
+      t.string :currency                                        # 币种
 
       t.string :interview_form  # 访谈形式
       t.integer :duration       # 时长

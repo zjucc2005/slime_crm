@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_055431) do
     t.string "category"
     t.bigint "created_by"
     t.string "bank"
+    t.string "sub_branch"
     t.string "account"
     t.string "username"
     t.datetime "created_at", precision: 6, null: false
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_055431) do
     t.datetime "started_at"
     t.datetime "ended_at"
     t.decimal "cpt", precision: 10, scale: 2
+    t.string "currency"
     t.string "base_duration"
     t.integer "progressive_duration"
     t.string "payment_time"
@@ -158,6 +160,7 @@ ActiveRecord::Schema.define(version: 2020_02_11_055431) do
     t.decimal "charge_rate", precision: 8, scale: 4
     t.decimal "base_price", precision: 10, scale: 2
     t.decimal "actual_price", precision: 10, scale: 2
+    t.string "currency"
     t.string "interview_form"
     t.integer "duration"
     t.datetime "started_at"

@@ -32,7 +32,7 @@
                         <td><%= contract.started_at.strftime('%F') %></td>
                         <td><%= contract.ended_at.strftime('%F') %></td>
                         <td><%= link_to contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end %></td>
-                        <td><%= contract.cpt %></td>
+                        <td><%= "#{contract.cpt} #{contract.currency}" %></td>
                         <td><%= contract.charge_duration %></td>
                         <td><%= Contract::PAYMENT_TIME[contract.payment_time] %></td>
                         <td><%= boolean_display(contract.is_tax_included) %></td>

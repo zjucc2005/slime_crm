@@ -1,0 +1,51 @@
+<%= hidden_field_tag :return_to, params[:return_to] %>
+
+<div class="row">
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :category %><span class="text-red">*</span>
+        <%= f.select :category, CandidatePaymentInfo::CATEGORY.to_a.map(&:reverse),
+                     { :prompt => default_prompt }, :required => true, :class => 'form-control select2' %>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :bank %><span class="text-red">*</span>
+        <%= f.text_field :bank, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :sub_branch %><span class="text-red">*</span>
+        <%= f.text_field :sub_branch, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :account %><span class="text-red">*</span>
+        <%= f.text_field :account, :required => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :username %><span class="text-red">*</span>
+        <%= f.text_field :username, :required => true, :class => 'form-control' %>
+    </div>
+</div>
+
+<script>
+    $(function(){ refresh_form(); });
+    $('#candidate_payment_info_category').change(function(){ refresh_form(); });
+    function refresh_form(){
+        let category = document.getElementById('candidate_payment_info_category');
+        if(category.value == 'alipay'){
+            form_deactivate('candidate_payment_info_bank');
+            form_deactivate('candidate_payment_info_sub_branch');
+            form_activate('candidate_payment_info_account');
+            form_activate('candidate_payment_info_username');
+        }else if(category.value == 'unionpay'){
+            form_activate('candidate_payment_info_bank');
+            form_activate('candidate_payment_info_sub_branch');
+            form_activate('candidate_payment_info_account');
+            form_activate('candidate_payment_info_username');
+        }else{
+            form_deactivate('candidate_payment_info_bank');
+            form_deactivate('candidate_payment_info_sub_branch');
+            form_deactivate('candidate_payment_info_account');
+            form_deactivate('candidate_payment_info_username');
+        }
+    }
+</script>

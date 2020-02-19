@@ -22,6 +22,7 @@
                 <th><%= mt(:expert) %></th>
                 <th><%= mt(:project_task, :interview_form) %></th>
                 <th><%= mt(:project_task, :actual_price) %></th>
+                <th><%= mt(:project_task, :currency) %></th>
                 <th><%= mt(:project_task, :charge_status) %></th>
                 <th><%= mt(:project_task, :cost) %></th>
                 <th><%= mt(:project_task, :payment_status) %></th>
@@ -40,6 +41,7 @@
                     <td><%= task.candidate.name %></td>
                     <td><%= project_task_interview_form_badge(task.interview_form) %></td>
                     <td><%= task.actual_price %></td>
+                    <td><%= currency_display(task.currency) %></td>
                     <td><%= project_task_charge_status_badge(task.charge_status) %></td>
                     <td><%= task.cost %></td>
                     <td><%= project_task_payment_status_badge(task.payment_status) %></td>

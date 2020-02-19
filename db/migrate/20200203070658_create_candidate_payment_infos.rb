@@ -6,6 +6,7 @@ class CreateCandidatePaymentInfos < ActiveRecord::Migration[6.0]
       t.bigint :created_by
 
       t.string :bank
+      t.string :sub_branch
       t.string :account
       t.string :username
 

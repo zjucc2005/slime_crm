@@ -42,6 +42,7 @@ class ProjectTask < ApplicationRecord
       self.ended_at       = started_at + duration.to_i * 60
       self.charge_rate    = active_contract.cpt
       self.base_price     = active_contract.base_price(duration.to_i)
+      self.currency       = active_contract.currency
       self.actual_price ||= base_price
     end
   end

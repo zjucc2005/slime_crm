@@ -47,7 +47,11 @@ class ProjectTasksController < ApplicationController
   # GET /project_tasks/:id/get_base_price.json
   def get_base_price
     load_project_task
-    render :json => { :data => @project_task.active_contract.base_price(params[:duration].to_i) }
+    contract = @project_task.active_contract
+    render :json => {
+             :price => contract.base_price(params[:duration].to_i),
+             :currency => ApplicationRecord::CURRENCY[contract.currency]
+           }
   end
 
   private

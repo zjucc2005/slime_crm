@@ -46,3 +46,16 @@ $.fn.datetimePicker = function(){
         }
     );
 };
+
+// form activate/deactivate
+window.form_activate = function(field){
+    let ele = $('#' + field);
+    ele.attr('required', true);
+    ele.parent().show();
+};
+
+window.form_deactivate = function(field){
+    let ele = $('#' + field);
+    ele.attr('required', false);
+    ele.parent().hide();
+};

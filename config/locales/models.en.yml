@@ -100,6 +100,7 @@ en:
       candidate_payment_info:
         category: "Category"
         bank: "Bank"
+        sub_branch: "Sub branch"
         account: "Account"
         username: "Username"
 
@@ -125,6 +126,7 @@ en:
         started_at: "Started at"
         ended_at: "Ended at"
         cpt: "Cost per time"
+        currency: "Currency"
         charge_duration: "Charge duration(min)"
         base_duration: "Base duration(min)"
         progressive_duration: "Progressive duration(min)"
@@ -170,6 +172,7 @@ en:
         charge_rate: "Charge rate"
         base_price: "Base price"
         actual_price: "Actual price"
+        currency: "Currency"
         interview_form: "Interview form"
         duration: "Duration"
         started_at: "Started at"

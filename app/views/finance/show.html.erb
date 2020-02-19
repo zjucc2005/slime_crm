@@ -111,6 +111,12 @@
             </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project_task, :currency) %></span>
+                </div>
+                <%= content_tag :span, currency_display(@project_task.currency), :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
                     <span class="input-group-text"><%= mt(:project_task, :charge_status) %></span>
                 </div>
                 <%= content_tag :span, project_task_charge_status_badge(@project_task.charge_status), :class => 'form-control' %>

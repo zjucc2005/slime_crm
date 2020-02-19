@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     get :project_tasks,        on: :member
   end
 
+  resources :candidate_payment_infos
+
   resources :companies do
     get :new_contract,        on: :member
     get :new_client,          on: :member

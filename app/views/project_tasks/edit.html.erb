@@ -46,6 +46,10 @@
                     <%= f.text_field :base_price, :disabled => true, :class => 'form-control' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :currency %>
+                    <%= f.text_field :currency, :disabled => true, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-12 form-group">
                     <%= f.label :actual_price %>
                     <%= f.number_field :actual_price, :min => 1, :class => 'form-control', :placeholder => '不填写则取基础收费' %>
                 </div>
@@ -136,7 +140,8 @@
             async: false,
             dataType: 'json',
             success: function(data){
-                $('#project_task_base_price').val(data.data);
+                $('#project_task_base_price').val(data.price);
+                $('#project_task_currency').val(data.currency);
             }
         })
     }
