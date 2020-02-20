@@ -1,0 +1,57 @@
+<div id="search_wrapper">
+    <%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#searchModal'} do %>
+        <%= fa_icon_tag('search') %> <%= t('action.search') %>
+    <% end %>
+
+    <div id="searchModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><%= t('action.search') %></h4>
+                    <button type="button" data-dismiss="modal" class="close">&times;</button>
+                </div>
+
+                <%= form_tag users_path, :method => :get do %>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-12 form-group">
+                                <%= label_tag :created_at, mt(:users, :created_at) %>
+                                <div class="form-group-range">
+                                    <div class="form-group-range-input">
+                                        <%= text_field_tag :created_at_ge, params[:created_at_ge], :class => 'form-control datepicker', :placeholder => t(:begin) %>
+                                    </div>
+                                    <span class="form-group-range-divider"><i class="fa fa-arrow-right"></i></span>
+                                    <div class="form-group-range-input">
+                                        <%= text_field_tag :created_at_le, params[:created_at_le], :class => 'form-control datepicker', :placeholder => t(:end) %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :email, mt(:user, :email) %>
+                                <%= text_field_tag :email, params[:email], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :name, mt(:user, :name) %>
+                                <%= text_field_tag :name, params[:name], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :role, mt(:user, :role) %>
+                                <%= select_tag :role, options_for_select(User::ROLES.to_a.map(&:reverse), params[:role]),
+                                               :prompt => default_prompt, :class => 'from-control select2' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :status, mt(:user, :status) %>
+                                <%= select_tag :status, options_for_select(User::STATUS.to_a.map(&:reverse), params[:status]),
+                                               :prompt => default_prompt, :class => 'form-control select2' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
+                        <%= submit_tag t('action.search'), :class => 'btn btn-submit' %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

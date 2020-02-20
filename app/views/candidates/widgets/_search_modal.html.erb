@@ -19,11 +19,19 @@
                                 <%= label_tag :global, nil %>
                                 <%= text_field_tag :term, params[:term], :class => 'form-control' %>
                             </div>
-                            <div class="col-lg-6 form-group">
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :name, mt(:candidate, :name) %>
                                 <%= text_field_tag :name, params[:name], :class => 'form-control' %>
                             </div>
-                            <div class="col-lg-6 form-group">
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :phone, mt(:candidate, :phone) %>
+                                <%= text_field_tag :phone, params[:phone], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :email, mt(:candidate, :email) %>
+                                <%= text_field_tag :email, params[:email], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :is_available, mt(:candidate, :is_available) %>
                                 <%= select_tag :is_available, options_for_select(boolean_options, params[:is_available]), :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>

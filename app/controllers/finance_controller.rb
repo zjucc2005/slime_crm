@@ -21,7 +21,8 @@ class FinanceController < ApplicationController
       query = query.joins(:project).where('projects.company_id' => companies.ids)
     end
     if params[:commit] == t('action.search_and_export')
-      # >> export code here
+      export_project_tasks(query)
+      return
     end
     @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
@@ -60,6 +61,42 @@ class FinanceController < ApplicationController
 
   def project_task_params
     params.require(:project_task).permit(:actual_price, :charge_status, :payment_status)
+  end
+
+  def export_project_tasks(query)
+    query_limit = 1000  # export data limit
+    if query.count > query_limit
+      flash[:error] = "导出数据条目过多, 当前: #{query.count}, 最大: #{query_limit}"
+      redirect_to finance_index_path and return
+    end
+
+    template_path = 'public/templates/finance_template.xlsx'
+    raise 'template file not found' unless File.exist?(template_path)
+
+    book = ::RubyXL::Parser.parse(template_path)              # read from template file
+    sheet = book[0]
+
+    query.each_with_index do |task, index|
+      row = index + 2
+      sheet.add_cell(row, 0, task.project.company.name)               # 客户(公司)/Client
+      sheet.add_cell(row, 1, task.project.name)                       # 项目名称/Project
+      sheet.add_cell(row, 2, task.project.code)                       # 项目代码/Project code
+      sheet.add_cell(row, 3, task.project.clients.first.try(:name))   # 负责人/Seat
+      sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M%p'))  # 日期/Date
+      sheet.add_cell(row, 5, task.interview_form)                     # 访谈类型
+      sheet.add_cell(row, 6, "##{task.candidate.uid}")                # 专家编号/Expert UID
+      sheet.add_cell(row, 7, task.candidate.name)                     # 专家姓名/Expert name
+      exp = task.candidate.latest_work_experience
+      sheet.add_cell(row, 8, exp.try(:org_cn))                        # 专家公司名称/Expert company
+      sheet.add_cell(row, 9, exp.try(:title))                         # 专家职位/Expert title
+      sheet.add_cell(row, 10, '')                                     # 专家级别/Expert level(取值待定)
+    end
+
+    file_dir = "public/export/#{Time.now.strftime('%y%m%d')}"
+    FileUtils.mkdir_p file_dir unless File.exist? file_dir
+    file_path = "#{file_dir}/finance_#{current_user.id}_#{Time.now.strftime('%H%M%S')}.xlsx"
+    book.write file_path
+    send_file file_path
   end
 
 end

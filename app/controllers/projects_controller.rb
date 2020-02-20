@@ -6,6 +6,14 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     query = Project.all
+    query = query.where('created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
+    query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
+    %w[name code].each do |field|
+      query = query.where("#{field} LIKE ?", "%#{params[field].strip}%") if params[field].present?
+    end
+    %w[status].each do |field|
+      query = query.where(field.to_sym => params[field]) if params[field].present?
+    end
     @projects = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 

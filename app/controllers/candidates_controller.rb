@@ -12,9 +12,9 @@ class CandidatesController < ApplicationController
                            UPPER(nickname) LIKE UPPER(:term) OR
                            UPPER(description) LIKE UPPER(:term)', { :term => "%#{params[:term].strip.upcase}%" })
     end
-    if params[:name].present?
-      query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" })
-    end
+    query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
+    query = query.where('phone = :phone OR phone1 = :phone', { :phone => params[:phone].strip }) if params[:phone].present?
+    query = query.where('email = :email OR email1 = :email', { :email => params[:email].strip }) if params[:email].present?
     %w[is_available].each do |field|
       query = query.where(field.to_sym => params[field.to_sym].strip) if params[field.to_sym].present?
     end

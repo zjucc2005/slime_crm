@@ -17,5 +17,9 @@ User.create!(email: 'pm@dev.com', password: '111111', role: 'pm', status: 'activ
 User.create!(email: 'pa@dev.com', password: '111111', role: 'pa', status: 'active',
              name_cn: '项目助理', name_en: 'pa', date_of_employment: Time.now, candidate_access_limit: 200) unless User.exists?(role: 'pa')
 User.create!(email: 'finance@dev.com', password: '111111', role: 'finance', status: 'active',
-             name_cn: '财务', name_en: 'pa', date_of_employment: Time.now, candidate_access_limit: 0) unless User.exists?(role: 'finance')
+             name_cn: '财务', name_en: 'finance', date_of_employment: Time.now, candidate_access_limit: 0) unless User.exists?(role: 'finance')
+
+# create card template
+CardTemplate.create!(name: '提示模板',
+                     content: "[ID] {% uid %}\r\n[姓名] {% name %}\r\n[城市] {% city %}\r\n[电话] {% phone %}\r\n[背景说明] {% description %}\r\n[其他未知参数] {% unknown_words %}") unless CardTemplate.count > 0
 

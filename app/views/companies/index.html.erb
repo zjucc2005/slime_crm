@@ -1,7 +1,10 @@
-<div class="card p-2 d-block mb-2">
-    <%= link_to new_company_path, :class => 'btn btn-primary' do %>
-        <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:company)) %>
-    <% end %>
+<div class="card p-2 mb-2 d-flex flex-row justify-content-between">
+    <div>
+        <%= link_to new_company_path, :class => 'btn btn-primary' do %>
+            <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:company)) %>
+        <% end %>
+    </div>
+    <%= render :partial => 'companies/widgets/search_modal' %>
 </div>
 
 

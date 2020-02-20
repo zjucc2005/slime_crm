@@ -20,6 +20,7 @@ class Company < ApplicationRecord
   # Scopes
   scope :client, -> { where(category: 'client') }
   scope :signed, -> { joins(:contracts).where('contracts.started_at <= :now AND contracts.ended_at >= :now', { :now => Time.now }).distinct }
+  scope :not_signed, -> { joins(:contracts).where('contracts.started_at > :now AND contracts.ended_at < :now', { :now => Time.now }).distinct }
 
   def is_client?
     category == 'client'
