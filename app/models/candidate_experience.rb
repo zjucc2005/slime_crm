@@ -15,4 +15,9 @@ class CandidateExperience < ApplicationRecord
   scope :work, -> { where(category: 'work') }
   scope :project, -> { where(category: 'project') }
   scope :education, -> { where(category: 'education') }
+
+
+  def friendly_timestamp(strftime='%F')
+    "#{started_at.strftime(strftime)} - #{ended_at ? ended_at.strftime(strftime) : I18n.t(:up_to_now)}"
+  end
 end

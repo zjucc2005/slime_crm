@@ -33,8 +33,8 @@
         <%= f.text_field :date_of_birth, :value => @candidate.date_of_birth.try(:strftime, '%F') ,:class => 'form-control datepicker', :placeholder => 'yyyy-mm-dd' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :city, mt(:candidate, :city) %><span class="text-red">*</span>
-        <%= f.text_field :city, :required => true, :class => 'form-control autocomplete-city' %>
+        <%= f.label :city, mt(:candidate, :city) %>
+        <%= f.text_field :city, :class => 'form-control autocomplete-city' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :industry, mt(:candidate, :industry) %>

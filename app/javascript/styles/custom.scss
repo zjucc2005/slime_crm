@@ -14,18 +14,6 @@
     height: 60px;
 }
 
-.status:before {
-    content: '';
-    position: relative;
-    display: inline-block;
-    margin-right: 3px;
-    border-radius: 5px;
-    width: 10px;
-    height: 10px;
-    background-color: #ccc;
-}
-
-
 .float-btn{
     position: fixed;
     bottom: 2em;
@@ -46,17 +34,28 @@
     z-index: 9;
     line-height: 0.8em;
 }
-.phone-add-btn {
-    color: #495057;
-}
-.phone-del-btn {
-    @extend .phone-add-btn;
-}
-.email-add-btn {
-    @extend .phone-add-btn;
-}
-.email-del-btn {
-    @extend .phone-del-btn;
+//.phone-add-btn {
+//    color: #495057;
+//}
+//.phone-del-btn {
+//    @extend .phone-add-btn;
+//}
+//.email-add-btn {
+//    @extend .phone-add-btn;
+//}
+//.email-del-btn {
+//    @extend .phone-del-btn;
+//}
+
+.candidate-comment-group {
+    .candidate-comment-unit {
+        border-bottom: 1px solid #e5e9ef;
+        margin-bottom: 1rem;
+        .content {
+            padding-top: 5px;
+            padding-left: 15px;
+        }
+    }
 }
 
 

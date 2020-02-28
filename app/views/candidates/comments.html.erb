@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('commenting') %> <%= mt(:candidate_comment) %></h5>
+        <%= link_to fa_icon_tag('close'), candidate_path(@candidate), :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
+                    <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
+                </h6>
+                <div class="btn-group btn-group-sm">
+                    <%= link_to new_candidate_comment_path(candidate_id: @candidate.id), :class => 'btn btn-primary' do %>
+                        <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => mt(:candidate_comment)) %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+        <div class="candidate-comment-group mt-3">
+            <% @candidate_comments.each do |comment| %>
+                <div class="candidate-comment-unit">
+                    <span class="badge badge-light"><%= show_creator(comment) %></span>
+                    <span class="badge badge-light"><%= show_timestamps(comment) %></span>
+                    <% if comment.created_by == current_user.id || current_user.admin? %>
+                        <%= link_to t('action.edit'), edit_candidate_comment_path(comment), :class => 'btn btn-link btn-xs' %>
+                        <%= link_to t('action.delete'), candidate_comment_path(comment), :method => :delete, :class => 'btn btn-link btn-xs',
+                                    :data => { :confirm => t(:sure_to_delete)} %>
+                    <% end %>
+                    <p class="content"><%= comment.content %></p>
+                </div>
+            <% end %>
+            <%= will_paginate @candidate_comments %>
+        </div>
+    </div>
+</div>

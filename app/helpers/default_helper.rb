@@ -20,7 +20,7 @@ module DefaultHelper
   end
 
   def boolean_display(val)
-    t(val.to_s.to_sym)
+    val.nil? ? val : t(val.to_s.to_sym)
   end
 
   ##

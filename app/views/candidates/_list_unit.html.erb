@@ -9,12 +9,19 @@
                     <span class="text-smaller text-gray"><%= "# #{ candidate.uid }" %></span>
                 </div>
                 <div class="text-center mr-3 mb-1 mb-lg-0">
-                    <h6 class="mb-0">
-                        <span class="status <%= candidate.is_available ? 'valid' : 'invalid' %> mr-2"></span>
-                        <%= link_to candidate_path(candidate) do %>
-                            <span><%= candidate.name %></span>
-                        <% end %>
-                    </h6>
+                    <div class="dropdown d-inline mr-2">
+                        <a class="status <%= candidate_is_available_status(candidate.is_available) %>" href="#" role="button" id="cia_<%= candidate.id %>" data-toggle="dropdown"></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-header"><%= mt(:candidate, :is_available) %></div>
+                            <%= link_to t(:true),    update_is_available_candidate_path(candidate, is_available: true),  :method => :put, :remote => true, :class => 'dropdown-item status status valid' %>
+                            <%= link_to t(:pending), update_is_available_candidate_path(candidate, is_available: nil),   :method => :put, :remote => true, :class => 'dropdown-item status status pending' %>
+                            <%= link_to t(:false),   update_is_available_candidate_path(candidate, is_available: false), :method => :put, :remote => true, :class => 'dropdown-item status status invalid' %>
+                        </div>
+                    </div>
+                    <!--<span class="status <%= candidate_is_available_status(candidate.is_available) %> mr-2"></span>-->
+                    <%= link_to candidate_path(candidate) do %>
+                        <span><%= candidate.name %></span>
+                    <% end %>
                 </div>
 
             </div>
@@ -34,14 +41,15 @@
             <div class="d-flex flex-column text-left">
                 <% candidate.experiences.work.order(:started_at => :desc).limit(3).each do |exp| %>
                     <div class="text-smaller">
-                        <span class="text-gray mr-1"><%= exp.started_at.strftime('%F') %></span>
-                        <span><%= hl(exp.org_cn, params[:term]) %></span>
+                        <span class="text-gray mr-1"><%= exp.friendly_timestamp('%Y-%m') %></span>
+                        <span class="mr-1" title="<%= exp.org_cn %>"><%= hl(truncate(exp.org_cn, length: 14), params[:term]) %></span>
+                        <span title="<%= exp.title %>"><%= truncate(exp.title, length: 5) %></span>
                     </div>
                 <% end %>
             </div>
         </div>
         <div class="col-lg-4 d-flex align-items-center flex-column text-left">
-            <div class="my-3 my-lg-0 text-smaller text-limit-length">
+            <div class="my-3 my-lg-0 text-smaller text-limit-length" title="<%= candidate.description %>">
                 <%= hl(truncate(candidate.description, length: 150), params[:term]) %>
             </div>
         </div>

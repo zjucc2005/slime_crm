@@ -53,6 +53,7 @@ zh_cn:
     models:
       user: "用户帐号"
       candidate: "候选人"
+      candidate_comment: "专家备注"
       candidate_payment_info: "支付信息"
       expert: "专家"
       client: "客户"
@@ -134,6 +135,9 @@ zh_cn:
         sub_branch: "支行"
         account: "帐号/卡号"
         username: "用户名"
+
+      candidate_comment:
+        content: "内容"
 
       card_template:
         category: "类型"

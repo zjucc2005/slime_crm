@@ -12,6 +12,9 @@
                     <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
                 </h6>
                 <div class="btn-group btn-group-sm">
+                    <%= link_to comments_candidate_path(@candidate), :class => 'btn btn-default' do %>
+                        <%= fa_icon_tag('commenting') %> <%= "#{mt(:candidate_comment)}(#{@candidate.comments.count})" %>
+                    <% end %>
                     <%= link_to project_tasks_candidate_path(@candidate), :class => 'btn btn-default' do %>
                         <%= fa_icon_tag('list') %> <%= "#{mt(:candidate, :interview_task)}(#{@candidate.normal_project_task_count})" %>
                     <% end %>
@@ -141,7 +144,7 @@
             <tbody>
             <% @candidate.experiences.work.order(:started_at => :desc).each do |exp| %>
                 <tr>
-                    <td><%= "#{exp.started_at.try(:strftime, '%F')} ~ #{exp.ended_at.try(:strftime, '%F')}" %></td>
+                    <td><%= exp.friendly_timestamp('%F') %></td>
                     <td><%= exp.org_cn %></td>
                     <td><%= exp.org_en %></td>
                     <td><%= exp.title %></td>

@@ -98,6 +98,13 @@ class CandidatesController < ApplicationController
     end
   end
 
+  # PUT /candidates/:id/update_is_available.js, remote: true
+  def update_is_available
+    load_candidate
+    @candidate.update(is_available: params[:is_available])
+    respond_to{ |f| f.js }
+  end
+
   # DELETE /candidates/:id
   def destroy
     begin
@@ -151,11 +158,7 @@ class CandidatesController < ApplicationController
       )
       if @client.save
         flash[:success] = t(:operation_succeeded)
-        if params[:return_to].present?
-          redirect_to params[:return_to]
-        else
-          redirect_to company_path(@company)
-        end
+        redirect_with_return_to company_path(@company)
       else
         render 'companies/new_client'
       end
@@ -261,11 +264,7 @@ class CandidatesController < ApplicationController
       @payment_info = @candidate.payment_infos.new(candidate_payment_info_params.merge({created_by: current_user.id}))
       if @payment_info.save
         flash[:success] = t(:operation_succeeded)
-        if params[:return_to].present?
-          redirect_to params[:return_to]
-        else
-          redirect_to candidate_path(@candidate)
-        end
+        redirect_with_return_to candidate_path(@candidate)
       else
         render :new_payment_info
       end
@@ -285,6 +284,22 @@ class CandidatesController < ApplicationController
       flash[:error] = e.message
       redirect_to candidates_path
     end
+  end
+
+  # GET /candidates/:id/comments
+  def comments
+    begin
+      load_candidate
+      @candidate_comments = @candidate.comments.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to candidates_path
+    end
+  end
+
+  # GET /candidates/:id/new_comment
+  def new_comment
+    @candidate_comment = CandidateComment.new
   end
 
   private

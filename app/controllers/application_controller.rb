@@ -18,4 +18,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_with_return_to(default_path)
+    if params[:return_to].present?
+      redirect_to params[:return_to]
+    else
+      redirect_to default_path
+    end
+  end
+
 end

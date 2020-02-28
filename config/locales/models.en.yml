@@ -24,6 +24,7 @@ en:
     models:
       user: "User account"
       candidate: "Candidate"
+      candidate_comment: "Candidate comment"
       candidate_payment_info: "Candidate payment info"
       expert: "Expert"
       client: "Client"
@@ -105,6 +106,9 @@ en:
         sub_branch: "Sub branch"
         account: "Account"
         username: "Username"
+
+      candidate_comment:
+        content: "Content"
 
       card_template:
         category: "Category"

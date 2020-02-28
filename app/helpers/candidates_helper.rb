@@ -19,6 +19,14 @@ module CandidatesHelper
     Candidate::DATA_SOURCE[data_source]
   end
 
+  def candidate_is_available_status(val)
+    if val.nil?
+      'pending'
+    else
+      val ? 'valid' : 'invalid'
+    end
+  end
+
   def candidate_is_available_options
     [[t(:true), 'true'], [t(:false), 'false'], [t(:pending), '']]
   end

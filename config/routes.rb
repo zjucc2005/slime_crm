@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   end
   
   resources :candidates do
+    put :update_is_available,  on: :member
+
     get :add_experience, on: :collection
     get :show_phone,     on: :member      # show candidate phone.js
     get :card_template,  on: :collection
@@ -33,9 +35,11 @@ Rails.application.routes.draw do
     get :new_payment_info,     on: :member
     post :create_payment_info, on: :member
     get :project_tasks,        on: :member
+    get :comments,             on: :member
   end
 
   resources :candidate_payment_infos
+  resources :candidate_comments
 
   resources :companies do
     get :new_contract,        on: :member

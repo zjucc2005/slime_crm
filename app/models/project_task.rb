@@ -6,11 +6,11 @@ class ProjectTask < ApplicationRecord
   CHARGE_STATUS = { :paid => '已收费', :unpaid => '未收费'}.stringify_keys
   PAYMENT_STATUS = { :paid => '已支付', :unpaid => '未支付', :free => '无需支付' }.stringify_keys
   INTERVIEW_FORM = {
+    :telephone      => '电话',
     :'face-to-face' => '面谈',
-    :'call'         => '电话',
-    :'video-call'   => '视频通话',
-    :'email'        => '邮件',
-    :'others'       => '其他'
+    :data           => '数据',
+    :roadshow       => '路演',
+    :others         => '其他'
   }.stringify_keys
 
   # Associations

@@ -12,8 +12,23 @@ body {
     min-width: 105px;
 }
 
-.status.valid:before { background-color: #7CF29C !important; }
-.status.invalid:before { background-color: #F0404C !important }
+.status {
+  &:before{
+    content: '';
+    position: relative;
+    display: inline-block;
+    margin-right: 3px;
+    border-radius: 5px;
+    width: 10px;
+    height: 10px;
+    background-color: #ccc;
+  }
+
+  &.valid:before { background-color: #7CF29C !important; }
+  &.invalid:before { background-color: #F0404C !important }
+  &.pending:before { background-color: #FFA500 !important }
+}
+
 
 a {
     color: #4680ff;

@@ -49,6 +49,7 @@ class Ability
     can :manage, User
     cannot :destroy, User
     can :manage, Candidate
+    can :manage, CandidateComment
     can :manage, CandidatePaymentInfo
     can :manage, Company
     can :manage, Contract
@@ -65,6 +66,7 @@ class Ability
     can_edit_my_account
     can :index, User
     can :manage, Candidate
+    can :manage, CandidateComment
     can :manage, CandidatePaymentInfo
     can [:new_client], Company
     can :manage, Project
@@ -79,6 +81,7 @@ class Ability
     can_edit_my_account
     can :index, User
     can :manage, Candidate
+    can :manage, CandidateComment
     can :manage, CandidatePaymentInfo
     can [:new_client], Company
     can [:index, :show, :add_users, :delete_user, :add_clients, :delete_client, :add_experts, :delete_expert,

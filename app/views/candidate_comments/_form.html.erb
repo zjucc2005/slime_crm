@@ -1,0 +1,13 @@
+<%= hidden_field_tag :return_to, params[:return_to] %>
+<%= hidden_field_tag :candidate_id, params[:candidate_id] %>
+
+<div class="row">
+    <div class="col-12 form-group">
+        <%= f.label :content %><span class="text-red">*</span>
+        <%= f.text_area :content, :rows => 5, :class => 'form-control' %>
+    </div>
+    <div class="col-12 form-group">
+        <span class="badge badge-light"><%= show_creator(@candidate_comment) %></span>
+        <span class="badge badge-light"><%= show_timestamps(@candidate_comment) %></span>
+    </div>
+</div>
