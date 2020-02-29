@@ -12,6 +12,7 @@ zh_cn:
   company_not_signed: "未签约"
   end: "结束"
   expert_card: "专家卡片"
+  global_search: "全局搜索"
   go_to_add: "去添加"
   homepage: "首页"
   import_expert: "导入专家"
@@ -55,6 +56,7 @@ zh_cn:
     search: "搜索"
     search_and_export: "搜索并导出"
     submit: "提交"
+    submit_and_continue: "提交并继续创建"
     update: "更新"
 
   will_paginate:

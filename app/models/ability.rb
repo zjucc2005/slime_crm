@@ -59,6 +59,7 @@ class Ability
     can :manage, Finance
 
     can :manage, LocationDatum
+    can :manage, Bank
     can :manage, CardTemplate
   end
 
@@ -74,7 +75,8 @@ class Ability
     can [:edit, :update, :get_base_price], ProjectTask
     cannot :manage, Finance
 
-    can :read, LocationDatum
+    can :manage, LocationDatum
+    can :manage, Bank
   end
 
   def pa_ability
@@ -88,7 +90,8 @@ class Ability
          :add_project_task], Project
     can [:edit, :update, :get_base_price], ProjectTask
 
-    can :read, LocationDatum
+    can :manage, LocationDatum
+    can :manage, Bank
   end
 
   def finance_ability
@@ -96,6 +99,7 @@ class Ability
     can :manage, Finance
 
     can :read, LocationDatum
+    can :read, Bank
   end
 
   private

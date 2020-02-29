@@ -12,6 +12,7 @@ en:
   company_not_signed: "Not signed"
   end: "End"
   expert_card: "Expert card"
+  global_search: "Global search"
   go_to_add: "Go to add"
   homepage: "Homepage"
   import_expert: "Import experts"
@@ -55,6 +56,7 @@ en:
     search: "Search"
     search_and_export: "Search&Export"
     submit: "Submit"
+    submit_and_next: "Submit and continue"
     update: "Update"
 
   will_paginate:

@@ -60,6 +60,7 @@ zh_cn:
       company: "公司"
       contract: "合同"
       location_datum: "行政区划数据"
+      bank: "银行数据"
       project: "项目"
       project_requirement: "项目需求"
       project_task: "项目任务"
@@ -183,6 +184,9 @@ zh_cn:
         province: "省份"
         city: "城市"
         district: "县区"
+
+      bank:
+        name: "名称"
 
       project:
         name: "项目名称"

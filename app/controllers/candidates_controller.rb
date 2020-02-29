@@ -7,18 +7,25 @@ class CandidatesController < ApplicationController
   def index
     query = Candidate.expert
     # query code here >>
-    if params[:term].present?
-      query = query.where('UPPER(name) LIKE UPPER(:term) OR
-                           UPPER(nickname) LIKE UPPER(:term) OR
-                           UPPER(description) LIKE UPPER(:term)', { :term => "%#{params[:term].strip.upcase}%" })
-    end
     query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
     query = query.where('phone = :phone OR phone1 = :phone', { :phone => params[:phone].strip }) if params[:phone].present?
     query = query.where('email = :email OR email1 = :email', { :email => params[:email].strip }) if params[:email].present?
     %w[is_available].each do |field|
       query = query.where(field.to_sym => params[field.to_sym].strip) if params[field.to_sym].present?
     end
-    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+
+    if params[:term].present?
+      or_conditions = []
+      %w[name nickname city email email1 phone phone1 description].each do |field|
+        or_conditions << "UPPER(candidates.#{field}) LIKE UPPER(:term)"
+      end
+      %w[org_cn org_en title description].each do |field|
+        or_conditions << "UPPER(candidate_experiences.#{field}) LIKE UPPER(:term)"
+      end
+      query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id').
+        where(or_conditions.join(' OR '), { :term => "%#{params[:term].strip.upcase}%" }).distinct
+    end
+    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 50)
   end
 
   # GET /candidates/:id

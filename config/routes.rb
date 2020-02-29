@@ -81,6 +81,6 @@ Rails.application.routes.draw do
   resources :location_data do
     get :autocomplete_city, on: :collection
   end
-
+  resources :banks
   resources :card_templates
 end

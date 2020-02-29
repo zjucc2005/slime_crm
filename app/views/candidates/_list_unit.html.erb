@@ -18,7 +18,6 @@
                             <%= link_to t(:false),   update_is_available_candidate_path(candidate, is_available: false), :method => :put, :remote => true, :class => 'dropdown-item status status invalid' %>
                         </div>
                     </div>
-                    <!--<span class="status <%= candidate_is_available_status(candidate.is_available) %> mr-2"></span>-->
                     <%= link_to candidate_path(candidate) do %>
                         <span><%= candidate.name %></span>
                     <% end %>
@@ -54,19 +53,23 @@
             </div>
         </div>
         <div class="col-lg-4 d-flex flex-column text-left">
-            <div class="text-smaller mb-3">
+            <div class="text-smaller mb-2">
                 <span>访谈次数： </span>
                 <span><%= candidate.normal_project_task_count %></span>，
                 <span>最近访谈时间： </span>
                 <span><%= candidate.project_tasks.maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
             </div>
-            <% candidate.project_tasks.interview.order(:started_at => :desc).limit(4).each do |task| %>
-                <div class="text-smaller">
-                    <span class="text-gray mr-1"><%= task.started_at.strftime('%F %H:%M') %></span>
-                    <span><%= mt(:project_task, :duration) %>: <%= task.duration %></span>,
-                    <span><%= mt(:project, :code) %>: <%= task.project.code %></span>
+            <% candidate.comments.order(:created_at => :desc).limit(3).each do |comment| %>
+                <div class="text-smaller" title="<%= comment.content %>">
+                    <span class="text-gray mr-1"><%= comment.created_at.strftime('%F') %></span>
+                    <span>[<%= comment.creator.name_cn %>]</span>
+                    <span><%= truncate(comment.content, length: 20) %></span>
                 </div>
             <% end %>
+            <div class="text-smaller">
+                <%= link_to t('action.add_model', model: mt(:candidate_comment)),
+                            new_candidate_comment_path(candidate_id: candidate.id, return_to: request.url) %>
+            </div>
         </div>
     </div>
 </div>

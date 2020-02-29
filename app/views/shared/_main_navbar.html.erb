@@ -47,6 +47,9 @@
                         <%= link_to location_data_path, :class => 'dropdown-item' do %>
                             <%= fa_icon_tag('location-arrow') %> <%= mt(:location_datum) %>
                         <% end if can?(:index, LocationDatum) %>
+                        <%= link_to banks_path, :class => 'dropdown-item' do %>
+                            <%= fa_icon_tag('bank') %> <%= mt(:bank) %>
+                        <% end if can?(:index, Bank) %>
                         <%= link_to my_account_users_path, :class => 'dropdown-item' do %>
                             <%= fa_icon_tag('user') %> <%= t(:my_account) %>
                         <% end if can?(:my_account, User) %>

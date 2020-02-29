@@ -2,7 +2,7 @@
     <div class="card-header">
         <h5><%= fa_icon_tag('location-arrow') %> <%= mt(:location_datum) %></h5>
     </div>
-    <div class="card-body p-2">
+    <div class="card-body p-3">
         <ol class="breadcrumb">
             <%= content_tag :li, :class => 'breadcrumb-item' do %>
                 <%= link_to t(:homepage), location_data_path %>
@@ -17,7 +17,7 @@
             <% end if @parent %>
         </ol>
 
-        <table class="table table-sm table-striped table-hover card-text">
+        <table class="table table-sm table-striped card-text">
             <thead>
             <tr>
                 <th><%= mt(:location_datum, :name) %></th>

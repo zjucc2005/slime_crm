@@ -20,6 +20,7 @@ class User < ApplicationRecord
   validates_inclusion_of :role, :in => %w[su admin pm pa finance]
   validates_inclusion_of :status, :in => %w[active inactive]
   validates_presence_of :name_cn
+  validates_length_of :name_cn, :maximum => 8
   validates_numericality_of :candidate_access_limit, :greater_than_or_equal_to => 0
 
   # Hooks
