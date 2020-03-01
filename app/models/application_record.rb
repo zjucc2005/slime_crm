@@ -4,8 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
   require 'carrierwave/orm/activerecord'
 
   CURRENCY = {
-      :RMB => '人民币',
-      :USD => '美元'
+      :RMB => 'RMB',
+      :USD => 'USD'
   }.stringify_keys
 
   FUXING = %w[公皙 南荣 东里 东宫 仲长 万俟 闻人 夏侯 子书 子桑 即墨 达奚 褚师 吴铭 欧阳 太史 端木 上官 司马 东方 子车 亓官 司寇

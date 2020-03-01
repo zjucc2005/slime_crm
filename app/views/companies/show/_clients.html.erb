@@ -13,6 +13,8 @@
                 <tr>
                     <th><%= mt(:candidate, :id) %></th>
                     <th><%= mt(:candidate, :name) %></th>
+                    <th><%= mt(:candidate, :nickname) %></th>
+                    <th><%= mt(:candidate, :title) %></th>
                     <th><%= mt(:candidate, :phone) %></th>
                     <th><%= mt(:candidate, :email) %></th>
                     <th><%= mt(:candidate, :created_by) %></th>
@@ -25,6 +27,8 @@
                     <tr>
                         <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
                         <td><%= client.name %></td>
+                        <td><%= client.nickname %></td>
+                        <td><%= client.title %></td>
                         <td><%= client.phone %></td>
                         <td><%= client.email %></td>
                         <td><%= client.creator.name_cn %></td>

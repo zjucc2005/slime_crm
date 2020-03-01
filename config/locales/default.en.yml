@@ -25,6 +25,7 @@ en:
   operation: "Operation"
   operation_failed: "Operation failed"
   operation_succeeded: "Operation succeeded"
+  project_can_only_have_one_pm: "Project can only have one PM"
   reset_password: "Reset password"
   settings: "Settings"
   sure: "Are you sure?"

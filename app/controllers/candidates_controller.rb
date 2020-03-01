@@ -320,9 +320,9 @@ class CandidatesController < ApplicationController
   end
 
   def candidate_params
-    params.require(:candidate).permit(:first_name, :last_name, :nickname, :city, :email, :email1, :phone, :phone1, :industry, :company_id,
-                                      :date_of_birth, :gender, :description, :is_available, :cpt, :currency,
-                                      :bank, :bank_card, :bank_user, :alipay_account, :alipay_user)
+    params.require(:candidate).permit(:first_name, :last_name, :nickname, :city, :email, :email1, :phone, :phone1,
+                                      :industry, :title, :company_id, :date_of_birth, :gender, :description,
+                                      :is_available, :cpt, :currency)
   end
 
   def experience_fields

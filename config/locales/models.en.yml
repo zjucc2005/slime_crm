@@ -75,6 +75,7 @@ en:
         phone: "Phone"
         phone1: "Phone2"
         industry: "Industry"
+        title: "Title"
         date_of_birth: "Date of birth"
         gender: "Gender"
         description: "Description"
@@ -137,9 +138,11 @@ en:
         charge_duration: "Charge duration(min)"
         base_duration: "Base duration(min)"
         progressive_duration: "Progressive duration(min)"
-        payment_time: "Payment time"
+        payment_days: "Payment days"
+        type_of_payment_day: "Type of payment day"
         payment_way: "Payment way"
         is_tax_included: "Tax included"
+        tax_rate: "Tax rate"
         is_invoice_needed: "Invoice needed"
         financial_info:
           name_cn: "Contact name(CN)"
@@ -171,6 +174,8 @@ en:
         expert: "Expert"
         start: "Start project"
         close: "Close project"
+        pm: "PM"
+        pa: "PA"
 
       project_requirement:
         status: "Status"

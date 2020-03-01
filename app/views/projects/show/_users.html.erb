@@ -1,9 +1,22 @@
 <div class="card card-inner mb-3">
     <div class="card-header">
         <h5><%= fa_icon_tag('users') %> <%= mt(:user) %></h5>
-        <%= link_to users_path(project_id: @project.id, from_source: 'project', role: %w[pm pa]), :class => 'btn btn-primary btn-xs' do %>
-            <%= fa_icon_tag('plus') %> <%= t('action.add') %>
-        <% end if can?(:index, User) && @project.can_edit? %>
+        <span>
+            <% if can?(:index, User) && @project.can_edit? %>
+                <% if @project.can_add_pm_user? %>
+                    <%= link_to users_path(project_id: @project.id, from_source: 'project_add_pm', role: 'pm'), :class => 'btn btn-primary btn-xs' do %>
+                        <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => mt(:project, :pm)) %>
+                    <% end %>
+                <% else %>
+                    <%= link_to 'javascript:void(0);', :onclick => "alert('#{t(:project_can_only_have_one_pm)}')", :class => 'btn btn-secondary btn-xs' do %>
+                        <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => mt(:project, :pm)) %>
+                    <% end %>
+                <% end %>
+                <%= link_to users_path(project_id: @project.id, from_source: 'project_add_pa', role: 'pa'), :class => 'btn btn-info btn-xs' do %>
+                    <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => mt(:project, :pa)) %>
+                <% end %>
+            <% end %>
+        </span>
     </div>
 
     <div class="card-body table_responsive">

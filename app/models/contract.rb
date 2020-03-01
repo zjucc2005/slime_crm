@@ -2,17 +2,15 @@
 class Contract < ApplicationRecord
 
   # ENUM
-  PAYMENT_TIME = {
-      :weekday => '工作日',
-      :natural => '自然日'
-  }.stringify_keys
+  TYPE_OF_PAYMENT_DAY = { :natural => '自然日' }.stringify_keys
+  PAYMENT_WAY = { :monthly => '月结', :by_project => '项目结' }.stringify_keys
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
   belongs_to :company, :class_name => 'Company'
 
   # Validations
-  validates_presence_of :file, :started_at, :ended_at, :base_duration, :progressive_duration
+  validates_presence_of :file, :started_at, :ended_at, :base_duration, :progressive_duration, :payment_way
   validates_format_of :base_duration, :with => /\A\d+(,\d+)*\Z/, :error => :invalid_format, :message => :invalid_format
 
   mount_uploader :file, FileUploader
@@ -56,6 +54,8 @@ class Contract < ApplicationRecord
   private
   def setup
     self.started_at ||= Time.now
+    self.type_of_payment_day ||= 'natural'
+    self.tax_rate ||= 0
   end
 
 end

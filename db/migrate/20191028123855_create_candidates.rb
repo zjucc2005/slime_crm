@@ -16,6 +16,7 @@ class CreateCandidates < ActiveRecord::Migration[6.0]
       t.string :phone
       t.string :phone1
       t.string :industry
+      t.string :title
       t.datetime :date_of_birth
       t.string :gender
       t.text :description

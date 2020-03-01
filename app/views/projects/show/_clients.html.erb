@@ -13,6 +13,7 @@
                 <tr>
                     <th><%= mt(:candidate, :id) %></th>
                     <th><%= mt(:candidate, :name) %></th>
+                    <th><%= mt(:candidate, :title) %></th>
                     <th><%= mt(:candidate, :phone) %></th>
                     <th><%= mt(:candidate, :email) %></th>
                     <th class="action"><%= t(:operation) %></th>
@@ -23,6 +24,7 @@
                     <tr>
                         <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
                         <td><%= client.name %></td>
+                        <td><%= client.title %></td>
                         <td><%= client.phone %><br><%= client.phone1 %></td>
                         <td><%= client.email %><br><%= client.email1 %></td>
                         <td class="action">

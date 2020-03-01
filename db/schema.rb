@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_02_29_050104) do
     t.string "phone"
     t.string "phone1"
     t.string "industry"
+    t.string "title"
     t.datetime "date_of_birth"
     t.string "gender"
     t.text "description"
@@ -127,9 +128,11 @@ ActiveRecord::Schema.define(version: 2020_02_29_050104) do
     t.string "currency"
     t.string "base_duration"
     t.integer "progressive_duration"
-    t.string "payment_time"
+    t.integer "payment_days"
+    t.string "type_of_payment_day"
     t.string "payment_way"
     t.boolean "is_tax_included"
+    t.decimal "tax_rate", precision: 6, scale: 5
     t.boolean "is_invoice_needed"
     t.jsonb "financial_info", default: {}
     t.datetime "created_at", precision: 6, null: false

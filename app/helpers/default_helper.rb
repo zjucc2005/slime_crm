@@ -13,6 +13,10 @@ module DefaultHelper
     ApplicationRecord::CURRENCY[val] || val
   end
 
+  def currency_symbol(val)
+    { 'RMB' => '¥', 'USD' => '$' }[val] || val
+  end
+
   def bank_options
     Bank.all.order(:name).pluck(:name)
   end

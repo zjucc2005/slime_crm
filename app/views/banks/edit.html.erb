@@ -6,7 +6,6 @@
 
     <div class="card-body">
         <%= form_for @bank do |f| %>
-            <%= model_error_tag(@bank) %>
             <%= render :partial => 'form', :locals => { :f => f } %>
 
             <div class="form-group mb-0">

@@ -104,6 +104,7 @@ zh_cn:
         phone: "电话"
         phone1: "电话2"
         industry: "行业"
+        title: "职位"
         date_of_birth: "出生日期"
         gender: "性别"
         description: "背景说明"
@@ -166,10 +167,12 @@ zh_cn:
         charge_duration: "收费时长(分钟)"
         base_duration: "基础收费时长(分钟)"
         progressive_duration: "递进收费时长(分钟)"
-        payment_time: "账期"
+        payment_days: "账期"
+        type_of_payment_day: "账期类型"
         payment_way: "出账方式"
         is_tax_included: "含税"
-        is_invoice_needed: "需要开票"
+        tax_rate: "税率"
+        is_invoice_needed: "开票"
         financial_info:
           name_cn: "联系人姓名(中文)"
           name_en: "联系人姓名(英文)"
@@ -200,6 +203,8 @@ zh_cn:
         expert: "专家"
         start: "启动项目"
         close: "结束项目"
+        pm: "项目经理"
+        pa: "项目助理"
 
       project_requirement:
         status: "状态"

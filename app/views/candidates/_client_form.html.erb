@@ -20,16 +20,19 @@
         </div>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :nickname, mt(:candidate, :nickname) %>
+        <%= f.label :nickname %>
         <%= f.text_field :nickname, :class => 'form-control' %>
     </div>
-
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :phone, mt(:candidate, :phone) %><span class="text-red">*</span>
+        <%= f.label :phone %><span class="text-red">*</span>
         <%= f.text_field :phone, :required => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :email, mt(:candidate, :email) %><span class="text-red">*</span>
+        <%= f.label :email %><span class="text-red">*</span>
         <%= f.email_field :email, :required => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, :class => 'form-control' %>
     </div>
 </div>

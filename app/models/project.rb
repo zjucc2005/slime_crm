@@ -66,15 +66,23 @@ class Project < ApplicationRecord
   end
 
   def can_close?
-    %w[ongoing].include?(status) &&
-      project_requirements.where(status: 'finished').count > 0 &&
-      project_requirements.where(status: 'ongoing').count == 0
+    %w[ongoing].include?(status)
+      # project_requirements.where(status: 'finished').count > 0 &&
+      # project_requirements.where(status: 'ongoing').count == 0
   end
 
   def can_add_requirement?
     %w[ongoing].include?(status)
   end
   alias :can_add_task? :can_add_requirement?
+
+  def can_add_pm_user?
+    pm_users.count == 0
+  end
+
+  def can_add_pa_user?
+    true
+  end
 
   def start!
     self.status = 'ongoing'

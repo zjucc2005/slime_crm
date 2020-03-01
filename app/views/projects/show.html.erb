@@ -75,7 +75,7 @@
                 <%= render :partial => 'projects/show/project_requirements', :locals => { :project_requirements => @project.project_requirements } %>
             </div>
             <div class="col-lg-6 col-12">
-                <%= render :partial => 'projects/show/users', :locals => { :users => @project.users } %>
+                <%= render :partial => 'projects/show/users', :locals => { :users => @project.users.order(:role => :desc) } %>
                 <%= render :partial => 'projects/show/clients', :locals => { :clients => @project.clients } %>
                 <%= render :partial => 'projects/show/experts', :locals => { :experts => @project.experts } %>
             </div>

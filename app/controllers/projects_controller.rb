@@ -98,7 +98,17 @@ class ProjectsController < ApplicationController
         raise t(:not_authorized) unless @project.can_edit?
 
         ActiveRecord::Base.transaction do
-          User.where(id: params[:uids], role: %w[pm pa]).each do |user|
+          # add pm
+          pm_users = User.where(id: params[:uids], role: 'pm')
+          pa_users = User.where(id: params[:uids], role: 'pa')
+          if @project.pm_users.count + pm_users.count > 1
+            raise t(:project_can_only_have_one_pm)
+          end
+         pm_users.each do |user|
+            @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
+          end
+          # add pa
+          pa_users.each do |user|
             @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
           end
         end

@@ -3,21 +3,21 @@
     <%= f.hidden_field :company_id, :required => true %>
 
     <div class="col-lg-6 col-12 form-group">
-        <%= f.label :file, mt(:contract, :file) %><span class="text-red">*</span>
+        <%= f.label :file %><span class="text-red">*</span>
         <%= link_to @contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end if @contract.file.present? %>
         <%= f.file_field :file, :required => !@contract.file.present?, :class => 'form-control-file' %>
     </div>
 
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :started_at, mt(:contract, :started_at) %><span class="text-red">*</span>
+        <%= f.label :started_at %><span class="text-red">*</span>
         <%= f.text_field :started_at, :required => true, :class => 'form-control datepicker' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :ended_at, mt(:contract, :ended_at) %><span class="text-red">*</span>
+        <%= f.label :ended_at %><span class="text-red">*</span>
         <%= f.text_field :ended_at, :required => true, :class => 'form-control datepicker' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :cpt, mt(:contract, :cpt) %><span class="text-red">*</span>
+        <%= f.label :cpt %><span class="text-red">*</span>
         <%= f.number_field :cpt, :min => 0, :required => true, :class => 'form-control', :placeholder => '每60分钟的费用' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
@@ -25,29 +25,38 @@
         <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :base_duration, mt(:contract, :base_duration) %><span class="text-red">*</span>
+        <%= f.label :base_duration %><span class="text-red">*</span>
         <%= f.text_field :base_duration, :min => 0, :required => true, :class => 'form-control', :placeholder => '范例: 30,45,60 (用半角逗号隔开)' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :progressive_duration, mt(:contract, :progressive_duration) %><span class="text-red">*</span>
+        <%= f.label :progressive_duration %><span class="text-red">*</span>
         <%= f.number_field :progressive_duration, :min => 1, :required => true, :class => 'form-control', :placeholder => '基础时长之后的递进幅度' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :payment_time, mt(:contract, :payment_time) %><span class="text-red">*</span>
-        <%= f.select :payment_time, Contract::PAYMENT_TIME.to_a.map(&:reverse), { :include_blank => false }, :class => 'form-control select2' %>
+        <%= f.label :payment_days %><span class="text-red">*</span>
+        <%= f.number_field :payment_days, :min => 0, :step => 1, :required => true, :class => 'form-control', :placeholder => '天数' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :payment_way, mt(:contract, :payment_way) %><span class="text-red">*</span>
-        <%= f.text_field :payment_way, :required => true, :class => 'form-control' %>
+        <%= f.label :type_of_payment_day %><span class="text-red">*</span>
+        <%= f.select :type_of_payment_day, Contract::TYPE_OF_PAYMENT_DAY.to_a.map(&:reverse), { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :is_tax_included, mt(:contract, :is_tax_included) %><span class="text-red">*</span>
+        <%= f.label :payment_way %><span class="text-red">*</span>
+        <%= f.select :payment_way, Contract::PAYMENT_WAY.to_a.map(&:reverse), { :include_blank => false }, :class => 'form-control select2' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :is_invoice_needed %><span class="text-red">*</span>
+        <%= f.select :is_invoice_needed, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :is_tax_included %><span class="text-red">*</span>
         <%= f.select :is_tax_included, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :is_invoice_needed, mt(:contract, :is_invoice_needed) %><span class="text-red">*</span>
-        <%= f.select :is_invoice_needed, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
+        <%= f.label :tax_rate %><span class="text-red">*</span>
+        <%= f.number_field :tax_rate, :min => 0, :step => 0.001, :class => 'form-control' %>
     </div>
+
 </div>
 
 <div class="row">
@@ -68,3 +77,22 @@
         <%= email_field_tag :'financial_info[email]', @contract.financial_info['email'], :class => 'form-control' %>
     </div>
 </div>
+
+<script>
+    $(function(){ init_tax_rate_tag(); });
+    $('#contract_is_tax_included').change(function(){
+        init_tax_rate_tag();
+    });
+    function init_tax_rate_tag(){
+        let is_tax_included = $('#contract_is_tax_included').val();
+        let tax_rate = $('#contract_tax_rate');
+        if(is_tax_included == 'true'){
+            tax_rate.parent().hide();
+            tax_rate.attr('required', false);
+            tax_rate.val('');
+        }else{
+            tax_rate.parent().show();
+            tax_rate.attr('required', true);
+        }
+    }
+</script>

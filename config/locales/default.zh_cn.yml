@@ -25,6 +25,7 @@ zh_cn:
   operation: "操作"
   operation_failed: "操作失败"
   operation_succeeded: "操作成功"
+  project_can_only_have_one_pm: "项目中只能存在一位项目经理"
   reset_password: "重置密码"
   settings: "设置"
   sure: "确认吗?"

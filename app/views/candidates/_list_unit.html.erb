@@ -27,7 +27,7 @@
 
             <div class="d-flex flex-column mb-1">
                 <div class="text-smaller">
-                    <span class="mr-1 text-light roundy px-1 py-0 <%= cps_bg(candidate.cpt) %>"><%= "¥#{candidate.cpt}" %></span>
+                    <span class="mr-1 text-light roundy px-1 py-0 <%= cps_bg(candidate.cpt) %>"><%= "#{currency_symbol(candidate.currency)}#{candidate.cpt}" %></span>
                     <span class="text-gray mr-1">/</span>
                     <span class="mr-1"><%= candidate.city || '-' %></span>
                     <span class="text-gray mr-1">/</span>
