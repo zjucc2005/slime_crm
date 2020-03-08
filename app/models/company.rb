@@ -14,7 +14,6 @@ class Company < ApplicationRecord
   validates_uniqueness_of :name
   validates_length_of :name, :minimum => 8
 
-  # Hooks
   before_validation :setup, :on => :create
 
   # Scopes

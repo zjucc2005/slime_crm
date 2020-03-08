@@ -18,6 +18,8 @@ class ProjectTask < ApplicationRecord
   belongs_to :project, :class_name => 'Project'
   belongs_to :candidate, :class_name => 'Candidate'
 
+  has_many :costs, :class_name => 'ProjectTaskCost'
+
   # Validations
   validates_presence_of :started_at
   validates_inclusion_of :category, :in => CATEGORY.keys

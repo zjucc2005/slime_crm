@@ -15,7 +15,6 @@ class Contract < ApplicationRecord
 
   mount_uploader :file, FileUploader
 
-  # Hooks
   before_validation :setup, :on => :create
 
   # Scopes

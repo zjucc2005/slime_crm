@@ -1,6 +1,5 @@
 # encoding: utf-8
 class CandidatePaymentInfo < ApplicationRecord
-
   # ENUM
   CATEGORY = {
     :unionpay => '银联',
@@ -14,5 +13,4 @@ class CandidatePaymentInfo < ApplicationRecord
   # Validations
   validates_presence_of :account, :username
   validates_inclusion_of :category, :in => CATEGORY.keys
-
 end

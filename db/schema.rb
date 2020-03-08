@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_050104) do
+ActiveRecord::Schema.define(version: 2020_03_07_111757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,25 +169,40 @@ ActiveRecord::Schema.define(version: 2020_02_29_050104) do
     t.index ["project_id"], name: "index_project_requirements_on_project_id"
   end
 
+  create_table "project_task_costs", force: :cascade do |t|
+    t.bigint "project_task_id"
+    t.string "category"
+    t.decimal "price", precision: 10, scale: 2
+    t.string "memo"
+    t.string "payment_status"
+    t.jsonb "payment_info", default: {}
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_task_id"], name: "index_project_task_costs_on_project_task_id"
+  end
+
   create_table "project_tasks", force: :cascade do |t|
     t.bigint "created_by"
     t.string "category"
     t.bigint "project_id"
     t.bigint "candidate_id"
     t.string "status"
-    t.decimal "charge_rate", precision: 8, scale: 4
-    t.decimal "base_price", precision: 10, scale: 2
-    t.decimal "actual_price", precision: 10, scale: 2
-    t.string "currency"
     t.string "interview_form"
     t.integer "duration"
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.decimal "cost", precision: 10, scale: 2
-    t.string "payment_method"
-    t.jsonb "payment_info", default: {}
     t.string "charge_status"
     t.string "payment_status"
+    t.decimal "total_price", precision: 10, scale: 2
+    t.decimal "charge_rate", precision: 10, scale: 2
+    t.decimal "base_price", precision: 10, scale: 2
+    t.decimal "actual_price", precision: 10, scale: 2
+    t.string "currency"
+    t.boolean "is_taxed", default: false
+    t.decimal "tax", precision: 10, scale: 2
+    t.boolean "is_shorthand", default: false
+    t.decimal "shorthand_price", precision: 10, scale: 2
+    t.boolean "is_recorded", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["candidate_id"], name: "index_project_tasks_on_candidate_id"

@@ -6,7 +6,6 @@ class Candidate < ApplicationRecord
   DATA_SOURCE = { :manual => '手工录入', :excel => 'Excel导入', :plugin => '插件采集' }.stringify_keys
   GENDER = { :male => '男', :female => '女' }.stringify_keys
 
-
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by
   belongs_to :company, :class_name => 'Company', :optional => true
@@ -27,7 +26,6 @@ class Candidate < ApplicationRecord
   validates_presence_of :name, :first_name
   validates_presence_of :cpt
 
-  # Hooks
   before_validation :setup, :on => [:create, :update]
 
   # Scopes

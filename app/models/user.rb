@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   # Associations
-  # has_many :candidates, :class_name => 'Candidate', :foreign_key => :created_by  # 创建者采用默认关联
+  # has_many :candidates, :class_name => 'Candidate', :foreign_key => :created_by  # 创建者取消默认关联
   # has_many :companies, :class_name => 'Company', :foreign_key => :created_by
   # has_many :contracts, :class_name => 'Contract', :foreign_key => :created_by
   # has_many :projects, :class_name => 'Project', :foreign_key => :created_by
