@@ -1,0 +1,9 @@
+// refresh payment_info_wrapper
+$('#payment_info_wrapper').html('<%= j(render :partial => 'edit_form_costs', :locals => { :costs => @project_task.costs }) %>');
+// refresh cost form modal
+$('button[data-dismiss=modal]').click();
+$('#add_cost_modal_wrapper').html('<%= j(render :partial => 'add_cost_modal', :locals => { :project_task => @project_task }) %>');
+if($('.select2-container').length){
+    $('.select2-container').remove();  // turbolinks:reload + select2 重复加载bug修复
+}
+$('.select2').select2();

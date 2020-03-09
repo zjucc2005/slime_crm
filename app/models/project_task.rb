@@ -40,12 +40,16 @@ class ProjectTask < ApplicationRecord
     self.status ||= 'ongoing'         # init
     self.charge_status ||= 'unpaid'   # init
     self.payment_status ||= 'unpaid'  # init
-    if self.status == 'finished'
-      self.ended_at       = started_at + duration.to_i * 60
-      self.charge_rate    = active_contract.cpt
-      self.base_price     = active_contract.base_price(duration.to_i)
-      self.currency       = active_contract.currency
-      self.actual_price ||= base_price
-    end
+
+    self.ended_at       = started_at + duration.to_i * 60                         # 结束时间 = 开始时间 + 时长
+    self.charge_rate    = active_contract.charge_rate                             # 收费倍率
+    self.base_price     = active_contract.base_price(duration.to_i)               # 基础收费
+    self.currency       = active_contract.currency                                # 货币
+    self.actual_price ||= base_price                                              # 实际收费
+    self.is_taxed       = active_contract.is_taxed                                # 是否含税
+    self.tax            = is_taxed ? 0 : actual_price * active_contract.tax_rate  # 税费 = 实际收费 * 税率
+    self.shorthand_price = 0 unless is_shorthand                                  # 速记费用
+
+    self.total_price    = actual_price.to_f + tax.to_f + shorthand_price.to_f     # 总费用
   end
 end

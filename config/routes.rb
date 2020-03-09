@@ -74,6 +74,7 @@ Rails.application.routes.draw do
 
   resources :project_tasks do
     get :get_base_price, on: :member  # 计算基础价格(实时)
+    post :add_cost,      on: :member  # 添加支出信息
   end
 
   resources :finance

@@ -124,14 +124,14 @@ ActiveRecord::Schema.define(version: 2020_03_07_111757) do
     t.string "file"
     t.datetime "started_at"
     t.datetime "ended_at"
-    t.decimal "cpt", precision: 10, scale: 2
+    t.decimal "charge_rate", precision: 10, scale: 2
     t.string "currency"
     t.string "base_duration"
     t.integer "progressive_duration"
     t.integer "payment_days"
     t.string "type_of_payment_day"
     t.string "payment_way"
-    t.boolean "is_tax_included"
+    t.boolean "is_taxed"
     t.decimal "tax_rate", precision: 6, scale: 5
     t.boolean "is_invoice_needed"
     t.jsonb "financial_info", default: {}

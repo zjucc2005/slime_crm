@@ -1,0 +1,84 @@
+<div id="addCostModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%= t('action.add_model', :model => t(:payment_info)) %></h4>
+                <button type="button" data-dismiss="modal" class="close">&times;</button>
+            </div>
+
+            <%= form_tag add_cost_project_task_path(project_task), :method => :post, :remote => true do %>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :category, mt(:project_task_cost, :category) %><span class="text-red">*</span>
+                            <%= select_tag :category, options_for_select(project_task_cost_category_options(project_task)),
+                                           :prompt => default_prompt, :required => true, :class => 'form-control select2' %>
+                        </div>
+                        <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :price, mt(:project_task_cost, :price) %><span class="text-red">*</span>
+                            <%= number_field_tag :price, nil, :min => 0, :step => 0.01, :required => true, :class => 'form-control' %>
+                        </div>
+                        <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :payment_info_category, mt(:project_task_cost, :payment_way) %><span class="text-red">*</span>
+                            <%= select_tag :'payment_info[category]', options_for_select(CandidatePaymentInfo::CATEGORY.to_a.map(&:reverse)),
+                                           :prompt => default_prompt, :required => true, :class => 'form-control select2' %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :payment_info_bank, mt(:candidate_payment_info, :bank) %><span class="text-red">*</span>
+                            <%= select_tag :'payment_info[bank]', options_for_select(bank_options), :prompt => default_prompt,
+                                           :required => true, :class => 'form-control select2' %>
+                        </div>
+                        <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :payment_info_sub_branch, mt(:candidate_payment_info, :sub_branch) %><span class="text-red">*</span>
+                            <%= text_field_tag :'payment_info[sub_branch]', nil, :class => 'form-control' %>
+                        </div>
+                        <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :payment_info_account, mt(:candidate_payment_info, :account) %><span class="text-red">*</span>
+                            <%= text_field_tag :'payment_info[account]', nil, :required => true, :class => 'form-control' %>
+                        </div>
+                        <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :payment_info_username, mt(:candidate_payment_info, :username) %><span class="text-red">*</span>
+                            <%= text_field_tag :'payment_info[username]', nil, :required => true, :class => 'form-control' %>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 form-group">
+                            <%= label_tag :memo, mt(:project_task_cost, :memo) %>
+                            <%= text_field_tag :memo, nil, :class => 'form-control' %>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){ refresh_cost_form(); });
+    $('#payment_info_category').change(function(){ refresh_cost_form(); });
+    function refresh_cost_form(){
+        let payment_info_category = document.getElementById('payment_info_category');
+        if(payment_info_category.value == 'alipay'){
+            form_deactivate('payment_info_bank');
+            form_deactivate('payment_info_sub_branch');
+            form_activate('payment_info_account');
+            form_activate('payment_info_username');
+        }else if(payment_info_category.value == 'unionpay'){
+            form_activate('payment_info_bank');
+            form_activate('payment_info_sub_branch');
+            form_activate('payment_info_account');
+            form_activate('payment_info_username');
+        }else{
+            form_deactivate('payment_info_bank');
+            form_deactivate('payment_info_sub_branch');
+            form_deactivate('payment_info_account');
+            form_deactivate('payment_info_username');
+        }
+    }
+</script>

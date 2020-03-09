@@ -11,7 +11,6 @@
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :bank %><span class="text-red">*</span>
         <%= f.select :bank, bank_options, { :prompt => default_prompt }, :required => true, :class => 'form-control select2' %>
-        <%#= f.text_field :bank, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :sub_branch %><span class="text-red">*</span>

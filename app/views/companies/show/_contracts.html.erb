@@ -15,10 +15,10 @@
                     <th><%= mt(:contract, :started_at) %></th>
                     <th><%= mt(:contract, :ended_at) %></th>
                     <th><%= mt(:contract, :file) %></th>
-                    <th><%= mt(:contract, :cpt) %></th>
+                    <th><%= mt(:contract, :charge_rate) %></th>
                     <th><%= mt(:contract, :charge_duration) %></th>
                     <th><%= mt(:contract, :payment_days) %></th>
-                    <th><%= mt(:contract, :is_tax_included) %></th>
+                    <th><%= mt(:contract, :is_taxed) %></th>
                     <th><%= mt(:contract, :tax_rate) %></th>
                     <th><%= mt(:contract, :is_invoice_needed) %></th>
                     <th><%= mt(:contract, :created_by) %></th>
@@ -33,10 +33,10 @@
                         <td><%= contract.started_at.strftime('%F') %></td>
                         <td><%= contract.ended_at.strftime('%F') %></td>
                         <td><%= link_to contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end %></td>
-                        <td><%= "#{contract.cpt} #{contract.currency}" %></td>
+                        <td><%= "#{contract.charge_rate} #{contract.currency}" %></td>
                         <td><%= contract.charge_duration %></td>
                         <td><%= "#{contract.payment_days}#{Contract::TYPE_OF_PAYMENT_DAY[contract.type_of_payment_day]}" %></td>
-                        <td><%= boolean_display(contract.is_tax_included) %></td>
+                        <td><%= boolean_display(contract.is_taxed) %></td>
                         <td><%= contract.tax_rate %></td>
                         <td><%= boolean_display(contract.is_invoice_needed) %></td>
                         <td><%= contract.creator.name_cn %></td>

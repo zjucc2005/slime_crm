@@ -23,7 +23,7 @@ class Contract < ApplicationRecord
   ##
   # 重要!!价格算法
   def base_price(duration=0)
-    (priced_duration(duration) / 60.0 * cpt).round  # 整数
+    (priced_duration(duration) / 60.0 * charge_rate).round  # 整数
   end
 
   # 用于计价的时长, 实际时长根据合同的 base/progressive_duration 规则得出

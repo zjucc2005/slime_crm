@@ -17,8 +17,8 @@
         <%= f.text_field :ended_at, :required => true, :class => 'form-control datepicker' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :cpt %><span class="text-red">*</span>
-        <%= f.number_field :cpt, :min => 0, :required => true, :class => 'form-control', :placeholder => '每60分钟的费用' %>
+        <%= f.label :charge_rate %><span class="text-red">*</span>
+        <%= f.number_field :charge_rate, :min => 0, :required => true, :class => 'form-control', :placeholder => '每60分钟的费用' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :currency %><span class="text-red">*</span>
@@ -49,8 +49,8 @@
         <%= f.select :is_invoice_needed, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :is_tax_included %><span class="text-red">*</span>
-        <%= f.select :is_tax_included, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
+        <%= f.label :is_taxed %><span class="text-red">*</span>
+        <%= f.select :is_taxed, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :tax_rate %><span class="text-red">*</span>
@@ -80,11 +80,11 @@
 
 <script>
     $(function(){ init_tax_rate_tag(); });
-    $('#contract_is_tax_included').change(function(){
+    $('#contract_is_taxed').change(function(){
         init_tax_rate_tag();
     });
     function init_tax_rate_tag(){
-        let is_tax_included = $('#contract_is_tax_included').val();
+        let is_tax_included = $('#contract_is_taxed').val();
         let tax_rate = $('#contract_tax_rate');
         if(is_tax_included == 'true'){
             tax_rate.parent().hide();

@@ -51,8 +51,8 @@ class ContractsController < ApplicationController
   end
 
   def contract_params
-    params.require(:contract).permit(:file, :started_at, :ended_at, :cpt, :currency, :base_duration, :progressive_duration,
-                                     :payment_days, :type_of_payment_day, :payment_way, :is_tax_included, :tax_rate, :is_invoice_needed)
+    params.require(:contract).permit(:file, :started_at, :ended_at, :charge_rate, :currency, :base_duration, :progressive_duration,
+                                     :payment_days, :type_of_payment_day, :payment_way, :is_taxed, :tax_rate, :is_invoice_needed)
   end
 
   def financial_info_fields

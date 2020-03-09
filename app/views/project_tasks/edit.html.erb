@@ -8,132 +8,26 @@
         <%= form_for @project_task do |f| %>
             <%= model_error_tag(@project_task) %>
 
-            <div class="row">
-                <div class="col-12 form-group">
-                    <span class="badge badge-light"><%= show_creator(@project_task) %></span>
-                    <span class="badge badge-light"><%= show_timestamps(@project_task) %></span>
-                </div>
-
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :category %><span class="text-red">*</span>
-                    <%= f.text_field :category, :value => ProjectTask::CATEGORY[@project_task.category], :disabled => true, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :expert %><span class="text-red">*</span>
-                    <%= f.text_field :candidate_id, :value => @project_task.candidate.name, :disabled => true, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :interview_form %><span class="text-red">*</span>
-                    <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
-                                 :required => true, :class => 'form-control select2' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :status %><span class="text-red">*</span>
-                    <%= f.select :status, project_task_status_options, { :prompt => default_prompt },
-                                 :required => true, :class => 'form-control select2' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :started_at %><span class="text-red">*</span>
-                    <%= f.text_field :started_at, :value => @project_task.started_at.strftime('%F %H:%M'), :required => true,
-                                     :class => 'form-control datetimepicker' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :duration, mt(:project_task, :duration) %><span class="text-red">*</span>
-                    <%= f.number_field :duration, :required => true, :min => 1, :class => 'form-control', :placeholder => '用于计算价格' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :base_price %><span class="text-red">*</span>
-                    <%= f.text_field :base_price, :disabled => true, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :currency %>
-                    <%= f.text_field :currency, :disabled => true, :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :actual_price %>
-                    <%= f.number_field :actual_price, :min => 1, :class => 'form-control', :placeholder => '不填写则取基础收费' %>
-                </div>
+            <div class="form-group">
+                <span class="badge badge-light"><%= show_creator(@project_task) %></span>
+                <span class="badge badge-light"><%= show_timestamps(@project_task) %></span>
             </div>
 
-            <div id="payment_info_wrapper" class="row" style="display: none;">
-                <div class="col-12 form-group">
-                    <%= f.label :payment_info, mt(:project_task, :payment_info) %>
-                    <table class="table table-sm table-striped border card-text">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th><%= mt(:candidate_payment_info, :category) %></th>
-                            <th><%= mt(:candidate_payment_info, :bank) %></th>
-                            <th><%= mt(:candidate_payment_info, :account) %></th>
-                            <th><%= mt(:candidate_payment_info, :username) %></th>
-                            <th><%= mt(:candidate_payment_info, :created_by) %></th>
-                            <th><%= mt(:candidate_payment_info, :created_at) %></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% @project_task.candidate.payment_infos.each_with_index do |payment_info, index| %>
-                            <tr>
-                                <td><%= radio_button_tag :candidate_payment_info_id, payment_info.id %></td>
-                                <td><%= candidate_payment_info_category_badge(payment_info.category) %></td>
-                                <td><%= payment_info.bank %></td>
-                                <td><%= payment_info.account %></td>
-                                <td><%= payment_info.username %></td>
-                                <td><%= payment_info.creator.name_cn %></td>
-                                <td><%= payment_info.created_at.strftime('%F %T') %></td>
-                            </tr>
-                        <% end %>
-                        <tr>
-                            <td colspan="7" align="center">
-                                <%= link_to new_payment_info_candidate_path(@project_task.candidate, return_to: request.path), :class => 'btn btn-primary btn-xs' do %>
-                                    <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:candidate_payment_info)) %>
-                                <% end %>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <%= render :partial => 'edit_form_charge', :locals => { :f => f } %>
+            <%= render :partial => 'edit_form_payment', :locals => { :f => f } %>
 
             <div class="form-group mb-0">
-                <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
+                <%= submit_tag t('action.save_draft'), :class => 'btn btn-info' %>
+                <%= submit_tag t('action.submit_and_confirm'), :data => { :confirm => t(:sure_to_submit) }, :class => 'btn btn-primary' %>
                 <%= link_to t('action.back'), project_path(@project_task.project), :class => 'btn btn-secondary' %>
             </div>
         <% end %>
+
+        <%#= render :partial => 'add_cost_modal', :locals => { :project_task => @project_task } %>
     </div>
 </div>
 
-<script>
-    $(function(){
-        get_base_price();
-//        init_payment_info_wrapper();
-    });
-    $('#project_task_cost').change(function(){
-        init_payment_info_wrapper();
-    });
-    $('#project_task_duration').change(function(){
-        get_base_price(); // 计算价格
-    });
-//    function init_payment_info_wrapper(){
-//        let cost = $('#project_task_cost');
-//        let wrapper = $('#payment_info_wrapper');
-//        if(cost.val() > 0){
-//            wrapper.show();
-//        }else{
-//            wrapper.hide();
-//        }
-//    }
-    function get_base_price(){
-        let duration = $('#project_task_duration').val();
-        $.ajax({
-            type: 'get',
-            url: '/project_tasks/' + <%= @project_task.id %> + '/get_base_price',
-            data: { duration: duration },
-            async: false,
-            dataType: 'json',
-            success: function(data){
-                $('#project_task_base_price').val(data.price);
-                $('#project_task_currency').val(data.currency);
-            }
-        })
-    }
-</script>
+<div id="add_cost_modal_wrapper">
+    <%= render :partial => 'add_cost_modal', :locals => { :project_task => @project_task } %>
+</div>
+

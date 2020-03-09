@@ -1,0 +1,108 @@
+<div class="badge badge-danger mb-3 px-4"><%= t(:charge_info) %></div>
+<div class="row border-bottom mb-3">
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :category %><span class="text-red">*</span>
+        <%= f.text_field :category, :value => ProjectTask::CATEGORY[@project_task.category], :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
+        <%= f.text_field :candidate_id, :value => @project_task.candidate.name, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :interview_form %><span class="text-red">*</span>
+        <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
+                                 :required => true, :class => 'form-control select2' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :started_at %><span class="text-red">*</span>
+        <%= f.text_field :started_at, :value => @project_task.started_at.strftime('%F %H:%M'), :required => true,
+                                         :class => 'form-control datetimepicker' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :duration, mt(:project_task, :duration) %><span class="text-red">*</span>
+        <%= f.number_field :duration, :required => true, :min => 1, :class => 'form-control', :placeholder => '用于计算价格' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :base_price %><span class="text-red">*</span>
+        <%= f.text_field :base_price, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :currency %><span class="text-red">*</span>
+        <%= f.text_field :currency, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :actual_price %>
+        <%= f.number_field :actual_price, :min => 1, :class => 'form-control', :placeholder => '不填写则取基础收费' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :is_taxed %>
+        <%= f.text_field :is_taxed, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :tax_rate %>
+        <%= text_field_tag :tax_rate, nil, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :tax %>
+        <%= f.text_field :tax, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :is_shorthand %><span class="text-red">*</span>
+        <%= f.select :is_shorthand, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :shorthand_price %>
+        <%= f.number_field :shorthand_price, :min => 0, :step => 0.01, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :is_recorded %><span class="text-red">*</span>
+        <%= f.select :is_recorded, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        get_base_price();
+    });
+    $('#project_task_duration').change(function(){
+        get_base_price(); // 计算价格
+    });
+    $('#project_task_actual_price').change(function(){
+        get_base_price();
+    });
+    $('#project_task_is_shorthand').change(function(){
+        get_shorthand_price();
+    });
+    function get_base_price(){
+        let duration = $('#project_task_duration').val();
+        let base_price = $('#project_task_base_price');
+        let currency = $('#project_task_currency');
+        let is_taxed = $('#project_task_is_taxed');
+        let tax_rate = $('#tax_rate');
+        let tax = $('#project_task_tax');
+        let actual_price = $('#project_task_actual_price');
+        $.ajax({
+            type: 'get',
+            url: '/project_tasks/' + <%= @project_task.id %> + '/get_base_price',
+            data: { duration: duration },
+            async: false,
+            dataType: 'json',
+            success: function(data){
+                base_price.val(data.price);
+                currency.val(data.currency);
+                is_taxed.val(data.is_taxed);
+                tax_rate.val(data.tax_rate);
+                tax.val((actual_price.val() || base_price.val()) * tax_rate.val());
+            }
+        })
+    }
+    function get_shorthand_price(){
+        let is_shorthand = $('#project_task_is_shorthand');
+        let shorthand_price = $('#project_task_shorthand_price');
+        if(is_shorthand.val() === 'true'){
+            shorthand_price.attr('required', true);
+        }else{
+            shorthand_price.attr('required', false);
+        }
+    }
+</script>

@@ -8,6 +8,13 @@ class ProjectTaskCost < ApplicationRecord
     :others      => '其他费用'
   }.stringify_keys
 
+  CATEGORY_LIMIT = {
+    :expert      => 1,  # 费用条目限制
+    :recommend   => 1,
+    :translation => 1,
+    :others      => 999
+  }.stringify_keys
+
   # Associations
   belongs_to :project_task, :class_name => 'ProjectTask'
 end

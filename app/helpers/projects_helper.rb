@@ -27,6 +27,12 @@ module ProjectsHelper
     @project.experts.pluck(:name, :id)
   end
 
+  def project_task_cost_category_options(project_task)
+    ProjectTaskCost::CATEGORY.select do |k, v|
+      project_task.costs.where(category: k).count < ProjectTaskCost::CATEGORY_LIMIT[k]
+    end.to_a.map(&:reverse)
+  end
+
   def project_task_category_badge(category)
     dict = { :interview => 'primary' }.stringify_keys
     content_tag :span, ProjectTask::CATEGORY[category] || category, :class => "badge badge-#{dict[category] || 'secondary'}"

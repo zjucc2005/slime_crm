@@ -1,0 +1,35 @@
+<table class="table table-sm table-striped border nowrap card-text">
+    <thead>
+    <tr>
+        <th><%= mt(:project_task_cost, :category) %></th>
+        <th><%= mt(:project_task_cost, :price) %></th>
+        <th><%= mt(:project_task_cost, :payment_way) %></th>
+        <th><%= mt(:candidate_payment_info, :bank) %></th>
+        <th><%= mt(:candidate_payment_info, :sub_branch) %></th>
+        <th><%= mt(:candidate_payment_info, :account) %></th>
+        <th><%= mt(:candidate_payment_info, :username) %></th>
+        <th><%= mt(:project_task_cost, :memo) %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% costs.each do |cost| %>
+    <tr>
+        <td><%= cost.category %></td>
+        <td><%= cost.price %></td>
+        <td><%= cost.payment_info['category'] %></td>
+        <td><%= cost.payment_info['bank'] %></td>
+        <td><%= cost.payment_info['sub_branch'] %></td>
+        <td><%= cost.payment_info['account'] %></td>
+        <td><%= cost.payment_info['username'] %></td>
+        <td><%= cost.memo %></td>
+    </tr>
+    <% end %>
+    <tr>
+        <td colspan="8" align="center">
+            <%= button_tag :type => 'button', :class => 'btn btn-primary btn-xs', :data => { :toggle => 'modal', :target => '#addCostModal'} do %>
+                <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => t(:payment_info)) %>
+            <% end %>
+        </td>
+    </tr>
+    </tbody>
+</table>
