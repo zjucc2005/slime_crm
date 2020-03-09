@@ -25,7 +25,7 @@ class CandidatesController < ApplicationController
       query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id').
         where(or_conditions.join(' OR '), { :term => "%#{params[:term].strip.upcase}%" }).distinct
     end
-    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 50)
+    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /candidates/:id
