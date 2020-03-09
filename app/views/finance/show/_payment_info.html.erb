@@ -1,0 +1,39 @@
+<div class="badge badge-success mb-3 px-4"><%= t(:payment_info) %></div>
+
+<table class="table table-sm table-striped border nowrap card-text">
+    <thead>
+    <tr>
+        <th><%= mt(:project_task_cost, :category) %></th>
+        <th><%= mt(:project_task_cost, :price) %></th>
+        <th><%= mt(:project_task_cost, :payment_way) %></th>
+        <th><%= mt(:candidate_payment_info, :bank) %></th>
+        <th><%= mt(:candidate_payment_info, :sub_branch) %></th>
+        <th><%= mt(:candidate_payment_info, :account) %></th>
+        <th><%= mt(:candidate_payment_info, :username) %></th>
+        <th><%= mt(:project_task_cost, :memo) %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @project_task.costs.each do |cost| %>
+        <tr>
+            <td><%= ProjectTaskCost::CATEGORY[cost.category] %></td>
+            <td><%= "#{cost.price} #{cost.currency}" %></td>
+            <td><%= candidate_payment_info_category_badge(cost.payment_info['category']) %></td>
+            <td><%= cost.payment_info['bank'] %></td>
+            <td><%= cost.payment_info['sub_branch'] %></td>
+            <td><%= cost.payment_info['account'] %></td>
+            <td><%= cost.payment_info['username'] %></td>
+            <td><%= cost.memo %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
+
+<div class="row">
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :payment_status) %></span>
+        </div>
+        <%= content_tag :span, project_task_payment_status_badge(@project_task.payment_status), :class => 'form-control' %>
+    </div>
+</div>

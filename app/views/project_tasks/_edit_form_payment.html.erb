@@ -1,4 +1,4 @@
 <div class="badge badge-success mb-3 px-4"><%= t(:payment_info) %></div>
 <div id="payment_info_wrapper" class="border-bottom mb-3">
-    <%= render :partial => 'edit_form_costs', :locals => { :costs => @project_task.costs } %>
+    <%= render :partial => 'edit_form_costs', :locals => { :project_task => @project_task } %>
 </div>

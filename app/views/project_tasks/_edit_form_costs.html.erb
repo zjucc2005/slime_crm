@@ -9,23 +9,30 @@
         <th><%= mt(:candidate_payment_info, :account) %></th>
         <th><%= mt(:candidate_payment_info, :username) %></th>
         <th><%= mt(:project_task_cost, :memo) %></th>
+        <th class="action"><%= t(:operation) %></th>
     </tr>
     </thead>
     <tbody>
-    <% costs.each do |cost| %>
+    <% project_task.costs.each do |cost| %>
     <tr>
-        <td><%= cost.category %></td>
-        <td><%= cost.price %></td>
-        <td><%= cost.payment_info['category'] %></td>
+        <td><%= ProjectTaskCost::CATEGORY[cost.category] %></td>
+        <td><%= "#{cost.price} #{cost.currency}" %></td>
+        <td><%= candidate_payment_info_category_badge(cost.payment_info['category']) %></td>
         <td><%= cost.payment_info['bank'] %></td>
         <td><%= cost.payment_info['sub_branch'] %></td>
         <td><%= cost.payment_info['account'] %></td>
         <td><%= cost.payment_info['username'] %></td>
         <td><%= cost.memo %></td>
+        <td class="action">
+            <%= link_to remove_cost_project_task_path(project_task, project_task_cost_id: cost.id), :method => :delete, :remote => true,
+                        :data => { :confirm => t(:sure_to_remove) }, :class => 'btn btn-danger btn-xs' do %>
+                <%= fa_icon_tag('trash') %> <%= t('action.remove') %>
+            <% end %>
+        </td>
     </tr>
     <% end %>
     <tr>
-        <td colspan="8" align="center">
+        <td colspan="10" align="center">
             <%= button_tag :type => 'button', :class => 'btn btn-primary btn-xs', :data => { :toggle => 'modal', :target => '#addCostModal'} do %>
                 <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => t(:payment_info)) %>
             <% end %>

@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_111757) do
     t.bigint "project_task_id"
     t.string "category"
     t.decimal "price", precision: 10, scale: 2
+    t.string "currency"
     t.string "memo"
     t.string "payment_status"
     t.jsonb "payment_info", default: {}

@@ -1,5 +1,5 @@
 // refresh payment_info_wrapper
-$('#payment_info_wrapper').html('<%= j(render :partial => 'edit_form_costs', :locals => { :costs => @project_task.costs }) %>');
+$('#payment_info_wrapper').html('<%= j(render :partial => 'edit_form_costs', :locals => { :project_task => @project_task }) %>');
 // refresh cost form modal
 $('button[data-dismiss=modal]').click();
 $('#add_cost_modal_wrapper').html('<%= j(render :partial => 'add_cost_modal', :locals => { :project_task => @project_task }) %>');

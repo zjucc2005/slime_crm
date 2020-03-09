@@ -4,7 +4,7 @@ class ProjectTask < ApplicationRecord
   CATEGORY = { :interview => '访谈' }.stringify_keys
   STATUS = { :ongoing  => '进展中', :finished => '已结束', :cancelled => '已取消'}.stringify_keys
   CHARGE_STATUS = { :paid => '已收费', :unpaid => '未收费'}.stringify_keys
-  PAYMENT_STATUS = { :paid => '已支付', :unpaid => '未支付', :free => '无需支付' }.stringify_keys
+  PAYMENT_STATUS = { :paid => '已支付', :unpaid => '未支付' }.stringify_keys
   INTERVIEW_FORM = {
     :telephone      => '电话',
     :'face-to-face' => '面谈',

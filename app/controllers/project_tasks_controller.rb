@@ -34,10 +34,21 @@ class ProjectTasksController < ApplicationController
     @project_task.costs.create!(
        category:     params[:category],
        price:        params[:price],
+       currency:     params[:currency],
        memo:         params[:memo],
        payment_info: params[:payment_info]
     )
     respond_to{|f| f.js }
+  end
+
+  # DELETE /project_tasks/:id/remove_cost.js, remote: true
+  def remove_cost
+    load_project_task
+
+    cost = @project_task.costs.where(id: params[:project_task_cost_id]).first
+    cost.try(:destroy!)
+    respond_to{|f| f.js { render :add_cost } }
+
   end
 
   # GET /project_tasks/:id/get_base_price.json

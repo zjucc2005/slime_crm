@@ -18,12 +18,12 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12 form-group">
-                <span class="badge badge-light"><%= show_creator(@project_task) %></span>
-                <span class="badge badge-light"><%= show_timestamps(@project_task) %></span>
-            </div>
+        <div class="form-group">
+            <span class="badge badge-light"><%= show_creator(@project_task) %></span>
+            <span class="badge badge-light"><%= show_timestamps(@project_task) %></span>
+        </div>
 
+        <div class="row border-bottom mb-3">
             <div class="col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><%= mt(:project, :name) %></span>
@@ -48,13 +48,6 @@
                 </div>
                 <%= content_tag :span, @project_task.project.company.name_abbr, :class => 'form-control' %>
             </div>
-
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :category) %></span>
-                </div>
-                <%= content_tag :span, ProjectTask::CATEGORY[@project_task.category], :class => 'form-control' %>
-            </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><%= mt(:expert) %></span>
@@ -63,9 +56,15 @@
             </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project_task, :category) %></span>
+                </div>
+                <%= content_tag :span, project_task_category_badge(@project_task.category), :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
                     <span class="input-group-text"><%= mt(:project_task, :interview_form) %></span>
                 </div>
-                <%= content_tag :span, ProjectTask::INTERVIEW_FORM[@project_task.interview_form], :class => 'form-control' %>
+                <%= content_tag :span, project_task_interview_form_badge(@project_task.interview_form), :class => 'form-control' %>
             </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
@@ -85,94 +84,9 @@
                 </div>
                 <%= content_tag :span, @project_task.ended_at.strftime('%F %H:%M'), :class => 'form-control' %>
             </div>
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :duration) %></span>
-                </div>
-                <%= content_tag :span, @project_task.duration, :class => 'form-control' %>
-            </div>
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :charge_rate) %></span>
-                </div>
-                <%= content_tag :span, @project_task.charge_rate, :class => 'form-control' %>
-            </div>
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :base_price) %></span>
-                </div>
-                <%= content_tag :span, @project_task.base_price, :class => 'form-control' %>
-            </div>
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :actual_price) %></span>
-                </div>
-                <%= content_tag :span, @project_task.actual_price, :class => 'form-control' %>
-            </div>
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :currency) %></span>
-                </div>
-                <%= content_tag :span, currency_display(@project_task.currency), :class => 'form-control' %>
-            </div>
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :charge_status) %></span>
-                </div>
-                <%= content_tag :span, project_task_charge_status_badge(@project_task.charge_status), :class => 'form-control' %>
-            </div>
-
         </div>
 
-
-        <div class="row pt-3 border-top">
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :cost) %></span>
-                </div>
-                <%= content_tag :span, @project_task.cost, :class => 'form-control' %>
-            </div>
-            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><%= mt(:project_task, :payment_status) %></span>
-                </div>
-                <%= content_tag :span, project_task_payment_status_badge(@project_task.payment_status), :class => 'form-control' %>
-            </div>
-            <% if @project_task.cost > 0 %>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project_task, :payment_method) %></span>
-                    </div>
-                    <%= content_tag :span, CandidatePaymentInfo::CATEGORY[@project_task.payment_method], :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_payment_info, :bank) %></span>
-                    </div>
-                    <%= content_tag :span, @project_task.payment_info['bank'], :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_payment_info, :account) %></span>
-                    </div>
-                    <%= content_tag :span, @project_task.payment_info['account'], :class => 'form-control' %>
-                </div>
-                <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:candidate_payment_info, :username) %></span>
-                    </div>
-                    <%= content_tag :span, @project_task.payment_info['username'], :class => 'form-control' %>
-                </div>
-                <div class="col-lg-6 col-12 input-group input-group-sm input-group-align">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><%= mt(:project_task, :payment_memo) %></span>
-                    </div>
-                    <%= content_tag :span, @project_task.payment_info['memo'], :class => 'form-control' %>
-                </div>
-
-            <% end %>
-        </div>
-
-
+        <%= render :partial => 'finance/show/charge_info' %>
+        <%= render :partial => 'finance/show/payment_info' %>
     </div>
 </div>

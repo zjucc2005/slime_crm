@@ -19,6 +19,10 @@
                             <%= number_field_tag :price, nil, :min => 0, :step => 0.01, :required => true, :class => 'form-control' %>
                         </div>
                         <div class="col-lg-3 col-6 form-group">
+                            <%= label_tag :currency, mt(:project_task_cost, :currency) %><span class="text-red">*</span>
+                            <%= select_tag :currency, options_for_select(currency_options), :required => true, :class => 'form-control select2' %>
+                        </div>
+                        <div class="col-lg-3 col-6 form-group">
                             <%= label_tag :payment_info_category, mt(:project_task_cost, :payment_way) %><span class="text-red">*</span>
                             <%= select_tag :'payment_info[category]', options_for_select(CandidatePaymentInfo::CATEGORY.to_a.map(&:reverse)),
                                            :prompt => default_prompt, :required => true, :class => 'form-control select2' %>

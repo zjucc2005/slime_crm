@@ -18,13 +18,14 @@
                 <th><%= mt(:project_task, :id) %></th>
                 <th><%= mt(:project, :code) %></th>
                 <th><%= mt(:company, :name_abbr) %></th>
-                <th><%= mt(:project_task, :category) %></th>
                 <th><%= mt(:expert) %></th>
+                <th><%= mt(:project_task, :category) %></th>
                 <th><%= mt(:project_task, :interview_form) %></th>
-                <th><%= mt(:project_task, :actual_price) %></th>
+                <th><%= mt(:project_task, :actual_price_excluding_tax) %></th>
+                <th><%= mt(:project_task, :actual_price_including_tax) %></th>
+                <th><%= mt(:project_task, :shorthand_price) %></th>
                 <th><%= mt(:project_task, :currency) %></th>
                 <th><%= mt(:project_task, :charge_status) %></th>
-                <th><%= mt(:project_task, :cost) %></th>
                 <th><%= mt(:project_task, :payment_status) %></th>
                 <th><%= mt(:project_task, :created_at) %></th>
                 <th class="action"><%= t(:operation) %></th>
@@ -37,13 +38,14 @@
                     <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
                     <td><%= truncate(task.project.code, length: 10) %></td>
                     <td><%= truncate(task.project.company.name_abbr, length: 10) %></td>
-                    <td><%= project_task_category_badge(task.category) %></td>
                     <td><%= task.candidate.name %></td>
+                    <td><%= project_task_category_badge(task.category) %></td>
                     <td><%= project_task_interview_form_badge(task.interview_form) %></td>
                     <td><%= task.actual_price %></td>
+                    <td><%= task.actual_price + task.tax %></td>
+                    <td><%= task.shorthand_price %></td>
                     <td><%= currency_display(task.currency) %></td>
                     <td><%= project_task_charge_status_badge(task.charge_status) %></td>
-                    <td><%= task.cost %></td>
                     <td><%= project_task_payment_status_badge(task.payment_status) %></td>
                     <td><%= task.created_at.strftime('%F %T') %></td>
                     <th class="action">

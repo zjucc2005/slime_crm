@@ -17,4 +17,15 @@ class ProjectTaskCost < ApplicationRecord
 
   # Associations
   belongs_to :project_task, :class_name => 'ProjectTask'
+
+  # Validations
+  validates_inclusion_of :category, :in => CATEGORY.keys
+  validates_presence_of :price, :currency
+
+  before_validation :setup, :on => :create
+
+  private
+  def setup
+    self.payment_status ||= 'unpaid'  # init
+  end
 end

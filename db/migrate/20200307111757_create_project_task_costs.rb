@@ -4,6 +4,7 @@ class CreateProjectTaskCosts < ActiveRecord::Migration[6.0]
       t.references :project_task
       t.string :category
       t.decimal :price, :precision => 10, :scale => 2
+      t.string :currency
       t.string :memo
       t.string :payment_status
       t.jsonb :payment_info, :default => {}

@@ -1,0 +1,79 @@
+<div class="badge badge-danger mb-3 px-4"><%= t(:charge_info) %></div>
+<div class="row border-bottom mb-3">
+    <!-- line 1 -->
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :duration) %></span>
+        </div>
+        <%= content_tag :span, @project_task.duration, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :charge_rate) %></span>
+        </div>
+        <%= content_tag :span, @project_task.charge_rate, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :currency) %></span>
+        </div>
+        <%= content_tag :span, currency_display(@project_task.currency), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6"></div>
+    <!-- line 2 -->
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :base_price) %></span>
+        </div>
+        <%= content_tag :span, @project_task.base_price, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :is_taxed) %></span>
+        </div>
+        <%= content_tag :span, boolean_display(@project_task.is_taxed), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :is_shorthand) %></span>
+        </div>
+        <%= content_tag :span, boolean_display(@project_task.is_shorthand), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :is_recorded) %></span>
+        </div>
+        <%= content_tag :span, boolean_display(@project_task.is_recorded), :class => 'form-control' %>
+    </div>
+    <!-- line 3 -->
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :actual_price) %></span>
+        </div>
+        <%= content_tag :span, @project_task.actual_price, :class => 'form-control text-bold' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :tax) %></span>
+        </div>
+        <%= content_tag :span, @project_task.tax, :class => 'form-control text-bold' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :shorthand_price) %></span>
+        </div>
+        <%= content_tag :span, @project_task.shorthand_price, :class => 'form-control text-bold' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :total_price) %></span>
+        </div>
+        <%= content_tag :span, @project_task.total_price, :class => 'form-control text-bold' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :charge_status) %></span>
+        </div>
+        <%= content_tag :span, project_task_charge_status_badge(@project_task.charge_status), :class => 'form-control' %>
+    </div>
+</div>

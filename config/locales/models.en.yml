@@ -194,6 +194,8 @@ en:
         charge_rate: "Charge rate"
         base_price: "Base Fee"
         actual_price: "Actual Fee"
+        actual_price_excluding_tax: "Actual Fee excluding tax"
+        actual_price_including_tax: "Actual Fee including tax"
         currency: "Currency"
         is_taxed: "Is taxed"
         tax: "Tax Fee"
@@ -205,6 +207,7 @@ en:
       project_task_cost:
         category: "Cost category"
         price: "Price"
+        currency: "Currency"
         memo: "Memo"
         payment_way: "Payment way"
         payment_status: "Payment status"
