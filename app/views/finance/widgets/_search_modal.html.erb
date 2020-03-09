@@ -58,7 +58,15 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
-                        <%= submit_tag t('action.search_and_export'), :class => 'btn btn-warning' %>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <%= t('action.search_and_export') %>
+                            </button>
+                            <div class="dropdown-menu">
+                                <%= submit_tag '中文模板', :class => 'dropdown-item' %>
+                                <%= submit_tag '英文模板', :class => 'dropdown-item' %>
+                            </div>
+                        </div>
                         <%= submit_tag t('action.search'), :class => 'btn btn-submit' %>
                     </div>
                 <% end %>

@@ -35,6 +35,11 @@ class ProjectTask < ApplicationRecord
     project.company.contracts.available.order(:started_at => :desc).first
   end
 
+  # 收费小时(用于财务表格导出)
+  def charge_hour
+    (active_contract.priced_duration(duration) / 60.0).round(2)
+  end
+
   private
   def setup
     self.status ||= 'ongoing'         # init

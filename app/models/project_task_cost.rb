@@ -24,6 +24,15 @@ class ProjectTaskCost < ApplicationRecord
 
   before_validation :setup, :on => :create
 
+  # 用于表格导出
+  def bank_or_alipay
+    if self.payment_info['category'] == 'alipay'
+      CandidatePaymentInfo::CATEGORY['alipay']
+    elsif self.payment_info['category'] == 'unionpay'
+      self.payment_info['bank']
+    end
+  end
+
   private
   def setup
     self.payment_status ||= 'unpaid'  # init

@@ -45,6 +45,16 @@ class Candidate < ApplicationRecord
     end
   end
 
+  # English name form - Mr./Miss sb.
+  def mr_name
+    _mr_   = gender == 'female' ? 'Miss' : 'Mr.'
+    _name_ = last_name
+    if /\p{Han}+/.match(last_name)
+      _name_ = Pinyin.t(last_name).capitalize rescue last_name
+    end
+    "#{_mr_} #{_name_}"
+  end
+
   def latest_work_experience
     experiences.work.order(:started_at => :desc).first
   end

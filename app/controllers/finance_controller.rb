@@ -20,10 +20,14 @@ class FinanceController < ApplicationController
                                 params[:company].strip, "%#{params[:company].strip}%")
       query = query.joins(:project).where('projects.company_id' => companies.ids)
     end
-    if params[:commit] == t('action.search_and_export')
-      export_project_tasks(query)
-      return
+
+    # export excel files
+    case params[:commit]
+      when '中文模板' then export_project_tasks(query, category='cn') and return
+      when '英文模板' then export_project_tasks(query, category='en') and return
+      else nil
     end
+
     @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
@@ -63,7 +67,7 @@ class FinanceController < ApplicationController
     params.require(:project_task).permit(:actual_price, :charge_status, :payment_status)
   end
 
-  def export_project_tasks(query)
+  def export_project_tasks(query, category='cn')
     query_limit = 1000  # export data limit
     if query.count > query_limit
       flash[:error] = "导出数据条目过多, 当前: #{query.count}, 最大: #{query_limit}"
@@ -73,7 +77,7 @@ class FinanceController < ApplicationController
     template_path = 'public/templates/finance_template.xlsx'
     raise 'template file not found' unless File.exist?(template_path)
 
-    book = ::RubyXL::Parser.parse(template_path)              # read from template file
+    book = ::RubyXL::Parser.parse(template_path)                      # read from template file
     sheet = book[0]
 
     query.each_with_index do |task, index|
@@ -83,18 +87,62 @@ class FinanceController < ApplicationController
       sheet.add_cell(row, 2, task.project.code)                       # 项目代码/Project code
       sheet.add_cell(row, 3, task.project.clients.first.try(:name))   # 负责人/Seat
       sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M%p'))  # 日期/Date
-      sheet.add_cell(row, 5, task.interview_form)                     # 访谈类型
+      interview_form = case category
+                         when 'cn' then ProjectTask::INTERVIEW_FORM[task.interview_form]
+                         when 'en' then task.interview_form.capitalize
+                         else task.interview_form
+                       end
+      sheet.add_cell(row, 5, interview_form)                          # 访谈类型
       sheet.add_cell(row, 6, "##{task.candidate.uid}")                # 专家编号/Expert UID
-      sheet.add_cell(row, 7, task.candidate.name)                     # 专家姓名/Expert name
+      candidate_name = case category
+                         when 'cn' then task.candidate.name
+                         when 'en' then task.candidate.mr_name
+                         else task.candidate.name
+                       end
+      sheet.add_cell(row, 7, candidate_name)                          # 专家姓名/Expert name
       exp = task.candidate.latest_work_experience
       sheet.add_cell(row, 8, exp.try(:org_cn))                        # 专家公司名称/Expert company
       sheet.add_cell(row, 9, exp.try(:title))                         # 专家职位/Expert title
       sheet.add_cell(row, 10, '')                                     # 专家级别/Expert level(取值待定)
+      sheet.add_cell(row, 11, '')                                     # 费率/Rate(取值待定)
+      sheet.add_cell(row, 12, task.duration)                          # 访谈时长/Duration
+      sheet.add_cell(row, 13, task.charge_hour)                       # 收费小时/Charge Hour
+      sheet.add_cell(row, 14, task.total_price)                       # 总费用/Fee
+      sheet.add_cell(row, 15, task.currency)                          # 币种/Currency
+      sheet.add_cell(row, 16, '')                                     # 备注/Comment
+      sheet.add_cell(row, 17, task.is_shorthand ? 'Y' : 'N')          # 速记/Shorthand
+      sheet.add_cell(row, 18, '')                                     # 新专家/New Expert
+      pm_user = task.project.pm_users.first
+      sheet.add_cell(row, 19, pm_user.name_cn) if pm_user             # 项目经理/PM
+      sheet.add_cell(row, 20, '')                                     # 专家招募/Research
+      sheet.add_cell(row, 21, task.candidate.cpt)                     # 专家基础费率
+      # 支出信息
+      expert_cost = task.costs.where(category: 'expert').first
+      if expert_cost
+        sheet.add_cell(row, 22, expert_cost.price)                         # 专家费/Expert Fee
+        sheet.add_cell(row, 23, expert_cost.payment_info['username'])      # 账号名/Account name(Username)
+        sheet.add_cell(row, 24, expert_cost.bank_or_alipay)                # 银行或者支付宝/Bank&Alipay
+        sheet.add_cell(row, 25, expert_cost.payment_info['account'])       # 账号/Account
+        sheet.add_cell(row, 26, expert_cost.payment_info['sub_branch'])    # 支行备注/Fee Comment
+      end
+      recommend_cost = task.costs.where(category: 'recommend').first
+      if recommend_cost
+        sheet.add_cell(row, 27, recommend_cost.price)                       # 推荐费/Recommend Fee
+        sheet.add_cell(row, 28, recommend_cost.payment_info['username'])    # 推荐人账号名
+        sheet.add_cell(row, 29, recommend_cost.bank_or_alipay)              # 推荐人银行或支付宝/Bank&Alipay
+        sheet.add_cell(row, 30, recommend_cost.payment_info['account'])     # 推荐人帐号/Account
+        sheet.add_cell(row, 31, recommend_cost.payment_info['sub_branch'])  # 推荐人支行备注/Sub-branch remarks
+      end
+      translation_cost = task.costs.where(category: 'translation').first
+      if translation_cost
+        sheet.add_cell(row, 32, translation_cost.price)                     # 翻译费/Translation
+      end
+      sheet.add_cell(row, 33, '')                                           # 备注/Remark
     end
 
     file_dir = "public/export/#{Time.now.strftime('%y%m%d')}"
     FileUtils.mkdir_p file_dir unless File.exist? file_dir
-    file_path = "#{file_dir}/finance_#{current_user.id}_#{Time.now.strftime('%H%M%S')}.xlsx"
+    file_path = "#{file_dir}/finance_#{category}_#{current_user.id}_#{Time.now.strftime('%H%M%S')}.xlsx"
     book.write file_path
     send_file file_path
   end
