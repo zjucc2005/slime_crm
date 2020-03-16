@@ -28,3 +28,23 @@ window.addExpertToProject = function(){
         window.location.href = '/projects/add_experts?' + params;
     }
 };
+
+window.batchUpdateChargeStatus = function(){
+    var uids = $("input[name='uids[]']:checked");
+    if(uids.length === 0){
+        alert('请至少选择一个条目');
+    }else{
+        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+        window.location.href = '/finance/batch_update_charge_status?' + params;
+    }
+};
+
+window.batchUpdatePaymentStatus = function(){
+    var uids = $("input[name='uids[]']:checked");
+    if(uids.length === 0){
+        alert('请至少选择一个条目');
+    }else{
+        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+        window.location.href = '/finance/batch_update_payment_status?' + params;
+    }
+};

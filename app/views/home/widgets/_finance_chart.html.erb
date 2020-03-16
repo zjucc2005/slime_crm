@@ -1,0 +1,37 @@
+<!-- finance chart -->
+<div class="col-lg-9 col-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">Finance chart</h6>
+            <div class="dropdown dropleft" style="line-height: 1.2;">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    <%= fa_icon_tag('cog') %>
+                </a>
+                <div class="dropdown-menu">
+                    <% year = Time.now.year %>
+                    <%= link_to load_finance_chart_path(mode: 'month', year: year), :remote => true, :class => 'dropdown-item' do %>
+                        <i class="fa fa-chart-line text-primary"></i> 按月统计 - <%= year %>
+                    <% end %>
+                    <%= link_to load_finance_chart_path(mode: 'week'), :remote => true, :class => 'dropdown-item' do %>
+                        <i class="fa fa-chart-line text-success"></i> 按周统计 - <%= year %>
+                    <% end %>
+                    <%= link_to load_finance_chart_path(mode: 'month', year: year - 1), :remote => true, :class => 'dropdown-item' do %>
+                        <i class="fa fa-chart-line text-primary"></i> 按月统计 - <%= year - 1 %>
+                    <% end %>
+                    <%= link_to load_finance_chart_path(mode: 'week', year: year - 1), :remote => true, :class => 'dropdown-item' do %>
+                        <i class="fa fa-chart-line text-success"></i> 按周统计 - <%= year - 1 %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="finance_chart" style="height: 300px;">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $.get('load_finance_chart.js');
+    });
+</script>

@@ -58,13 +58,37 @@ class FinanceController < ApplicationController
     end
   end
 
+  # GET /finance/batch_update_charge_status
+  def batch_update_charge_status
+    @project_tasks = ProjectTask.where(id: params[:uids], charge_status: 'unpaid')
+    ActiveRecord::Base.transaction do
+      @project_tasks.each do |task|
+        task.update(charge_status: 'paid')
+      end
+    end
+    flash[:success] = t(:operation_succeeded)
+    redirect_to finance_index_path
+  end
+
+  # GET /finance/batch_update_payment_status
+  def batch_update_payment_status
+    @project_tasks = ProjectTask.where(id: params[:uids], payment_status: 'unpaid')
+    ActiveRecord::Base.transaction do
+      @project_tasks.each do |task|
+        task.update(payment_status: 'paid')
+      end
+    end
+    flash[:success] = t(:operation_succeeded)
+    redirect_to finance_index_path
+  end
+
   private
   def load_project_task
     @project_task = ProjectTask.find(params[:id])
   end
 
   def project_task_params
-    params.require(:project_task).permit(:actual_price, :charge_status, :payment_status)
+    params.require(:project_task).permit(:actual_price, :shorthand_price, :charge_status, :payment_status)
   end
 
   def export_project_tasks(query, category='cn')

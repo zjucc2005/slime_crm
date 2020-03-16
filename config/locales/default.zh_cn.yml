@@ -64,6 +64,14 @@ zh_cn:
     submit_and_confirm: "提交确认"
     submit_and_continue: "提交并继续创建"
     update: "更新"
+    update_model: "更新%{model}"
+    update_batch_model: "批量更新%{model}"
+
+  dashboard:
+    total_experts: "专家总数"
+    total_projects: "项目总数"
+    total_tasks: "任务总数"
+    total_staffs: "员工总数"
 
   will_paginate:
     previous_label: "上一页"

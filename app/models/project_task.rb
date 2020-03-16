@@ -27,6 +27,7 @@ class ProjectTask < ApplicationRecord
   validates_inclusion_of :interview_form, :in => INTERVIEW_FORM.keys
 
   before_validation :setup, :on => [:create, :update]
+  after_update :sync_payment_status
   # Scopes
   scope :interview, -> { where( category: 'interview') }
 
@@ -46,15 +47,20 @@ class ProjectTask < ApplicationRecord
     self.charge_status ||= 'unpaid'   # init
     self.payment_status ||= 'unpaid'  # init
 
-    self.ended_at       = started_at + duration.to_i * 60                         # 结束时间 = 开始时间 + 时长
-    self.charge_rate    = active_contract.charge_rate                             # 收费倍率
-    self.base_price     = active_contract.base_price(duration.to_i)               # 基础收费
-    self.currency       = active_contract.currency                                # 货币
-    self.actual_price ||= base_price                                              # 实际收费
-    self.is_taxed       = active_contract.is_taxed                                # 是否含税
-    self.tax            = is_taxed ? 0 : actual_price * active_contract.tax_rate  # 税费 = 实际收费 * 税率
+    if duration.present?
+      self.ended_at       = started_at + duration.to_i * 60                         # 结束时间 = 开始时间 + 时长
+      self.charge_rate    = active_contract.charge_rate                             # 收费倍率
+      self.base_price     = active_contract.base_price(duration.to_i)               # 基础收费
+      self.actual_price ||= base_price                                              # 实际收费
+      self.currency       = active_contract.currency                                # 货币
+      self.is_taxed       = active_contract.is_taxed                                # 是否含税
+      self.tax            = is_taxed ? 0 : actual_price * active_contract.tax_rate  # 税费 = 实际收费 * 税率
+    end
     self.shorthand_price = 0 unless is_shorthand                                  # 速记费用
-
     self.total_price    = actual_price.to_f + tax.to_f + shorthand_price.to_f     # 总费用
+  end
+
+  def sync_payment_status
+    costs.map{|cost| cost.update(payment_status: self.payment_status) }
   end
 end

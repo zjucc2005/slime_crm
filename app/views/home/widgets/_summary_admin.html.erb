@@ -1,0 +1,44 @@
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol blue">
+            <%= fa_icon_tag('user-circle') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= @total_experts %></h1>
+            <p><%= t('dashboard.total_experts') %></p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol yellow">
+            <%= fa_icon_tag('map') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= @total_projects %></h1>
+            <p><%= t('dashboard.total_projects') %></p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol red">
+            <%= fa_icon_tag('tags') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= @total_tasks %></h1>
+            <p><%= t('dashboard.total_tasks') %></p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol purple">
+            <%= fa_icon_tag('users') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= @total_staffs %></h1>
+            <p><%= t('dashboard.total_staffs') %></p>
+        </div>
+    </div>
+</div>

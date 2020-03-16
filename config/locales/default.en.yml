@@ -64,6 +64,14 @@ en:
     submit_and_confirm: "Submit and confirm"
     submit_and_next: "Submit and continue"
     update: "Update"
+    update_model: "Update %{model}"
+    update_batch_model: "Batch update %{model}"
+
+  dashboard:
+    total_experts: "Total Experts"
+    total_projects: "Total Projects"
+    total_tasks: "Total Tasks"
+    total_staffs: "Total Staffs"
 
   will_paginate:
     previous_label: "&#8592; Previous"

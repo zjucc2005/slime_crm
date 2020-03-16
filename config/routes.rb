@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: 'home#index'
+  get '/load_finance_chart', to: 'home#load_finance_chart'
 
   resources :users do
     post :admin_create,      on: :collection  # create users by admin
@@ -78,7 +79,10 @@ Rails.application.routes.draw do
     delete :remove_cost, on: :member  # 删除支出信息
   end
 
-  resources :finance
+  resources :finance do
+    get :batch_update_charge_status,  on: :collection
+    get :batch_update_payment_status, on: :collection
+  end
 
   resources :location_data do
     get :autocomplete_city, on: :collection

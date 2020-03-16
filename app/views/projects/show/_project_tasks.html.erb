@@ -1,6 +1,6 @@
 <div class="card card-inner mb-3">
     <div class="card-header">
-        <h5><%= fa_icon_tag('street-view') %> <%= mt(:project_task) %></h5>
+        <h5><%= fa_icon_tag('tags') %> <%= mt(:project_task) %></h5>
         <%= link_to add_project_task_project_path(@project), :class => 'btn btn-primary btn-xs' do %>
             <%= fa_icon_tag('plus') %> <%= t('action.add') %>
         <% end if can?(:add_project_task, Project) && @project.can_add_task? %>

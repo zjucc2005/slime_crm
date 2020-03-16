@@ -1,10 +1,11 @@
 <div class="card p-2 mb-2 d-flex flex-row justify-content-between">
     <div>
-        <!--
-        <%= link_to '', :class => 'btn btn-warning' do %>
-            <%= fa_icon_tag('file-excel-o') %> <%= t('action.export_excel') %>(dev)
+        <%= link_to '', :class => 'btn btn-default', :onclick => 'batchUpdateChargeStatus();' do %>
+            <%= fa_icon_tag('cny') %> <%= t('action.update_batch_model', :model => mt(:project_task, :charge_status)) %>
         <% end %>
-        -->
+        <%= link_to '', :class => 'btn btn-default', :onclick => 'batchUpdatePaymentStatus();' do %>
+            <%= fa_icon_tag('cny') %> <%= t('action.update_batch_model', :model => mt(:project_task, :payment_status)) %>
+        <% end %>
     </div>
     <%= render :partial => 'finance/widgets/search_modal' %>
 </div>
