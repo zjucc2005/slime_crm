@@ -1,0 +1,10 @@
+<div class="d-inline-block">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <%= fa_icon_tag('cny') %> <%= t('action.update_batch_model', :model => mt(:project_task, :payment_status)) %>
+    </button>
+    <div class="dropdown-menu">
+        <%= link_to '', :class => 'dropdown-item', :onclick => "batchUpdatePaymentStatus('paid');" do %>
+            <%= project_task_payment_status_badge('paid') %>
+        <% end %>
+    </div>
+</div>

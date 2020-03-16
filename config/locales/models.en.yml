@@ -203,6 +203,11 @@ en:
         is_shorthand: "Is shorthand"
         shorthand_price: "Shorthand Fee"
         is_recorded: "Is recorded"
+        billed_at: "Billed at"
+        charged_at: "Charged at"
+        charge_days: "Charge days"
+        charge_deadline: "Charge deadline"
+        paid_at: "Paid at"
 
       project_task_cost:
         category: "Cost category"

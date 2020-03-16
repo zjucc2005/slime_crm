@@ -13,8 +13,8 @@
                 <tr>
                     <th><%= mt(:project_task, :id) %></th>
                     <th><%= mt(:project_task, :category) %></th>
-                    <th><%= mt(:expert) %></th>
                     <th><%= mt(:project_task, :interview_form) %></th>
+                    <th><%= mt(:expert) %></th>
                     <th><%= mt(:project_task, :started_at) %></th>
                     <th><%= mt(:project_task, :duration) %></th>
                     <th class="action"><%= t(:operation) %></th>
@@ -25,8 +25,8 @@
                     <tr>
                         <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
                         <td><%= project_task_category_badge(task.category) %></td>
-                        <td><%= task.candidate.name %></td>
                         <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+                        <td><%= task.expert.name %></td>
                         <td><%= task.started_at.strftime('%F %H:%M') %></td>
                         <td><%= task.duration %></td>
                         <td class="action">

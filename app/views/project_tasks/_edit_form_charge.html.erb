@@ -5,13 +5,17 @@
         <%= f.text_field :category, :value => ProjectTask::CATEGORY[@project_task.category], :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
-        <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
-        <%= f.text_field :candidate_id, :value => @project_task.candidate.name, :disabled => true, :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-12 form-group">
         <%= f.label :interview_form %><span class="text-red">*</span>
         <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
                                  :required => true, :class => 'form-control select2' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
+        <%= f.text_field :expert_id, :value => @project_task.expert.name, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :client, t(:client_contact) %><span class="text-red">*</span>
+        <%= f.text_field :client_id, :value => @project_task.client.name, :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :started_at %><span class="text-red">*</span>

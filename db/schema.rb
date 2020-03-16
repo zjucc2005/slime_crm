@@ -186,14 +186,20 @@ ActiveRecord::Schema.define(version: 2020_03_07_111757) do
     t.bigint "created_by"
     t.string "category"
     t.bigint "project_id"
-    t.bigint "candidate_id"
+    t.bigint "expert_id"
+    t.bigint "client_id"
     t.string "status"
     t.string "interview_form"
     t.integer "duration"
     t.datetime "started_at"
     t.datetime "ended_at"
     t.string "charge_status"
+    t.datetime "billed_at"
+    t.datetime "charged_at"
+    t.integer "charge_days"
+    t.datetime "charge_deadline"
     t.string "payment_status"
+    t.datetime "paid_at"
     t.decimal "total_price", precision: 10, scale: 2
     t.decimal "charge_rate", precision: 10, scale: 2
     t.decimal "base_price", precision: 10, scale: 2
@@ -206,7 +212,6 @@ ActiveRecord::Schema.define(version: 2020_03_07_111757) do
     t.boolean "is_recorded", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["candidate_id"], name: "index_project_tasks_on_candidate_id"
     t.index ["project_id"], name: "index_project_tasks_on_project_id"
   end
 

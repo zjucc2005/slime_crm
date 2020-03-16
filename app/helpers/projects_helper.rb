@@ -23,8 +23,12 @@ module ProjectsHelper
     ProjectTask::STATUS.select{|k,v| %w[finished cancelled].include?(k)}.to_a.map(&:reverse)
   end
 
-  def project_task_candidate_options
+  def project_task_expert_options
     @project.experts.pluck(:name, :id)
+  end
+
+  def project_task_client_options
+    @project.clients.pluck(:name, :id)
   end
 
   def project_task_cost_category_options(project_task)
@@ -50,7 +54,7 @@ module ProjectsHelper
   end
 
   def project_task_charge_status_badge(category)
-    dict = { :paid => 'success', :unpaid => 'danger' }.stringify_keys
+    dict = { :paid => 'success', :billed => 'warning', :unbilled => 'danger' }.stringify_keys
     content_tag :span, ProjectTask::CHARGE_STATUS[category] || category, :class => "badge badge-#{dict[category] || 'secondary' }"
   end
 

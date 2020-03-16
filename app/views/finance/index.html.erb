@@ -1,11 +1,7 @@
 <div class="card p-2 mb-2 d-flex flex-row justify-content-between">
     <div>
-        <%= link_to '', :class => 'btn btn-default', :onclick => 'batchUpdateChargeStatus();' do %>
-            <%= fa_icon_tag('cny') %> <%= t('action.update_batch_model', :model => mt(:project_task, :charge_status)) %>
-        <% end %>
-        <%= link_to '', :class => 'btn btn-default', :onclick => 'batchUpdatePaymentStatus();' do %>
-            <%= fa_icon_tag('cny') %> <%= t('action.update_batch_model', :model => mt(:project_task, :payment_status)) %>
-        <% end %>
+        <%= render :partial => 'finance/widgets/batch_update_charge_status' %>
+        <%= render :partial => 'finance/widgets/batch_update_payment_status' %>
     </div>
     <%= render :partial => 'finance/widgets/search_modal' %>
 </div>
@@ -39,7 +35,7 @@
                     <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
                     <td><%= truncate(task.project.code, length: 10) %></td>
                     <td><%= truncate(task.project.company.name_abbr, length: 10) %></td>
-                    <td><%= task.candidate.name %></td>
+                    <td><%= task.expert.name %></td>
                     <td><%= project_task_category_badge(task.category) %></td>
                     <td><%= project_task_interview_form_badge(task.interview_form) %></td>
                     <td><%= task.actual_price %></td>

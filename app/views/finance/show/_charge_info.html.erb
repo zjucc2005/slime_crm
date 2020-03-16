@@ -19,7 +19,12 @@
         </div>
         <%= content_tag :span, currency_display(@project_task.currency), :class => 'form-control' %>
     </div>
-    <div class="col-lg-3 col-6"></div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :charge_days) %></span>
+        </div>
+        <%= content_tag :span, @project_task.charge_days, :class => 'form-control' %>
+    </div>
     <!-- line 2 -->
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
@@ -75,5 +80,17 @@
             <span class="input-group-text"><%= mt(:project_task, :charge_status) %></span>
         </div>
         <%= content_tag :span, project_task_charge_status_badge(@project_task.charge_status), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :billed_at) %></span>
+        </div>
+        <%= content_tag :span, @project_task.billed_at.try(:strftime, '%F'), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :charged_at) %></span>
+        </div>
+        <%= content_tag :span, @project_task.charged_at.try(:strftime, '%F'), :class => 'form-control' %>
     </div>
 </div>

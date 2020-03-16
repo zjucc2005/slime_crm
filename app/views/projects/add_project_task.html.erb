@@ -19,13 +19,18 @@
                     <%= f.select :category, project_task_category_options, { :include_blank => false }, :class => 'form-control select2' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
-                    <%= f.select :candidate_id, project_task_candidate_options, { :prompt => default_prompt },
+                    <%= f.label :interview_form, mt(:project_task, :interview_form) %><span class="text-red">*</span>
+                    <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
                                  :required => true, :class => 'form-control select2' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :interview_form, mt(:project_task, :interview_form) %><span class="text-red">*</span>
-                    <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
+                    <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
+                    <%= f.select :expert_id, project_task_expert_options, { :prompt => default_prompt },
+                                 :required => true, :class => 'form-control select2' %>
+                </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :client, t(:client_contact) %><span class="text-red">*</span>
+                    <%= f.select :client_id, project_task_client_options, { :prompt => default_prompt },
                                  :required => true, :class => 'form-control select2' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">

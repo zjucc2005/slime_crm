@@ -3,8 +3,8 @@ class ProjectTask < ApplicationRecord
   # ENUM
   CATEGORY = { :interview => '访谈' }.stringify_keys
   STATUS = { :ongoing  => '进展中', :finished => '已结束', :cancelled => '已取消'}.stringify_keys
-  CHARGE_STATUS = { :paid => '已收费', :unpaid => '未收费'}.stringify_keys
-  PAYMENT_STATUS = { :paid => '已支付', :unpaid => '未支付' }.stringify_keys
+  CHARGE_STATUS = { :unbilled => '未出账', :billed => '已出账', :paid => '已收费'}.stringify_keys
+  PAYMENT_STATUS = { :unpaid => '未支付', :paid => '已支付' }.stringify_keys
   INTERVIEW_FORM = {
     :telephone      => '电话',
     :'face-to-face' => '面谈',
@@ -16,7 +16,9 @@ class ProjectTask < ApplicationRecord
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
   belongs_to :project, :class_name => 'Project'
-  belongs_to :candidate, :class_name => 'Candidate'
+  # belongs_to :candidate, :class_name => 'Candidate'
+  belongs_to :expert, :class_name => 'Candidate', :foreign_key => :expert_id
+  belongs_to :client, :class_name => 'Candidate', :foreign_key => :client_id
 
   has_many :costs, :class_name => 'ProjectTaskCost'
 
@@ -44,20 +46,22 @@ class ProjectTask < ApplicationRecord
   private
   def setup
     self.status ||= 'ongoing'         # init
-    self.charge_status ||= 'unpaid'   # init
+    self.charge_status ||= 'unbilled'   # init
     self.payment_status ||= 'unpaid'  # init
 
     if duration.present?
-      self.ended_at       = started_at + duration.to_i * 60                         # 结束时间 = 开始时间 + 时长
-      self.charge_rate    = active_contract.charge_rate                             # 收费倍率
-      self.base_price     = active_contract.base_price(duration.to_i)               # 基础收费
-      self.actual_price ||= base_price                                              # 实际收费
-      self.currency       = active_contract.currency                                # 货币
-      self.is_taxed       = active_contract.is_taxed                                # 是否含税
-      self.tax            = is_taxed ? 0 : actual_price * active_contract.tax_rate  # 税费 = 实际收费 * 税率
+      contract = active_contract
+      self.charge_days    = contract.payment_days                              # 账期(天数)
+      self.ended_at       = started_at + duration.to_i * 60                    # 结束时间 = 开始时间 + 时长
+      self.charge_rate    = contract.charge_rate                               # 收费倍率
+      self.base_price     = contract.base_price(duration.to_i)                 # 基础收费
+      self.actual_price ||= base_price                                         # 实际收费
+      self.currency       = contract.currency                                  # 货币
+      self.is_taxed       = contract.is_taxed                                  # 是否含税
+      self.tax            = is_taxed ? 0 : actual_price * contract.tax_rate    # 税费 = 实际收费 * 税率
     end
-    self.shorthand_price = 0 unless is_shorthand                                  # 速记费用
-    self.total_price    = actual_price.to_f + tax.to_f + shorthand_price.to_f     # 总费用
+    self.shorthand_price = 0 unless is_shorthand                               # 速记费用
+    self.total_price    = actual_price.to_f + tax.to_f + shorthand_price.to_f  # 总费用
   end
 
   def sync_payment_status
