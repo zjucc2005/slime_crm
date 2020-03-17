@@ -43,6 +43,17 @@ class ProjectTask < ApplicationRecord
     (active_contract.priced_duration(duration) / 60.0).round(2)
   end
 
+  def set_charge_timestamp
+    case charge_status
+      when 'billed' then
+        self.billed_at = Time.now
+        self.charge_deadline = billed_at + charge_days.to_i.days
+      when 'paid'   then
+        self.charged_at = Time.now
+      else nil
+    end
+  end
+
   private
   def setup
     self.status ||= 'ongoing'         # init
@@ -60,7 +71,7 @@ class ProjectTask < ApplicationRecord
       self.is_taxed       = contract.is_taxed                                  # 是否含税
       self.tax            = is_taxed ? 0 : actual_price * contract.tax_rate    # 税费 = 实际收费 * 税率
     end
-    self.shorthand_price = 0 unless is_shorthand                               # 速记费用
+    self.shorthand_price ||= 0                                                 # 速记费用
     self.total_price    = actual_price.to_f + tax.to_f + shorthand_price.to_f  # 总费用
   end
 

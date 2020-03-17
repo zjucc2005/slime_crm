@@ -46,7 +46,14 @@ class FinanceController < ApplicationController
     begin
       load_project_task
 
-      if @project_task.update(project_task_params)
+      @project_task.actual_price    = params[:project_task][:actual_status]
+      @project_task.shorthand_price = params[:project_task][:shorthand_status]
+      @project_task.charge_status   = params[:project_task][:charge_status]
+      @project_task.payment_status  = params[:project_task][:payment_status]
+      if @project_task.charge_status_changed?
+        @project_task.set_charge_timestamp
+      end
+      if @project_task.save
         flash[:success] = t(:operation_succeeded)
         redirect_to finance_path(@project_task)
       else
@@ -60,10 +67,21 @@ class FinanceController < ApplicationController
 
   # GET /finance/batch_update_charge_status
   def batch_update_charge_status
-    @project_tasks = ProjectTask.where(id: params[:uids], charge_status: 'unpaid')
-    ActiveRecord::Base.transaction do
-      @project_tasks.each do |task|
-        task.update(charge_status: 'paid')
+    if params[:status] == 'billed'
+      ActiveRecord::Base.transaction do
+        ProjectTask.where(id: params[:uids], charge_status: 'unbilled').each do |task|
+          task.charge_status = 'billed'
+          task.set_charge_timestamp
+          task.save!
+        end
+      end
+    elsif params[:status] == 'paid'
+      ActiveRecord::Base.transaction do
+        ProjectTask.where(id: params[:uids], charge_status: 'billed').each do |task|
+          task.charge_status = 'paid'
+          task.set_charge_timestamp
+          task.save!
+        end
       end
     end
     flash[:success] = t(:operation_succeeded)
@@ -72,10 +90,11 @@ class FinanceController < ApplicationController
 
   # GET /finance/batch_update_payment_status
   def batch_update_payment_status
-    @project_tasks = ProjectTask.where(id: params[:uids], payment_status: 'unpaid')
-    ActiveRecord::Base.transaction do
-      @project_tasks.each do |task|
-        task.update(payment_status: 'paid')
+    if params[:status] == 'paid'
+      ActiveRecord::Base.transaction do
+        ProjectTask.where(id: params[:uids], payment_status: 'unpaid').each do |task|
+          task.update(payment_status: 'paid')
+        end
       end
     end
     flash[:success] = t(:operation_succeeded)
