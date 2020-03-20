@@ -16,7 +16,6 @@ class ProjectTask < ApplicationRecord
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
   belongs_to :project, :class_name => 'Project'
-  # belongs_to :candidate, :class_name => 'Candidate'
   belongs_to :expert, :class_name => 'Candidate', :foreign_key => :expert_id
   belongs_to :client, :class_name => 'Candidate', :foreign_key => :client_id
 
