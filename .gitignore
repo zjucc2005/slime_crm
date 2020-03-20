@@ -26,6 +26,8 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials.yml.enc
+# EDITOR="mate --wait" bin/rails credentials:edit
 
 /public/packs
 /public/packs-test
