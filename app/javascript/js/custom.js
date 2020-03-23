@@ -1,7 +1,6 @@
 // import all custom js files
 import './custom.candidate'
 import './custom.project'
-//import './jquery.datetimepicker'
 
 
 // DOMContentLoaded events ----------------------------------------------------------------------
@@ -9,7 +8,7 @@ $(document).on('turbolinks:load', function(){
     setTimeout("$('.alert').css('display','none')",5000);
     $('.datetimepicker').datetimePicker();
     $('.datepicker').datePicker();
-    $('.monthpicker').monthPicker();
+    //$('.monthpicker').monthPicker();
     if($('.select2-container').length){
         $('.select2-container').remove();  // turbolinks:reload + select2 重复加载bug修复
     }
@@ -28,70 +27,27 @@ window.selectAll = function(ele, name){
     // }
 };
 
-//$.fn.datePicker = function(){
-//    $(this).datetimepicker(
-//        {
-//            format: 'Y-m-d',
-//            timepicker: false,
-//            allowBlank: true
-//        }
-//    );
-//};
-//
-//$.fn.datetimePicker = function(){
-//    $(this).datetimepicker(
-//        {
-//            format: 'Y-m-d H:i',
-//            timepicker: true,
-//            allowBlank: true
-//        }
-//    );
-//};
 // ===== Date & Time picker =====
-
-// date & time
-$.fn.datetimePicker = function(){
-    $(this).datetimepicker({
-        language: 'zh-CN',
-        fontAwesome:'font-awesome',
-        autoclose: true,
-        //pickerPosition: 'bottom-left',
-        todayBtn: true,
-
-        format: 'yyyy-mm-dd hh:ii',
-        startView: 'month',
-        minView: 'hour'
-    });
-};
-
-// date
 $.fn.datePicker = function(){
-    $(this).datetimepicker({
-        language: 'zh-CN',
-        fontAwesome:'font-awesome',
-        autoclose: true,
-        //pickerPosition: 'bottom-left',
-        todayBtn: true,
-
-        format: 'yyyy-mm-dd',
-        startView: 'month',
-        minView: 'month'
-    });
+    $(this).datetimepicker(
+        {
+            globalLocale: 'ch',
+            format: 'Y-m-d',
+            timepicker: false,
+            allowBlank: true
+        }
+    );
 };
 
-// month
-$.fn.monthPicker = function(){
-    $(this).datetimepicker({
-        language: 'zh-CN',
-        fontAwesome:'font-awesome',
-        autoclose: true,
-        //pickerPosition: 'bottom-left',
-        todayBtn: false,
-
-        format: 'yyyy-mm',
-        startView: 'year',
-        minView: 'year'
-    });
+$.fn.datetimePicker = function(){
+    $(this).datetimepicker(
+        {
+            globalLocale: 'ch',
+            format: 'Y-m-d H:i',
+            timepicker: true,
+            allowBlank: true
+        }
+    );
 };
 
 // form activate/deactivate
