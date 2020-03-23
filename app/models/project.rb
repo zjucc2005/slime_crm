@@ -19,8 +19,7 @@ class Project < ApplicationRecord
   has_many :project_tasks, :class_name => 'ProjectTask'
 
   # Validations
-  validates_presence_of :name, :code
-  validates_uniqueness_of :code, :case_sensitive => false
+  validates_presence_of :name
   validates_inclusion_of :status, :in => STATUS.keys
 
   before_validation :setup, :on => :create
@@ -58,7 +57,8 @@ class Project < ApplicationRecord
   end
 
   def can_destroy?
-    %w[initialized].include?(status)
+    project_tasks.count == 0  # 只能删除没有任务的项目
+    # %w[initialized].include?(status)
   end
 
   def can_start?

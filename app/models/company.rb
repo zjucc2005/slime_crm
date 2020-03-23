@@ -30,6 +30,10 @@ class Company < ApplicationRecord
     contracts.available.count > 0
   end
 
+  def can_destroy?
+    false  # 公司删除条件待确定
+  end
+
   private
   def setup
     self.category ||= 'client'

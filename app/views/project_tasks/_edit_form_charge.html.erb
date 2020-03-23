@@ -19,8 +19,7 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :started_at %><span class="text-red">*</span>
-        <%= f.text_field :started_at, :value => @project_task.started_at.strftime('%F %H:%M'), :required => true,
-                                         :class => 'form-control datetimepicker' %>
+        <%= f.text_field :started_at, :value => @project_task.started_at.strftime('%F %H:%M'), :required => true, :class => 'form-control datetimepicker' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :duration, mt(:project_task, :duration) %><span class="text-red">*</span>
