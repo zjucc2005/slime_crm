@@ -1,6 +1,6 @@
 <div id="search_wrapper">
     <%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#searchModal'} do %>
-        <%= fa_icon_tag('search') %> <%= t('action.search') %>
+        <%= fa_icon_tag('search') %> <%= content_tag :span, t('action.search'), :class => 'd-lg-inline d-none' %>
     <% end %>
 
     <div id="searchModal" class="modal fade">

@@ -5,13 +5,16 @@ class CandidatesController < ApplicationController
 
   # GET /candidates
   def index
+    set_per_page
+
     query = Candidate.expert
     # query code here >>
     query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
     query = query.where('phone = :phone OR phone1 = :phone', { :phone => params[:phone].strip }) if params[:phone].present?
     query = query.where('email = :email OR email1 = :email', { :email => params[:email].strip }) if params[:email].present?
-    %w[is_available].each do |field|
-      query = query.where(field.to_sym => params[field.to_sym].strip) if params[field.to_sym].present?
+    if params[:is_available].present?
+      params[:is_available] = nil if params[:is_available] == 'nil'
+      query = query.where(is_available: params[:is_available])
     end
 
     if params[:term].present?
@@ -25,7 +28,7 @@ class CandidatesController < ApplicationController
       query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id').
         where(or_conditions.join(' OR '), { :term => "%#{params[:term].strip.upcase}%" }).distinct
     end
-    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /candidates/:id
@@ -189,7 +192,7 @@ class CandidatesController < ApplicationController
 
       if @client.update(candidate_params)
         flash[:success] = t(:operation_succeeded)
-        redirect_to company_path(@company)
+        redirect_with_return_to company_path(@company)
       else
         render :edit_client
       end

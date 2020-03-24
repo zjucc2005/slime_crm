@@ -13,18 +13,18 @@
                 <tr>
                     <th><%= mt(:candidate, :id) %></th>
                     <th><%= mt(:candidate, :name) %></th>
-                    <th><%= mt(:candidate, :phone) %></th>
-                    <th><%= mt(:candidate, :email) %></th>
+                    <th><%= mt(:candidate_experience, :company) %></th>
+                    <th><%= mt(:candidate_experience, :title) %></th>
                     <th class="action"><%= t(:operation) %></th>
                 </tr>
                 </thead>
                 <tbody>
                 <% experts.each do |expert| %>
                     <tr>
-                        <td><%= content_tag :span, "# #{expert.uid}", :class => 'text-gray' %></td>
-                        <td><%= expert.name %></td>
-                        <td><%= expert.phone %><br><%= expert.phone1 %></td>
-                        <td><%= expert.email %><br><%= expert.email1 %></td>
+                        <td><%= link_to "# #{expert.uid}", candidate_path(expert), :class => 'text-gray' %></td>
+                        <td><%= link_to expert.name, candidate_path(expert) %></td>
+                        <td><%= expert.latest_work_experience.try(:org_cn) %></td>
+                        <td><%= expert.latest_work_experience.try(:title) %></td>
                         <td class="action">
                             <%= link_to delete_expert_project_path(@project, expert_id: expert.id),
                                         :method => :delete, :data => { :confirm => t(:sure_to_remove) },

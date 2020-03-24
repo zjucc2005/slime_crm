@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-3 form-group">
                             <%= button_tag :type => 'submit', :class => 'btn btn-default btn-form-control w-100' do %>
-                                <%= fa_icon_tag('search') %> <%= t('action.search') %>
+                                <%= fa_icon_tag('search') %> <%= content_tag :span, t('action.search'), :class => 'd-lg-inline d-none' %>
                             <% end %>
                         </div>
                     </div>

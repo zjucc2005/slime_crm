@@ -17,6 +17,7 @@
                 <th><%= mt(:candidate, :phone) %></th>
                 <th><%= mt(:candidate, :email) %></th>
                 <th><%= mt(:candidate, :created_at) %></th>
+                <th><%= t(:operation) %></th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +31,7 @@
                     <td><%= client.phone %></td>
                     <td><%= client.email %></td>
                     <td><%= client.created_at.strftime('%F %T') %></td>
+                    <td><%= link_to t('action.edit'), edit_client_candidate_path(client, return_to: request.path), :class => 'btn btn-edit btn-xs' %></td>
                 </tr>
             <% end %>
             <tr>

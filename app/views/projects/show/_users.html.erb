@@ -34,8 +34,8 @@
                 <tbody>
                 <% users.each do |user| %>
                     <tr>
-                        <td><%= content_tag :span, "# #{user.uid}", :class => 'text-gray' %></td>
-                        <td><%= user.email %></td>
+                        <td><%= link_to "# #{user.uid}", user_path(user), :class => 'text-gray' %></td>
+                        <td><%= link_to user.email, user_path(user) %></td>
                         <td><%= user.name_cn %></td>
                         <td><%= user_role_badge(user.role) %></td>
                         <td class="action">

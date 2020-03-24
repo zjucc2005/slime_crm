@@ -22,8 +22,8 @@
                 <tbody>
                 <% clients.each do |client| %>
                     <tr>
-                        <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
-                        <td><%= client.name %></td>
+                        <td><%= link_to "# #{client.uid}", edit_client_candidate_path(client, return_to: request.path), :class => 'text-gray' %></td>
+                        <td><%= link_to client.name, edit_client_candidate_path(client, return_to: request.path) %></td>
                         <td><%= client.title %></td>
                         <td><%= client.phone %><br><%= client.phone1 %></td>
                         <td><%= client.email %><br><%= client.email1 %></td>

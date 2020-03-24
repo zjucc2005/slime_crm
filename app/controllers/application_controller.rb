@@ -26,4 +26,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_per_page(maxlength=100)
+    @per_page = params[:per_page] || 20
+    if params[:per_page].to_i > maxlength
+      @per_page = maxlength
+    else
+      @per_page = params[:per_page]
+    end
+  end
+
 end

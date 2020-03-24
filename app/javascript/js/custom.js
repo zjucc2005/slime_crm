@@ -8,7 +8,6 @@ $(document).on('turbolinks:load', function(){
     setTimeout("$('.alert').css('display','none')",5000);
     $('.datetimepicker').datetimePicker();
     $('.datepicker').datePicker();
-    //$('.monthpicker').monthPicker();
     if($('.select2-container').length){
         $('.select2-container').remove();  // turbolinks:reload + select2 重复加载bug修复
     }
@@ -31,7 +30,6 @@ window.selectAll = function(ele, name){
 $.fn.datePicker = function(){
     $(this).datetimepicker(
         {
-            globalLocale: 'ch',
             format: 'Y-m-d',
             timepicker: false,
             allowBlank: true
@@ -42,7 +40,6 @@ $.fn.datePicker = function(){
 $.fn.datetimePicker = function(){
     $(this).datetimepicker(
         {
-            globalLocale: 'ch',
             format: 'Y-m-d H:i',
             timepicker: true,
             allowBlank: true

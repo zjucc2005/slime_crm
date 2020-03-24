@@ -33,14 +33,6 @@
         <%= f.text_field :date_of_birth, :value => @candidate.date_of_birth.try(:strftime, '%F') ,:class => 'form-control datepicker', :placeholder => 'yyyy-mm-dd' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :city, mt(:candidate, :city) %>
-        <%= f.text_field :city, :class => 'form-control autocomplete-city' %>
-    </div>
-    <div class="col-lg-3 col-6 form-group">
-        <%= f.label :industry, mt(:candidate, :industry) %>
-        <%= f.text_field :industry, :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 form-group">
         <%= f.label :phone, mt(:candidate, :phone) %><span class="text-red">*</span>
         <%= f.text_field :phone, :required => true, :class => 'form-control' %>
     </div>
@@ -48,6 +40,15 @@
         <%= f.label :phone1, mt(:candidate, :phone1) %>
         <%= f.text_field :phone1, :class => 'form-control' %>
     </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :city, mt(:candidate, :city) %>
+        <%= f.text_field :city, :class => 'form-control autocomplete-city' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :industry, mt(:candidate, :industry) %>
+        <%= f.text_field :industry, :class => 'form-control' %>
+    </div>
+
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :email, mt(:candidate, :email) %><span class="text-red">*</span>
         <%= f.email_field :email, :required => true, :class => 'form-control' %>

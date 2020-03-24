@@ -31,6 +31,10 @@ module CandidatesHelper
     [[t(:true), 'true'], [t(:false), 'false'], [t(:pending), '']]
   end
 
+  def candidate_is_available_search_options
+    [[t(:true), 'true'], [t(:false), 'false'], [t(:pending), 'nil']]
+  end
+
   def work_exps
     params[:work_exp] || []
   end

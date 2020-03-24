@@ -1,6 +1,6 @@
 <div id="search_wrapper">
     <%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#searchModal'} do %>
-        <%= fa_icon_tag('search') %> <%= t('action.search') %>
+        <%= fa_icon_tag('search') %> <%= content_tag :span, t('action.search'), :class => 'd-lg-inline d-none' %>
     <% end %>
     <!--<button type="button" data-toggle="modal" data-target="#searchModal" class="float-btn btn-primary fa fa-search shadow"></button>-->
 
@@ -33,7 +33,7 @@
                             </div>
                             <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :is_available, mt(:candidate, :is_available) %>
-                                <%= select_tag :is_available, options_for_select(boolean_options, params[:is_available]), :prompt => default_prompt, :class => 'form-control select2' %>
+                                <%= select_tag :is_available, options_for_select(candidate_is_available_search_options, params[:is_available]), :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
                         </div>
                     </div>

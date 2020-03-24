@@ -97,6 +97,7 @@ en:
         ended_at: "Ended at"
         org_cn: "Company(CN)"
         org_en: "Company(EN)"
+        company: "Company"
         department: "Department"
         title: "Job title"
         description: "Description"

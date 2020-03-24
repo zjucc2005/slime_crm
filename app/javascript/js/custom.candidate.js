@@ -1,20 +1,11 @@
-//window.genExpertCard = function(){
-//    var uids = $("input[name='uids[]']:checked");
-//    if(uids.length === 0){
-//        alert('请至少选择一位专家');
-//    }else{
-//        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
-//        window.location.href = '/candidates/gen_card?' + params;
-//    }
-//};
-
 window.cardTemplate = function(){
     var uids = $("input[name='uids[]']:checked");
     if(uids.length === 0){
         alert('请至少选择一位专家');
     }else{
         var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
-        window.location.href = '/candidates/card_template?' + params;
+        //window.location.href = '/candidates/card_template?' + params;
+        window.open('/candidates/card_template?' + params);
     }
 };
 

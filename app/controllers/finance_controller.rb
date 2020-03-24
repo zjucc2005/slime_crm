@@ -136,21 +136,21 @@ class FinanceController < ApplicationController
                          else task.interview_form
                        end
       sheet.add_cell(row, 5, interview_form)                          # 访谈类型
-      sheet.add_cell(row, 6, "##{task.candidate.uid}")                # 专家编号/Expert UID
-      candidate_name = case category
-                         when 'cn' then task.candidate.name
-                         when 'en' then task.candidate.mr_name
-                         else task.candidate.name
+      sheet.add_cell(row, 6, "##{task.expert.uid}")                   # 专家编号/Expert UID
+      expert_name = case category
+                         when 'cn' then task.expert.name
+                         when 'en' then task.expert.mr_name
+                         else task.expert.name
                        end
-      sheet.add_cell(row, 7, candidate_name)                          # 专家姓名/Expert name
-      exp = task.candidate.latest_work_experience
+      sheet.add_cell(row, 7, expert_name)                             # 专家姓名/Expert name
+      exp = task.expert.latest_work_experience
       sheet.add_cell(row, 8, exp.try(:org_cn))                        # 专家公司名称/Expert company
       sheet.add_cell(row, 9, exp.try(:title))                         # 专家职位/Expert title
       sheet.add_cell(row, 10, '')                                     # 专家级别/Expert level(取值待定)
-      sheet.add_cell(row, 11, '')                                     # 费率/Rate(取值待定)
+      sheet.add_cell(row, 11, '')                                     # 倍率/Rate(取值待定)
       sheet.add_cell(row, 12, task.duration)                          # 访谈时长/Duration
       sheet.add_cell(row, 13, task.charge_hour)                       # 收费小时/Charge Hour
-      sheet.add_cell(row, 14, task.total_price)                       # 总费用/Fee
+      sheet.add_cell(row, 14, task.actual_price)                      # 总费用/Fee
       sheet.add_cell(row, 15, task.currency)                          # 币种/Currency
       sheet.add_cell(row, 16, '')                                     # 备注/Comment
       sheet.add_cell(row, 17, task.is_shorthand ? 'Y' : 'N')          # 速记/Shorthand
@@ -158,7 +158,7 @@ class FinanceController < ApplicationController
       pm_user = task.project.pm_users.first
       sheet.add_cell(row, 19, pm_user.name_cn) if pm_user             # 项目经理/PM
       sheet.add_cell(row, 20, '')                                     # 专家招募/Research
-      sheet.add_cell(row, 21, task.candidate.cpt)                     # 专家基础费率
+      sheet.add_cell(row, 21, task.expert.cpt)                        # 专家基础费率
       # 支出信息
       expert_cost = task.costs.where(category: 'expert').first
       if expert_cost
