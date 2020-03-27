@@ -6,7 +6,6 @@ class CandidatesController < ApplicationController
   # GET /candidates
   def index
     set_per_page
-
     query = Candidate.expert
     # query code here >>
     query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
@@ -325,7 +324,7 @@ class CandidatesController < ApplicationController
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :nickname, :city, :email, :email1, :phone, :phone1,
                                       :industry, :title, :company_id, :date_of_birth, :gender, :description,
-                                      :is_available, :cpt, :currency)
+                                      :is_available, :cpt, :currency, :wechat)
   end
 
   def experience_fields

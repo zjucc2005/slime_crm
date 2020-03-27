@@ -64,6 +64,19 @@ class ProjectTasksController < ApplicationController
            }
   end
 
+  # PUT /project_tasks/:id/cancel
+  def cancel
+    load_project_task
+
+    if @project_task.can_cancel?
+      @project_task.update(status: 'cancelled')
+      flash[:success] = t(:operation_succeeded)
+    else
+      flash[:error] = t(:operation_failed)
+    end
+    redirect_to project_path(@project_task.project)
+  end
+
   private
   def load_project_task
     @project_task = ProjectTask.find(params[:id])

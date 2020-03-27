@@ -100,6 +100,12 @@
                 </div>
                 <%= content_tag :span, @candidate.email1, :class => 'form-control' %>
             </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:candidate, :wechat) %></span>
+                </div>
+                <%= content_tag :span, @candidate.property['wechat'], :class => 'form-control' %>
+            </div>
         </div>
 
         <div class="row border-bottom mb-3">

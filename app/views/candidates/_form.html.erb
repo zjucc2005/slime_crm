@@ -21,59 +21,64 @@
         </div>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :nickname, mt(:candidate, :nickname) %>
+        <%= f.label :nickname %>
         <%= f.text_field :nickname, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :gender, mt(:candidate, :gender) %>
+        <%= f.label :gender %>
         <%= f.select :gender, Candidate::GENDER.to_a.map(&:reverse), { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :date_of_birth, mt(:candidate, :date_of_birth) %>
+        <%= f.label :date_of_birth %>
         <%= f.text_field :date_of_birth, :value => @candidate.date_of_birth.try(:strftime, '%F') ,:class => 'form-control datepicker', :placeholder => 'yyyy-mm-dd' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :phone, mt(:candidate, :phone) %><span class="text-red">*</span>
+        <%= f.label :phone %><span class="text-red">*</span>
         <%= f.text_field :phone, :required => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :phone1, mt(:candidate, :phone1) %>
+        <%= f.label :phone1 %>
         <%= f.text_field :phone1, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :city, mt(:candidate, :city) %>
+        <%= f.label :city %>
         <%= f.text_field :city, :class => 'form-control autocomplete-city' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :industry, mt(:candidate, :industry) %>
+        <%= f.label :industry %>
         <%= f.text_field :industry, :class => 'form-control' %>
     </div>
 
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :email, mt(:candidate, :email) %><span class="text-red">*</span>
+        <%= f.label :email %><span class="text-red">*</span>
         <%= f.email_field :email, :required => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :email1, mt(:candidate, :email1) %>
+        <%= f.label :email1 %>
         <%= f.email_field :email1, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :wechat %>
+        <%= f.text_field :wechat, :class => 'form-control' %>
+        <%#= text_field_tag :wechat, @candidate.property['wechat'], :class => 'form-control' %>
     </div>
 </div>
 
 <div class="row border-bottom mb-3">
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :is_available, mt(:candidate, :is_available) %><span class="text-red">*</span>
+        <%= f.label :is_available %><span class="text-red">*</span>
         <%= f.select :is_available, candidate_is_available_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :cpt, mt(:candidate, :cpt) %><span class="text-red">*</span>
+        <%= f.label :cpt %><span class="text-red">*</span>
         <%= f.number_field :cpt, :required => true, :min => 0, :step => 1, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :currency, mt(:candidate, :currency) %><span class="text-red">*</span>
+        <%= f.label :currency %><span class="text-red">*</span>
         <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-12 form-group">
-        <%= f.label :description, mt(:candidate, :description) %>
+        <%= f.label :description %>
         <%= f.text_area :description, :class => 'form-control', :rows => 4 %>
     </div>
 </div>

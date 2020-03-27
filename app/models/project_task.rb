@@ -32,6 +32,10 @@ class ProjectTask < ApplicationRecord
   # Scopes
   scope :interview, -> { where( category: 'interview') }
 
+  def can_cancel?
+    %w[ongoing].include? status
+  end
+
   # 当前执行中的合同(最新), 用于获取价格计算规则
   def active_contract
     project.company.contracts.available.order(:started_at => :desc).first

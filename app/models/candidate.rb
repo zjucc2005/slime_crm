@@ -45,6 +45,12 @@ class Candidate < ApplicationRecord
     end
   end
 
+  # property fields
+  %w[wechat].each do |k|
+    define_method(:"#{k}"){ self.property[k] }
+    define_method(:"#{k}="){ |v| self.property[k] = v }
+  end
+
   # English name form - Mr./Miss sb.
   def mr_name
     _mr_   = gender == 'female' ? 'Miss' : 'Mr.'

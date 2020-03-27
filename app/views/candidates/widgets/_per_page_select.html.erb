@@ -1,0 +1,6 @@
+<div class="btn-group">
+    <%= form_tag candidates_path, :method => :get, :id => 'perPageForm' do %>
+        <%= select_tag :per_page, options_for_select([['20 条/页' ,20], ['50 条/页', 50], [ '100 条/页', 100]], params[:per_page]),
+                       :onchange => "$('#perPageForm').submit();", :class => 'form-control' %>
+    <% end %>
+</div>

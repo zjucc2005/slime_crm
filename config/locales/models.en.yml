@@ -90,6 +90,7 @@ en:
         property: "Property"
         seat: "Client seat"
         interview_task: "Interview task"
+        wechat: "Wechat"
 
       candidate_experience:
         category: "Category"
