@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('industry') %> <%= t('action.add_model', :model => mt(:industry)) %></h5>
+        <%= link_to fa_icon_tag('close'), industries_path, :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_for @industry do |f| %>
+            <%= render :partial => 'form', :locals => { :f => f } %>
+
+            <div class="form-group mb-0">
+                <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
+                <%= f.submit t('action.submit_and_continue'), :class => 'btn btn-info' %>
+                <%= link_to t('action.back'), industries_path, :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>

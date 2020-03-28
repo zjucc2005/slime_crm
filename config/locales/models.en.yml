@@ -31,7 +31,8 @@ en:
       company: "Company"
       contract: "Contract"
       location_datum: "Location datum"
-      bank: "Bank"
+      bank: "Bank list"
+      industry: "Industry list"
       project: "Project"
       project_requirement: "Project requirement"
       project_task: "Project task"
@@ -162,6 +163,9 @@ en:
         district: "District"
 
       bank:
+        name: "Name"
+
+      industry:
         name: "Name"
 
       project:

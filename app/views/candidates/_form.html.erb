@@ -46,9 +46,8 @@
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :industry %>
-        <%= f.text_field :industry, :class => 'form-control' %>
+        <%= f.select :industry, industry_options, { :prompt => default_prompt }, :class => 'form-control select2' %>
     </div>
-
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :email %><span class="text-red">*</span>
         <%= f.email_field :email, :required => true, :class => 'form-control' %>
@@ -60,7 +59,6 @@
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :wechat %>
         <%= f.text_field :wechat, :class => 'form-control' %>
-        <%#= text_field_tag :wechat, @candidate.property['wechat'], :class => 'form-control' %>
     </div>
 </div>
 

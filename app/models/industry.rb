@@ -1,5 +1,5 @@
 # encoding: utf-8
-class Bank < ApplicationRecord
+class Industry < ApplicationRecord
   validates_presence_of :name
   validates_uniqueness_of :name
 

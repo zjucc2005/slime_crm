@@ -60,6 +60,7 @@ class Ability
 
     can :manage, LocationDatum
     can :manage, Bank
+    can :manage, Industry
     can :manage, CardTemplate
   end
 
@@ -77,6 +78,7 @@ class Ability
 
     can :manage, LocationDatum
     can :manage, Bank
+    can :manage, Industry
   end
 
   def pa_ability
@@ -92,6 +94,7 @@ class Ability
 
     can :manage, LocationDatum
     can :manage, Bank
+    can :manage, Industry
   end
 
   def finance_ability
@@ -100,6 +103,7 @@ class Ability
 
     can :read, LocationDatum
     can :read, Bank
+    can :read, Industry
   end
 
   private

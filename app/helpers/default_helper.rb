@@ -21,6 +21,10 @@ module DefaultHelper
     Bank.all.order(:name).pluck(:name)
   end
 
+  def industry_options
+    Industry.all.order(:name).pluck(:name)
+  end
+
   ##
   # boolean options for select tag
   def boolean_options
