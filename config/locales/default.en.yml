@@ -20,6 +20,7 @@ en:
   inconsistent_password: "Two passwords must be consistent"
   invalid_current_password: "Invalid current password"
   invalid_file_format: "Invalid file format"
+  keywords_at_most: "%{limit} keywords at most"
   my_account: "My account"
   not_authorized: "You are not authorized to access this page."
   not_found: "Not found"
