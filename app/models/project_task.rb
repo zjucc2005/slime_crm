@@ -23,7 +23,7 @@ class ProjectTask < ApplicationRecord
   has_many :costs, :class_name => 'ProjectTaskCost'
 
   # Validations
-  validates_presence_of :started_at, :expert_level, :expert_rate
+  validates_presence_of :started_at
   validates_inclusion_of :category, :in => CATEGORY.keys
   validates_inclusion_of :status, :in => STATUS.keys
   validates_inclusion_of :interview_form, :in => INTERVIEW_FORM.keys

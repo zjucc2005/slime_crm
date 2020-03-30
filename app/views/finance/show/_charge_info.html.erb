@@ -99,4 +99,10 @@
         </div>
         <%= content_tag :span, @project_task.charged_at.try(:strftime, '%F'), :class => 'form-control' %>
     </div>
+    <div class="col-12 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :memo) %></span>
+        </div>
+        <%= content_tag :span, @project_task.memo, :class => 'form-control' %>
+    </div>
 </div>

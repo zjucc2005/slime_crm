@@ -85,7 +85,7 @@ class ProjectTasksController < ApplicationController
 
   def project_task_params
     params.require(:project_task).permit(:interview_form, :started_at, :expert_level, :expert_rate, :duration,
-                                         :actual_price, :is_shorthand, :shorthand_price, :is_recorded)
+                                         :actual_price, :is_shorthand, :shorthand_price, :is_recorded, :memo)
   end
 
 end

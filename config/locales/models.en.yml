@@ -217,6 +217,7 @@ en:
         paid_at: "Paid at"
         expert_level: "Expert level"
         expert_rate: "Expert rate"
+        memo: "Memo"
 
       project_task_cost:
         category: "Cost category"

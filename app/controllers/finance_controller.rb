@@ -159,15 +159,15 @@ class FinanceController < ApplicationController
       exp = task.expert.latest_work_experience
       sheet.add_cell(row, 8, exp.try(:org_cn))                        # 专家公司名称/Expert company
       sheet.add_cell(row, 9, exp.try(:title))                         # 专家职位/Expert title
-      sheet.add_cell(row, 10, '')                                     # 专家级别/Expert level(取值待定)
-      sheet.add_cell(row, 11, '')                                     # 倍率/Rate(取值待定)
+      sheet.add_cell(row, 10, task.expert_level.capitalize)           # 专家级别/Expert level
+      sheet.add_cell(row, 11, task.expert_rate)                       # 倍率/Rate
       sheet.add_cell(row, 12, task.duration)                          # 访谈时长/Duration
       sheet.add_cell(row, 13, task.charge_hour)                       # 收费小时/Charge Hour
       sheet.add_cell(row, 14, task.actual_price)                      # 总费用/Fee
       sheet.add_cell(row, 15, task.currency)                          # 币种/Currency
-      sheet.add_cell(row, 16, '')                                     # 备注/Comment
+      sheet.add_cell(row, 16, task.memo)                              # 备注/Comment
       sheet.add_cell(row, 17, task.is_shorthand ? 'Y' : 'N')          # 速记/Shorthand
-      sheet.add_cell(row, 18, '')                                     # 新专家/New Expert
+      sheet.add_cell(row, 18, task.expert.new_expert? ? 'Y' : 'N')    # 新专家/New Expert
       pm_user = task.project.pm_users.first
       sheet.add_cell(row, 19, pm_user.name_cn) if pm_user             # 项目经理/PM
       sheet.add_cell(row, 20, '')                                     # 专家招募/Research

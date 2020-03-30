@@ -69,6 +69,11 @@ class Candidate < ApplicationRecord
     project_tasks.where(status: %w[ongoing finished]).count
   end
 
+  # new expert has at most 1 task
+  def new_expert?
+    project_tasks.where(status: 'finished').count <= 1
+  end
+
   private
   def setup
     self.category    ||= 'expert'  # init category
