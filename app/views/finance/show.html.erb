@@ -11,9 +11,13 @@
                   <span class="text-gray mr-3"><%= "# #{@project_task.uid}" %></span>
                 </h6>
                 <div class="btn-group btn-group-sm">
+                    <%= link_to return_back_finance_path(@project_task), :method => :put, :class => 'btn btn-warning',
+                                :data => { :confirm => t(:sure_to_submit) } do %>
+                        <%= fa_icon_tag('arrow-left') %> <%= t(:return_back_and_reedit) %>
+                    <% end if @project_task.can_return_back? && can?(:return_back, Finance) %>
                     <%= link_to edit_finance_path(@project_task), :class => 'btn btn-dark' do %>
-                        <%= fa_icon_tag('edit') %> <%= "#{t('action.update')}" %>
-                    <% end %>
+                        <%= fa_icon_tag('edit') %> <%= t('action.update') %>
+                    <% end if can?(:edit, Finance) %>
                 </div>
             </div>
         </div>

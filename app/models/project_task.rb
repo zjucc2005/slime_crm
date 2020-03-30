@@ -37,6 +37,10 @@ class ProjectTask < ApplicationRecord
     %w[ongoing].include? status
   end
 
+  def can_return_back?
+    %w[unbilled].include? charge_status
+  end
+
   # 当前执行中的合同(最新), 用于获取价格计算规则
   def active_contract
     project.company.contracts.available.order(:started_at => :desc).first

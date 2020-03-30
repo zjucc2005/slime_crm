@@ -30,6 +30,7 @@ zh_cn:
   payment_info: "支出信息"
   project_can_only_have_one_pm: "项目中只能存在一位项目经理"
   reset_password: "重置密码"
+  return_back_and_reedit: "退回项目重新编辑"
   settings: "设置"
   sure: "确认吗?"
   sure_to_cancel: "确认取消吗?"

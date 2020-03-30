@@ -65,6 +65,19 @@ class FinanceController < ApplicationController
     end
   end
 
+  # PUT /finance/:id/return_back
+  def return_back
+    load_project_task
+
+    if @project_task.can_return_back?
+      @project_task.update!(status: 'ongoing')
+      flash[:success] = t(:operation_succeeded)
+    else
+      flash[:error] = t(:not_authorized)
+    end
+    redirect_to finance_index_path
+  end
+
   # GET /finance/batch_update_charge_status
   def batch_update_charge_status
     if params[:status] == 'billed'

@@ -85,6 +85,8 @@ Rails.application.routes.draw do
   end
 
   resources :finance do
+    put :return_back, on: :member
+
     get :batch_update_charge_status,  on: :collection
     get :batch_update_payment_status, on: :collection
   end
