@@ -20,7 +20,7 @@
                 <div>
                     <%= submit_tag t('action.save_draft'), :class => 'btn btn-info' %>
                     <%= submit_tag t('action.submit_and_confirm'), :data => { :confirm => t(:sure_to_submit) }, :class => 'btn btn-primary' %>
-                    <%= link_to t('action.back'), project_path(@project_task.project), :class => 'btn btn-secondary' %>
+                    <%= link_to t('action.back'), 'javascript:history.go(-1);', :class => 'btn btn-secondary' %>
                 </div>
                 <div>
                     <%= link_to t('action.cancel'), cancel_project_task_path(@project_task), :method => :put,

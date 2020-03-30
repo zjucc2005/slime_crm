@@ -13,4 +13,12 @@ class CandidatePaymentInfo < ApplicationRecord
   # Validations
   validates_presence_of :account, :username
   validates_inclusion_of :category, :in => CATEGORY.keys
+
+  def to_template
+    case category
+      when 'unionpay' then "#{CATEGORY[category]} | #{bank} | #{sub_branch} | #{account} | #{username}"
+      when 'alipay' then "#{CATEGORY[category]} | #{account} | #{username}"
+      else category
+    end
+  end
 end

@@ -32,6 +32,7 @@ en:
   project_can_only_have_one_pm: "Project can only have one PM"
   reset_password: "Reset password"
   return_back_and_reedit: "Return back and reedit"
+  select_payment_info: "Select payment info"
   settings: "Settings"
   show_all: "Show all"
   sure: "Are you sure?"

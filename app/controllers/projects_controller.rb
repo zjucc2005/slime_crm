@@ -288,7 +288,7 @@ class ProjectsController < ApplicationController
   def project_tasks
     load_project
     query = @project.project_tasks
-    @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 3)
+    @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   private

@@ -57,5 +57,6 @@ window.form_activate = function(field){
 window.form_deactivate = function(field){
     let ele = $('#' + field);
     ele.attr('required', false);
+    ele.val('');
     ele.parent().hide();
 };

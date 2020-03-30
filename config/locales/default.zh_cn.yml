@@ -32,6 +32,7 @@ zh_cn:
   project_can_only_have_one_pm: "项目中只能存在一位项目经理"
   reset_password: "重置密码"
   return_back_and_reedit: "退回项目重新编辑"
+  select_payment_info: "选择支付信息"
   settings: "设置"
   show_all: "查看全部"
   sure: "确认吗?"

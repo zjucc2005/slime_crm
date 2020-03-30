@@ -37,13 +37,35 @@ class ProjectTasksController < ApplicationController
   # POST /project_tasks/:id/add_cost.js, remote: true
   def add_cost
     load_project_task
-    @project_task.costs.create!(
-       category:     params[:category],
-       price:        params[:price],
-       currency:     params[:currency],
-       memo:         params[:memo],
-       payment_info: params[:payment_info]
-    )
+
+    ActiveRecord::Base.transaction do
+      cost = @project_task.costs.new
+      cost.category = params[:category]
+      cost.price    = params[:price]
+      cost.currency = params[:currency]
+      cost.memo    = params[:memo]
+
+      template = @project_task.expert.payment_infos.where(id: params[:template]).first
+      if params[:category] == 'expert'
+        if template
+          cost.payment_info = {
+            category:   template.category,
+            bank:       template.bank,
+            sub_branch: template.sub_branch,
+            account:    template.account,
+            username:   template.username
+          }
+        else
+          cost.payment_info = params[:payment_info]
+          @project_task.expert.payment_infos.create!(
+            params.require(:payment_info).permit(:category, :bank, :sub_branch, :account, :username).merge(created_by: current_user.id)
+          )
+        end
+      else
+        cost.payment_info = params[:payment_info]
+      end
+      cost.save!
+    end
     respond_to{|f| f.js }
   end
 

@@ -14,6 +14,14 @@
                             <%= select_tag :category, options_for_select(project_task_cost_category_options(project_task)),
                                            :prompt => default_prompt, :required => true, :class => 'form-control select2' %>
                         </div>
+                        <div class="col-lg-9 col-12 form-group">
+                            <%= label_tag :template, t(:select_payment_info) %>
+                            <%= select_tag :template, options_for_select(project_task_cost_template_options(project_task)),
+                                           :prompt => t('action.new_model', :model => mt(:candidate_payment_info)), :class => 'form-control select2' %>
+                        </div>
+                    </div>
+
+                    <div class="row">
                         <div class="col-lg-3 col-6 form-group">
                             <%= label_tag :price, mt(:project_task_cost, :price) %><span class="text-red">*</span>
                             <%= number_field_tag :price, nil, :min => 0, :step => 0.01, :required => true, :class => 'form-control' %>
@@ -64,7 +72,13 @@
 </div>
 
 <script>
-    $(function(){ refresh_cost_form(); });
+    $(function(){
+        refresh_template();
+        refresh_payment_info_category();
+        refresh_cost_form();
+    });
+    $('#category').change(function(){ refresh_template(); });
+    $('#template').change(function(){ refresh_payment_info_category(); });
     $('#payment_info_category').change(function(){ refresh_cost_form(); });
     function refresh_cost_form(){
         let payment_info_category = document.getElementById('payment_info_category');
@@ -84,5 +98,26 @@
             form_deactivate('payment_info_account');
             form_deactivate('payment_info_username');
         }
+    }
+    function refresh_template(){
+        let category = $('#category');
+        let template = $('#template');
+        if(category.val() == 'expert'){
+            template.parent().show();
+        }else{
+            template.parent().hide();
+            template.val('').change();
+        }
+    }
+    function refresh_payment_info_category(){
+        let category = document.getElementById('category');
+        let template = document.getElementById('template');
+        if(category.value == 'expert' && template.value ){
+            $('#payment_info_category').val('').change();
+            form_deactivate('payment_info_category');
+        }else{
+            form_activate('payment_info_category');
+        }
+
     }
 </script>
