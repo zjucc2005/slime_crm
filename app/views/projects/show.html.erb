@@ -80,7 +80,7 @@
                 <%= render :partial => 'projects/show/experts', :locals => { :experts => @project.experts } %>
             </div>
             <div class="col-lg-6 col-12">
-                <%= render :partial => 'projects/show/project_tasks', :locals => { :project_tasks => @project.project_tasks.where(status: %w[ongoing finished]).order(:created_at => :desc) } %>
+                <%= render :partial => 'projects/show/project_tasks', :locals => { :project_tasks => @project.project_tasks.where(status: %w[ongoing finished]).order(:created_at => :desc).limit(12) } %>
             </div>
         </div>
 

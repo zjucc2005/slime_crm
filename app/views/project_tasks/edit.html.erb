@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <h5><%= fa_icon_tag('map') %> <%= t('action.edit_model', :model => mt(:project_task)) %></h5>
-        <%= link_to fa_icon_tag('close'), project_path(@project_task.project), :class => 'card-header-close' %>
+        <%= link_to fa_icon_tag('close'), 'javascript:history.go(-1);', :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">

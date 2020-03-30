@@ -69,6 +69,8 @@ Rails.application.routes.draw do
 
     put :start, on: :member
     put :close, on: :member
+
+    get :project_tasks, on: :member
   end
 
   resources :project_requirements do

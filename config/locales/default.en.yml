@@ -33,6 +33,7 @@ en:
   reset_password: "Reset password"
   return_back_and_reedit: "Return back and reedit"
   settings: "Settings"
+  show_all: "Show all"
   sure: "Are you sure?"
   sure_to_cancel: "Sure to cancel?"
   sure_to_delete: "Sure to delete?"

@@ -284,6 +284,13 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /projects/:id/project_tasks
+  def project_tasks
+    load_project
+    query = @project.project_tasks
+    @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 3)
+  end
+
   private
   def load_project
     @project = Project.find(params[:id])

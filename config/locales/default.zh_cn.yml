@@ -33,6 +33,7 @@ zh_cn:
   reset_password: "重置密码"
   return_back_and_reedit: "退回项目重新编辑"
   settings: "设置"
+  show_all: "查看全部"
   sure: "确认吗?"
   sure_to_cancel: "确认取消吗?"
   sure_to_delete: "确认删除吗?"

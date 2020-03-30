@@ -53,6 +53,11 @@ module ProjectsHelper
     content_tag :span, ProjectTask::INTERVIEW_FORM[category] || category, :class => "badge badge-#{dict[category] || 'secondary' }"
   end
 
+  def project_task_status_badge(category)
+    dict = { :ongoing => 'success', :finished => 'secondary', :cancelled => 'danger' }.stringify_keys
+    content_tag :span, ProjectTask::STATUS[category] || category, :class => "badge badge-#{dict[category] || 'secondary' }"
+  end
+
   def project_task_charge_status_badge(category)
     dict = { :paid => 'success', :billed => 'warning', :unbilled => 'danger' }.stringify_keys
     content_tag :span, ProjectTask::CHARGE_STATUS[category] || category, :class => "badge badge-#{dict[category] || 'secondary' }"
