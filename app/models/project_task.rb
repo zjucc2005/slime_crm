@@ -43,7 +43,7 @@ class ProjectTask < ApplicationRecord
 
   # 当前执行中的合同(最新), 用于获取价格计算规则
   def active_contract
-    project.company.contracts.available.order(:started_at => :desc).first
+    project.active_contract
   end
 
   # 收费小时(用于财务表格导出)

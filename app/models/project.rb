@@ -96,6 +96,10 @@ class Project < ApplicationRecord
     self.save!
   end
 
+  def active_contract
+    company.contracts.available.order(:started_at => :desc).first
+  end
+
   private
   def setup
     self.status ||= 'initialized'

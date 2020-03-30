@@ -5,7 +5,13 @@ class ProjectTasksController < ApplicationController
 
   # GET /project_tasks/:id/edit
   def edit
-    load_project_task
+    begin
+      load_project_task
+      load_active_contract
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to project_path(@project_task.project)
+    end
   end
 
   # PUT /project_tasks/:id
@@ -81,6 +87,11 @@ class ProjectTasksController < ApplicationController
   private
   def load_project_task
     @project_task = ProjectTask.find(params[:id])
+  end
+
+  def load_active_contract
+    @contract = @project_task.active_contract
+    raise t(:contract_expired) if @contract.nil?
   end
 
   def project_task_params

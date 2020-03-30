@@ -11,6 +11,7 @@ en:
   client_contact: "Client contact"
   company_signed: "Signed"
   company_not_signed: "Not signed"
+  contract_expired: "Contract expired"
   end: "End"
   expert_card: "Expert card"
   global_search: "Global search"

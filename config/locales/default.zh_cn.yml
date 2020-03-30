@@ -11,6 +11,7 @@ zh_cn:
   client_contact: "客户联系人"
   company_signed: "已签约"
   company_not_signed: "未签约"
+  contract_expired: "合同已过期"
   end: "结束"
   expert_card: "专家卡片"
   global_search: "全局搜索"
