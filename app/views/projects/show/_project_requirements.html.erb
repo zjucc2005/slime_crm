@@ -12,6 +12,7 @@
                 <thead>
                 <tr>
                     <th><%= mt(:project_requirement, :content) %></th>
+                    <th><%= mt(:project_requirement, :demand_number) %></th>
                     <th><%= mt(:project_requirement, :status) %></th>
                     <th><%= mt(:project_requirement, :created_by) %></th>
                     <th><%= mt(:project_requirement, :created_at) %></th>
@@ -22,13 +23,24 @@
                 <% project_requirements.each do |requirement| %>
                     <tr>
                         <td><%= project_requirement_content_raw(requirement.content) %></td>
+                        <td><%= requirement.demand_number %></td>
                         <td><%= project_requirement_status_badge(requirement.status) %></td>
                         <td><%= requirement.creator.name_cn %></td>
                         <td class="text-nowrap"><%= requirement.created_at.strftime('%F %H:%M') %></td>
                         <td class="action">
-                            <%= link_to edit_project_requirement_path(requirement), :class => 'btn btn-edit btn-xs' do %>
-                                <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => nil) %>
-                            <% end if can?(:edit, ProjectRequirement) && requirement.can_edit? %>
+                            <div class="btn-group">
+                                <%= link_to edit_project_requirement_path(requirement), :class => 'btn btn-edit btn-xs' do %>
+                                    <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
+                                <% end if can?(:edit, ProjectRequirement) && requirement.can_edit? %>
+                                <%= link_to finish_project_requirement_path(requirement), :method => :put, :class => 'btn btn-warning btn-xs',
+                                            :data => { :confirm => t(:sure_to_finish)} do %>
+                                    <%= fa_icon_tag('check') %> <%= t('action.finish') %>
+                                <% end if can?(:finish, ProjectRequirement) && requirement.can_edit? %>
+                                <%= link_to unfinish_project_requirement_path(requirement), :method => :put, :class => 'btn btn-danger btn-xs',
+                                            :data => { :confirm => t(:sure_to_unfinish)} do %>
+                                    <%= fa_icon_tag('remove') %> <%= t('action.unfinish') %>
+                                <% end if can?(:cancel, ProjectRequirement) && requirement.can_edit? %>
+                            </div>
                         </td>
                     </tr>
                 <% end %>

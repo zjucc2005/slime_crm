@@ -25,7 +25,7 @@ class CreateProjectTasks < ActiveRecord::Migration[6.0]
       t.datetime :paid_at                                        # 成本支付时间
 
       t.decimal :total_price,     :precision => 10, :scale => 2  # 总费用
-      t.decimal :charge_rate,     :precision => 10, :scale => 2  # 收费倍率, 取值Contract#cpt
+      t.decimal :charge_rate,     :precision => 10, :scale => 2  # 收费基准, 取值Contract#cpt
       t.decimal :base_price,      :precision => 10, :scale => 2  # 基础价格
       t.decimal :actual_price,    :precision => 10, :scale => 2  # 实际价格
       t.string :currency                                         # 币种

@@ -15,8 +15,12 @@
                 </div>
 
                 <div class="col-12 form-group">
-                    <%= f.label :content, mt(:project_requirement, :content) %><span class="text-red">*</span>
+                    <%= f.label :content %><span class="text-red">*</span>
                     <%= f.text_area :content, :required => true, :rows => 5, :class => 'form-control' %>
+                </div>
+                <div class="col-12 form-group">
+                    <%= f.label :demand_number %>
+                    <%= f.number_field :demand_number, :min => 1, :class => 'form-control' %>
                 </div>
             </div>
 

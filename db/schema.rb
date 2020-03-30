@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_071927) do
+ActiveRecord::Schema.define(version: 2020_03_29_074146) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 2020_03_28_071927) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "demand_number"
     t.index ["project_id"], name: "index_project_requirements_on_project_id"
   end
 
@@ -218,6 +219,8 @@ ActiveRecord::Schema.define(version: 2020_03_28_071927) do
     t.boolean "is_recorded", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "expert_level"
+    t.decimal "expert_rate", precision: 10, scale: 2
     t.index ["project_id"], name: "index_project_tasks_on_project_id"
   end
 

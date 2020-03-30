@@ -71,7 +71,10 @@ Rails.application.routes.draw do
     put :close, on: :member
   end
 
-  resources :project_requirements
+  resources :project_requirements do
+    put :finish,   on: :member
+    put :unfinish, on: :member
+  end
 
   resources :project_tasks do
     get :get_base_price, on: :member  # 计算基础价格(实时)

@@ -12,6 +12,7 @@ class ProjectTask < ApplicationRecord
     :roadshow       => '路演',
     :others         => '其他'
   }.stringify_keys
+  EXPERT_LEVEL = { :standard => 'Standard', :premium  => 'Premium' }.stringify_keys
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
@@ -22,7 +23,7 @@ class ProjectTask < ApplicationRecord
   has_many :costs, :class_name => 'ProjectTaskCost'
 
   # Validations
-  validates_presence_of :started_at
+  validates_presence_of :started_at, :expert_level, :expert_rate
   validates_inclusion_of :category, :in => CATEGORY.keys
   validates_inclusion_of :status, :in => STATUS.keys
   validates_inclusion_of :interview_form, :in => INTERVIEW_FORM.keys
@@ -65,17 +66,17 @@ class ProjectTask < ApplicationRecord
 
     if duration.present?
       contract = active_contract
-      self.charge_days    = contract.payment_days                              # 账期(天数)
-      self.ended_at       = started_at + duration.to_i * 60                    # 结束时间 = 开始时间 + 时长
-      self.charge_rate    = contract.charge_rate                               # 收费倍率
-      self.base_price     = contract.base_price(duration.to_i)                 # 基础收费
-      self.actual_price ||= base_price                                         # 实际收费
-      self.currency       = contract.currency                                  # 货币
-      self.is_taxed       = contract.is_taxed                                  # 是否含税
-      self.tax            = is_taxed ? 0 : actual_price * contract.tax_rate    # 税费 = 实际收费 * 税率
+      self.charge_days    = contract.payment_days                                  # 账期(天数)
+      self.ended_at       = started_at + duration.to_i * 60                        # 结束时间 = 开始时间 + 时长
+      self.charge_rate    = contract.charge_rate                                   # 收费倍率
+      self.base_price     = contract.base_price(duration.to_i) * expert_rate.to_d  # 基础收费
+      self.actual_price ||= base_price                                             # 实际收费
+      self.currency       = contract.currency                                      # 货币
+      self.is_taxed       = contract.is_taxed                                      # 是否含税
+      self.tax            = is_taxed ? 0 : actual_price * contract.tax_rate        # 税费 = 实际收费 * 税率
     end
-    self.shorthand_price ||= 0                                                 # 速记费用
-    self.total_price    = actual_price.to_f + tax.to_f + shorthand_price.to_f  # 总费用
+    self.shorthand_price ||= 0                                                     # 速记费用
+    self.total_price    = actual_price.to_f + tax.to_f + shorthand_price.to_f      # 总费用
   end
 
   def sync_payment_status

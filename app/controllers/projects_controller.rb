@@ -302,7 +302,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_requirement_params
-    params.require(:project_requirement).permit(:content)
+    params.require(:project_requirement).permit(:content, :demand_number)
   end
 
   # 加载客户公司

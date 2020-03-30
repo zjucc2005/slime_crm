@@ -3,8 +3,9 @@ class ProjectRequirement < ApplicationRecord
   # ENUM
   STATUS = {
     :ongoing     => '进展中',
-    :finished    => '已结束',
-    :cancelled   => '已取消'
+    :finished    => '已完成',
+    :unfinished  => '未完成',
+    # :cancelled   => '已取消'
   }.stringify_keys
 
   # Associations

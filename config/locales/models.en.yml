@@ -186,6 +186,7 @@ en:
       project_requirement:
         status: "Status"
         content: "Content"
+        demand_number: "Demand number"
 
       project_task:
         category: "Category"
@@ -214,6 +215,8 @@ en:
         charge_days: "Charge days"
         charge_deadline: "Charge deadline"
         paid_at: "Paid at"
+        expert_level: "Expert level"
+        expert_rate: "Expert rate"
 
       project_task_cost:
         category: "Cost category"

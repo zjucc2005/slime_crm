@@ -21,9 +21,9 @@
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
-            <span class="input-group-text"><%= mt(:project_task, :charge_days) %></span>
+            <span class="input-group-text"><%= mt(:project_task, :expert_rate) %></span>
         </div>
-        <%= content_tag :span, @project_task.charge_days, :class => 'form-control' %>
+        <%= content_tag :span, @project_task.expert_rate, :class => 'form-control' %>
     </div>
     <!-- line 2 -->
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
@@ -80,6 +80,12 @@
             <span class="input-group-text"><%= mt(:project_task, :charge_status) %></span>
         </div>
         <%= content_tag :span, project_task_charge_status_badge(@project_task.charge_status), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :charge_days) %></span>
+        </div>
+        <%= content_tag :span, @project_task.charge_days, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">

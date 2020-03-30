@@ -11,7 +11,7 @@ module ProjectsHelper
   end
 
   def project_requirement_status_badge(status)
-    dict = { :ongoing => 'success', :finished => 'secondary', :cancelled => 'secondary' }.stringify_keys
+    dict = { :ongoing => 'success', :finished => 'secondary', :unfinished => 'danger' }.stringify_keys
     content_tag :span, ProjectRequirement::STATUS[status] || status, :class => "badge badge-#{dict[status] || 'secondary'}"
   end
 

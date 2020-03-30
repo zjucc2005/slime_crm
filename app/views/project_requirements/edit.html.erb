@@ -18,11 +18,9 @@
                     <%= f.label :content, mt(:project_requirement, :content) %><span class="text-red">*</span>
                     <%= f.text_area :content, :required => true, :rows => 5, :class => 'form-control' %>
                 </div>
-
                 <div class="col-12 form-group">
-                    <%= f.label :status, mt(:project_requirement, :status) %><span class="text-red">*</span>
-                    <%= f.select :status, ProjectRequirement::STATUS.to_a.map(&:reverse), { :prompt => default_prompt },
-                                 :class => 'form-control select2' %>
+                    <%= f.label :demand_number %>
+                    <%= f.number_field :demand_number, :min => 1, :class => 'form-control' %>
                 </div>
             </div>
 

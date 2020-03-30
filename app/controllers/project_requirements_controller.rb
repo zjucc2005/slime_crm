@@ -27,9 +27,35 @@ class ProjectRequirementsController < ApplicationController
     end
   end
 
+  # PUT /project_requirements/:id/finish
+  def finish
+    begin
+      load_project_requirement
+      raise t(:not_authorized) unless @project_requirement.can_edit?
+      @project_requirement.update!(status: 'finished')
+      flash[:success] = t(:operation_succeeded)
+    rescue Exception => e
+      flash[:error] = e.message
+    end
+    redirect_to project_path(@project_requirement.project)
+  end
+
+  # PUT /project_requirements/:id/unfinish
+  def unfinish
+    begin
+      load_project_requirement
+      raise t(:not_authorized) unless @project_requirement.can_edit?
+      @project_requirement.update!(status: 'unfinished')
+      flash[:success] = t(:operation_succeeded)
+    rescue Exception => e
+      flash[:error] = e.message
+    end
+    redirect_to project_path(@project_requirement.project)
+  end
+
   private
   def project_requirement_params
-    params.require(:project_requirement).permit(:content, :status)
+    params.require(:project_requirement).permit(:content, :demand_number)
   end
 
   def load_project_requirement

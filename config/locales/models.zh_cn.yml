@@ -215,6 +215,7 @@ zh_cn:
       project_requirement:
         status: "状态"
         content: "内容"
+        demand_number: "需求人数"
 
       project_task:
         category: "类型"
@@ -243,6 +244,8 @@ zh_cn:
         charge_days: "账期(天数)"
         charge_deadline: "账期截止时间"
         paid_at: "支付时间"
+        expert_level: "专家级别"
+        expert_rate: "专家倍率"
 
       project_task_cost:
         category: "费用类型"

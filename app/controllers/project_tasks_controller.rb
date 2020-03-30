@@ -54,10 +54,11 @@ class ProjectTasksController < ApplicationController
   # GET /project_tasks/:id/get_base_price.json
   def get_base_price
     load_project_task
-    contract = @project_task.active_contract
-    base_price = contract.base_price(params[:duration].to_i)
+    contract    = @project_task.active_contract
+    base_price  = contract.base_price(params[:duration].to_i)
+    expert_rate = params[:expert_rate].to_d
     render :json => {
-             :price    => base_price,
+             :price    => base_price * expert_rate,
              :currency => ApplicationRecord::CURRENCY[contract.currency],
              :is_taxed => t(contract.is_taxed.to_s),
              :tax_rate => contract.tax_rate
@@ -83,8 +84,8 @@ class ProjectTasksController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:interview_form, :started_at, :duration, :actual_price,
-                                         :is_shorthand, :shorthand_price, :is_recorded)
+    params.require(:project_task).permit(:interview_form, :started_at, :expert_level, :expert_rate, :duration,
+                                         :actual_price, :is_shorthand, :shorthand_price, :is_recorded)
   end
 
 end
