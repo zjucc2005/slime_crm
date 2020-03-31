@@ -62,9 +62,12 @@ module CandidatesHelper
 
   ##
   # highlight text by search params
-  def hl(text, keyword)
-    return text if keyword.nil? || text.nil?
-    text.gsub(keyword, "<hl class='bg-red text-white'>#{keyword}</hl>").html_safe
+  def hl(text, words=[])
+    return text if words.blank? || text.nil?
+    words.each do |word|
+      text = text.gsub(word, "<hl class='text-red'>#{word}</hl>")
+    end
+    text.html_safe
   end
 
 end

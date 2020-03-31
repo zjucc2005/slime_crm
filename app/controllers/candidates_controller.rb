@@ -6,6 +6,7 @@ class CandidatesController < ApplicationController
   # GET /candidates
   def index
     set_per_page
+    @hl_words = [] # 高亮关键词
     query = Candidate.expert
     # query code here >>
     query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
@@ -16,6 +17,7 @@ class CandidatesController < ApplicationController
 
     # 公司名
     if params[:company].present?
+      @hl_words << params[:company].strip
       query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
       or_conditions = []
       %w[org_cn org_en].each do |field|
@@ -26,6 +28,7 @@ class CandidatesController < ApplicationController
 
     # 职位
     if params[:title].present?
+      @hl_words << params[:title].strip
       query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
       or_conditions = []
       %w[title].each do |field|
@@ -38,6 +41,7 @@ class CandidatesController < ApplicationController
     if params[:description].present?
       query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
       @terms = params[:description].split
+      @hl_words += @terms
       if @terms.length > 5
         flash[:error] = t(:keywords_at_most, :limit => 5)
         redirect_to candidates_path and return

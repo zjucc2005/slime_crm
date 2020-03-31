@@ -41,15 +41,15 @@
                 <% candidate.experiences.work.order(:started_at => :desc).limit(3).each do |exp| %>
                     <div class="text-smaller">
                         <span class="text-gray mr-1"><%= exp.friendly_timestamp('%Y-%m') %></span>
-                        <span class="mr-1" title="<%= exp.org_cn %>"><%= hl(truncate(exp.org_cn, length: 14), params[:term]) %></span>
-                        <span title="<%= exp.title %>"><%= truncate(exp.title, length: 5) %></span>
+                        <span class="mr-1" title="<%= exp.org_cn %>"><%= hl(truncate(exp.org_cn, length: 14), @hl_words) %></span>
+                        <span title="<%= exp.title %>"><%= hl(truncate(exp.title, length: 5), @hl_words) %></span>
                     </div>
                 <% end %>
             </div>
         </div>
         <div class="col-lg-4 d-flex align-items-center flex-column text-left">
             <div class="my-3 my-lg-0 text-smaller text-limit-length" title="<%= candidate.description %>">
-                <%= hl(truncate(candidate.description, length: 150), params[:term]) %>
+                <%= hl(truncate(candidate.description, length: 150), @hl_words) %>
             </div>
         </div>
         <div class="col-lg-4 d-flex flex-column text-left">
