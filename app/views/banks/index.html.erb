@@ -7,7 +7,7 @@
             <div class="col-6 form-group">
                 <%= link_to new_bank_path, :class => 'btn btn-submit btn-form-control' do %>
                     <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => mt(:bank)) %>
-                <% end %>
+                <% end if can?(:new, Bank) %>
             </div>
             <div class="col-6">
                 <%= form_tag banks_path, :method => :get do %>

@@ -77,8 +77,8 @@ class Ability
     cannot :manage, Finance
 
     can :manage, LocationDatum
-    can :manage, Bank
-    can :manage, Industry
+    can :read, Bank
+    can :read, Industry
   end
 
   def pa_ability
@@ -93,8 +93,8 @@ class Ability
     can [:edit, :update, :get_base_price], ProjectTask
 
     can :manage, LocationDatum
-    can :manage, Bank
-    can :manage, Industry
+    can :read, Bank
+    can :read, Industry
   end
 
   def finance_ability
