@@ -57,8 +57,7 @@ class Project < ApplicationRecord
   end
 
   def can_destroy?
-    project_tasks.count == 0  # 只能删除没有任务的项目
-    # %w[initialized].include?(status)
+    project_tasks.where.not(status: 'cancelled').count == 0  # 只能删除没有任务的项目
   end
 
   def can_start?
@@ -98,6 +97,14 @@ class Project < ApplicationRecord
 
   def active_contract
     company.contracts.available.order(:started_at => :desc).first
+  end
+
+  def total_project_tasks
+    project_tasks.where(status: 'finished').count
+  end
+
+  def total_project_task_duration
+    project_tasks.where(status: 'finished').sum(:duration)
   end
 
   private

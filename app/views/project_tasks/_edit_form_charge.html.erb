@@ -5,17 +5,21 @@
         <%= f.text_field :category, :value => ProjectTask::CATEGORY[@project_task.category], :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
-        <%= f.label :interview_form %><span class="text-red">*</span>
-        <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
-                                 :required => true, :class => 'form-control select2' %>
-    </div>
-    <div class="col-lg-3 col-12 form-group">
         <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
         <%= f.text_field :expert_id, :value => @project_task.expert.name, :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :client, t(:client_contact) %><span class="text-red">*</span>
         <%= f.text_field :client_id, :value => @project_task.client.name, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :pm %><span class="text-red">*</span>
+        <%= f.text_field :pm_id, :value => @project_task.pm.name_cn, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :interview_form %><span class="text-red">*</span>
+        <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
+                     :required => true, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :started_at %><span class="text-red">*</span>
@@ -27,12 +31,15 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :expert_rate %><span class="text-red">*</span>
-        <%= f.number_field :expert_rate, :value => @project_task.expert_rate || 1, :min => 0.01, :step => 0.01, :required => true, :class => 'form-control' %>
+        <%= f.number_field :expert_rate, :value => @project_task.expert_rate || 1, :min => 0.01, :step => 0.01, :required => true, :readonly => true, :class => 'form-control' %>
     </div>
-
     <div class="col-lg-3 col-12 form-group">
-        <%= f.label :duration, mt(:project_task, :duration) %><span class="text-red">*</span>
-        <%= f.number_field :duration, :required => true, :min => 1, :class => 'form-control', :placeholder => '用于计算价格' %>
+        <%= f.label :duration, mt(:project_task, :duration_min) %><span class="text-red">*</span>
+        <%= f.number_field :duration, :required => true, :min => 1, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :charge_duration, mt(:project_task, :charge_duration_min) %><span class="text-red">*</span>
+        <%= f.number_field :charge_duration, :required => true, :min => 1, :class => 'form-control', :placeholder => '用于计算价格' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :base_price %><span class="text-red">*</span>
@@ -80,7 +87,7 @@
     $(function(){
         get_expert_rate();
     });
-    $('#project_task_duration').change(function(){
+    $('#project_task_charge_duration').change(function(){
         get_base_price(); // 计算价格
     });
     $('#project_task_expert_rate').change(function(){
@@ -97,7 +104,7 @@
     });
     function get_base_price(){
         let expert_rate = $('#project_task_expert_rate').val();
-        let duration = $('#project_task_duration').val();
+        let charge_duration = $('#project_task_charge_duration').val();
         let base_price = $('#project_task_base_price');
         let currency = $('#project_task_currency');
         let is_taxed = $('#project_task_is_taxed');
@@ -107,7 +114,7 @@
         $.ajax({
             type: 'get',
             url: '/project_tasks/' + <%= @project_task.id %> + '/get_base_price',
-            data: { duration: duration, expert_rate: expert_rate },
+            data: { duration: charge_duration, expert_rate: expert_rate },
             async: false,
             dataType: 'json',
             success: function(data){
@@ -132,10 +139,12 @@
         let expert_level = $('#project_task_expert_level')[0];
         let expert_rate = $('#project_task_expert_rate')[0];
         if(expert_level.value == 'standard'){
-            expert_rate.disabled = true;
+//            expert_rate.disabled = true;
+            expert_rate.readOnly = true;
             expert_rate.value = 1;
         }else if(expert_level.value == 'premium'){
-            expert_rate.disabled = false;
+//            expert_rate.disabled = false;
+            expert_rate.readOnly = false;
         }
         get_base_price();
     }

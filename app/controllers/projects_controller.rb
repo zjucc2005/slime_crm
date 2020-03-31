@@ -305,7 +305,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:category, :expert_id, :client_id, :interview_form, :started_at)
+    params.require(:project_task).permit(:category, :expert_id, :client_id, :pm_id, :interview_form, :started_at)
   end
 
   def project_requirement_params

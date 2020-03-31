@@ -24,6 +24,8 @@ class ProjectTaskCost < ApplicationRecord
 
   before_validation :setup, :on => :create
 
+  scope :expert, -> { where(category: 'expert') }
+
   # 用于表格导出
   def bank_or_alipay
     if self.payment_info['category'] == 'alipay'

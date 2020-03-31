@@ -16,6 +16,8 @@
                 <th><%= mt(:project, :id) %></th>
                 <th><%= mt(:project, :name) %></th>
                 <th><%= mt(:project, :code) %></th>
+                <th><%= mt(:project, :total_project_tasks) %></th>
+                <th><%= mt(:project, :total_project_task_duration) %></th>
                 <th><%= mt(:project, :started_at) %></th>
                 <th><%= mt(:project, :ended_at) %></th>
                 <th><%= mt(:project, :status) %></th>
@@ -29,6 +31,8 @@
                     <td><%= content_tag :span, "# #{project.uid}", :class => 'text-gray' %></td>
                     <td><%= link_to project.name, project_path(project) %></td>
                     <td><%= project.code %></td>
+                    <td><%= project.total_project_tasks %></td>
+                    <td><%= project.total_project_task_duration %></td>
                     <td><%= project.started_at.try(:strftime, '%F') %></td>
                     <td><%= project.ended_at.try(:strftime, '%F') %></td>
                     <td><%= project_status_badge(project.status) %></td>

@@ -182,6 +182,8 @@ en:
         close: "Close project"
         pm: "PM"
         pa: "PA"
+        total_project_tasks: "Total tasks"
+        total_project_task_duration: "Total duration(min)"
 
       project_requirement:
         status: "Status"
@@ -193,8 +195,9 @@ en:
         status: "Status"
         interview_form: "Interview form"
         duration: "Duration"
-        started_at: "Started at"
-        ended_at: "Ended at"
+        duration: "Duration(min)"
+        started_at: "Task started at"
+        ended_at: "Task ended at"
         charge_status: "Charge status"
         payment_status: "Payment status"
         total_price: "Total Fee"
@@ -218,6 +221,9 @@ en:
         expert_level: "Expert level"
         expert_rate: "Expert rate"
         memo: "Memo"
+        charge_duration: "Charge duration"
+        charge_duration_min: "Charge duration(min)"
+        pm: "PM"
 
       project_task_cost:
         category: "Cost category"

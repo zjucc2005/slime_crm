@@ -15,13 +15,8 @@
                 </div>
 
                 <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :category, mt(:project_task, :category) %><span class="text-red">*</span>
+                    <%= f.label :category %><span class="text-red">*</span>
                     <%= f.select :category, project_task_category_options, { :include_blank => false }, :class => 'form-control select2' %>
-                </div>
-                <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :interview_form, mt(:project_task, :interview_form) %><span class="text-red">*</span>
-                    <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
-                                 :required => true, :class => 'form-control select2' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
                     <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
@@ -34,7 +29,16 @@
                                  :required => true, :class => 'form-control select2' %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
-                    <%= f.label :started_at, mt(:project_task, :started_at) %><span class="text-red">*</span>
+                    <%= f.label :pm %><span class="text-red">*</span>
+                    <%= f.select :pm_id, project_task_pm_options, { :include_blank => false }, :class => 'form-control select2' %>
+                </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :interview_form %><span class="text-red">*</span>
+                    <%= f.select :interview_form, ProjectTask::INTERVIEW_FORM.to_a.map(&:reverse), { :prompt => default_prompt },
+                                 :required => true, :class => 'form-control select2' %>
+                </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :started_at %><span class="text-red">*</span>
                     <%= f.text_field :started_at, :required => true, :class => 'form-control datetimepicker' %>
                 </div>
             </div>

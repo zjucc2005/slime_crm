@@ -67,8 +67,9 @@
                 </div>
             <% end %>
             <div class="text-smaller">
-                <%= link_to t('action.add_model', model: mt(:candidate_comment)),
-                            new_candidate_comment_path(candidate_id: candidate.id, return_to: request.url) %>
+                <%= link_to new_candidate_comment_path(candidate_id: candidate.id, return_to: request.url) do %>
+                    <%= t('action.add_model', model: mt(:candidate_comment)) %>
+                <% end if can?(:new, CandidateComment) %>
             </div>
         </div>
     </div>

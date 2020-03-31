@@ -125,6 +125,12 @@ a {
     white-space: nowrap;
   }
 }
+.table-sm {
+  font-size: 0.8rem;
+  th, td{
+    padding: 0.2rem;
+  }
+}
 
 /* custom checkbox */
 .candidate-checkbox { position: absolute !important; left: -15px; }
@@ -236,7 +242,7 @@ input[type=checkbox].checkbox-square {
     &:disabled, &[readonly] {
       cursor: not-allowed;
     }
-    &:disabled {
+    &:disabled, &[readonly] {
       background-color: #343a40;
       color: #FFFFFF;
     }

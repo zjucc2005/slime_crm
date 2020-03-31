@@ -1,6 +1,6 @@
 <%= button_tag :type => 'button', :class => 'btn btn-warning', :data => { :toggle => 'modal', :target => '#importExpertModal'}  do %>
     <%= fa_icon_tag('eject') %> <%= t(:import_expert) %>
-<% end %>
+<% end if can?(:import_expert, Candidate) %>
 
 <div class="modal fade" id="importExpertModal">
     <div class="modal-dialog">

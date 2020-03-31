@@ -13,38 +13,41 @@
             <tr>
                 <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
                 <th><%= mt(:project_task, :id) %></th>
-                <th><%= mt(:project, :code) %></th>
-                <th><%= mt(:company, :name_abbr) %></th>
+                <th><%= mt(:project, :name) %></th>
+                <th><%= t(:project_id) %></th>
+                <th><%= mt(:project_task, :started_at) %></th>
                 <th><%= mt(:expert) %></th>
-                <th><%= mt(:project_task, :category) %></th>
+                <th><%= t(:expert_id) %></th>
                 <th><%= mt(:project_task, :interview_form) %></th>
-                <th><%= mt(:project_task, :actual_price_excluding_tax) %></th>
-                <th><%= mt(:project_task, :actual_price_including_tax) %></th>
-                <th><%= mt(:project_task, :shorthand_price) %></th>
+                <th><%= mt(:project_task, :charge_duration) %></th>
+                <th><%= fa_icon_tag('long-arrow-down') %> <%= t(:expert_payment) %></th>
+                <th><%= fa_icon_tag('long-arrow-up') %> <%= mt(:project_task, :actual_price_excluding_tax) %></th>
+                <th><%= fa_icon_tag('long-arrow-up') %> <%= mt(:project_task, :shorthand_price) %></th>
                 <th><%= mt(:project_task, :currency) %></th>
                 <th><%= mt(:project_task, :charge_status) %></th>
                 <th><%= mt(:project_task, :payment_status) %></th>
-                <th><%= mt(:project_task, :created_at) %></th>
                 <th class="action"><%= t(:operation) %></th>
             </tr>
             </thead>
             <tbody>
             <% @project_tasks.each do |task| %>
+                <% project = task.project %>
                 <tr>
                     <td><%= check_box_tag :'uids[]', task.id, false %></td>
                     <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
-                    <td><%= truncate(task.project.code, length: 10) %></td>
-                    <td><%= truncate(task.project.company.name_abbr, length: 10) %></td>
-                    <td><%= task.expert.name %></td>
-                    <td><%= project_task_category_badge(task.category) %></td>
+                    <td title="<%= project.name %>"><%= truncate(project.name, length: 8) %></td>
+                    <td><%= project.uid %></td>
+                    <td><%= task.started_at.strftime('%F %H:%M') %></td>
+                    <td><%= link_to task.expert.name, candidate_path(task.expert_id) %></td>
+                    <td><%= task.expert.uid %></td>
                     <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+                    <td><%= "#{task.charge_duration} #{t(:minute)}" %></td>
+                    <td><%= task.expert_cost_friendly %></td>
                     <td><%= task.actual_price %></td>
-                    <td><%= task.actual_price + task.tax %></td>
                     <td><%= task.shorthand_price %></td>
                     <td><%= currency_display(task.currency) %></td>
                     <td><%= project_task_charge_status_badge(task.charge_status) %></td>
                     <td><%= project_task_payment_status_badge(task.payment_status) %></td>
-                    <td><%= task.created_at.strftime('%F %T') %></td>
                     <th class="action">
                         <%= link_to finance_path(task), :class => 'btn btn-primary btn-xs' do %>
                             <%= fa_icon_tag('file') %> <%= t('action.detail') %>

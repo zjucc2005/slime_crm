@@ -74,6 +74,20 @@ class Candidate < ApplicationRecord
     project_tasks.where(status: 'finished').count <= 1
   end
 
+  # card template params setting
+  def card_template_params(field)
+    case field.to_sym
+      when :uid         then self.uid
+      when :name        then self.name
+      when :city        then self.city
+      when :phone       then self.phone
+      when :description then self.description
+      when :company     then self.latest_work_experience.try(:org_cn)
+      when :title       then self.latest_work_experience.try(:title)
+      else nil
+    end
+  end
+
   private
   def setup
     self.category    ||= 'expert'  # init category

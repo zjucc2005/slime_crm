@@ -31,6 +31,10 @@ module ProjectsHelper
     @project.clients.pluck(:name, :id)
   end
 
+  def project_task_pm_options
+    @project.pm_users.pluck(:name_cn, :id)
+  end
+
   def project_task_cost_category_options(project_task)
     ProjectTaskCost::CATEGORY.select do |k, v|
       project_task.costs.where(category: k).count < ProjectTaskCost::CATEGORY_LIMIT[k]

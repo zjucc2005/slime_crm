@@ -168,9 +168,8 @@ class FinanceController < ApplicationController
       sheet.add_cell(row, 16, task.memo)                              # 备注/Comment
       sheet.add_cell(row, 17, task.is_shorthand ? 'Y' : 'N')          # 速记/Shorthand
       sheet.add_cell(row, 18, task.expert.new_expert? ? 'Y' : 'N')    # 新专家/New Expert
-      pm_user = task.project.pm_users.first
-      sheet.add_cell(row, 19, pm_user.name_cn) if pm_user             # 项目经理/PM
-      sheet.add_cell(row, 20, '')                                     # 专家招募/Research
+      sheet.add_cell(row, 19, task.pm.name_cn)                        # 项目经理/PM
+      sheet.add_cell(row, 20, task.creator.name_cn)                   # 专家招募/Research(creator)
       sheet.add_cell(row, 21, task.expert.cpt)                        # 专家基础费率
       # 支出信息
       expert_cost = task.costs.where(category: 'expert').first

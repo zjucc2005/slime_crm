@@ -4,7 +4,7 @@ class CardTemplate < ApplicationRecord
 
   # ENUM
   CATEGORY = {
-    :Candidate => %w[uid name city phone description]
+    :Candidate => %w[uid name city phone description company title]
   }.stringify_keys
 
   # Validations
@@ -31,7 +31,7 @@ class CardTemplate < ApplicationRecord
     @container = []                           # init container
     text_parser(content) do |field|
       if valid_field?(field)                  # only handle with valid fields
-        @instance.send(field)                 # instance methods/instance variables of model
+        @instance.card_template_params(field) # instance methods/instance variables of model
       else
         "{{ invalid param: #{field} }}"
       end

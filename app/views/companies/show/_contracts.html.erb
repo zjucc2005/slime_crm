@@ -18,6 +18,7 @@
                     <th><%= mt(:contract, :charge_rate) %></th>
                     <th><%= mt(:contract, :charge_duration) %></th>
                     <th><%= mt(:contract, :payment_days) %></th>
+                    <th><%= mt(:contract, :payment_way) %></th>
                     <th><%= mt(:contract, :is_taxed) %></th>
                     <th><%= mt(:contract, :tax_rate) %></th>
                     <th><%= mt(:contract, :is_invoice_needed) %></th>
@@ -36,6 +37,7 @@
                         <td><%= "#{contract.charge_rate} #{contract.currency}" %></td>
                         <td><%= contract.charge_duration %></td>
                         <td><%= "#{contract.payment_days}#{Contract::TYPE_OF_PAYMENT_DAY[contract.type_of_payment_day]}" %></td>
+                        <td><%= Contract::PAYMENT_WAY[contract.payment_way] %></td>
                         <td><%= boolean_display(contract.is_taxed) %></td>
                         <td><%= contract.tax_rate %></td>
                         <td><%= boolean_display(contract.is_invoice_needed) %></td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_025938) do
+ActiveRecord::Schema.define(version: 2020_03_31_051416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,6 +222,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_025938) do
     t.string "expert_level"
     t.decimal "expert_rate", precision: 10, scale: 2
     t.string "memo"
+    t.integer "charge_duration"
+    t.bigint "pm_id"
     t.index ["project_id"], name: "index_project_tasks_on_project_id"
   end
 

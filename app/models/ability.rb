@@ -90,6 +90,7 @@ class Ability
     can [:new_client], Company
     can [:index, :show, :add_users, :delete_user, :add_clients, :delete_client, :add_experts, :delete_expert,
          :add_project_task], Project
+    can :manage, ProjectRequirement
     can [:edit, :update, :get_base_price], ProjectTask
 
     can :manage, LocationDatum
@@ -99,6 +100,7 @@ class Ability
 
   def finance_ability
     can_edit_my_account
+    can [:read, :card_template, :gen_card], Candidate
     can :manage, Finance
 
     can :read, LocationDatum

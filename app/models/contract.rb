@@ -3,7 +3,7 @@ class Contract < ApplicationRecord
 
   # ENUM
   TYPE_OF_PAYMENT_DAY = { :natural => '自然日' }.stringify_keys
-  PAYMENT_WAY = { :monthly => '月结', :by_project => '项目结' }.stringify_keys
+  PAYMENT_WAY = { :monthly => '月结', :by_project => '项目结', :advance_payment => '预付' }.stringify_keys
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true

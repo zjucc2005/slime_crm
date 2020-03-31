@@ -21,7 +21,10 @@ class ProjectTasksController < ApplicationController
 
       if @project_task.update(project_task_params)
         if params[:commit] == t('action.submit_and_confirm')
-          @project_task.update(status: 'finished')
+          contract = @project_task.active_contract
+          @project_task.status = 'finished'
+          @project_task.charge_status  = contract.payment_way == 'advance_payment' ? 'paid' : 'unbilled'  # 预付合同直接已收费
+          @project_task.save!
         end
         flash[:success] = t(:operation_succeeded)
         redirect_to project_path(@project_task.project)
@@ -117,7 +120,7 @@ class ProjectTasksController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:interview_form, :started_at, :expert_level, :expert_rate, :duration,
+    params.require(:project_task).permit(:interview_form, :started_at, :expert_level, :expert_rate, :duration, :charge_duration,
                                          :actual_price, :is_shorthand, :shorthand_price, :is_recorded, :memo)
   end
 

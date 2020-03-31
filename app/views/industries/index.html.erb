@@ -44,11 +44,11 @@
                         <div class="btn-group">
                             <%= link_to edit_industry_path(industry), :class => 'btn btn-edit btn-xs' do %>
                                 <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
-                            <% end %>
+                            <% end if can?(:edit, Industry) %>
                             <%= link_to industry_path(industry), :method => :delete, :class => 'btn btn-danger btn-xs',
                                         :data => { :confirm => t(:sure_to_delete) } do %>
                                 <%= fa_icon_tag('trash') %> <%= t('action.delete') %>
-                            <% end %>
+                            <% end if can?(:destroy, Industry) %>
                         </div>
                     </td>
                 </tr>

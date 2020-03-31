@@ -211,6 +211,8 @@ zh_cn:
         close: "结束项目"
         pm: "项目经理"
         pa: "项目助理"
+        total_project_tasks: "任务总数"
+        total_project_task_duration: "任务总时长(分钟)"
 
       project_requirement:
         status: "状态"
@@ -221,9 +223,10 @@ zh_cn:
         category: "类型"
         status: "状态"
         interview_form: "形式"
-        duration: "时长(分钟)"
-        started_at: "开始时间"
-        ended_at: "结束时间"
+        duration: "时长"
+        duration_min: "时长(分钟)"
+        started_at: "任务开始时间"
+        ended_at: "任务结束时间"
         charge_status: "收费状态"
         payment_status: "支付状态"
         total_price: "总费用"
@@ -247,6 +250,9 @@ zh_cn:
         expert_level: "专家级别"
         expert_rate: "专家倍率"
         memo: "备注"
+        charge_duration: "收费时长"
+        charge_duration_min: "收费时长(分钟)"
+        pm: "项目经理"
 
       project_task_cost:
         category: "费用类型"
