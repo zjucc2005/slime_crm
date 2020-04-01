@@ -101,10 +101,10 @@ class ProjectsController < ApplicationController
           # add pm
           pm_users = User.where(id: params[:uids], role: 'pm')
           pa_users = User.where(id: params[:uids], role: 'pa')
-          if @project.pm_users.count + pm_users.count > 1
-            raise t(:project_can_only_have_one_pm)
-          end
-         pm_users.each do |user|
+          # if @project.pm_users.count + pm_users.count > 1
+          #   raise t(:project_can_only_have_one_pm)
+          # end
+          pm_users.each do |user|
             @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
           end
           # add pa

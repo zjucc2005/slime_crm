@@ -2,3 +2,4 @@
 //= require select2.min
 //= require echart
 //= require jquery.datetimepicker.full
+//= require clipboard.min

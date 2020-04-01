@@ -22,6 +22,7 @@
                     <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
                     <%= f.select :expert_id, project_task_expert_options, { :prompt => default_prompt },
                                  :required => true, :class => 'form-control select2' %>
+                    <%= hidden_field_tag :expert_info, nil %>
                 </div>
                 <div class="col-lg-3 col-12 form-group">
                     <%= f.label :client, t(:client_contact) %><span class="text-red">*</span>
@@ -43,10 +44,49 @@
                 </div>
             </div>
 
-            <div class="form-group mb-0">
-                <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
-                <%= link_to t('action.back'), project_path(@project), :class => 'btn btn-secondary' %>
+            <div class="form-group mb-0 d-flex justify-content-between">
+                <div>
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
+                    <%= link_to t('action.back'), project_path(@project), :class => 'btn btn-secondary' %>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <%= t(:external_link) %>
+                    </button>
+                    <div class="dropdown-menu">
+                        <%= link_to '虚拟号', 'https://api.winnerlook.com/index', :target => '_blank', :class => 'dropdown-item clipboard'  %>
+                        <%= link_to '全时', 'https://aktins-associates.baiying.quanshi.com', :target => '_blank', :class => 'dropdown-item clipboard' %>
+                        <%= link_to '263', 'https://meet.263.net', :target => '_blank', :class => 'dropdown-item clipboard' %>
+                    </div>
+                </div>
             </div>
         <% end %>
     </div>
 </div>
+
+<script>
+    $(function(){
+        new ClipboardJS('.clipboard', {
+            text: function(){ return $('#expert_info').val(); }
+        });
+    });
+    $('#project_task_expert_id').change(function(){
+        getExpertInfo();
+    });
+    // 获取专家简易信息, 用于剪切板
+    function getExpertInfo(){
+        var expert_id = $('#project_task_expert_id').val();
+        $.ajax({
+            type: 'get',
+            url: '/candidates/' + expert_id + '/expert_info_for_clipboard',
+            async: false,
+            dataType: 'json',
+            success: function(data){
+                $('#expert_info').val(data.data);
+            },
+            error: function(data){
+                $('#expert_info').val('');
+            }
+        })
+    }
+</script>

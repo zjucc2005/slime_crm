@@ -336,6 +336,12 @@ class CandidatesController < ApplicationController
     @candidate_comment = CandidateComment.new
   end
 
+  # GET /candidates/:id/expert_info_for_clipboard
+  def expert_info_for_clipboard
+    @candidate = Candidate.find(params[:id])
+    render :json => { :data => "#{@candidate.name}|#{@candidate.phone}" }
+  end
+
   private
   def load_candidate
     @candidate = Candidate.find(params[:id])
