@@ -22,7 +22,7 @@
                 <% experts.each do |expert| %>
                     <tr>
                         <td><%= link_to "# #{expert.uid}", candidate_path(expert), :class => 'text-gray' %></td>
-                        <td><%= link_to expert.name, candidate_path(expert) %></td>
+                        <td><%= link_to expert.name, candidate_path(expert), :target => '_blank' %></td>
                         <td><%= expert.latest_work_experience.try(:org_cn) %></td>
                         <td><%= expert.latest_work_experience.try(:title) %></td>
                         <td class="action">

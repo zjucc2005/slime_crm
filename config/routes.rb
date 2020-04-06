@@ -101,4 +101,10 @@ Rails.application.routes.draw do
   resources :banks
   resources :industries
   resources :card_templates
+
+  resources :statistics do
+    get :current_month_count_infos,  on: :collection
+    get :current_month_task_ranking, on: :collection
+    get :unscheduled_projects,       on: :collection
+  end
 end

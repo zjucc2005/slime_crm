@@ -15,9 +15,9 @@ class HomeController < ApplicationController
 
   private
   def load_dashboard_of_admin
-    @total_experts  = Candidate.expert.count
-    @total_projects = Project.where(status: %w[ongoing finished]).count
-    @total_tasks    = ProjectTask.where(status: %w[ongoing finished]).count
-    @total_staffs   = User.active.count
+    @total_experts            = Candidate.expert.count
+    @total_signed_companies   = Company.signed.count
+    @total_tasks              = ProjectTask.where(status: 'finished').count
+    @total_task_duration_hour = (ProjectTask.where(status: 'finished').sum(:duration) / 60.0).round(1)
   end
 end

@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-12 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <%= fa_icon_tag('sort-amount-desc') %>
+                    <%= t('dashboard.current_month_task_duration_ranking') %> ALL
+                </h5>
+                <%= link_to fa_icon_tag('close'), 'javascript:history.go(-1);', :class => 'card-header-close' %>
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-sm card-text border-bottom">
+                    <thead>
+                    <tr>
+                        <th class="pl-3"><%= t('dashboard.ranking') %></th>
+                        <th><%= mt(:user, :name_cn) %></th>
+                        <th><%= t('dashboard.total_hours') %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @current_month_task_ranking.each do |info| %>
+                        <tr>
+                            <th class="pl-3"><%= info[:seq] %></th>
+                            <td><%= info[:username] %></td>
+                            <td><%= info[:hours] %> h</td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

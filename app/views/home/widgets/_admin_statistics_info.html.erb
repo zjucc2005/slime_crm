@@ -1,0 +1,56 @@
+<div class="col-lg-3 col-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <i class="fa fa-long-arrow-up text-green"></i>
+                <%= t('dashboard.current_month_increase') %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="current_month_count_infos_wrapper">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <%= fa_icon_tag('sort-amount-desc') %>
+                <%= t('dashboard.current_month_task_duration_ranking') %> TOP 10
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="current_month_task_duration_ranking_wrapper">
+            </div>
+            <div class="text-center text-bold">
+                <%= link_to '···', current_month_task_ranking_statistics_path, :title => t(:show_all) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-6 col-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <%= t('dashboard.unscheduled_projects') %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="unscheduled_projects_wrapper"></div>
+            <div class="text-center text-bold">
+                <%= link_to '···', projects_path, :title => t(:show_all) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $.get('statistics/current_month_count_infos.js');
+        $.get('statistics/current_month_task_ranking.js?limit=10');
+        $.get('statistics/unscheduled_projects.js?limit=10')
+    });
+</script>

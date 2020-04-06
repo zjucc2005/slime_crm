@@ -12,11 +12,11 @@
 <div class="col-lg-3 col-6 mb-3">
     <div class="card summary-item">
         <div class="symbol yellow">
-            <%= fa_icon_tag('map') %>
+            <%= fa_icon_tag('bank') %>
         </div>
         <div class="value">
-            <h1 class="count"><%= @total_projects %></h1>
-            <p><%= t('dashboard.total_projects') %></p>
+            <h1 class="count"><%= @total_signed_companies %></h1>
+            <p><%= t('dashboard.total_signed_companies') %></p>
         </div>
     </div>
 </div>
@@ -34,11 +34,11 @@
 <div class="col-lg-3 col-6 mb-3">
     <div class="card summary-item">
         <div class="symbol purple">
-            <%= fa_icon_tag('users') %>
+            <%= fa_icon_tag('clock-o') %>
         </div>
         <div class="value">
-            <h1 class="count"><%= @total_staffs %></h1>
-            <p><%= t('dashboard.total_staffs') %></p>
+            <h1 class="count"><%= @total_task_duration_hour %></h1>
+            <p><%= t('dashboard.total_task_duration_hour') %></p>
         </div>
     </div>
 </div>

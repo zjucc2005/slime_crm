@@ -40,6 +40,7 @@ en:
   select_payment_info: "Select payment info"
   settings: "Settings"
   show_all: "Show all"
+  statistics_info: "Statistics info"
   sure: "Are you sure?"
   sure_to_cancel: "Sure to cancel?"
   sure_to_delete: "Sure to delete?"
@@ -84,10 +85,21 @@ en:
     update_batch_model: "Batch update %{model}"
 
   dashboard:
+    category: "Category"
+    current_month_increase: "Current Month Increase"
+    current_month_task_duration_ranking: "Current Month Task Duration Ranking"
+    detail: "Detail"
+    unscheduled_projects: "Unscheduled Projects"
+    ranking: "Ranking"
     total_experts: "Total Experts"
-    total_projects: "Total Projects"
+    total_hours: "Total hours"
+    total_signed_companies: "Total Signed Companies"
     total_tasks: "Total Tasks"
+    total_task_duration_hour: "Total Task Duration"
+    total_income: "Total income"
+    total_expert_fee: "Total expert fee"
     total_staffs: "Total Staffs"
+    value: "Value"
 
   will_paginate:
     previous_label: "&#8592; Previous"

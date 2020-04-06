@@ -40,6 +40,7 @@ zh_cn:
   select_payment_info: "选择支付信息"
   settings: "设置"
   show_all: "查看全部"
+  statistics_info: "统计信息"
   sure: "确认吗?"
   sure_to_cancel: "确认取消吗?"
   sure_to_delete: "确认删除吗?"
@@ -84,10 +85,21 @@ zh_cn:
     update_batch_model: "批量更新%{model}"
 
   dashboard:
+    category: "类型"
+    current_month_increase: "本月新增"
+    current_month_task_duration_ranking: "本月任务小时数排名"
+    detail: "详情"
+    unscheduled_projects: "未安排访谈的项目"
+    ranking: "排名"
     total_experts: "专家总数"
-    total_projects: "项目总数"
+    total_hours: "总小时数"
+    total_signed_companies: "已签约客户总数"
     total_tasks: "任务总数"
+    total_task_duration_hour: "任务总小时数"
+    total_income: "收入总计"
+    total_expert_fee: "专家费用支出总计"
     total_staffs: "员工总数"
+    value: "数值"
 
   will_paginate:
     previous_label: "上一页"

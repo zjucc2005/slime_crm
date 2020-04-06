@@ -24,7 +24,7 @@
                 <% users.each do |user| %>
                     <tr>
                         <td><%= link_to "# #{user.uid}", user_path(user), :class => 'text-gray' %></td>
-                        <td><%= link_to user.email, user_path(user) %></td>
+                        <td><%= link_to user.email, user_path(user), :target => '_blank' %></td>
                         <td><%= user.name_cn %></td>
                         <td><%= user_role_badge(user.role) %></td>
                         <td class="action">

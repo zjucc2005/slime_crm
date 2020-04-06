@@ -1,0 +1,20 @@
+<table class="table table-sm card-text border-bottom">
+    <thead>
+    <tr>
+        <th class="pl-3"><%= t('dashboard.category') %></th>
+        <th><%= t('dashboard.value') %></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @current_month_count_infos.each do |info| %>
+        <tr>
+            <td class="pl-3"><%= info[:name] %></td>
+            <td>+ <%= info[:value] %></td>
+            <td>
+                <%= link_to(t('dashboard.detail'), info[:url]) if info[:url].present? %>
+            </td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>
