@@ -1,5 +1,8 @@
 <div class="row">
-    <%= render :partial => 'home/widgets/admin_summary' %>
-    <%= render :partial => 'home/widgets/admin_statistics_info' %>
-    <%#= render :partial => 'home/widgets/finance_chart' %>
+    <% if current_user.is_role?('admin') %>
+        <%= render :partial => 'home/widgets/admin_summary' %>
+        <%= render :partial => 'home/widgets/admin_statistics_info' %>
+    <% else %>
+
+    <% end %>
 </div>

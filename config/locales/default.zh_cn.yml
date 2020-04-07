@@ -52,6 +52,7 @@ zh_cn:
   up_to_now: "至今"
   user_account: "用户帐号"
   work_experience: "工作经历"
+  year: "年"
 
   action:
     add: "添加"
@@ -85,15 +86,24 @@ zh_cn:
     update_batch_model: "批量更新%{model}"
 
   dashboard:
+    annual_total: "全年总计"
     category: "类型"
     current_month_increase: "本月新增"
     current_month_task_duration_ranking: "本月任务小时数排名"
     detail: "详情"
+    expense: "费用支出"
+    expense_expert: "专家费用"
+    expense_recommend: "推荐费用"
+    expense_translation: "翻译费用"
+    expense_others: "其他费用"
+    finance_summary: "财务统计总览"
+    finance_statistics_annual: "%{year}年财务统计"
     unscheduled_projects: "未安排访谈的项目"
     ranking: "排名"
+    statistical_year: "统计年份"
     total_experts: "专家总数"
     total_hours: "总小时数"
-    total_signed_companies: "已签约客户总数"
+    total_signed_companies: "已签约公司总数"
     total_tasks: "任务总数"
     total_task_duration_hour: "任务总小时数"
     total_income: "收入总计"

@@ -8,11 +8,6 @@ class HomeController < ApplicationController
     end
   end
 
-  # GET /load_finance_chart.js, remote: true
-  def load_finance_chart
-
-  end
-
   private
   def load_dashboard_of_admin
     @total_experts            = Candidate.expert.count

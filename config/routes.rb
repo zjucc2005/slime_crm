@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: 'home#index'
-  get '/load_finance_chart', to: 'home#load_finance_chart'
 
   resources :users do
     post :admin_create,      on: :collection  # create users by admin
@@ -106,5 +105,7 @@ Rails.application.routes.draw do
     get :current_month_count_infos,  on: :collection
     get :current_month_task_ranking, on: :collection
     get :unscheduled_projects,       on: :collection
+
+    get :finance_summary,            on: :collection
   end
 end

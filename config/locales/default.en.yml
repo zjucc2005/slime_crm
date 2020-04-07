@@ -52,6 +52,7 @@ en:
   up_to_now: "up to now"
   user_account: "User account"
   work_experience: "Work experience"
+  year: "Year"
 
   action:
     add: "Add"
@@ -85,12 +86,21 @@ en:
     update_batch_model: "Batch update %{model}"
 
   dashboard:
+    annual_total: "Annual Total"
     category: "Category"
     current_month_increase: "Current Month Increase"
     current_month_task_duration_ranking: "Current Month Task Duration Ranking"
     detail: "Detail"
+    expense: "Expense"
+    expense_expert: "Expert Fee"
+    expense_recommend: "Recommend Fee"
+    expense_translation: "Translation Fee"
+    expense_others: "Others Fee"
+    finance_summary: "Finance Summary Chart"
+    finance_statistics_annual: "%{year} Finance Statistics"
     unscheduled_projects: "Unscheduled Projects"
     ranking: "Ranking"
+    statistical_year: "Statistical Year"
     total_experts: "Total Experts"
     total_hours: "Total hours"
     total_signed_companies: "Total Signed Companies"

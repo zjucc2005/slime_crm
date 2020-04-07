@@ -1,6 +1,7 @@
 # encoding: utf-8
 class StatisticsController < ApplicationController
   before_action :authenticate_user!
+  # load_and_authorize_resource
 
   # GET /statistics/current_month_count_infos.js
   def current_month_count_infos
@@ -19,8 +20,8 @@ class StatisticsController < ApplicationController
       { :name => t('dashboard.total_experts'),            :value => total_experts,            :url => nil },
       { :name => t('dashboard.total_tasks'),              :value => total_tasks,              :url => nil },
       { :name => t('dashboard.total_task_duration_hour'), :value => total_task_duration_hour, :url => nil },
-      { :name => t('dashboard.total_income'),             :value => total_income,             :url => nil },
-      { :name => t('dashboard.total_expert_fee'),         :value => total_expert_fee,         :url => nil }
+      { :name => t('dashboard.total_income'),             :value => total_income,             :url => finance_summary_statistics_path },
+      { :name => t('dashboard.total_expert_fee'),         :value => total_expert_fee,         :url => finance_summary_statistics_path }
     ]
 
     respond_to do |f|
@@ -60,4 +61,65 @@ class StatisticsController < ApplicationController
     end
   end
 
+  # GET /statistics/finance_summary
+  def finance_summary
+    current_year = Time.now.year
+    @year_options = (current_year-2..current_year).to_a.reverse  # year options
+    @year = params[:year] || current_year                        # statistical year
+    @x_axis = %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月]     # X axis
+
+    # annual total infos
+    o_time = Time.local @year  # original time
+
+    income              = []
+    expense             = []
+    expense_expert      = []
+    expense_recommend   = []
+    expense_translation = []
+    expense_others      = []
+
+
+    project_task_query = ProjectTask.where(status: 'finished')
+    project_task_cost_query = ProjectTaskCost.joins(:project_task).where('project_tasks.status': 'finished')
+
+    12.times do |i|
+      s_time = o_time + i.month  # start time
+      e_time = s_time + 1.month  # end time
+
+      cost_group = project_task_cost_query.where('project_tasks.started_at BETWEEN ? AND ?', s_time, e_time).
+        select('SUM(project_task_costs.price) AS sum_price, project_task_costs.category').group('project_task_costs.category')
+
+      expert_fee      = cost_group.select{|c| c.category == 'expert' }[0].try(:sum_price)      || 0.0
+      recommend_fee   = cost_group.select{|c| c.category == 'recommend' }[0].try(:sum_price)   || 0.0
+      translation_fee = cost_group.select{|c| c.category == 'translation' }[0].try(:sum_price) || 0.0
+      others_fee      = cost_group.select{|c| c.category == 'others' }[0].try(:sum_price)      || 0.0
+
+      income << project_task_query.where('started_at BETWEEN ? AND ?', s_time, e_time).sum(:actual_price)
+      expense << expert_fee + recommend_fee + translation_fee + others_fee
+      expense_expert << expert_fee
+      expense_recommend << recommend_fee
+      expense_translation << translation_fee
+      expense_others << others_fee
+    end
+
+
+    @result = [
+      { :name => t('dashboard.total_income'), :data => income },
+      { :name => t('dashboard.expense'), :data => expense },
+      { :name => t('dashboard.expense_expert'), :data => expense_expert, :stack => t('dashboard.expense') },
+      { :name => t('dashboard.expense_recommend'), :data => expense_recommend, :stack => t('dashboard.expense') },
+      { :name => t('dashboard.expense_translation'), :data => expense_translation, :stack => t('dashboard.expense') },
+      { :name => t('dashboard.expense_others'), :data => expense_others, :stack => t('dashboard.expense') },
+    ]
+
+    @annual_count_infos = [
+      { :name => t('dashboard.total_income'), :value => income.sum },
+      { :name => t('dashboard.expense'), :value => expense.sum },
+      { :name => t('dashboard.expense_expert'), :value => expense_expert.sum },
+      { :name => t('dashboard.expense_recommend'), :value => expense_recommend.sum },
+      { :name => t('dashboard.expense_translation'), :value => expense_translation.sum },
+      { :name => t('dashboard.expense_others'), :value => expense_others.sum },
+
+    ]
+  end
 end

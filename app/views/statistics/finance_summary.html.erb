@@ -1,0 +1,111 @@
+<!-- finance summary chart -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">
+            <%= fa_icon_tag('bar-chart') %>
+            <%= t('dashboard.finance_summary') %>
+        </h5>
+        <%= link_to fa_icon_tag('close'), root_path, :class => 'card-header-close' %>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-3 col-12">
+                <%= form_tag request.path, :method => :get do %>
+                    <div class="form-group">
+                        <%= label_tag :year, t('dashboard.statistical_year') %>
+                        <%= select_tag :year, options_for_select(@year_options, params[:year]), :class => 'form-control select2' %>
+                    </div>
+                    <div class="form-group">
+                        <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                    </div>
+                <% end %>
+
+                <div class="card shadow-none border">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <%= t('dashboard.annual_total') %>
+                        </h6>
+                    </div>
+                    <div class="card-body p-0">
+                        <div id="finance_summary_total_wrapper">
+                            <table class="table table-sm card-text">
+                                <thead>
+                                <tr>
+                                    <th class="pl-3"><%= t('dashboard.category') %></th>
+                                    <th><%= t('dashboard.value') %></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <% @annual_count_infos.each do |info| %>
+                                    <tr>
+                                        <td class="pl-3"><%= info[:name] %></td>
+                                        <td><%= info[:value] %></td>
+                                    </tr>
+                                <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-12">
+                <div id="finance_chart" style="height: 480px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $.get('statistics/finance_summary_total.js');
+        let finance_chart = echarts.init(document.getElementById('finance_chart'), 'default');
+        let finance_data = [
+            <% @result.each do |res| %>
+                {
+                    name: '<%= res[:name] %>',
+                    type: 'bar',
+                    <% if res[:stack].present? %>
+                    stack: '<%= res[:stack] %>',
+                    barWidth: 4,
+                    <% end %>
+                    data: <%= res[:data].to_s.html_safe %>
+                },
+            <% end %>
+        ];
+
+        let finance_option = {
+            title: {
+                text: '<%= t('dashboard.finance_statistics_annual', year: @year) %>',
+                subtext: 'Monthly Statistics'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ["收入总计", "费用支出", "专家费用", "推荐费用", "翻译费用", "其他费用"]
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: <%= @x_axis.to_s.html_safe %>
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value'
+                }
+            ],
+            series: finance_data
+        };
+        finance_chart.setOption(finance_option);
+    });
+</script>

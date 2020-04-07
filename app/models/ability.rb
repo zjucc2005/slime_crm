@@ -62,6 +62,7 @@ class Ability
     can :manage, Bank
     can :manage, Industry
     can :manage, CardTemplate
+    # can :manage, Statistic
   end
 
   def pm_ability
