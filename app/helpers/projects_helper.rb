@@ -24,15 +24,15 @@ module ProjectsHelper
   end
 
   def project_task_expert_options
-    @project.experts.pluck(:name, :id)
+    @project.experts.map{|c| [c.uid_name, c.id] }
   end
 
   def project_task_client_options
-    @project.clients.pluck(:name, :id)
+    @project.clients.map{|c| [c.uid_name, c.id] }
   end
 
   def project_task_pm_options
-    @project.pm_users.pluck(:name_cn, :id)
+    @project.pm_users.map{|u| [u.uid_name, u.id] }
   end
 
   def project_task_cost_category_options(project_task)

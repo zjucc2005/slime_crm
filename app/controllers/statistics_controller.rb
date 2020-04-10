@@ -64,9 +64,9 @@ class StatisticsController < ApplicationController
   # GET /statistics/finance_summary
   def finance_summary
     current_year = Time.now.year
-    @year_options = (current_year-2..current_year).to_a.reverse  # year options
+    @year_options = (2019..current_year).to_a.reverse            # year options
     @year = params[:year] || current_year                        # statistical year
-    @x_axis = %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月]     # X axis
+    @x_axis = %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月]     # X axis
 
     # annual total infos
     o_time = Time.local @year  # original time

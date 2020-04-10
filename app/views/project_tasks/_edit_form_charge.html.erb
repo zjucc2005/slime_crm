@@ -6,15 +6,15 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
-        <%= f.text_field :expert_id, :value => @project_task.expert.name, :disabled => true, :class => 'form-control' %>
+        <%= f.text_field :expert_id, :value => @project_task.expert.uid_name, :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :client, t(:client_contact) %><span class="text-red">*</span>
-        <%= f.text_field :client_id, :value => @project_task.client.name, :disabled => true, :class => 'form-control' %>
+        <%= f.text_field :client_id, :value => @project_task.client.uid_name, :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :pm %><span class="text-red">*</span>
-        <%= f.text_field :pm_id, :value => @project_task.pm.name_cn, :disabled => true, :class => 'form-control' %>
+        <%= f.text_field :pm_id, :value => @project_task.pm.uid_name, :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :interview_form %><span class="text-red">*</span>

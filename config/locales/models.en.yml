@@ -104,6 +104,7 @@ en:
         title: "Job title"
         description: "Description"
         duration: "Duration"
+        current_company: "Current company"
 
       candidate_payment_info:
         category: "Category"
@@ -183,7 +184,7 @@ en:
         pm: "PM"
         pa: "PA"
         total_project_tasks: "Total tasks"
-        total_project_task_duration: "Total duration(min)"
+        total_project_task_duration: "Total duration"
 
       project_requirement:
         status: "Status"

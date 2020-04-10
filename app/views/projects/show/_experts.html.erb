@@ -30,7 +30,7 @@
                                         :method => :delete, :data => { :confirm => t(:sure_to_remove) },
                                         :class => 'btn btn-danger btn-xs' do %>
                                 <%= fa_icon_tag('trash') %> <%= t('action.remove') %>
-                            <% end if can?(:delete_expert, Project) && @project.can_edit? %>
+                            <% end if false && can?(:delete_expert, Project) && @project.can_edit? %>
                         </td>
                     </tr>
                 <% end %>

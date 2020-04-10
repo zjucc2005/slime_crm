@@ -24,6 +24,12 @@ class CandidatesController < ApplicationController
         or_conditions << "UPPER(candidate_experiences.#{field}) LIKE UPPER(:term)"
       end
       query = query.where(or_conditions.join(' OR '), { :term => "%#{params[:company].strip}%" })
+      # 只搜索当前公司
+      if params[:current_company] == 'true'
+        query = query.where('candidate_experiences.ended_at' => nil)
+      elsif params[:current_company] == 'false'
+        query = query.where.not('candidate_experiences.ended_at' => nil)
+      end
     end
 
     # 职位

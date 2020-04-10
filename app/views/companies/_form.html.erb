@@ -13,8 +13,8 @@
         <%= f.text_field :name, :required => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :name_abbr, mt(:company, :name_abbr) %>
-        <%= f.text_field :name_abbr, :class => 'form-control' %>
+        <%= f.label :name_abbr, mt(:company, :name_abbr) %><span class="text-red">*</span>
+        <%= f.text_field :name_abbr, :required => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :tax_id, mt(:company, :tax_id) %>

@@ -104,7 +104,7 @@ class Project < ApplicationRecord
   end
 
   def total_project_task_duration
-    project_tasks.where(status: 'finished').sum(:duration)
+    (project_tasks.where(status: 'finished').sum(:duration) / 60.0).round(1)
   end
 
   private

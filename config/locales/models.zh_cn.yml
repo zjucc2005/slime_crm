@@ -133,6 +133,7 @@ zh_cn:
         title: "职位"
         description: "描述"
         duration: "起止时间"
+        current_company: "目前公司"
 
       candidate_payment_info:
         category: "类型"
@@ -212,7 +213,7 @@ zh_cn:
         pm: "项目经理"
         pa: "项目助理"
         total_project_tasks: "任务总数"
-        total_project_task_duration: "任务总时长(分钟)"
+        total_project_task_duration: "任务总时长"
 
       project_requirement:
         status: "状态"

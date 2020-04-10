@@ -61,6 +61,11 @@ class Candidate < ApplicationRecord
     "#{_mr_} #{_name_}"
   end
 
+  # uid + name
+  def uid_name
+    "#{uid} #{name}"
+  end
+
   def latest_work_experience
     experiences.work.order(:started_at => :desc).first
   end

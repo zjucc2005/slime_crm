@@ -10,7 +10,7 @@ class Company < ApplicationRecord
 
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys
-  validates_presence_of :name, :city
+  validates_presence_of :name, :name_abbr, :city
   validates_uniqueness_of :name
   validates_length_of :name, :minimum => 8
 

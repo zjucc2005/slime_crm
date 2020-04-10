@@ -64,6 +64,10 @@ class User < ApplicationRecord
     true
   end
 
+  def uid_name
+    "#{uid} #{name_cn}"
+  end
+
   private
   def setup
     self.status ||= 'inactive'
