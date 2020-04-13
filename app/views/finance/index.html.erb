@@ -19,10 +19,11 @@
                 <th><%= mt(:expert) %></th>
                 <th><%= t(:expert_id) %></th>
                 <th><%= mt(:project_task, :interview_form) %></th>
+                <th><%= mt(:project_task, :duration) %></th>
                 <th><%= mt(:project_task, :charge_duration) %></th>
-                <th><%= fa_icon_tag('long-arrow-down') %> <%= t(:expert_payment) %></th>
-                <th><%= fa_icon_tag('long-arrow-up') %> <%= mt(:project_task, :actual_price_excluding_tax) %></th>
-                <th><%= fa_icon_tag('long-arrow-up') %> <%= mt(:project_task, :shorthand_price) %></th>
+                <th><%= t(:expert_payment) %> <%= fa_icon_tag('long-arrow-down') %></th>
+                <th><%= mt(:project_task, :actual_price_excluding_tax) %> <%= fa_icon_tag('long-arrow-up') %></th>
+                <!--<th><%= fa_icon_tag('long-arrow-up') %> <%= mt(:project_task, :shorthand_price) %></th>-->
                 <th><%= mt(:project_task, :currency) %></th>
                 <th><%= mt(:project_task, :charge_status) %></th>
                 <th><%= mt(:project_task, :payment_status) %></th>
@@ -41,10 +42,11 @@
                     <td><%= link_to task.expert.name, candidate_path(task.expert_id) %></td>
                     <td><%= task.expert.uid %></td>
                     <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+                    <td><%= "#{task.duration} #{t(:minute)}" %></td>
                     <td><%= "#{task.charge_duration} #{t(:minute)}" %></td>
                     <td><%= task.expert_cost_friendly %></td>
                     <td><%= task.actual_price %></td>
-                    <td><%= task.shorthand_price %></td>
+                    <!--<td><%= task.shorthand_price %></td>-->
                     <td><%= currency_display(task.currency) %></td>
                     <td><%= project_task_charge_status_badge(task.charge_status) %></td>
                     <td><%= project_task_payment_status_badge(task.payment_status) %></td>

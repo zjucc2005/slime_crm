@@ -71,12 +71,17 @@ Rails.application.routes.draw do
     put :start, on: :member
     put :close, on: :member
 
+    get :experts,       on: :member
     get :project_tasks, on: :member
   end
 
   resources :project_requirements do
     put :finish,   on: :member
     put :unfinish, on: :member
+  end
+
+  resources :project_candidates do
+    put :update_mark, on: :member
   end
 
   resources :project_tasks do

@@ -284,6 +284,13 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /projects/:id/experts
+  def experts
+    load_project
+    query = @project.experts
+    @experts = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+  end
+
   # GET /projects/:id/project_tasks
   def project_tasks
     load_project

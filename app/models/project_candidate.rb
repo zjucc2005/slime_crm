@@ -2,6 +2,11 @@
 class ProjectCandidate < ApplicationRecord
   # ENUM
   CATEGORY = { :expert => '专家', :client => '客户' }.stringify_keys
+  MARK = {
+    :accept  => '接受',
+    :decline => '拒绝',
+    :pending => '待定'
+  }.stringify_keys
 
   # Associations
   belongs_to :project, :class_name => 'Project'
@@ -18,6 +23,7 @@ class ProjectCandidate < ApplicationRecord
   private
   def setup
     self.category ||= 'client'
+    self.mark     ||= 'pending'
   end
 
 end

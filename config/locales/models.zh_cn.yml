@@ -121,6 +121,7 @@ zh_cn:
         seat: "客户seat"
         interview_task: "访谈任务"
         wechat: "微信"
+        task_count: "任务次数"
 
       candidate_experience:
         category: "类型"
@@ -220,6 +221,9 @@ zh_cn:
         status: "状态"
         content: "内容"
         demand_number: "需求人数"
+
+      project_candidate:
+        mark: "项目标识"
 
       project_task:
         category: "类型"

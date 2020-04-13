@@ -1,6 +1,9 @@
 <div class="card card-inner mb-3">
     <div class="card-header">
-        <h5><%= fa_icon_tag('user-circle') %> <%= mt(:expert) %></h5>
+        <h5>
+            <%= fa_icon_tag('user-circle') %> <%= mt(:expert) %>
+            <%= link_to t(:show_all), experts_project_path(@project), :class => 'h6' %>
+        </h5>
         <%= link_to candidates_path(project_id: @project.id, from_source: 'project'), :class => 'btn btn-primary btn-xs' do %>
             <%= fa_icon_tag('plus') %> <%= t('action.add') %>
         <% end if can?(:index, Candidate) && @project.can_edit? %>
@@ -34,6 +37,11 @@
                         </td>
                     </tr>
                 <% end %>
+                <tr>
+                    <td colspan="10" class="text-center">
+                        <%= link_to '...', experts_project_path(@project), :title => t(:show_all) %>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         <% else %>

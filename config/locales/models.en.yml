@@ -92,6 +92,7 @@ en:
         seat: "Client seat"
         interview_task: "Interview task"
         wechat: "Wechat"
+        task_count: "Task count"
 
       candidate_experience:
         category: "Category"
@@ -191,6 +192,9 @@ en:
         status: "Status"
         content: "Content"
         demand_number: "Demand number"
+
+      project_candidate:
+        mark: "Project mark"
 
       project_task:
         category: "Category"

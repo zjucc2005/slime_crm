@@ -1,0 +1,98 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('user-circle') %> <%= mt(:expert) %></h5>
+        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@project.uid}" %></span>
+                    <span><%= @project.name %></span>
+                </h6>
+
+                <div>
+                    <%= link_to '', :class => 'btn btn-default btn-sm', :onclick => 'cardTemplate();' do %>
+                        <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
+                    <% end if can?(:card_template, Candidate) %>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 form-group">
+                <%= project_status_badge(@project.status) %>
+                <span class="badge badge-light"><%= show_creator(@project) %></span>
+                <span class="badge badge-light"><%= show_timestamps(@project) %></span>
+            </div>
+        </div>
+
+        <div class="p-1 table-responsive-sm">
+            <% if @experts.any? %>
+                <table class="table table-sm table-striped border card-text">
+                    <thead>
+                    <tr>
+                        <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
+                        <th><%= mt(:candidate, :id) %></th>
+                        <th><%= mt(:candidate, :name) %></th>
+                        <th><%= mt(:candidate, :phone) %></th>
+                        <th><%= mt(:candidate, :email) %></th>
+                        <th><%= mt(:candidate_experience, :company) %></th>
+                        <th><%= mt(:candidate_experience, :title) %></th>
+                        <th><%= mt(:candidate, :task_count) %></th>
+                        <th><%= mt(:candidate, :is_available) %> <%= fa_icon_tag('caret-down') %></th>
+                        <th><%= mt(:project_candidate, :mark) %> <%= fa_icon_tag('caret-down') %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @experts.each do |expert| %>
+                        <tr>
+                            <td><%= check_box_tag :'uids[]', expert.id, false %></td>
+                            <td><%= content_tag :span, "# #{expert.uid}", :class => 'text-gray' %></td>
+                            <td><%= link_to expert.name, candidate_path(expert), :target => '_blank' %></td>
+                            <td><%= expert.phone %></td>
+                            <td><%= expert.email %></td>
+                            <td><%= expert.latest_work_experience.try(:org_cn) %></td>
+                            <td><%= expert.latest_work_experience.try(:title) %></td>
+                            <td><%= @project.project_tasks.where(expert_id: expert.id, status: 'finished').count %></td>
+                            <td>
+                                <div class="dropdown">
+                                    <a class="status <%= candidate_is_available_status(expert.is_available) %>" href="#" role="button" id="cia_<%= expert.id %>" data-toggle="dropdown"></a>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-header"><%= mt(:candidate, :is_available) %></div>
+                                        <%= link_to t(:true),    update_is_available_candidate_path(expert, is_available: true),  :method => :put, :remote => true, :class => 'dropdown-item status valid' %>
+                                        <%= link_to t(:pending), update_is_available_candidate_path(expert, is_available: nil),   :method => :put, :remote => true, :class => 'dropdown-item status pending' %>
+                                        <%= link_to t(:false),   update_is_available_candidate_path(expert, is_available: false), :method => :put, :remote => true, :class => 'dropdown-item status invalid' %>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <% pc = @project.project_candidates.where(candidate_id: expert).first %>
+                                <div class="dropdown">
+                                    <a href="#" role="button" id="pcm_<%= pc.id %>" data-toggle="dropdown">
+                                        <%= project_candidate_mark_badge(pc.mark) %>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-header"><%= mt(:project_candidate, :mark) %></div>
+                                        <% ProjectCandidate::MARK.keys.each do |mark| %>
+                                            <%= link_to update_mark_project_candidate_path(pc, mark: mark), :method => :put, :remote => true, :class => 'dropdown-item' do %>
+                                                <%= project_candidate_mark_badge(mark) %>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+                <%= will_paginate @experts %>
+            <% else %>
+                <div class="p-2 text-center">
+                    <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
