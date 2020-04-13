@@ -158,6 +158,7 @@ zh_cn:
         industry: "行业"
         city: "城市"
         address: "地址"
+        linkman: "联系人"
         phone: "联系电话"
         description: "公司简介"
         is_signed: "是否签约"

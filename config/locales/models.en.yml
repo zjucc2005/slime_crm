@@ -129,6 +129,7 @@ en:
         industry: "Industry"
         city: "City"
         address: "Address"
+        linkman: "Linkman"
         phone: "Phone"
         description: "Description"
         is_signed: "Signed"
