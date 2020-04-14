@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get :show_phone,     on: :member      # show candidate phone.js
     get :card_template,  on: :collection
     get :gen_card,       on: :collection
+    get :expert_template,on: :collection
 
     post :create_client, on: :collection
     get :edit_client,    on: :member

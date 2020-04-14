@@ -9,6 +9,16 @@ window.cardTemplate = function(){
     }
 };
 
+window.expertTemplate = function(){
+    var uids = $("input[name='uids[]']:checked");
+    if(uids.length === 0){
+        alert('请至少选择一位专家');
+    }else{
+        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+        window.location.href = '/candidates/expert_template?' + params;
+    }
+};
+
 window.clipboard = function(element){
     selectText(element);
     document.execCommand('copy');

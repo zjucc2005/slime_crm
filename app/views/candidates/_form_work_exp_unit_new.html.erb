@@ -6,7 +6,7 @@
         <div class="form-group-range">
             <div class="form-group-range-input">
                 <%= text_field_tag :"work_exp[#{i}][started_at]", (params[:work_exp][i.to_s][:started_at] rescue nil),
-                                    :required => true, :class => 'form-control datepicker', :placeholder => "#{t(:begin)}*" %>
+                                   :required => true, :class => 'form-control datepicker', :placeholder => "#{t(:begin)}*" %>
             </div>
             <span class="form-group-range-divider">
                 <i class="fa fa-arrow-right"></i>

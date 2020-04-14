@@ -170,6 +170,12 @@ class CandidatesController < ApplicationController
     @candidates = Candidate.where(id: params[:uids])
   end
 
+  # GET /candidates/expert_template
+  def expert_template
+    @candidates = Candidate.where(id: params[:uids]).order(:created_at => :desc)
+    export_expert_template(@candidates)
+  end
+
   # POST /candidates/create_client
   def create_client
     begin
@@ -351,5 +357,27 @@ class CandidatesController < ApplicationController
 
   def candidate_payment_info_params
     params.require(:candidate_payment_info).permit(:category, :bank, :sub_branch, :account, :username)
+  end
+
+  def export_expert_template(query)
+    template_path = 'public/templates/expert_template.xlsx'
+    raise 'template file not found' unless File.exist?(template_path)
+
+    book = ::RubyXL::Parser.parse(template_path)  # read from template file
+    sheet = book[0]
+    query.each_with_index do |expert, index|
+      row = index + 1
+      exp = expert.latest_work_experience
+      sheet.add_cell(row, 0, "##{expert.uid}")    # Expert Code
+      sheet.add_cell(row, 1, exp.try(:org_cn))    # Company
+      sheet.add_cell(row, 2, exp.try(:title))     # Position
+      sheet.add_cell(row, 3, expert.city)         # Region
+      sheet.add_cell(row, 4, expert.description)  # Key Insights
+    end
+    file_dir = "public/export/#{Time.now.strftime('%y%m%d')}"
+    FileUtils.mkdir_p file_dir unless File.exist? file_dir
+    file_path = "#{file_dir}/expert_#{current_user.id}_#{Time.now.strftime('%H%M%S')}.xlsx"
+    book.write file_path
+    send_file file_path
   end
 end
