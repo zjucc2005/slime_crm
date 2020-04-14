@@ -38,7 +38,7 @@ module DefaultHelper
   ##
   # show creator of instance
   def show_creator(instance)
-    creator = instance.creator.try(:name_cn) || current_user.name_cn
+    creator = instance.creator.try(:name_cn) || 'NA'
     "#{mt(:candidate, :created_by)}: #{creator}"
   end
 

@@ -5,6 +5,10 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
+  resource :api do
+    post :createExpert
+  end
+
   resources :users do
     post :admin_create,      on: :collection  # create users by admin
     get :edit_password,      on: :member

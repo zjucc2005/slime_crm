@@ -9,43 +9,15 @@ class CandidatesController < ApplicationController
     @hl_words = [] # 高亮关键词
     query = Candidate.expert
     # query code here >>
-    query = query.where('UPPER(name) LIKE :name OR UPPER(nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
-    query = query.where('phone = :phone OR phone1 = :phone', { :phone => params[:phone].strip }) if params[:phone].present?
-    query = query.where('email = :email OR email1 = :email', { :email => params[:email].strip }) if params[:email].present?
-    query = query.where(industry: params[:industry].strip) if params[:industry].present?
-    query = query.where(is_available: params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
+    query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
+    query = query.where('UPPER(candidates.name) LIKE :name OR UPPER(candidates.nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
+    query = query.where('candidates.phone = :phone OR candidates.phone1 = :phone', { :phone => params[:phone].strip }) if params[:phone].present?
+    query = query.where('candidates.email = :email OR candidates.email1 = :email', { :email => params[:email].strip }) if params[:email].present?
+    query = query.where('candidates.industry' => params[:industry].strip) if params[:industry].present?
+    query = query.where('candidates.is_available' => params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
 
-    # 公司名
-    if params[:company].present?
-      @hl_words << params[:company].strip
-      query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
-      or_conditions = []
-      %w[org_cn org_en].each do |field|
-        or_conditions << "UPPER(candidate_experiences.#{field}) LIKE UPPER(:term)"
-      end
-      query = query.where(or_conditions.join(' OR '), { :term => "%#{params[:company].strip}%" })
-      # 只搜索当前公司
-      if params[:current_company] == 'true'
-        query = query.where('candidate_experiences.ended_at' => nil)
-      elsif params[:current_company] == 'false'
-        query = query.where.not('candidate_experiences.ended_at' => nil)
-      end
-    end
-
-    # 职位
-    if params[:title].present?
-      @hl_words << params[:title].strip
-      query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
-      or_conditions = []
-      %w[title].each do |field|
-        or_conditions << "UPPER(candidate_experiences.#{field}) LIKE UPPER(:term)"
-      end
-      query = query.where(or_conditions.join(' OR '), { :term => "%#{params[:title].strip}%" })
-    end
-
-    # 背景说明
+    # 专家说明
     if params[:description].present?
-      query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
       @terms = params[:description].split
       @hl_words += @terms
       if @terms.length > 5
@@ -53,10 +25,19 @@ class CandidatesController < ApplicationController
         redirect_to candidates_path and return
       end
       and_conditions = []
+
+      or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title]
       @terms.each do |term|
-        and_conditions << "(candidates.description LIKE '%#{term}%' OR candidate_experiences.description LIKE '%#{term}%')"
+        and_conditions << "(#{or_fields.map{|field| "UPPER(#{field}) LIKE UPPER('%#{term}%')" }.join(' OR ') })"
       end
       query = query.where(and_conditions.join(' AND '))
+
+      # 只搜索当前公司
+      if params[:current_company] == 'true'
+        query = query.where('candidate_experiences.ended_at' => nil)
+      elsif params[:current_company] == 'false'
+        query = query.where.not('candidate_experiences.ended_at' => nil)
+      end
     end
     @candidates = query.distinct.order(:created_at => :desc).paginate(:page => params[:page], :per_page => @per_page)
   end

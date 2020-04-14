@@ -12,9 +12,10 @@ module CandidatesHelper
 
   def show_candidate_data_source
     data_source = case action_name
-                  when 'new' then 'manual'
-                  when 'edit' then @candidate.data_source
-                  else 'unknown'
+                    when 'new' then 'manual'
+                    when 'edit' then @candidate.data_source
+                    when 'show' then @candidate.data_source
+                    else 'unknown'
                   end
     Candidate::DATA_SOURCE[data_source]
   end

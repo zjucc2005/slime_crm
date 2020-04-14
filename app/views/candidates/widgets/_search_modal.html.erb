@@ -16,20 +16,12 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-12 form-group">
-                                <%= label_tag :description, mt(:candidate, :description) %>
+                                <%= label_tag :description, t(:expert_description) %>
                                 <%= text_field_tag :description, params[:description], :class => 'form-control', :placeholder => '关键词之间用空格隔开, 最多5个关键词' %>
-                            </div>
-                            <div class="col-lg-3 col-6 form-group">
-                                <%= label_tag :company, mt(:candidate_experience, :company) %>
-                                <%= text_field_tag :company, params[:company], :class => 'form-control' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :current_company, mt(:candidate_experience, :current_company) %>
                                 <%= select_tag :current_company, options_for_select(boolean_options, params[:current_company]), :prompt => default_prompt, :class => 'form-control select2' %>
-                            </div>
-                            <div class="col-lg-3 col-6 form-group">
-                                <%= label_tag :title, mt(:candidate_experience, :title) %>
-                                <%= text_field_tag :title, params[:title], :class => 'form-control' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :industry, mt(:candidate, :industry) %>

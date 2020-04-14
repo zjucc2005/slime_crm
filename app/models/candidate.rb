@@ -3,11 +3,11 @@ class Candidate < ApplicationRecord
 
   # ENUM
   CATEGORY = { :expert => '专家', :client => '客户' }.stringify_keys
-  DATA_SOURCE = { :manual => '手工录入', :excel => 'Excel导入', :plugin => '插件采集' }.stringify_keys
+  DATA_SOURCE = { :manual => '手工录入', :excel => 'Excel导入', :plugin => '插件采集', :api => 'API创建' }.stringify_keys
   GENDER = { :male => '男', :female => '女' }.stringify_keys
 
   # Associations
-  belongs_to :creator, :class_name => 'User', :foreign_key => :created_by
+  belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
   belongs_to :company, :class_name => 'Company', :optional => true
   has_many :experiences, :class_name => 'CandidateExperience', :dependent => :destroy
   has_many :payment_infos, :class_name => 'CandidatePaymentInfo', :dependent => :destroy
@@ -23,7 +23,7 @@ class Candidate < ApplicationRecord
   validates_inclusion_of :data_source, :in => DATA_SOURCE.keys
   validates_inclusion_of :gender, :in => GENDER.keys, :allow_nil => true
   validates_inclusion_of :currency, :in => CURRENCY.keys, :allow_nil => true
-  validates_presence_of :name, :first_name
+  validates_presence_of :name, :last_name
   validates_presence_of :cpt
 
   before_validation :setup, :on => [:create, :update]

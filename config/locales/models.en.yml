@@ -104,6 +104,7 @@ en:
         department: "Department"
         title: "Job title"
         description: "Description"
+        duty: "Duty"
         duration: "Duration"
         current_company: "Current company"
 

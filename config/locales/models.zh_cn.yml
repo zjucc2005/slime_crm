@@ -133,6 +133,7 @@ zh_cn:
         department: "部门"
         title: "职位"
         description: "描述"
+        duty: "职责"
         duration: "起止时间"
         current_company: "目前公司"
 

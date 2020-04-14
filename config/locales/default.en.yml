@@ -14,6 +14,7 @@ en:
   contract_expired: "Contract expired"
   end: "End"
   expert_card: "Expert card"
+  expert_description: "Expert description"
   expert_id: "Expert ID"
   expert_payment: "Expert fee"
   external_link: "External link"

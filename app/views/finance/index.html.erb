@@ -15,6 +15,7 @@
                 <th><%= mt(:project_task, :id) %></th>
                 <th><%= mt(:project, :name) %></th>
                 <th><%= t(:project_id) %></th>
+                <th><%= mt(:company, :name_abbr) %></th>
                 <th><%= mt(:project_task, :started_at) %></th>
                 <th><%= mt(:expert) %></th>
                 <th><%= t(:expert_id) %></th>
@@ -38,6 +39,7 @@
                     <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
                     <td title="<%= project.name %>"><%= truncate(project.name, length: 8) %></td>
                     <td><%= project.uid %></td>
+                    <td><%= project.company.name_abbr %></td>
                     <td><%= task.started_at.strftime('%F %H:%M') %></td>
                     <td><%= link_to task.expert.name, candidate_path(task.expert_id) %></td>
                     <td><%= task.expert.uid %></td>

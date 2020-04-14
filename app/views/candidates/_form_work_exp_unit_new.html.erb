@@ -31,7 +31,7 @@
         <%= text_field_tag :"work_exp[#{i}][title]", (params[:work_exp][i.to_s][:title] rescue nil), :class => 'form-control' %>
     </div>
     <div class="col-12 form-group">
-        <%= label_tag :description, mt(:candidate_experience, :description) %>
+        <%= label_tag :description, mt(:candidate_experience, :duty) %>
         <%= text_area_tag :"work_exp[#{i}][description]", (params[:work_exp][i.to_s][:description] rescue nil), :class => 'form-control', :rows => 3 %>
     </div>
 </div>
