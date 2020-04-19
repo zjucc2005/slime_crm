@@ -79,8 +79,8 @@ module ProjectsHelper
   end
 
   def project_candidate_mark_badge(mark)
-    dict = { :accept => 'dark', :decline => 'dark' }.stringify_keys
-    content_tag :span, ProjectCandidate::MARK[mark] || mark, :class => "badge badge-#{dict[mark] || 'secondary' }"
+    dict = { :pending => 'secondary' }.stringify_keys
+    content_tag :span, ProjectCandidate::MARK[mark] || mark, :class => "badge badge-#{dict[mark] || 'dark' }"
   end
 
 end

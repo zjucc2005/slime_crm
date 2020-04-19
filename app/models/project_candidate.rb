@@ -3,9 +3,12 @@ class ProjectCandidate < ApplicationRecord
   # ENUM
   CATEGORY = { :expert => '专家', :client => '客户' }.stringify_keys
   MARK = {
-    :accept  => '接受',
-    :decline => '拒绝',
-    :pending => '待定'
+    :decline     => '拒绝',
+    :unsuitable  => '不合适',
+    :recommended => '已推荐',
+    :interviewed => '已访谈',
+    :contacting  => '联络中',
+    :pending     => '待定'
   }.stringify_keys
 
   # Associations
