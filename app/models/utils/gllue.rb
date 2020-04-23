@@ -3,8 +3,10 @@ module Utils
   class Gllue
 
     VERSION = '1.0'
-    URL     = 'http://172.16.81.245'
+    # URL     = 'http://172.16.81.245'  # 局域网 IP
+    URL     = 'http://116.62.206.67'
     AES_KEY = 'e36258956d57846e'
+    AES_IV  = '0' * 16
     EMAIL   = 'eric.ling@atkins-associates.com'
 
     class << self
@@ -13,36 +15,43 @@ module Utils
       end
 
       # main method
-      def candidate_list(page=1, per_page=10)
-        url = "#{URL}/rest/candidate/list"
-        params = {
-          :gllue_private_token => private_token,
-          :paginate_by         => per_page,
-          :page                => page,
-          :gql                 => '',
-        }
-        Api.get(url, params)
+      def candidate_list(page=1, per_page=10, fields=[])
+        _fields_ = fields.join(',')
+        url = "#{URL}/rest/candidate/list?private_token=#{private_token}&paginate_by=#{per_page}&page=#{page}&fields=#{_fields_}"
+        Api.get(url)
       end
 
+      # 最大有效时长5分钟, 本地缓存1分钟重新获取
       def private_token
-        Rails.cache.fetch('gllue_private_token', expires_in: 1.minute) do
-          URI.encode Base64.strict_encode64(aes_encrypt(plain_text))
-        end
+        timestamp = (Time.now.to_f * 1000).to_i
+        text = "#{timestamp},#{EMAIL},"
+        encrypt(text)
+      end
+
+      def encrypt(text)
+        CGI.escape(Base64.strict_encode64(aes_encrypt(text)))
+      end
+
+      def decrypt(text)
+        aes_decrypt(Base64.decode64(CGI.unescape(text)))
       end
 
       # AES-128-CBC 加密
-      def aes_encrypt(text)
+      def aes_encrypt(text, key=AES_KEY, iv=AES_IV)
         cipher = OpenSSL::Cipher::AES.new(128, :CBC)
         cipher.encrypt
-        cipher.key = AES_KEY
-        cipher.iv  = '0' * 16  # 初始矢量 IV
-        cipher.update(pad_text(text))
+        cipher.key = key
+        cipher.iv  = iv
+        cipher.update(pad_text(text)) + cipher.final
       end
 
-      # 明文字串
-      def plain_text
-        timestamp = (Time.now.to_f * 1000).to_i
-        "#{timestamp},#{EMAIL},"
+      # AES-128-CBC 解密
+      def aes_decrypt(text, key=AES_KEY, iv=AES_IV)
+        cipher = OpenSSL::Cipher::AES.new(128, :CBC)
+        cipher.decrypt
+        cipher.key = key
+        cipher.iv  = iv
+        cipher.update(text)
       end
 
       def pad_text(text, length=16)

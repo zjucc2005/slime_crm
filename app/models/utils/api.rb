@@ -43,6 +43,7 @@ module Utils
         else raise NoMethodError
       end
 
+      Rails.logger.info("CALL: url[#{url}]")
       unless Rails.env.production?
         Rails.logger.info("body ===> [#{request.body}]")
         request.each do |r_key,r_value|
