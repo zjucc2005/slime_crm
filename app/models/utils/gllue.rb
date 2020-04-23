@@ -14,7 +14,7 @@ module Utils
 
       # main method
       def candidate_list(page=1, per_page=10)
-        url = "#{URL}/rest/candidate/id_list"
+        url = "#{URL}/rest/candidate/list"
         params = {
           :gllue_private_token => private_token,
           :paginate_by         => per_page,
