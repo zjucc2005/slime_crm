@@ -15,9 +15,10 @@ module Utils
       end
 
       # main method
-      def candidate_list(page=1, per_page=10, fields=[])
-        _fields_ = fields.join(',')
-        url = "#{URL}/rest/candidate/list?private_token=#{private_token}&paginate_by=#{per_page}&page=#{page}&fields=#{_fields_}"
+      def candidate_list(options={})
+        page     = options[:page]
+        per_page = options[:per_page]
+        url = "#{URL}/rest/candidate/list?private_token=#{private_token}&paginate_by=#{per_page}&page=#{page}"
         Api.get(url)
       end
 

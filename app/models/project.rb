@@ -107,6 +107,10 @@ class Project < ApplicationRecord
     (project_tasks.where(status: 'finished').sum(:duration) / 60.0).round(1)
   end
 
+  def project_option_friendly
+    "#{company.name_abbr} - #{code} - #{name}"
+  end
+
   private
   def setup
     self.status ||= 'initialized'

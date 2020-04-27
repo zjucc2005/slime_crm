@@ -6,13 +6,14 @@
         <% end if can?(:add_project_requirement, Project) && @project.can_add_requirement? %>
     </div>
 
-    <div class="card-body table-responsive">
+    <div class="card-body" style="overflow-y: scroll; max-height: 240px;">
         <% if project_requirements.any? %>
-            <table class="table table-sm table-striped nowrap card-text">
+            <table class="table table-sm table-striped card-text">
                 <thead>
                 <tr>
                     <th><%= mt(:project_requirement, :content) %></th>
                     <th><%= mt(:project_requirement, :demand_number) %></th>
+                    <th><%= mt(:project_requirement, :file) %></th>
                     <th><%= mt(:project_requirement, :status) %></th>
                     <th><%= mt(:project_requirement, :created_by) %></th>
                     <th><%= mt(:project_requirement, :created_at) %></th>
@@ -24,6 +25,7 @@
                     <tr>
                         <td><%= project_requirement_content_raw(requirement.content) %></td>
                         <td><%= requirement.demand_number %></td>
+                        <td><%= link_to requirement.file.url do %><%= fa_icon_tag('download') %><% end if requirement.file.present? %></td>
                         <td><%= project_requirement_status_badge(requirement.status) %></td>
                         <td><%= requirement.creator.name_cn %></td>
                         <td class="text-nowrap"><%= requirement.created_at.strftime('%F %H:%M') %></td>

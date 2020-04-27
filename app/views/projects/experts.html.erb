@@ -40,12 +40,13 @@
                         <th><%= mt(:candidate, :id) %></th>
                         <th><%= mt(:candidate, :name) %></th>
                         <th><%= mt(:candidate, :phone) %></th>
-                        <th><%= mt(:candidate, :email) %></th>
+                        <!--<th><%= mt(:candidate, :email) %></th>-->
                         <th><%= mt(:candidate_experience, :company) %></th>
                         <th><%= mt(:candidate_experience, :title) %></th>
                         <th><%= mt(:candidate, :task_count) %></th>
                         <th><%= mt(:candidate, :is_available) %> <%= fa_icon_tag('caret-down') %></th>
                         <th><%= mt(:project_candidate, :mark) %> <%= fa_icon_tag('caret-down') %></th>
+                        <th><%= t(:operation) %></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -54,8 +55,12 @@
                             <td><%= check_box_tag :'uids[]', expert.id, false %></td>
                             <td><%= content_tag :span, "# #{expert.uid}", :class => 'text-gray' %></td>
                             <td><%= link_to expert.name, candidate_path(expert), :target => '_blank' %></td>
-                            <td><%= expert.phone %></td>
-                            <td><%= expert.email %></td>
+                            <td>
+                                <%= content_tag :span, :id => "show_phone_wrapper_#{expert.id}", :class => 'mr-1' do %>
+                                    <%= link_to '查看联系方式', show_phone_candidate_path(expert), :remote => true %>
+                                <% end %>
+                            </td>
+                            <!--<td><%= expert.email %></td>-->
                             <td><%= expert.latest_work_experience.try(:org_cn) %></td>
                             <td><%= expert.latest_work_experience.try(:title) %></td>
                             <td><%= @project.project_tasks.where(expert_id: expert.id, status: 'finished').count %></td>
@@ -85,6 +90,11 @@
                                         <% end %>
                                     </div>
                                 </div>
+                            </td>
+                            <td>
+                                <%= link_to new_candidate_comment_path(candidate_id: expert.id, return_to: request.url) do %>
+                                    <%= t('action.add_model', model: mt(:candidate_comment)) %>
+                                <% end if can?(:new, CandidateComment) %>
                             </td>
                         </tr>
                     <% end %>

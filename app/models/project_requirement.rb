@@ -15,6 +15,8 @@ class ProjectRequirement < ApplicationRecord
   # Validations
   validates_inclusion_of :status, :in => STATUS.keys
 
+  mount_uploader :file, FileUploader
+
   before_validation :setup, :on => :create
 
   def can_edit?

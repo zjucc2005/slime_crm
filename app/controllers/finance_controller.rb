@@ -138,7 +138,7 @@ class FinanceController < ApplicationController
 
     query.each_with_index do |task, index|
       row = index + 2
-      sheet.add_cell(row, 0, task.project.company.name)               # 客户(公司)/Client
+      sheet.add_cell(row, 0, task.project.company.name_abbr)          # 客户(公司)/Client
       sheet.add_cell(row, 1, task.project.name)                       # 项目名称/Project
       sheet.add_cell(row, 2, task.project.code)                       # 项目代码/Project code
       sheet.add_cell(row, 3, task.project.clients.first.try(:name))   # 负责人/Seat

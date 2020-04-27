@@ -193,6 +193,7 @@ en:
         status: "Status"
         content: "Content"
         demand_number: "Demand number"
+        file: "File"
 
       project_candidate:
         mark: "Project mark"

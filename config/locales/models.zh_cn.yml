@@ -222,6 +222,7 @@ zh_cn:
         status: "状态"
         content: "内容"
         demand_number: "需求人数"
+        file: "文件"
 
       project_candidate:
         mark: "项目标识"

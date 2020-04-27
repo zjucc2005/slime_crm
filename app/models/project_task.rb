@@ -34,6 +34,18 @@ class ProjectTask < ApplicationRecord
   # Scopes
   scope :interview, -> { where( category: 'interview') }
 
+  def finished!
+    ActiveRecord::Base.transaction do
+      contract = active_contract
+      self.status = 'finished'
+      self.charge_status = contract.payment_way == 'advance_payment' ? 'paid' : 'unbilled'  # 预付合同直接已收费
+      self.save!
+
+      project_candidate = ProjectCandidate.where(project_id: project_id, candidate_id: expert_id).first
+      project_candidate.update!(mark: 'interviewed') if project_candidate  # 自动更新专家项目中标识为已访谈
+    end
+  end
+
   def can_cancel?
     %w[ongoing].include? status
   end

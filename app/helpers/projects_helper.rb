@@ -1,5 +1,9 @@
 module ProjectsHelper
 
+  def project_options
+    Project.where(status: %w[initialized ongoing]).map{|p| [p.project_option_friendly, p.id]}
+  end
+
   # project status display style
   def project_status_badge(status)
     dict = { :initialized => 'warning', :ongoing => 'success', :finished => 'secondary' }.stringify_keys
@@ -79,7 +83,7 @@ module ProjectsHelper
   end
 
   def project_candidate_mark_badge(mark)
-    dict = { :pending => 'secondary' }.stringify_keys
+    dict = { :unsuitable => 'danger', :recommended => 'success', :interviewed => 'primary', :contacting => 'warning', :pending => 'secondary' }.stringify_keys
     content_tag :span, ProjectCandidate::MARK[mark] || mark, :class => "badge badge-#{dict[mark] || 'dark' }"
   end
 

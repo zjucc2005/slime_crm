@@ -33,7 +33,7 @@
                         <td><%= content_tag :span, "# #{contract.uid}", :class => 'text-gray' %></td>
                         <td><%= contract.started_at.strftime('%F') %></td>
                         <td><%= contract.ended_at.strftime('%F') %></td>
-                        <td><%= link_to contract.file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end %></td>
+                        <td><%= link_to contract.file.url do %><%= fa_icon_tag('download') %><% end %></td>
                         <td><%= "#{contract.charge_rate} #{contract.currency}" %></td>
                         <td><%= contract.charge_duration %></td>
                         <td><%= "#{contract.payment_days}#{Contract::TYPE_OF_PAYMENT_DAY[contract.type_of_payment_day]}" %></td>

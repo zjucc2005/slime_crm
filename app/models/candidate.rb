@@ -89,6 +89,7 @@ class Candidate < ApplicationRecord
       when :description then self.description
       when :company     then self.latest_work_experience.try(:org_cn)
       when :title       then self.latest_work_experience.try(:title)
+      when :expert_level then self.cpt.to_i >= 1500 ? 'Premium Expert' : 'Standard Expert'
       else nil
     end
   end

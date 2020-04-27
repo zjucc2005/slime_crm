@@ -21,10 +21,7 @@ class ProjectTasksController < ApplicationController
 
       if @project_task.update(project_task_params)
         if params[:commit] == t('action.submit_and_confirm')
-          contract = @project_task.active_contract
-          @project_task.status = 'finished'
-          @project_task.charge_status  = contract.payment_way == 'advance_payment' ? 'paid' : 'unbilled'  # 预付合同直接已收费
-          @project_task.save!
+          @project_task.finished!
         end
         flash[:success] = t(:operation_succeeded)
         redirect_to project_path(@project_task.project)

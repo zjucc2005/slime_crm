@@ -90,9 +90,7 @@ class ProjectsController < ApplicationController
 
   # GET/PUT /projects/add_users
   def add_users
-    if request.get?
-      @project_options = Project.where(status: %w[initialized ongoing]).pluck(:name, :id)
-    elsif request.put?
+    if request.put?
       begin
         @project = Project.find(params[:project_id])
         raise t(:not_authorized) unless @project.can_edit?
@@ -123,9 +121,7 @@ class ProjectsController < ApplicationController
 
   # GET/PUT /projects/add_experts
   def add_experts
-    if request.get?
-      @project_options = Project.where(status: %w[initialized ongoing]).pluck(:name, :id)
-    elsif request.put?
+    if request.put?
       begin
         @project = Project.find(params[:project_id])
         raise t(:not_authorized) unless @project.can_edit?
@@ -148,7 +144,11 @@ class ProjectsController < ApplicationController
   def add_clients
     begin
       load_project
-      @clients = @project.company.candidates
+      query = @project.company.candidates
+      %w[name nickname title phone email].each do |field|
+        query = query.where("#{field} LIKE ?", "%#{params[field].strip}%") if params[field].present?
+      end
+      @clients = query.order(:created_at => :desc)
 
       if request.put?
         raise t(:not_authorized) unless @project.can_edit?
@@ -316,7 +316,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_requirement_params
-    params.require(:project_requirement).permit(:content, :demand_number)
+    params.require(:project_requirement).permit(:content, :demand_number, :file)
   end
 
   # 加载客户公司
