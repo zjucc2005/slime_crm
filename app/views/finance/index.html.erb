@@ -41,7 +41,7 @@
                     <td><%= project.uid %></td>
                     <td><%= project.company.name_abbr %></td>
                     <td><%= task.started_at.strftime('%F %H:%M') %></td>
-                    <td><%= link_to task.expert.name, candidate_path(task.expert_id) %></td>
+                    <td><%= link_to task.expert.name, candidate_path(task.expert_id), :target => '_blank' %></td>
                     <td><%= task.expert.uid %></td>
                     <td><%= project_task_interview_form_badge(task.interview_form) %></td>
                     <td><%= "#{task.duration} #{t(:minute)}" %></td>

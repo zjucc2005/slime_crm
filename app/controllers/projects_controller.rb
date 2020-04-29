@@ -284,6 +284,20 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # PUT /projects/:id/reopen
+  def reopen
+    begin
+      load_project
+      raise t(:not_authorized) unless @project.can_reopen?
+      @project.reopen!
+      flash[:success] = t(:operation_succeeded)
+      redirect_to project_path(@project)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
+    end
+  end
+
   # GET /projects/:id/experts
   def experts
     load_project

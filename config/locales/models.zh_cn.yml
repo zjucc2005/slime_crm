@@ -213,6 +213,7 @@ zh_cn:
         expert: "专家"
         start: "启动项目"
         close: "结束项目"
+        reopen: "重新打开项目"
         pm: "项目经理"
         pa: "项目助理"
         total_project_tasks: "任务总数"
@@ -261,6 +262,7 @@ zh_cn:
         charge_duration: "收费时长"
         charge_duration_min: "收费时长(分钟)"
         pm: "项目经理"
+        f_flag: "是否跟进"
 
       project_task_cost:
         category: "费用类型"

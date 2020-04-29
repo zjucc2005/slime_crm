@@ -75,7 +75,7 @@
                     <span class="input-group-text"><%= mt(:expert) %></span>
                 </div>
                 <%= content_tag :span, :class => 'form-control' do %>
-                    <%= link_to @project_task.expert.name, candidate_path(@project_task.expert_id) %>
+                    <%= link_to @project_task.expert.name, candidate_path(@project_task.expert_id), :target => '_blank' %>
                 <% end %>
             </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
@@ -119,6 +119,12 @@
                     <span class="input-group-text"><%= mt(:project_task, :duration) %></span>
                 </div>
                 <%= content_tag :span, "#{@project_task.duration} #{t(:minute)}", :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project_task, :f_flag) %></span>
+                </div>
+                <%= content_tag :span, boolean_display(@project_task.f_flag), :class => 'form-control' %>
             </div>
         </div>
 

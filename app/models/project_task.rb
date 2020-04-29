@@ -91,7 +91,7 @@ class ProjectTask < ApplicationRecord
       self.charge_days    = contract.payment_days                                            # 账期(天数)
       self.ended_at       = started_at + duration.to_i * 60                                  # 结束时间 = 开始时间 + 时长
       self.charge_rate    = contract.charge_rate                                             # 收费倍率
-      self.base_price     = contract.base_price(charge_duration.to_i) * expert_rate.to_d     # 基础收费(根据收费时长)
+      self.base_price     = contract.base_price(charge_duration.to_i, self.f_flag) * expert_rate.to_d  # 基础收费(根据收费时长)
       self.actual_price ||= base_price                                                       # 实际收费
       self.currency       = contract.currency                                                # 货币
       self.is_taxed       = contract.is_taxed                                                # 是否含税

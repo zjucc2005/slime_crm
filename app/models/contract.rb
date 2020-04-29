@@ -22,13 +22,15 @@ class Contract < ApplicationRecord
 
   ##
   # 重要!!价格算法
-  def base_price(duration=0)
-    (priced_duration(duration) / 60.0 * charge_rate).round  # 整数
+  # 参数 duration - 参与计费市场, f - follow up标识, 为true时按递进时长计算
+  def base_price(duration=0, f=false)
+    (priced_duration(duration, f) / 60.0 * charge_rate).round  # 整数
   end
 
   # 用于计价的时长, 实际时长根据合同的 base/progressive_duration 规则得出
-  def priced_duration(duration=0)
+  def priced_duration(duration=0, f=false)
     return 0 if duration.zero?
+    return progressive_duration * (duration.to_f / progressive_duration).ceil if f
     thresholds = base_duration.split(',').map(&:to_i).sort  # base_duration 的 Array 形式, 升序排列
     result = thresholds[0]
     if duration > thresholds[-1]

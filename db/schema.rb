@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_013059) do
+ActiveRecord::Schema.define(version: 2020_04_29_135546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_013059) do
     t.string "memo"
     t.integer "charge_duration"
     t.bigint "pm_id"
+    t.boolean "f_flag", default: false
     t.index ["project_id"], name: "index_project_tasks_on_project_id"
   end
 

@@ -75,6 +75,7 @@ Rails.application.routes.draw do
 
     put :start, on: :member
     put :close, on: :member
+    put :reopen, on: :member
 
     get :experts,       on: :member
     get :project_tasks, on: :member

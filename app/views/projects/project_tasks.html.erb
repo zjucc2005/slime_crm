@@ -35,6 +35,7 @@
                         <th><%= mt(:project_task, :duration) %></th>
                         <th><%= mt(:project_task, :expert_level) %></th>
                         <th><%= mt(:project_task, :expert_rate) %></th>
+                        <th><%= mt(:project_task, :f_flag) %></th>
                         <th><%= mt(:project_task, :is_shorthand) %></th>
                         <th><%= mt(:project_task, :is_recorded) %></th>
                         <th><%= mt(:project_task, :status) %></th>
@@ -52,6 +53,7 @@
                                 <td><%= task.duration %></td>
                                 <td><%= ProjectTask::EXPERT_LEVEL[task.expert_level] %></td>
                                 <td><%= task.expert_rate %></td>
+                                <td><%= boolean_display(task.f_flag) %></td>
                                 <td><%= boolean_display(task.is_shorthand) %></td>
                                 <td><%= boolean_display(task.is_recorded) %></td>
                                 <td><%= project_task_status_badge(task.status) %></td>

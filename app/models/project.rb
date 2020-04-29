@@ -66,8 +66,10 @@ class Project < ApplicationRecord
 
   def can_close?
     %w[ongoing].include?(status)
-      # project_requirements.where(status: 'finished').count > 0 &&
-      # project_requirements.where(status: 'ongoing').count == 0
+  end
+
+  def can_reopen?
+    %w[finished].include?(status)
   end
 
   def can_add_requirement?
@@ -92,6 +94,12 @@ class Project < ApplicationRecord
   def close!
     self.status = 'finished'
     self.ended_at ||= Time.now
+    self.save!
+  end
+
+  def reopen!
+    self.status = 'ongoing'
+    self.ended_at = nil
     self.save!
   end
 

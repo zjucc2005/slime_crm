@@ -83,7 +83,9 @@ class ProjectTasksController < ApplicationController
   def get_base_price
     load_project_task
     contract    = @project_task.active_contract
-    base_price  = contract.base_price(params[:duration].to_i)
+    f           = params[:f] == 'true'
+    Rails.logger.info "f.class: #{f.class}"
+    base_price  = contract.base_price(params[:duration].to_i, f)
     expert_rate = params[:expert_rate].to_d
     render :json => {
              :price    => base_price * expert_rate,
@@ -118,7 +120,7 @@ class ProjectTasksController < ApplicationController
 
   def project_task_params
     params.require(:project_task).permit(:interview_form, :started_at, :expert_level, :expert_rate, :duration, :charge_duration,
-                                         :actual_price, :is_shorthand, :shorthand_price, :is_recorded, :memo)
+                                         :actual_price, :is_shorthand, :shorthand_price, :is_recorded, :memo, :f_flag)
   end
 
 end

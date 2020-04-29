@@ -35,11 +35,15 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :duration, mt(:project_task, :duration_min) %><span class="text-red">*</span>
-        <%= f.number_field :duration, :required => true, :min => 1, :class => 'form-control' %>
+        <%= f.number_field :duration, :value => @project_task.duration || 0, :required => true, :min => 1, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :charge_duration, mt(:project_task, :charge_duration_min) %><span class="text-red">*</span>
-        <%= f.number_field :charge_duration, :required => true, :min => 1, :class => 'form-control', :placeholder => '用于计算价格' %>
+        <%= f.number_field :charge_duration, :value => @project_task.charge_duration || 0, :required => true, :min => 1, :class => 'form-control', :placeholder => '用于计算价格' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :f_flag %><span class="text-red">*</span>
+        <%= f.select :f_flag, boolean_options, {}, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :base_price %><span class="text-red">*</span>
@@ -51,7 +55,7 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :actual_price %>
-        <%= f.number_field :actual_price, :min => 1, :class => 'form-control', :placeholder => '不填写则取基础收费' %>
+        <%= f.number_field :actual_price, :min => 0, :step => 0.01, :class => 'form-control', :placeholder => '不填写则取基础收费' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :is_taxed %>
@@ -96,6 +100,9 @@
     $('#project_task_actual_price').change(function(){
         get_base_price();
     });
+    $('#project_task_f_flag').change(function(){
+        get_base_price();
+    });
     $('#project_task_is_shorthand').change(function(){
         get_shorthand_price();
     });
@@ -105,6 +112,7 @@
     function get_base_price(){
         let expert_rate = $('#project_task_expert_rate').val();
         let charge_duration = $('#project_task_charge_duration').val();
+        let f_flag = $('#project_task_f_flag').val();
         let base_price = $('#project_task_base_price');
         let currency = $('#project_task_currency');
         let is_taxed = $('#project_task_is_taxed');
@@ -114,7 +122,7 @@
         $.ajax({
             type: 'get',
             url: '/project_tasks/' + <%= @project_task.id %> + '/get_base_price',
-            data: { duration: charge_duration, expert_rate: expert_rate },
+            data: { duration: charge_duration, expert_rate: expert_rate, f: f_flag },
             async: false,
             dataType: 'json',
             success: function(data){

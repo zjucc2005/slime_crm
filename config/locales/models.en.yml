@@ -184,6 +184,7 @@ en:
         expert: "Expert"
         start: "Start project"
         close: "Close project"
+        reopen: "Reopen project"
         pm: "PM"
         pa: "PA"
         total_project_tasks: "Total tasks"
@@ -232,6 +233,7 @@ en:
         charge_duration: "Charge duration"
         charge_duration_min: "Charge duration(min)"
         pm: "PM"
+        f_flag: "Follow up"
 
       project_task_cost:
         category: "Cost category"
