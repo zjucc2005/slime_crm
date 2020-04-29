@@ -18,7 +18,8 @@ module Utils
       def candidate_list(options={})
         page     = options[:page]
         per_page = options[:per_page]
-        url = "#{URL}/rest/candidate/list?private_token=#{private_token}&paginate_by=#{per_page}&page=#{page}"
+        demand_keys = %w[zhuanjiafeilv candidateexperience_set__start candidateexperience_set__end candidateexperience_set__description].to_json
+        url = "#{URL}/rest/candidate/list?private_token=#{private_token}&paginate_by=#{per_page}&page=#{page}&demandKeys=#{demand_keys}"
         Api.get(url)
       end
 

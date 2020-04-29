@@ -155,7 +155,7 @@
                     <td><%= exp.org_cn %></td>
                     <td><%= exp.org_en %></td>
                     <td><%= exp.title %></td>
-                    <td style="white-space: normal;"><%= exp.description %></td>
+                    <td style="white-space: normal;"><%= candidate_experience_description_raw(exp.description) %></td>
                 </tr>
             <% end %>
             </tbody>
