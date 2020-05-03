@@ -48,10 +48,6 @@ module CandidatesHelper
     content_tag :span, CandidatePaymentInfo::CATEGORY[category] || category, :class => "badge badge-#{dict[category] || 'secondary'}"
   end
 
-  def candidate_experience_description_raw(content)
-    content.gsub(/(\r\n)|\n/, '<br>').html_safe
-  end
-
   # ========================================
   ##
   # background color for cps

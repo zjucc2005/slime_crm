@@ -10,10 +10,6 @@ module ProjectsHelper
     content_tag :span, Project::STATUS[status] || status, :class => "badge badge-#{dict[status] || 'secondary'}"
   end
 
-  def project_requirement_content_raw(content)
-    content.gsub(/(\r\n)|\n/, '<br>').html_safe
-  end
-
   def project_requirement_status_badge(status)
     dict = { :ongoing => 'success', :finished => 'secondary', :unfinished => 'danger' }.stringify_keys
     content_tag :span, ProjectRequirement::STATUS[status] || status, :class => "badge badge-#{dict[status] || 'secondary'}"

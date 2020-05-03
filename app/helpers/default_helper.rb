@@ -55,4 +55,8 @@ module DefaultHelper
     end
   end
 
+  def content_raw(content)
+    content.to_s.gsub(/(\r\n)|\n/, '<br>').html_safe
+  end
+
 end

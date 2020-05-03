@@ -23,7 +23,7 @@
                 <tbody>
                 <% project_requirements.each do |requirement| %>
                     <tr>
-                        <td><%= project_requirement_content_raw(requirement.content) %></td>
+                        <td><%= content_raw(requirement.content) %></td>
                         <td><%= requirement.demand_number %></td>
                         <td><%= link_to requirement.file.url do %><%= fa_icon_tag('download') %><% end if requirement.file.present? %></td>
                         <td><%= project_requirement_status_badge(requirement.status) %></td>
