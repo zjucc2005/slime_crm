@@ -35,6 +35,7 @@ module Utils
 
     def save
       return false if self.class.existed?(@g_data['id'])
+      return false if @g_data['chineseName'].blank? && @g_data['englishName'].blank?
       # 数据对应存储逻辑, 涉及多个表, 事务处理
       ActiveRecord::Base.transaction do
         first_name, last_name = Candidate.name_split(@g_data['chineseName'].to_s.strip)
