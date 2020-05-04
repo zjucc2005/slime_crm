@@ -28,7 +28,7 @@ class CandidatesController < ApplicationController
 
       or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title]
       @terms.each do |term|
-        and_conditions << "(#{or_fields.map{|field| "UPPER(#{field}) LIKE UPPER('%#{term}%')" }.join(' OR ') })"
+        and_conditions << "(#{or_fields.map{|field| "#{field} LIKE '%#{term}%'" }.join(' OR ') })"
       end
       query = query.where(and_conditions.join(' AND '))
 

@@ -120,6 +120,10 @@ module Utils
           _range_ = i..[i + limit - 1, range.max].min
 
           res = candidate_list(id_ge: _range_.min, id_le: _range_.max, per_page: limit)
+          if res['list'].length == 0
+            puts 'task finished'
+            break
+          end
           res['list'].sort_by{|gd| gd['id']}.each do |g_data|
             self.new(g_data).save
           end if res['list'].present?
