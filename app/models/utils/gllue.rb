@@ -109,8 +109,8 @@ module Utils
       end
 
       def import_by_range(range=0..0)
-        # slice range per 100
-        limit = 100
+        # slice range per 1000
+        limit = 1000
         range.step(limit).each do |i|
           _range_ = i..[i + limit - 1, range.max].min
 
