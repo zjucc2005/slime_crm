@@ -9,6 +9,8 @@ module Utils
     AES_IV  = '0' * 16
     EMAIL   = 'eric.ling@atkins-associates.com'
 
+    DEFAULT_TIMESTAMP = '1900-01-01'  # 默认时间点, 用来代替空值
+
     # EXCEPT_IDS = [
     #   (159784..190159),  # 百度
     #   (190160..196072),  # 滴滴
@@ -64,7 +66,7 @@ module Utils
         )
         (@g_data['candidateexperience_set'] || []).each do |exp|
           candidate.experiences.work.create!(
-            started_at:  time_parse(exp['start']) || Time.now,
+            started_at:  time_parse(exp['start']) || DEFAULT_TIMESTAMP,
             ended_at:    time_parse(exp['end']),
             org_cn:      exp['client']['name'],
             title:       exp['title'],
@@ -73,7 +75,7 @@ module Utils
         end
         (@g_data['candidateeducation_set'] || []).each do |exp|
           candidate.experiences.education.create!(
-            started_at: time_parse(exp['start']) || Time.now,
+            started_at: time_parse(exp['start']) || DEFAULT_TIMESTAMP,
             ended_at:   time_parse(exp['end']),
             org_cn:     exp['school']
           ) if exp['start'].present? && exp['school'].present?
@@ -109,7 +111,7 @@ module Utils
         # slice range per 100
         limit = 100
         range.step(limit).each do |i|
-          _range_ = i..[i + 99, range.max].min
+          _range_ = i..[i + limit - 1, range.max].min
 
           res = candidate_list(id_ge: _range_.min, id_le: _range_.max, per_page: limit)
           res['list'].sort_by{|gd| gd['id']}.each do |g_data|
