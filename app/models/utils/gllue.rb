@@ -34,6 +34,7 @@ module Utils
     end
 
     def clear_string(str)
+      return nil if str.blank?
       str.gsub("\u0000", '')  # DEBUG: ArgumentError(string contains null byte)
     end
 
