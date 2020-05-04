@@ -45,6 +45,7 @@
                             </div>
                         </div>
                     </div>
+                    <%= hidden_field_tag :per_page, params[:per_page] %>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
                         <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
