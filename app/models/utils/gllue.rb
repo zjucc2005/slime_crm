@@ -140,11 +140,16 @@ module Utils
         params << "demandKeys=#{demand_keys}"
         params << "gql=#{CGI.escape(gql)}"
         url = "#{URL}/rest/candidate/list?#{params.join('&')}"
-        res = Api.get(url)
-        if res.code == '200'
-          JSON.parse res.body
+        response = Api.get(url)
+        if response.code == '200'
+          res = JSON.parse response.body
+          if res['status'] == false
+            raise res['message']
+          else
+            res
+          end
         else
-          raise "http code: #{res.code}"
+          raise "http code: #{response.code}"
         end
       end
 
