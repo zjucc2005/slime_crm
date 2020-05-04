@@ -33,6 +33,10 @@ module Utils
       str.to_s.match(/^\d{4}-\d{2}/) ? Time.local(*str.split('-')) : nil
     end
 
+    def clear_string(str)
+      str.gsub("\u0000", '')  # DEBUG: ArgumentError(string contains null byte)
+    end
+
     def save
       return false if self.class.existed?(@g_data['id'])
       return false if @g_data['chineseName'].blank? && @g_data['englishName'].blank?
@@ -71,7 +75,7 @@ module Utils
             ended_at:    time_parse(exp['end']),
             org_cn:      exp['client']['name'],
             title:       exp['title'],
-            description: exp['description']
+            description: clear_string(exp['description'])
           )
         end
         (@g_data['candidateeducation_set'] || []).each do |exp|
@@ -118,7 +122,7 @@ module Utils
           res['list'].sort_by{|gd| gd['id']}.each do |g_data|
             self.new(g_data).save
           end if res['list'].present?
-          puts "imported gllue_id range: #{_range_}"
+          puts "#{Time.now} -- imported gllue_id range: #{_range_}"
         end
       end
 
