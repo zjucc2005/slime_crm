@@ -37,7 +37,7 @@ module Utils
       return false if self.class.existed?(@g_data['id'])
       # 数据对应存储逻辑, 涉及多个表, 事务处理
       ActiveRecord::Base.transaction do
-        first_name, last_name = Candidate.name_split(@g_data['chineseName'].to_s)
+        first_name, last_name = Candidate.name_split(@g_data['chineseName'].to_s.strip)
         last_name = @g_data['englishName'] if last_name.blank?  # 没有中文名的, 赋值英文名
         gender = case @g_data['gender']
                    when true  then 'male'
@@ -116,7 +116,7 @@ module Utils
           res = candidate_list(id_ge: _range_.min, id_le: _range_.max, per_page: limit)
           res['list'].sort_by{|gd| gd['id']}.each do |g_data|
             self.new(g_data).save
-          end
+          end if res['list'].present?
           puts "imported gllue_id range: #{_range_}"
         end
       end
