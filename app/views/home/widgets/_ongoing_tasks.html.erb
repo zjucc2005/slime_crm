@@ -1,0 +1,62 @@
+<div class="col-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0"><%= t(:ongoing_tasks) %></h6>
+        </div>
+        <div class="card-body">
+            <% if @project_tasks.any? %>
+                <table class="table table-sm table-striped border card-text">
+                    <thead>
+                    <tr>
+                        <th><%= mt(:project_task, :id) %></th>
+                        <th><%= mt(:project, :name) %></th>
+                        <th><%= mt(:project, :code) %></th>
+                        <th><%= mt(:project_task, :category) %></th>
+                        <th><%= mt(:project_task, :interview_form) %></th>
+                        <th><%= mt(:expert) %></th>
+                        <th><%= mt(:project_task, :started_at) %></th>
+                        <th><%= mt(:project_task, :duration) %></th>
+                        <th><%= mt(:project_task, :expert_level) %></th>
+                        <th><%= mt(:project_task, :expert_rate) %></th>
+                        <th><%= mt(:project_task, :f_flag) %></th>
+                        <th><%= mt(:project_task, :is_shorthand) %></th>
+                        <th><%= mt(:project_task, :is_recorded) %></th>
+                        <th><%= mt(:project_task, :status) %></th>
+                        <th class="action"><%= t(:operation) %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @project_tasks.each do |task| %>
+                        <% project = task.project %>
+                        <tr>
+                            <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
+                            <td title="<%= project.name %>"><%= truncate(project.name, length: 8) %></td>
+                            <td><%= project.code %></td>
+                            <td><%= project_task_category_badge(task.category) %></td>
+                            <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+                            <td><%= task.expert.name %></td>
+                            <td><%= task.started_at.strftime('%F %H:%M') %></td>
+                            <td><%= task.duration %></td>
+                            <td><%= ProjectTask::EXPERT_LEVEL[task.expert_level] %></td>
+                            <td><%= task.expert_rate %></td>
+                            <td><%= boolean_display(task.f_flag) %></td>
+                            <td><%= boolean_display(task.is_shorthand) %></td>
+                            <td><%= boolean_display(task.is_recorded) %></td>
+                            <td><%= project_task_status_badge(task.status) %></td>
+                            <td class="action">
+                                <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
+                                        <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
+                                <% end if can?(:edit, ProjectTask) && task.status == 'ongoing' %>
+                            </td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            <% else %>
+                <div class="p-2 text-center">
+                    <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

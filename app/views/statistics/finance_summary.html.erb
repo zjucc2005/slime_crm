@@ -57,7 +57,6 @@
 </div>
 <script>
     $(document).ready(function(){
-        $.get('statistics/finance_summary_total.js');
         let finance_chart = echarts.init(document.getElementById('finance_chart'), 'default');
         let finance_data = [
             <% @result.each do |res| %>

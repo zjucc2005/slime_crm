@@ -31,6 +31,7 @@ en:
   my_account: "My account"
   not_authorized: "You are not authorized to access this page."
   not_found: "Not found"
+  ongoing_tasks: "Ongoing tasks"
   operation: "Operation"
   operation_failed: "Operation failed"
   operation_succeeded: "Operation succeeded"

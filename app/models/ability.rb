@@ -54,6 +54,7 @@ class Ability
     can :manage, Company
     can :manage, Contract
     can :manage, Project
+    can :manage, ProjectCandidate
     can :manage, ProjectRequirement
     can :manage, ProjectTask
     can :manage, Finance
@@ -73,6 +74,7 @@ class Ability
     can :manage, CandidatePaymentInfo
     can [:new_client], Company
     can :manage, Project
+    can :manage, ProjectCandidate
     can :manage, ProjectRequirement
     can [:edit, :update, :get_base_price], ProjectTask
     cannot :manage, Finance
@@ -90,7 +92,8 @@ class Ability
     can :manage, CandidatePaymentInfo
     can [:new_client], Company
     can [:index, :show, :add_users, :delete_user, :add_clients, :delete_client, :add_experts, :delete_expert,
-         :add_project_task], Project
+         :add_project_task, :project_tasks, :experts], Project
+    can :manage, ProjectCandidate
     can :manage, ProjectRequirement
     can [:edit, :update, :get_base_price], ProjectTask
 

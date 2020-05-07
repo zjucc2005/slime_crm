@@ -85,6 +85,14 @@ class Project < ApplicationRecord
     true
   end
 
+  def can_delete_user?(user, operator)
+    if self.created_by == user.id
+      operator.is_role?('admin')        # 创建者PM只能被ADMIN移除
+    else
+      operator.is_role?('admin', 'pm')  # PM/PA可以被ADMIN/PM移除
+    end
+  end
+
   def start!
     self.status = 'ongoing'
     self.started_at ||= Time.now

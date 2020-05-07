@@ -28,7 +28,13 @@ class ProjectsController < ApplicationController
     begin
       @project = Project.new(project_params.merge(created_by: current_user.id))
 
-      if @project.save
+      if @project.valid?
+        ActiveRecord::Base.transaction do
+          @project.save!
+          if current_user.is_role?('pm')
+            @project.project_users.find_or_create_by!(category: 'pm', user_id: current_user.id)
+          end
+        end
         flash[:success] = t(:operation_succeeded)
         redirect_to project_path(@project)
       else
@@ -99,9 +105,6 @@ class ProjectsController < ApplicationController
           # add pm
           pm_users = User.where(id: params[:uids], role: 'pm')
           pa_users = User.where(id: params[:uids], role: 'pa')
-          # if @project.pm_users.count + pm_users.count > 1
-          #   raise t(:project_can_only_have_one_pm)
-          # end
           pm_users.each do |user|
             @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
           end
@@ -315,6 +318,7 @@ class ProjectsController < ApplicationController
   private
   def load_project
     @project = Project.find(params[:id])
+
   end
 
   def project_params

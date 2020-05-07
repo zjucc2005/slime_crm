@@ -118,8 +118,7 @@ class StatisticsController < ApplicationController
       { :name => t('dashboard.expense_expert'), :value => expense_expert.sum },
       { :name => t('dashboard.expense_recommend'), :value => expense_recommend.sum },
       { :name => t('dashboard.expense_translation'), :value => expense_translation.sum },
-      { :name => t('dashboard.expense_others'), :value => expense_others.sum },
-
+      { :name => t('dashboard.expense_others'), :value => expense_others.sum }
     ]
   end
 end

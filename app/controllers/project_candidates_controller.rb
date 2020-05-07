@@ -1,7 +1,7 @@
 # encoding: utf-8
 class ProjectCandidatesController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
-
 
   # PUT /project_candidates/:id/update_mark.js, remote: true
   def update_mark

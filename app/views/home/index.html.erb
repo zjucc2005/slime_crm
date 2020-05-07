@@ -1,8 +1,10 @@
 <div class="row">
-    <% if current_user.is_role?('admin') %>
+    <% if current_user.is_role?('admin', 'finance') %>
         <%= render :partial => 'home/widgets/admin_summary' %>
         <%= render :partial => 'home/widgets/admin_statistics_info' %>
-    <% elsif current_user.is_role?('pm', 'pa', 'finance') %>
+    <% elsif current_user.is_role?('pm', 'pa') %>
+        <%= render :partial => 'home/widgets/ongoing_tasks' %>
+    <% else %>
         <% 4.times do %>
             <div class="col-lg-6 col-12 mb-3">
                 <div class="card">
@@ -34,6 +36,5 @@
                 </div>
             </div>
         <% end %>
-    <% else %>
     <% end %>
 </div>

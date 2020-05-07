@@ -31,6 +31,7 @@ zh_cn:
   my_account: "我的帐号"
   not_authorized: "没有访问权限或访问被限制"
   not_found: "未找到信息"
+  ongoing_tasks: "进展中的任务"
   operation: "操作"
   operation_failed: "操作失败"
   operation_succeeded: "操作成功"
