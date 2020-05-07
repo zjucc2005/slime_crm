@@ -52,6 +52,15 @@ module Utils
                  end
         cpt_match = @g_data['zhuanjiafeilv'].to_s.match(/\d+/)
         cpt = cpt_match ? cpt_match[0].to_i : 0
+        if @g_data['gllueextinterview_willingness'].is_a?(Hash)
+          is_available = case @g_data['gllueextinterview_willingness']['value']
+                           when '是' then true
+                           when '否' then false
+                           else nil
+                         end
+        else
+          is_available = false
+        end
 
         candidate = Candidate.expert.create!(
           data_source:   'api',
@@ -65,7 +74,7 @@ module Utils
           date_of_birth: @g_data['dateOfBirth'],
           gender:        gender,
           description:   @g_data['gllueextbkdetail'],
-          is_available:  @g_data['gllueextinterview_willingness'],
+          is_available:  is_available,
           cpt:           cpt,
           currency:      'RMB',
           property:      { gllue_id: @g_data['id'] }
@@ -141,13 +150,17 @@ module Utils
         demand_keys = %w[zhuanjiafeilv
                          candidateexperience_set__start candidateexperience_set__end candidateexperience_set__description
                          candidateeducation_set__start candidateeducation_set__end candidateeducation_set__school].to_json
-        gql = "id__gte=#{options[:id_ge]}&id__lte=#{options[:id_le]}"
+        gql = []
+        gql << "id__gte=#{options[:id_ge]}" if options[:id_ge]
+        gql << "id__lte=#{options[:id_le]}" if options[:id_le]
+        gql << "#{options[:id_in].map{|id| "id=#{id}" }.join('|')}" if options[:id_in]
+        # gql = "id__gte=#{options[:id_ge]}&id__lte=#{options[:id_le]}"
 
         params << "private_token=#{private_token}"
         params << "page=#{options[:page]}"
         params << "paginate_by=#{options[:per_page]}"
         params << "demandKeys=#{demand_keys}"
-        params << "gql=#{CGI.escape(gql)}"
+        params << "gql=#{CGI.escape(gql.join('&'))}"
         url = "#{URL}/rest/candidate/list?#{params.join('&')}"
         response = Api.get(url)
         if response.code == '200'
@@ -197,6 +210,31 @@ module Utils
 
       def pad_text(text, length=16)
         "#{text}#{' ' * (length - text.length % length)}"
+      end
+
+      # 刷新访谈意愿用临时脚本
+      def update_is_available
+        limit = 200
+        candidates = Candidate.where(is_available: true).where("CAST(property->>'gllue_id' as integer) > 0")
+        gllue_ids = candidates.map{|c| c.property['gllue_id'] }
+        (0..gllue_ids.length-1).step(limit).each do |i|
+          arr = gllue_ids[i, limit]
+          res = candidate_list per_page: limit, id_in: arr
+          res['list'].each do |gd|
+            if gd['gllueextinterview_willingness'].is_a?(Hash)
+              is_available = case gd['gllueextinterview_willingness']['value']
+                               when '是' then true
+                               when '否' then false
+                               else nil
+                             end
+            else
+              is_available = false
+            end
+            c = Candidate.where("CAST(property->>'gllue_id' AS INTEGER) = ?", gd['id']).first
+            c.update!(is_available: is_available) if c
+          end
+          puts "#{Time.now} -- update_is_available: #{i}"
+        end
       end
     end
 
