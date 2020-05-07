@@ -12,7 +12,7 @@ class CompaniesController < ApplicationController
     %w[city industry].each do |field|
       query = query.where("companies.#{field} LIKE ?", "%#{params[field].strip}%") if params[field].present?
     end
-    %w[status].each do |field|
+    %w[id status].each do |field|
       query = query.where("companies.#{field}" => params[field]) if params[field].present?
     end
     if params[:is_signed] == 'true'

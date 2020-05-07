@@ -6,14 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   # Associations
-  # has_many :candidates, :class_name => 'Candidate', :foreign_key => :created_by  # 创建者取消默认关联
-  # has_many :companies, :class_name => 'Company', :foreign_key => :created_by
-  # has_many :contracts, :class_name => 'Contract', :foreign_key => :created_by
-  # has_many :projects, :class_name => 'Project', :foreign_key => :created_by
-  # has_many :project_tasks, :class_name => 'ProjectTask', :foreign_key => :created_by
-
   has_many :project_users, :class_name => 'ProjectUser'
-  has_many :in_projects, :class_name => 'Project', :through => :project_users  # 用户参与的项目
+  has_many :projects, :class_name => 'Project', :through => :project_users  # 用户参与的项目
   has_many :candidate_access_logs, :class_name => 'CandidateAccessLog'
 
   # validations

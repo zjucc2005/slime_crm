@@ -18,7 +18,7 @@
                             <%= link_to t(:false),   update_is_available_candidate_path(candidate, is_available: false), :method => :put, :remote => true, :class => 'dropdown-item status invalid' %>
                         </div>
                     </div>
-                    <%= link_to candidate_path(candidate) do %>
+                    <%= link_to candidate_path(candidate), :target => '_blank' do %>
                         <span><%= candidate.name %></span>
                     <% end %>
                 </div>

@@ -8,7 +8,7 @@ class FinanceController < ApplicationController
     query = ProjectTask.where(status: 'finished')
     query = query.where('project_tasks.created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('project_tasks.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
-    %w[category interview_form charge_status payment_status].each do |field|
+    %w[id category interview_form charge_status payment_status].each do |field|
       query = query.where("project_tasks.#{field}" => params[field].strip) if params[field].present?
     end
     if params[:project].present?

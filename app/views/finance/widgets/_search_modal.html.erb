@@ -27,6 +27,10 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :id, mt(:project_task, :id) %>
+                                <%= text_field_tag :id, params[:id], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :project, mt(:project) %>
                                 <%= text_field_tag :project, params[:project], :class => 'form-control', :placeholder => '项目名称/编码' %>
                             </div>

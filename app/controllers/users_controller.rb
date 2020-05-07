@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     query = query.where('email LIKE ?', "%#{params[:email].strip}%") if params[:email].present?
     query = query.where('UPPER(name_cn) LIKE UPPER(:name) OR UPPER(name_en) LIKE UPPER(:name)', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
-    %w[role status].each do |field|
+    %w[id role status].each do |field|
       query = query.where(field.to_sym => params[field]) if params[field].present?
     end
     @users = query.order(:created_at => :asc).paginate(:page => params[:page], :per_page => 20)

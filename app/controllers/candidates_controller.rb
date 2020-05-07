@@ -10,6 +10,7 @@ class CandidatesController < ApplicationController
     query = Candidate.expert
     # query code here >>
     query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
+    query = query.where('candidates.id' => params[:id].strip) if params[:id].present?
     query = query.where('UPPER(candidates.name) LIKE :name OR UPPER(candidates.nickname) LIKE :name', { :name => "%#{params[:name].strip.upcase}%" }) if params[:name].present?
     query = query.where('candidates.phone = :phone OR candidates.phone1 = :phone', { :phone => params[:phone].strip }) if params[:phone].present?
     query = query.where('candidates.email = :email OR candidates.email1 = :email', { :email => params[:email].strip }) if params[:email].present?

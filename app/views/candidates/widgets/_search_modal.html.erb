@@ -28,6 +28,10 @@
                                 <%= select_tag :industry, options_for_select(industry_options, params[:industry]), :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :id, mt(:candidate, :id) %>
+                                <%= text_field_tag :id, params[:id], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :name, mt(:candidate, :name) %>
                                 <%= text_field_tag :name, params[:name], :class => 'form-control' %>
                             </div>

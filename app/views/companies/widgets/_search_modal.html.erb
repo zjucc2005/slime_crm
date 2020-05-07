@@ -27,6 +27,10 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :id, mt(:company, :id) %>
+                                <%= text_field_tag :id, params[:id], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :name, mt(:company, :name) %>
                                 <%= text_field_tag :name, params[:name], :class => 'form-control', :placeholder => '公司名称/简称' %>
                             </div>
