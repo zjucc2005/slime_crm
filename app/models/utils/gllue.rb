@@ -213,29 +213,29 @@ module Utils
       end
 
       # 刷新访谈意愿用临时脚本
-      def update_is_available
-        limit = 200
-        candidates = Candidate.where(is_available: true).where("CAST(property->>'gllue_id' as integer) > 0")
-        gllue_ids = candidates.map{|c| c.property['gllue_id'] }
-        (0..gllue_ids.length-1).step(limit).each do |i|
-          arr = gllue_ids[i, limit]
-          res = candidate_list per_page: limit, id_in: arr
-          res['list'].each do |gd|
-            if gd['gllueextinterview_willingness'].is_a?(Hash)
-              is_available = case gd['gllueextinterview_willingness']['value']
-                               when '是' then true
-                               when '否' then false
-                               else nil
-                             end
-            else
-              is_available = false
-            end
-            c = Candidate.where("CAST(property->>'gllue_id' AS INTEGER) = ?", gd['id']).first
-            c.update!(is_available: is_available) if c
-          end
-          puts "#{Time.now} -- update_is_available: #{i}"
-        end
-      end
+      # def update_is_available
+      #   limit = 200
+      #   candidates = Candidate.where(is_available: true).where("CAST(property->>'gllue_id' as integer) > 0")
+      #   gllue_ids = candidates.map{|c| c.property['gllue_id'] }
+      #   (0..gllue_ids.length-1).step(limit).each do |i|
+      #     arr = gllue_ids[i, limit]
+      #     res = candidate_list per_page: limit, id_in: arr
+      #     res['list'].each do |gd|
+      #       if gd['gllueextinterview_willingness'].is_a?(Hash)
+      #         is_available = case gd['gllueextinterview_willingness']['value']
+      #                          when '是' then true
+      #                          when '否' then false
+      #                          else nil
+      #                        end
+      #       else
+      #         is_available = false
+      #       end
+      #       c = Candidate.where("CAST(property->>'gllue_id' AS INTEGER) = ?", gd['id']).first
+      #       c.update!(is_available: is_available) if c
+      #     end
+      #     puts "#{Time.now} -- update_is_available: #{i}"
+      #   end
+      # end
     end
 
   end

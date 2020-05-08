@@ -217,7 +217,8 @@ zh_cn:
         pm: "项目经理"
         pa: "项目助理"
         total_project_tasks: "任务总数"
-        total_project_task_duration: "任务总时长"
+        total_duration: "总时长"
+        total_charge_duration: "总收费时长"
 
       project_requirement:
         status: "状态"

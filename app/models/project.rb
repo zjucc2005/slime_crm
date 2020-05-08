@@ -119,8 +119,12 @@ class Project < ApplicationRecord
     project_tasks.where(status: 'finished').count
   end
 
-  def total_project_task_duration
+  def total_duration
     (project_tasks.where(status: 'finished').sum(:duration) / 60.0).round(1)
+  end
+
+  def total_charge_duration
+    (project_tasks.where(status: 'finished').sum(:charge_duration) / 60.0).round(1)
   end
 
   def project_option_friendly

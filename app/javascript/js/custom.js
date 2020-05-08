@@ -60,3 +60,18 @@ window.form_deactivate = function(field){
     ele.val('');
     ele.parent().hide();
 };
+
+// forbid mouse wheel scroll event
+window.disableMouseWheelScroll = function(e){
+    e = e || window.event;
+    if(e.preventDefault) {
+        // Firefox
+        e.preventDefault();
+        e.stopPropagation();
+    } else {
+        // IE
+        e.cancelBubble=true;
+        e.returnValue = false;
+    }
+    return false;
+};
