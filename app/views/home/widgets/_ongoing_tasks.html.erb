@@ -16,6 +16,7 @@
                         <th><%= mt(:expert) %></th>
                         <th><%= mt(:project_task, :started_at) %></th>
                         <th><%= mt(:project_task, :duration) %></th>
+                        <th><%= mt(:project_task, :charge_duration) %></th>
                         <th><%= mt(:project_task, :expert_level) %></th>
                         <th><%= mt(:project_task, :expert_rate) %></th>
                         <th><%= mt(:project_task, :f_flag) %></th>
@@ -37,6 +38,7 @@
                             <td><%= task.expert.name %></td>
                             <td><%= task.started_at.strftime('%F %H:%M') %></td>
                             <td><%= task.duration %></td>
+                            <td><%= task.charge_duration %></td>
                             <td><%= ProjectTask::EXPERT_LEVEL[task.expert_level] %></td>
                             <td><%= task.expert_rate %></td>
                             <td><%= boolean_display(task.f_flag) %></td>
