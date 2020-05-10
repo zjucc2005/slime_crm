@@ -12,13 +12,18 @@ class HomeController < ApplicationController
 
   private
   def load_dashboard_of_admin
-    @total_experts            = Candidate.expert.count
-    @total_signed_companies   = Company.signed.count
-    @total_tasks              = ProjectTask.where(status: 'finished').count
+    @total_experts              = Candidate.expert.count
+    @total_signed_companies     = Company.signed.count
+    @total_tasks                = ProjectTask.where(status: 'finished').count
     @total_charge_duration_hour = (ProjectTask.where(status: 'finished').sum(:charge_duration) / 60.0).round(1)
   end
 
   def load_dashboard_of_pm
-    @project_tasks = ProjectTask.where(status: 'ongoing', created_by: current_user.id)
+    @total_experts              = Candidate.expert.where(created_by: current_user.id).count
+    @total_tasks                = ProjectTask.where(status: 'finished', created_by: current_user.id).count
+    @total_charge_duration_hour = (ProjectTask.where(status: 'finished', created_by: current_user.id).sum(:charge_duration) / 60.0).round(1)
+
+    query = ProjectTask.where(created_by: current_user.id)
+    @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 10)
   end
 end

@@ -1,0 +1,44 @@
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol blue">
+            <%= fa_icon_tag('user-circle') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= @total_experts %></h1>
+            <p><%= t('dashboard.total_my_experts') %></p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol red">
+            <%= fa_icon_tag('tags') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= @total_tasks %></h1>
+            <p><%= t('dashboard.total_my_tasks') %></p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol purple">
+            <%= fa_icon_tag('clock-o') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= @total_charge_duration_hour %></h1>
+            <p><%= t('dashboard.total_charge_duration_hour') %></p>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-6 mb-3">
+    <div class="card summary-item">
+        <div class="symbol green">
+            <%= fa_icon_tag('bell-o') %>
+        </div>
+        <div class="value">
+            <h1 class="count"><%= current_user.candidate_access_logs.today.count %></h1>
+            <p><%= mt(:user, :candidate_access_count) %></p>
+        </div>
+    </div>
+</div>

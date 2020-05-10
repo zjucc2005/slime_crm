@@ -3,6 +3,7 @@
         <%= render :partial => 'home/widgets/admin_summary' %>
         <%= render :partial => 'home/widgets/admin_statistics_info' %>
     <% elsif current_user.is_role?('pm', 'pa') %>
+        <%= render :partial => 'home/widgets/pm_summary' %>
         <%= render :partial => 'home/widgets/ongoing_tasks' %>
     <% else %>
         <% 4.times do %>

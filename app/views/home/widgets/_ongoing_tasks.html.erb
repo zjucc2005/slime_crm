@@ -54,6 +54,7 @@
                     <% end %>
                     </tbody>
                 </table>
+                <%= will_paginate @project_tasks %>
             <% else %>
                 <div class="p-2 text-center">
                     <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>

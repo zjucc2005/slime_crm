@@ -76,7 +76,7 @@ class Ability
     can :manage, Project
     can :manage, ProjectCandidate
     can :manage, ProjectRequirement
-    can [:edit, :update, :get_base_price], ProjectTask
+    can [:edit, :update, :get_base_price, :add_cost, :remove_cost, :cancel], ProjectTask
     cannot :manage, Finance
 
     can :manage, LocationDatum
@@ -95,7 +95,7 @@ class Ability
          :add_project_task, :project_tasks, :experts], Project
     can :manage, ProjectCandidate
     can :manage, ProjectRequirement
-    can [:edit, :update, :get_base_price], ProjectTask
+    can [:edit, :update, :get_base_price, :add_cost, :remove_cost, :cancel], ProjectTask
 
     can :manage, LocationDatum
     can :read, Bank
