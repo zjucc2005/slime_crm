@@ -70,7 +70,6 @@ class CandidateCommentsController < ApplicationController
 
   def load_candidate_comment
     @candidate_comment = CandidateComment.find(params[:id])
-    raise I18n.t(:not_authorized) unless @candidate_comment.created_by == current_user.id || current_user.admin?
   end
 
 end

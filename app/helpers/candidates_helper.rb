@@ -28,8 +28,12 @@ module CandidatesHelper
     end
   end
 
+  def candidate_is_available_display(val)
+    val.nil? ? t(:pending) : t(val.to_s.to_sym)
+  end
+
   def candidate_is_available_options
-    [[t(:true), 'true'], [t(:false), 'false'], [t(:pending), '']]
+    [[t(:pending), ''], [t(:true), 'true'], [t(:false), 'false']]
   end
 
   def candidate_is_available_search_options

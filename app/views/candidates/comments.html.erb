@@ -24,11 +24,9 @@
                 <div class="candidate-comment-unit">
                     <span class="badge badge-light"><%= show_creator(comment) %></span>
                     <span class="badge badge-light"><%= show_timestamps(comment) %></span>
-                    <% if comment.created_by == current_user.id || current_user.admin? %>
-                        <%= link_to t('action.edit'), edit_candidate_comment_path(comment), :class => 'btn btn-link btn-xs' %>
-                        <%= link_to t('action.delete'), candidate_comment_path(comment), :method => :delete, :class => 'btn btn-link btn-xs',
-                                    :data => { :confirm => t(:sure_to_delete)} %>
-                    <% end %>
+                    <%= link_to t('action.edit'), edit_candidate_comment_path(comment), :class => 'btn btn-link btn-xs' %>
+                    <%= link_to t('action.delete'), candidate_comment_path(comment), :method => :delete, :class => 'btn btn-link btn-xs',
+                                :data => { :confirm => t(:sure_to_delete)} %>
                     <p class="content"><%= comment.content %></p>
                 </div>
             <% end %>

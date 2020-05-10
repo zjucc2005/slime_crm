@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     if (1..maxlength).include?(params[:per_page].to_i)
       @per_page = params[:per_page].to_i
     else
-      @per_page = 20
+      @per_page = 50
     end
   end
 
