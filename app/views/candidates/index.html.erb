@@ -10,6 +10,7 @@
         <% end if can?(:add_experts, Project) %>
     </div>
     <div>
+        <%= render :partial => 'candidates/widgets/show_history' %>
         <%= render :partial => 'candidates/widgets/per_page_select' %>
         <%= render :partial => 'candidates/widgets/search_modal' %>
     </div>

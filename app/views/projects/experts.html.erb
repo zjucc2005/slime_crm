@@ -14,7 +14,7 @@
 
                 <div class="btn-group btn-group-sm">
                     <%= render :partial => 'candidates/widgets/expert_card', :locals => { :uid => nil } %>
-                    <%= link_to '', :class => 'btn btn-default', :onclick => 'expertTemplate();' do %>
+                    <%= link_to '', :class => 'btn btn-default', :onclick => "expertTemplate(#{@project.id});" do %>
                         <%= fa_icon_tag('file-excel-o') %> <%= t('action.export_excel') %>
                     <% end %>
                 </div>

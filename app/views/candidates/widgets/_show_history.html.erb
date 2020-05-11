@@ -1,0 +1,8 @@
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <%= fa_icon_tag('history') %> <%= t(:browsing_history) %>
+</button>
+<div class="dropdown-menu">
+    <% (session[:cache_show_history] || []).to_a.reverse.each do |ele| %>
+        <%= link_to ele[1], candidate_path(ele[0]), :class => 'dropdown-item' %>
+    <% end %>
+</div>

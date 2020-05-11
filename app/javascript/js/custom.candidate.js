@@ -30,12 +30,15 @@ window.cardTemplate = function(card_template_id, uid){
     }
 };
 
-window.expertTemplate = function(){
+window.expertTemplate = function(project_id){
     var uids = $("input[name='uids[]']:checked");
     if(uids.length === 0){
         alert('请至少选择一位专家');
     }else{
         var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+        if(project_id){
+            params += '&project_id=' + project_id;
+        }
         window.location.href = '/candidates/expert_template?' + params;
     }
 };

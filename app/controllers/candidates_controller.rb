@@ -29,7 +29,7 @@ class CandidatesController < ApplicationController
 
       or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title]
       @terms.each do |term|
-        and_conditions << "(#{or_fields.map{|field| "#{field} LIKE '%#{term}%'" }.join(' OR ') })"
+        and_conditions << "(#{or_fields.map{|field| "UPPER(#{field}) LIKE '%#{term.upcase}%'" }.join(' OR ') })"
       end
       query = query.where(and_conditions.join(' AND '))
 
@@ -47,6 +47,7 @@ class CandidatesController < ApplicationController
   def show
     begin
       load_candidate
+      session_cache_show_history
     rescue Exception => e
       flash[:error] = e.message
       redirect_to candidates_path
@@ -173,7 +174,13 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/expert_template
   def expert_template
-    @candidates = Candidate.where(id: params[:uids]).order(:created_at => :desc)
+    if params[:project_id].present?
+      @candidates = Candidate.joins(:project_candidates).
+        where(:'candidates.id' => params[:uids], :'project_candidates.project_id' => params[:project_id]).
+        order(:'project_candidates.created_at' => :asc)
+    else
+      @candidates = Candidate.where(id: params[:uids]).order(:created_at => :desc)
+    end
     export_expert_template(@candidates)
   end
 
@@ -380,5 +387,15 @@ class CandidatesController < ApplicationController
     file_path = "#{file_dir}/expert_#{current_user.id}_#{Time.now.strftime('%H%M%S')}.xlsx"
     book.write file_path
     send_file file_path
+  end
+
+  def session_cache_show_history
+    begin
+      fifo = Utils::Fifo.new(session[:cache_show_history], len: 5, dup: false)
+      fifo.push([@candidate.id, "##{@candidate.uid} #{@candidate.name}"])
+      session[:cache_show_history] = fifo.to_a
+    rescue
+      session[:cache_show_history] = nil
+    end
   end
 end

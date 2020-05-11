@@ -12,6 +12,9 @@ $(document).on('turbolinks:load', function(){
         $('.select2-container').remove();  // turbolinks:reload + select2 重复加载bug修复
     }
     $('.select2').select2();
+    $('input[type=number]').mousewheel(function(){
+        disableMouseWheelScroll();  // 全局禁用 number 的滚轮
+    })
 });
 
 // select all checkbox
@@ -21,9 +24,6 @@ window.selectAll = function(ele, name){
     target.each(function(){
         this.checked = ele.checked;
     });
-    // for(var i=0; i<target.length; i++){
-    //     target[i].checked = ele.checked;
-    // }
 };
 
 // ===== Date & Time picker =====
