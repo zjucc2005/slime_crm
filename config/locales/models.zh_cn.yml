@@ -146,6 +146,7 @@ zh_cn:
 
       candidate_comment:
         content: "内容"
+        is_top: "置顶"
 
       card_template:
         category: "类型"

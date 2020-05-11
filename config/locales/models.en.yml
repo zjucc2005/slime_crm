@@ -117,6 +117,7 @@ en:
 
       candidate_comment:
         content: "Content"
+        is_top: "Is top"
 
       card_template:
         category: "Category"

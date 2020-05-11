@@ -2,6 +2,10 @@
 <%= hidden_field_tag :candidate_id, params[:candidate_id] %>
 
 <div class="row">
+    <div class="col-3 form-group">
+        <%= f.label :is_top, :class => 'mr-2' %>
+        <%= f.check_box :is_top %>
+    </div>
     <div class="col-12 form-group">
         <%= f.label :content %><span class="text-red">*</span>
         <%= f.text_area :content, :required => true, :rows => 5, :class => 'form-control' %>

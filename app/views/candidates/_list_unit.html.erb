@@ -59,11 +59,11 @@
                 <span>最近访谈时间： </span>
                 <span><%= candidate.project_tasks.where(status: 'finished').maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
             </div>
-            <% candidate.comments.order(:created_at => :desc).limit(3).each do |comment| %>
+            <% candidate.comments.order(:is_top => :desc, :created_at => :desc).limit(3).each do |comment| %>
                 <div class="text-smaller" title="<%= comment.content %>">
                     <span class="text-gray mr-1"><%= comment.created_at.strftime('%F') %></span>
                     <span>[<%= comment.creator.name_cn %>]</span>
-                    <span><%= truncate(comment.content, length: 20) %></span>
+                    <span><%= content_tag(:i, nil, :class => 'fa fa-flag text-red') if comment.is_top? %><%= truncate(comment.content, length: 20) %></span>
                 </div>
             <% end %>
             <div class="text-smaller">

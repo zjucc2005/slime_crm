@@ -13,7 +13,11 @@ class CandidateCommentsController < ApplicationController
   def create
     @candidate = Candidate.find(params[:candidate_id])
     @candidate_comment = @candidate.comments.new(candidate_comment_params.merge(created_by: current_user.id))
-    if @candidate_comment.save
+    if @candidate_comment.valid?
+      ActiveRecord::Base.transaction do
+        @candidate_comment.save
+        @candidate_comment.topped
+      end
       flash[:success] = t(:operation_succeeded)
       redirect_with_return_to comments_candidate_path(@candidate)
     else
@@ -38,6 +42,7 @@ class CandidateCommentsController < ApplicationController
       load_candidate_comment
 
       if @candidate_comment.update(candidate_comment_params)
+        @candidate_comment.topped
         flash[:success] = t(:operation_succeeded)
         redirect_with_return_to comments_candidate_path(@candidate_comment.candidate)
       else
@@ -65,7 +70,7 @@ class CandidateCommentsController < ApplicationController
 
   private
   def candidate_comment_params
-    params.require(:candidate_comment).permit(:content)
+    params.require(:candidate_comment).permit(:content, :is_top)
   end
 
   def load_candidate_comment

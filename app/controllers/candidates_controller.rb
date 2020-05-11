@@ -318,7 +318,7 @@ class CandidatesController < ApplicationController
   def comments
     begin
       load_candidate
-      @candidate_comments = @candidate.comments.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+      @candidate_comments = @candidate.comments.order(:is_top => :desc, :created_at => :desc).paginate(:page => params[:page], :per_page => 20)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to candidates_path

@@ -13,11 +13,9 @@
                 </h6>
 
                 <div class="btn-group btn-group-sm">
-                    <%= link_to '', :class => 'btn btn-default', :onclick => 'cardTemplate();' do %>
-                        <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
-                    <% end if can?(:card_template, Candidate) %>
+                    <%= render(:partial => 'candidates/widgets/expert_card', :locals => { :uid => nil }) if can?(:card_template, Candidate) %>
                     <%= link_to '', :class => 'btn btn-default', :onclick => 'expertTemplate();' do %>
-                      <%= fa_icon_tag('file-excel-o') %> <%= t('action.export_excel') %>
+                        <%= fa_icon_tag('file-excel-o') %> <%= t('action.export_excel') %>
                     <% end %>
                 </div>
             </div>
