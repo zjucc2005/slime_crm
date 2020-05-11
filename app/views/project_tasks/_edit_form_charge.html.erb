@@ -35,11 +35,11 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :duration, mt(:project_task, :duration_min) %><span class="text-red">*</span>
-        <%= f.number_field :duration, :value => @project_task.duration || 0, :required => true, :min => 1, :class => 'form-control' %>
+        <%= f.number_field :duration, :value => @project_task.duration || 0, :required => true, :min => 0, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :charge_duration, mt(:project_task, :charge_duration_min) %><span class="text-red">*</span>
-        <%= f.number_field :charge_duration, :value => @project_task.charge_duration || 0, :required => true, :min => 1, :class => 'form-control', :placeholder => '用于计算价格' %>
+        <%= f.number_field :charge_duration, :value => @project_task.charge_duration || 0, :required => true, :min => 0, :class => 'form-control', :placeholder => '用于计算价格' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :f_flag %><span class="text-red">*</span>

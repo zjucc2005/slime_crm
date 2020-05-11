@@ -25,6 +25,7 @@
                     <th><%= mt(:project_task, :category) %></th>
                     <th><%= mt(:project_task, :interview_form) %></th>
                     <th><%= mt(:project_task, :status) %></th>
+                    <th><%= mt(:project, :name) %></th>
                     <th><%= mt(:project, :code) %></th>
                     <th><%= mt(:company, :name_abbr) %></th>
                 </tr>
@@ -39,7 +40,14 @@
                         <td><%= project_task_category_badge(task.category) %></td>
                         <td><%= project_task_interview_form_badge(task.interview_form) %></td>
                         <td><%= ProjectTask::STATUS[task.status] %></td>
-                        <td><%= truncate(task.project.code, length: 10) %></td>
+                        <td>
+                            <% if can?(:show, Project) %>
+                                <%= link_to truncate(task.project.name, length: 16), project_path(task.project_id) %>
+                            <% else %>
+                                <%= truncate(task.project.name, length: 16) %>
+                            <% end %>
+                        </td>
+                        <td><%= task.project.code %></td>
                         <td><%= truncate(task.project.company.name_abbr, length: 10) %></td>
                     </tr>
                     <% end %>
