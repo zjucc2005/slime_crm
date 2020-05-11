@@ -1,11 +1,32 @@
-window.cardTemplate = function(){
-    var uids = $("input[name='uids[]']:checked");
-    if(uids.length === 0){
-        alert('请至少选择一位专家');
+//window.cardTemplate = function(){
+//    var uids = $("input[name='uids[]']:checked");
+//    if(uids.length === 0){
+//        alert('请至少选择一位专家');
+//    }else{
+//        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+//        //window.location.href = '/candidates/card_template?' + params;
+//        window.open('/candidates/card_template?' + params);
+//    }
+//};
+
+window.cardTemplate = function(card_template_id, uid){
+    if(card_template_id){
+        if(uid){
+            var params = 'uids[]=' + uid;
+        }else{
+            var uids = $("input[name='uids[]']:checked");
+            if(uids.length === 0){
+                alert('请至少选择一位专家');
+                return
+            }else{
+                var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+            }
+        }
+        params += '&card_template_id=' + card_template_id;
+        //window.location.href = '/candidates/gen_card?' + params;
+        window.open('/candidates/gen_card?' + params);
     }else{
-        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
-        //window.location.href = '/candidates/card_template?' + params;
-        window.open('/candidates/card_template?' + params);
+        alert('参数错误');
     }
 };
 

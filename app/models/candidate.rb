@@ -82,15 +82,28 @@ class Candidate < ApplicationRecord
   # card template params setting
   def card_template_params(field)
     case field.to_sym
-      when :uid         then self.uid
-      when :name        then self.name
-      when :city        then self.city
-      when :phone       then self.phone
-      when :description then self.description
-      when :company     then self.latest_work_experience.try(:org_cn)
-      when :title       then self.latest_work_experience.try(:title)
+      when :uid          then self.uid
+      when :name         then self.name
+      when :city         then self.city
+      when :phone        then self.phone
+      when :description  then self.description
+      when :company      then self.latest_work_experience.try(:org_cn)
+      when :title        then self.latest_work_experience.try(:title)
       when :expert_level then self.cpt.to_i >= 1500 ? 'Premium Expert' : 'Standard Expert'
+      when :rate         then self._c_t_rate_
       else nil
+    end
+  end
+
+  # for card template use
+  def _c_t_rate_
+    case self.cpt
+      when 0..1000 then 2800
+      when 1000..1500 then 3360
+      when 1500..2000 then 4200
+      when 2000..2500 then 5040
+      when 2500..3000 then 5600
+      else 'TBD'
     end
   end
 

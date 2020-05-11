@@ -4,11 +4,8 @@
             <%= fa_icon_tag('plus') %> <%= "#{t('action.new_model', :model => mt(:expert))}" %>
         <% end if can?(:new, Candidate) %>
         <%#= render :partial => 'candidates/widgets/btn_import_expert' %>
-        <%= link_to '', :class => 'btn btn-default', :onclick => 'cardTemplate();' do %>
-            <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
-        <% end if can?(:card_template, Candidate) %>
-
-        <%= link_to '', :class => 'btn btn-default', :onclick => 'addExpertToProject();' do %>
+        <%= render :partial => 'candidates/widgets/expert_card', :locals => { :uid => nil } %>
+        <%= link_to 'javascript:void(0);', :class => 'btn btn-default', :onclick => 'addExpertToProject();' do %>
             <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
         <% end if can?(:add_experts, Project) %>
     </div>
@@ -30,6 +27,3 @@
         </div>
     </div>
 <% end %>
-
-<%= hidden_field_tag :from_source, params[:from_source] %>
-<%= hidden_field_tag :project_id, params[:project_id] %>

@@ -160,10 +160,10 @@ class CandidatesController < ApplicationController
   end
 
   # GET /candidates/card_template
-  def card_template
-    @candidates = Candidate.where(id: params[:uids])
-    @card_template_options = CardTemplate.where(category: 'Candidate').order(:created_at => :desc).pluck(:name, :id)
-  end
+  # def card_template
+  #   @candidates = Candidate.where(id: params[:uids])
+  #   @card_template_options = CardTemplate.where(category: 'Candidate').order(:created_at => :desc).pluck(:name, :id)
+  # end
 
   # GET /candidates/gen_card
   def gen_card

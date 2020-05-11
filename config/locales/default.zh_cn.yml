@@ -84,6 +84,7 @@ zh_cn:
     submit: "提交"
     submit_and_confirm: "提交确认"
     submit_and_continue: "提交并继续创建"
+    submit_and_continue_to_add: "提交并继续添加"
     unfinish: "未完成"
     update: "更新"
     update_model: "更新%{model}"

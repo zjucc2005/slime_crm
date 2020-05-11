@@ -1,0 +1,8 @@
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
+</button>
+<div class="dropdown-menu">
+    <% card_template_options.each do |option| %>
+        <%= link_to option[0], 'javascript:void(0);', :class => 'dropdown-item', :onclick => "cardTemplate(#{option[1]}, #{uid});" %>
+    <% end %>
+</div>
