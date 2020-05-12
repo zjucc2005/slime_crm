@@ -40,7 +40,7 @@
                             </div>
                             <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :industry, mt(:company, :industry) %>
-                                <%= text_field_tag :industry, params[:industry], :class => 'form-control' %>
+                                <%= select_tag :industry, options_for_select(industry_options, params[:industry]), :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :is_signed, mt(:company, :is_signed) %>
