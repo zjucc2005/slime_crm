@@ -22,7 +22,7 @@
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :industry %>
-        <%= f.select :industry, industry_options, { :prompt => default_prompt }, :class => 'form-control select2' %>
+        <%= f.select :industry, company_industry_options, { :include_blank => default_prompt }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :city %><span class="text-red">*</span>
