@@ -62,7 +62,7 @@
                                 <td class="action">
                                     <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
                                         <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
-                                    <% end if can?(:edit, ProjectTask) && task.status == 'ongoing' %>
+                                    <% end if can?(:edit, ProjectTask) && task.can_be_edited_by(current_user)  %>
                                 </td>
                             </tr>
                         <% end %>

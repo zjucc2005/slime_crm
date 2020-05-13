@@ -8,6 +8,8 @@ class ProjectTasksController < ApplicationController
     begin
       load_project_task
       load_active_contract
+
+      check_editable # 只能编辑自己创建的任务
     rescue Exception => e
       flash[:error] = e.message
       redirect_to project_path(@project_task.project)
@@ -111,6 +113,10 @@ class ProjectTasksController < ApplicationController
   private
   def load_project_task
     @project_task = ProjectTask.find(params[:id])
+  end
+
+  def check_editable
+    raise t(:not_authorized) unless @project_task.can_be_edited_by(current_user)
   end
 
   def load_active_contract

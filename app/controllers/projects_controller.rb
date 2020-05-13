@@ -135,10 +135,10 @@ class ProjectsController < ApplicationController
           end
         end
         flash[:success] = t(:operation_succeeded)
-        if params[:commit] == t('action.submit_and_continue')
-          redirect_to project_path(@project)
-        else
+        if params[:commit] == t('action.submit_and_continue_to_add')
           redirect_to candidates_path
+        else
+          redirect_to project_path(@project)
         end
       rescue Exception => e
         flash[:error] = e.message

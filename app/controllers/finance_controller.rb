@@ -28,7 +28,7 @@ class FinanceController < ApplicationController
       else nil
     end
 
-    @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /finance/:id

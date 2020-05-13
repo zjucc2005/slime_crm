@@ -54,6 +54,10 @@ class ProjectTask < ApplicationRecord
     %w[unbilled].include? charge_status
   end
 
+  def can_be_edited_by(user)
+    status == 'ongoing' && created_by == user.id
+  end
+
   # 当前执行中的合同(最新), 用于获取价格计算规则
   def active_contract
     project.active_contract
