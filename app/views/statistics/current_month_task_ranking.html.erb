@@ -15,14 +15,16 @@
                         <th class="pl-3"><%= t('dashboard.ranking') %></th>
                         <th><%= mt(:user, :name_cn) %></th>
                         <th><%= t('dashboard.total_hours') %></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <% @current_month_task_ranking.each do |info| %>
+                    <% @current_month_task_ranking.each_with_index do |info, index| %>
                         <tr>
-                            <th class="pl-3"><%= info[:seq] %></th>
+                            <th class="pl-3"><%= index + 1 %></th>
                             <td><%= info[:username] %></td>
-                            <td><%= info[:hours] %> h</td>
+                            <td><%= (info[:total_minutes] / 60.0).round(1) %> h</td>
+                            <td>pm: <%= (info[:pm_minutes] /60.0).round(1) %> h, pa: <%= (info[:pa_minutes] /60.0).round(1) %> h</td>
                         </tr>
                     <% end %>
                     </tbody>

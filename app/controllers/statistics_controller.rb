@@ -29,21 +29,22 @@ class StatisticsController < ApplicationController
     end
   end
 
-  # GET /statistics/current_month_task_ranking?top=10
+  # GET /statistics/current_month_task_ranking?limit=10
   def current_month_task_ranking
     current_month = Time.now.beginning_of_month
-    result = ProjectTask.joins('LEFT JOIN users on users.id = project_tasks.created_by').
-      where('project_tasks.status' => 'finished').
-      where('project_tasks.started_at >= ?', current_month).
-      select('sum(charge_duration) AS total_charge_duration, users.name_cn AS username, created_by').
-      group(:created_by, :username).order(:total_charge_duration => :desc)
-    result = result.limit(params[:limit]) if params[:limit].present?
-
-    @current_month_task_ranking = []
-    result.each_with_index do |r, index|
-      @current_month_task_ranking << { :seq => index + 1, :username => r.username, :hours => (r.total_charge_duration / 60.0).round(1) }
+    result = []
+    users = User.active.where(role: %w[admin pm pa])  # 激活中用户 + 角色admin/pm/pa
+    project_tasks = ProjectTask.where(status: 'finished').where('started_at >= ?', current_month)
+    users.each do |user|
+      pm_minutes = project_tasks.where(pm_id: user.id).sum(:charge_duration) * 0.5       # 权重 0.5
+      pa_minutes = project_tasks.where(created_by: user.id).sum(:charge_duration) * 0.5  # 权重 0.5
+      total_minutes = pm_minutes + pa_minutes
+      if total_minutes > 0
+        result << { :username => user.name_cn, :pm_minutes => pm_minutes, :pa_minutes => pa_minutes, :total_minutes => total_minutes }
+      end
     end
 
+    @current_month_task_ranking = result.sort_by{|e| e[:total_minutes]}.reverse
     respond_to do |f|
       f.js
       f.html
