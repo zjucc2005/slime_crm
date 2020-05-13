@@ -24,7 +24,7 @@
                             <th class="pl-3"><%= index + 1 %></th>
                             <td><%= info[:username] %></td>
                             <td><%= (info[:total_minutes] / 60.0).round(1) %> h</td>
-                            <td>pm: <%= info[:pm_minutes].round %> min, pa: <%= info[:pa_minutes].round %> min</td>
+                            <td>pm: <%= info[:pm_minutes] %> min, pa: <%= info[:pa_minutes] %> min</td>
                         </tr>
                     <% end %>
                     </tbody>

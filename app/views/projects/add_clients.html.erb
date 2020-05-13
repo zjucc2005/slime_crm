@@ -8,13 +8,15 @@
         <%= form_tag request.path, :method => :get do %>
             <div class="row">
                 <div class="col-2 form-group">
+                    <%= link_to new_client_company_path(@project.company, return_to: request.path), :class => 'btn btn-primary btn-form-control w-100' do %>
+                        <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => t(:client_contact)) %>
+                    <% end if can?(:manage, Project) %>
+                </div>
+                <div class="col-2 form-group">
                     <%= text_field_tag :name, params[:name], :class => 'form-control', :placeholder => mt(:candidate, :name) %>
                 </div>
                 <div class="col-2 form-group">
                     <%= text_field_tag :nickname, params[:nickname], :class => 'form-control', :placeholder => mt(:candidate, :nickname) %>
-                </div>
-                <div class="col-2 form-group">
-                    <%= text_field_tag :title, params[:title], :class => 'form-control', :placeholder => mt(:candidate, :title) %>
                 </div>
                 <div class="col-2 form-group">
                     <%= text_field_tag :phone, params[:phone], :class => 'form-control', :placeholder => mt(:candidate, :phone) %>
