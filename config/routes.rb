@@ -103,6 +103,7 @@ Rails.application.routes.draw do
 
     get :batch_update_charge_status,  on: :collection
     get :batch_update_payment_status, on: :collection
+    get :export_finance_excel,        on: :collection
   end
 
   resources :location_data do
@@ -116,6 +117,7 @@ Rails.application.routes.draw do
     get :current_month_count_infos,  on: :collection
     get :current_month_task_ranking, on: :collection
     get :unscheduled_projects,       on: :collection
+    get :ongoing_project_tasks,      on: :collection
 
     get :finance_summary,            on: :collection
   end

@@ -8,7 +8,7 @@ class FinanceController < ApplicationController
     query = ProjectTask.where(status: 'finished')
     query = query.where('project_tasks.created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('project_tasks.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
-    %w[id category interview_form charge_status payment_status].each do |field|
+    %w[id project_id category interview_form charge_status payment_status].each do |field|
       query = query.where("project_tasks.#{field}" => params[field].strip) if params[field].present?
     end
     if params[:project].present?
@@ -20,11 +20,13 @@ class FinanceController < ApplicationController
                                 params[:company].strip, "%#{params[:company].strip}%")
       query = query.joins(:project).where('projects.company_id' => companies.ids)
     end
-
+    if params[:expert].present?
+      query = query.joins(:expert).where('candidates.name LIKE ?', "%#{params[:expert].strip}%")
+    end
     # export excel files
     case params[:commit]
-      when '中文模板' then export_project_tasks(query, category='cn') and return
-      when '英文模板' then export_project_tasks(query, category='en') and return
+      when '中文模板' then export_project_tasks(query.order(:started_at => :desc), category='cn') and return
+      when '英文模板' then export_project_tasks(query.order(:started_at => :desc), category='en') and return
       else nil
     end
 
@@ -112,6 +114,21 @@ class FinanceController < ApplicationController
     end
     flash[:success] = t(:operation_succeeded)
     redirect_to finance_index_path
+  end
+
+  # GET /finance/export_finance_excel?mode=cn&uids[]=
+  def export_finance_excel
+    begin
+      query = ProjectTask.where(id: params[:uids]).order(:started_at => :desc)
+      case params[:mode]
+        when 'cn' then export_project_tasks(query, 'cn')
+        when 'en' then export_project_tasks(query, 'en')
+        else raise('params error')
+      end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to finance_index_path
+    end
   end
 
   private

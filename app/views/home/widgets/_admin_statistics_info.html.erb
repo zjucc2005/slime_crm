@@ -1,5 +1,5 @@
 <div class="col-lg-3 col-12 mb-3">
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header">
             <h6 class="mb-0">
                 <i class="fa fa-long-arrow-up text-green"></i>
@@ -11,9 +11,7 @@
             </div>
         </div>
     </div>
-</div>
 
-<div class="col-lg-3 col-12 mb-3">
     <div class="card">
         <div class="card-header">
             <h6 class="mb-0">
@@ -31,8 +29,8 @@
     </div>
 </div>
 
-<div class="col-lg-6 col-12 mb-3">
-    <div class="card">
+<div class="col-lg-9 col-12 mb-3">
+    <div class="card mb-3">
         <div class="card-header">
             <h6 class="mb-0">
                 <%= t('dashboard.unscheduled_projects') %>
@@ -45,12 +43,28 @@
             </div>
         </div>
     </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <%= t('dashboard.ongoing_tasks') %>
+                <%= content_tag :span, 0, :class => 'badge badge-success', :id => 'ongoing_project_tasks_count' %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="ongoing_project_tasks_wrapper" class="table-responsive"></div>
+            <div class="text-center text-bold">
+                <%= link_to '···', ongoing_project_tasks_statistics_path, :title => t(:show_all) %>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
     $(document).ready(function(){
         $.get('statistics/current_month_count_infos.js');
         $.get('statistics/current_month_task_ranking.js?limit=10&mode=1');
-        $.get('statistics/unscheduled_projects.js?limit=10')
+        $.get('statistics/unscheduled_projects.js?limit=10');
+        $.get('statistics/ongoing_project_tasks.js?limit=10');
     });
 </script>

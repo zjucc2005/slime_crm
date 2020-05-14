@@ -55,3 +55,18 @@ window.batchUpdatePaymentStatus = function(s){
         window.location.href = '/finance/batch_update_payment_status?' + params;
     }
 };
+
+window.exportFinanceExcel = function(mode){
+    var uids = $("input[name='uids[]']:checked");
+    if(!['en', 'cn'].includes(mode)){
+        alert('参数错误');
+        return false;
+    }
+    if(uids.length === 0){
+        alert('请至少选择一个条目');
+    }else{
+        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+        params = params + '&mode=' + mode;
+        window.location.href = '/finance/export_finance_excel?' + params;
+    }
+};

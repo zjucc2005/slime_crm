@@ -35,8 +35,16 @@
                                 <%= text_field_tag :project, params[:project], :class => 'form-control', :placeholder => '项目名称/编码' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :project_id, t(:project_id) %>
+                                <%= text_field_tag :project_id, params[:project_id], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :company, mt(:company) %>
                                 <%= text_field_tag :company, params[:company], :class => 'form-control', :placeholder => '公司名称/简称' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :expert, mt(:expert) %>
+                                <%= text_field_tag :expert, params[:expert], :class => 'form-control' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :category, mt(:project_task, :category) %>
@@ -62,6 +70,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
+                        <%= submit_tag t('action.search'), :class => 'btn btn-submit' %>
                         <div class="btn-group">
                             <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                                 <%= t('action.search_and_export') %>
@@ -71,7 +80,6 @@
                                 <%= submit_tag '英文模板', :class => 'dropdown-item' %>
                             </div>
                         </div>
-                        <%= submit_tag t('action.search'), :class => 'btn btn-submit' %>
                     </div>
                 <% end %>
             </div>

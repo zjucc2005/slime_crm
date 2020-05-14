@@ -1,0 +1,13 @@
+<div class="d-inline-block">
+    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+        <%= t('action.export_excel') %>
+    </button>
+    <div class="dropdown-menu">
+        <%= link_to '', :class => 'dropdown-item', :onclick => "exportFinanceExcel('cn');" do %>
+            中文模板
+        <% end %>
+        <%= link_to '', :class => 'dropdown-item', :onclick => "exportFinanceExcel('en');" do %>
+            英文模板
+        <% end %>
+    </div>
+</div>

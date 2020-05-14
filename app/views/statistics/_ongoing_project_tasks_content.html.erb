@@ -1,0 +1,39 @@
+<table class="table table-sm table-striped border nowrap card-text">
+    <thead>
+    <tr>
+        <th><%= mt(:project_task, :id) %></th>
+        <th><%= mt(:project, :name) %></th>
+        <th><%= mt(:project, :code) %></th>
+        <th><%= mt(:project_task, :category) %></th>
+        <th><%= mt(:project_task, :interview_form) %></th>
+        <th><%= mt(:expert) %></th>
+        <th><%= mt(:project_task, :started_at) %></th>
+        <th><%= mt(:project_task, :duration) %></th>
+        <th><%= mt(:project_task, :charge_duration) %></th>
+        <th><%= mt(:project_task, :expert_level) %></th>
+        <th><%= mt(:project_task, :expert_rate) %></th>
+        <th><%= mt(:project, :pm) %></th>
+        <th><%= mt(:project, :pa) %></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @project_tasks.each do |task| %>
+        <% project = task.project %>
+        <tr>
+            <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
+            <td title="<%= project.name %>"><%= truncate(project.name, length: 8) %></td>
+            <td><%= project.code %></td>
+            <td><%= project_task_category_badge(task.category) %></td>
+            <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+            <td><%= task.expert.name %></td>
+            <td><%= task.started_at.strftime('%F %H:%M') %></td>
+            <td><%= task.duration %></td>
+            <td><%= task.charge_duration %></td>
+            <td><%= ProjectTask::EXPERT_LEVEL[task.expert_level] %></td>
+            <td><%= task.expert_rate %></td>
+            <td><%= task.pm.name_cn %></td>
+            <td><%= task.creator.name_cn %></td>
+        </tr>
+    <% end %>
+    </tbody>
+</table>

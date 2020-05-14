@@ -62,6 +62,14 @@ class StatisticsController < ApplicationController
     end
   end
 
+  # GET /statistics/ongoing_project_tasks
+  def ongoing_project_tasks
+    query = ProjectTask.where(status: 'ongoing').order(:created_at => :asc)
+    @count = query.count
+    query = query.limit(params[:limit]) if params[:limit].present?
+    @project_tasks = query
+  end
+
   # GET /statistics/finance_summary
   def finance_summary
     current_year = Time.now.year
