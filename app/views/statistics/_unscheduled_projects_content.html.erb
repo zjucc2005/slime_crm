@@ -1,7 +1,7 @@
 <table class="table table-sm card-text border-bottom">
     <thead>
     <tr>
-        <th class="pl-3"><%= mt(:project, :id) %></th>
+        <th><%= mt(:project, :id) %></th>
         <th><%= mt(:project, :name) %></th>
         <th><%= mt(:project, :created_by) %></th>
         <th><%= mt(:project, :created_at) %></th>
@@ -10,7 +10,7 @@
     <tbody>
     <% @projects.each do |project| %>
         <tr>
-            <td class="pl-3"><%= content_tag :span, "# #{project.uid}", :class => 'text-gray' %></td>
+            <td><%= content_tag :span, "# #{project.uid}", :class => 'text-gray' %></td>
             <td><%= link_to project.name, project_path(project) %></td>
             <td><%= project.creator.name_cn %></td>
             <td><%= project.created_at.strftime('%F %T') %></td>

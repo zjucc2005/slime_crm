@@ -4,6 +4,7 @@ en:
   pending: "Pending"
 
   add_to_project: "Add to project"
+  advance_payment: "Advance payment"
   base_info: "Base info"
   begin: "Begin"
   browsing_history: "Browsing history"
@@ -115,7 +116,10 @@ en:
     total_my_tasks: "Total My Tasks"
     total_charge_duration_hour: "Total Charge Duration(h)"
     total_income: "Total income"
+    total_income_billed: "Total income(billed)"
+    total_income_unbilled: "Total income(unbilled)"
     total_expert_fee: "Total expert fee"
+    total_expert_fee_unpaid: "Total expert fee(unpaid)"
     total_staffs: "Total Staffs"
     value: "Value"
 

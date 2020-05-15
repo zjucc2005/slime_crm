@@ -14,14 +14,20 @@ class StatisticsController < ApplicationController
     total_tasks                = project_task_query.count
     total_charge_duration_hour = (project_task_query.sum(:charge_duration) / 60.0).round(1)
     total_income               = project_task_query.sum(:actual_price)
-    total_expert_fee           = project_task_cost_query.sum(:price)
+    total_income_unbilled      = project_task_query.where('project_tasks.charge_status' => 'unbilled').sum(:actual_price)
+    total_income_billed        = project_task_query.where('project_tasks.charge_status' => 'billed').sum(:actual_price)
+    total_expert_fee           = project_task_cost_query.sum('project_task_costs.price')
+    total_expert_fee_unpaid    = project_task_cost_query.where('project_tasks.payment_status' => 'unpaid').sum('project_task_costs.price')
 
     @current_month_count_infos = [
       { :name => t('dashboard.total_experts'),              :value => total_experts,              :url => nil },
       { :name => t('dashboard.total_tasks'),                :value => total_tasks,                :url => nil },
       { :name => t('dashboard.total_charge_duration_hour'), :value => total_charge_duration_hour, :url => nil },
       { :name => t('dashboard.total_income'),               :value => total_income,               :url => finance_summary_statistics_path },
-      { :name => t('dashboard.total_expert_fee'),           :value => total_expert_fee,           :url => finance_summary_statistics_path }
+      { :name => t('dashboard.total_income_unbilled'),      :value => total_income_unbilled,      :url => nil },
+      { :name => t('dashboard.total_income_billed'),        :value => total_income_billed,        :url => nil },
+      { :name => t('dashboard.total_expert_fee'),           :value => total_expert_fee,           :url => finance_summary_statistics_path },
+      { :name => t('dashboard.total_expert_fee_unpaid'),    :value => total_expert_fee_unpaid,    :url => nil }
     ]
 
     respond_to do |f|

@@ -48,7 +48,7 @@ class ProjectTasksController < ApplicationController
       cost.memo    = params[:memo]
 
       template = @project_task.expert.payment_infos.where(id: params[:template]).first
-      if params[:category] == 'expert'
+      if params[:category] == 'expert' && params[:advance_payment] == 'false'
         if template
           cost.payment_info = {
             category:   template.category,
