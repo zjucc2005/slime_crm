@@ -29,4 +29,7 @@
     </div>
 <% end %>
 
-<button type="button" class="float-btn btn-secondary fa fa-angle-up shadow" onclick="window.scrollTo(0, 0);"></button>
+<div class="float-bar">
+    <%= button_tag('', :type => 'button', :class => 'float-bar-btn fa fa-map', :title => t(:add_to_project), :onclick => 'addExpertToProject();') if can?(:add_experts, Project) %>
+    <%= button_tag '', :type => 'button', :class => 'float-bar-btn fa fa-angle-up', :onclick => 'window.scrollTo(0, 0);' %>
+</div>
