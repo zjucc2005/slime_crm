@@ -14,6 +14,10 @@ class ProjectsController < ApplicationController
     %w[id status].each do |field|
       query = query.where(field.to_sym => params[field]) if params[field].present?
     end
+    if params[:company].present?
+      query = query.joins(:company).where('companies.name ILIKE :company OR companies.name_abbr ILIKE :company', { company: "%#{params[:company].strip}%" })
+    end
+
     @projects = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 

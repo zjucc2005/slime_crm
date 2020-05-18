@@ -16,8 +16,7 @@ class FinanceController < ApplicationController
                                           params[:project].strip, "%#{params[:project].strip}%")
     end
     if params[:company].present?
-      companies = Company.where('UPPER(name_abbr) = UPPER(?) OR UPPER(name) LIKE UPPER(?)',
-                                params[:company].strip, "%#{params[:company].strip}%")
+      companies = Company.where('name ILIKE :company OR name_abbr ILIKE :company', { company: "%#{params[:company].strip}%"})
       query = query.joins(:project).where('projects.company_id' => companies.ids)
     end
     if params[:expert].present?

@@ -43,6 +43,10 @@
                                 <%= select_tag :status, options_for_select(Project::STATUS.to_a.map(&:reverse), params[:status]),
                                                :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :company, mt(:company) %>
+                                <%= text_field_tag :company, params[:company], :class => 'form-control', :placeholder => '公司名称/简称' %>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
