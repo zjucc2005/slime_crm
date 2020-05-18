@@ -28,7 +28,7 @@ class CandidatesController < ApplicationController
       end
       and_conditions = []
 
-      or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title]
+      or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title candidate_experiences.description]
       @terms.each do |term|
         and_conditions << "(#{or_fields.map{|field| "#{field} ILIKE '%#{term}%'" }.join(' OR ') })"
       end

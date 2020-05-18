@@ -47,10 +47,6 @@
                                 <%= label_tag :is_available, mt(:candidate, :is_available) %>
                                 <%= select_tag :is_available, options_for_select(candidate_is_available_search_options, params[:is_available]), :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
-                            <div class="col-lg-3 col-6 form-group">
-                                <%= label_tag :duty, mt(:candidate_experience, :duty) %>
-                                <%= text_field_tag :duty, params[:duty], :class => 'form-control' %>
-                            </div>
                         </div>
                     </div>
                     <%= hidden_field_tag :per_page, params[:per_page] %>
