@@ -93,6 +93,14 @@ class Project < ApplicationRecord
     end
   end
 
+  def can_be_viewed_by(user)
+    if user.is_role?('admin')
+      true
+    else
+      self.project_users.where(user_id: user.id).count > 0
+    end
+  end
+
   def start!
     self.status = 'ongoing'
     self.started_at ||= Time.now

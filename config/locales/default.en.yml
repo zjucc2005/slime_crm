@@ -40,6 +40,7 @@ en:
   payment_info: "Payment info"
   project_can_only_have_one_pm: "Project can only have one PM"
   project_id: "Project ID"
+  related_projects: "Related projects"
   reset_password: "Reset password"
   return_back_and_reedit: "Return back and reedit"
   select_payment_info: "Select payment info"

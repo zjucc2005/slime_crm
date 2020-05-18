@@ -11,8 +11,14 @@
                     <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
                     <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
                 </h6>
+
                 <div class="btn-group btn-group-sm">
-                    <%= render :partial => 'candidates/widgets/expert_card', :locals => { :uid => @candidate.id } %>
+                    <div class="btn-group btn-group-sm">
+                        <%= render :partial => 'candidates/widgets/expert_card', :locals => { :uid => @candidate.id } %>
+                    </div>
+                    <div class="btn-group btn-group-sm">
+                        <%= render :partial => 'candidates/widgets/related_projects', :locals => { :candidate => @candidate } %>
+                    </div>
                     <%= link_to 'javascript:void(0);', :class => 'btn btn-default', :onclick => "addExpertToProject(#{@candidate.id});" do %>
                         <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
                     <% end if can?(:add_experts, Project) %>
