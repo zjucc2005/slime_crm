@@ -121,6 +121,7 @@ class Candidate < ApplicationRecord
   end
 
   def validates_uniqueness_of_phone
+    return true if self.category == 'client'  # 只验证专家
     query = self.class.expert.where.not(id: self.id)
     if phone.present?
       errors.add(:phone, :taken) if query.exists?(phone: phone) || query.exists?(phone1: phone)
