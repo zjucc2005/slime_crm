@@ -102,8 +102,6 @@ class CandidatesController < ApplicationController
       load_candidate
 
       ActiveRecord::Base.transaction do
-        @candidate.update!(candidate_params)                                   # update candidate
-
         _work_exp = params[:_work_exp] || {}  # old work_exp
         work_exp  = params[:work_exp]  || {}  # new work_exp
         @candidate.experiences.work.where.not(id: _work_exp.keys).destroy_all  # update existed experiences
@@ -114,11 +112,16 @@ class CandidatesController < ApplicationController
           @candidate.experiences.work.create!(val.permit(experience_fields))   # create new experiences
         end
       end
-      flash[:success] = t(:operation_succeeded)
-      redirect_to candidate_path(@candidate)
+
+      if @candidate.update(candidate_params)                                   # update candidate
+        flash[:success] = t(:operation_succeeded)
+        redirect_to candidate_path(@candidate)
+      else
+        render :edit
+      end
     rescue Exception => e
       flash[:error] = e.message
-      redirect_to candiates_path
+      redirect_to candidates_path
     end
   end
 

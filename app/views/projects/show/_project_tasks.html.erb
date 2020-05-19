@@ -6,7 +6,7 @@
         </h5>
         <%= link_to add_project_task_project_path(@project), :class => 'btn btn-primary btn-xs' do %>
             <%= fa_icon_tag('plus') %> <%= t('action.add') %>
-        <% end if can?(:add_project_task, Project) && @project.can_add_task? %>
+        <% end if can?(:add_project_task, Project) && @can_operate && @project.can_add_task? %>
     </div>
 
     <div class="card-body table-responsive">
@@ -35,7 +35,7 @@
                         <td class="action">
                             <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
                                 <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
-                            <% end if can?(:edit, ProjectTask) && task.can_be_edited_by(current_user) %>
+                            <% end if can?(:edit, ProjectTask) && @can_operate && task.can_be_edited_by(current_user) %>
                         </td>
                     </tr>
                 <% end %>

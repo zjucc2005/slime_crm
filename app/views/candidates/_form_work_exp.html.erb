@@ -1,6 +1,6 @@
 <div class="badge badge-info mb-3 px-4"><%= t(:work_experience) %></div>
 <div id="work_exp_wrapper">
-    <% if action_name == 'edit' %>
+    <% if %w[edit update].include?(action_name) %>
         <% @candidate.experiences.work.each do |exp| %>
             <%= render :partial => 'form_work_exp_unit_edit', :locals => { :exp => exp } %>
         <% end %>

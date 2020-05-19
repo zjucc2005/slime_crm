@@ -3,7 +3,7 @@
         <h5><%= fa_icon_tag('phone') %> <%= t(:client_contact) %></h5>
         <%= link_to add_clients_project_path(@project), :class => 'btn btn-primary btn-xs' do %>
             <%= fa_icon_tag('plus') %> <%= t('action.add', :model => nil) %>
-        <% end if can?(:add_clients, Project) && @project.can_edit? %>
+        <% end if can?(:add_clients, Project) && @can_operate && @project.can_edit? %>
     </div>
 
     <div class="card-body table-responsive">
@@ -32,7 +32,7 @@
                                         :method => :delete, :data => { :confirm => t(:sure_to_remove) },
                                         :class => 'btn btn-danger btn-xs' do %>
                                 <%= fa_icon_tag('trash') %> <%= t('action.remove') %>
-                            <% end if can?(:delete_client, Project) && @project.can_edit? %>
+                            <% end if can?(:delete_client, Project) && @can_operate && @project.can_edit? %>
                         </td>
                     </tr>
                 <% end %>

@@ -326,7 +326,7 @@ class ProjectsController < ApplicationController
   private
   def load_project
     @project = Project.find(params[:id])
-
+    @can_operate =  @project.can_be_operated_by(current_user)
   end
 
   def project_params

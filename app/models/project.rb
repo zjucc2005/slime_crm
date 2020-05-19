@@ -93,7 +93,7 @@ class Project < ApplicationRecord
     end
   end
 
-  def can_be_viewed_by(user)
+  def can_be_operated_by(user)
     if user.is_role?('admin')
       true
     else

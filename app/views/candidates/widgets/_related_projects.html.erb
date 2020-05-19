@@ -4,11 +4,7 @@
     </button>
     <div class="dropdown-menu">
         <% candidate.projects.each do |p| %>
-            <% if p.can_be_viewed_by(current_user) %>
-                <%= link_to "# #{p.uid} - #{p.name} - #{p.code}", project_path(p), :class => 'dropdown-item' %>
-            <% else %>
-                <%= link_to "# #{p.uid} - #{p.name} - #{p.code}", 'javascript:void(0)', :class => 'dropdown-item text-gray' %>
-            <% end %>
+            <%= link_to "# #{p.uid} - #{p.name} - #{p.code}", project_path(p), :class => 'dropdown-item' %>
         <% end %>
     </div>
 <% end %>

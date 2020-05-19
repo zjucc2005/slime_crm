@@ -26,7 +26,7 @@ class Candidate < ApplicationRecord
   validates_presence_of :name, :last_name
   validates_presence_of :cpt
 
-  before_validation :setup, :on => [:create, :update]
+  before_validation :setup, :validates_uniqueness_of_phone, :on => [:create, :update]
 
   # Scopes
   scope :expert, -> { where(category: 'expert') }
@@ -118,6 +118,16 @@ class Candidate < ApplicationRecord
     self.phone1        = phone1.strip if phone1
     self.email         = email.strip if email
     self.email1        = email1.strip if email1
+  end
+
+  def validates_uniqueness_of_phone
+    query = self.class.where.not(id: self.id)
+    if phone.present?
+      errors.add(:phone, :taken) if query.exists?(phone: phone) || query.exists?(phone1: phone)
+    end
+    if phone1.present?
+      errors.add(:phone1, :taken) if query.exists?(phone: phone1) || query.exists?(phone1: phone1)
+    end
   end
 
 end
