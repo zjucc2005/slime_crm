@@ -17,10 +17,12 @@
 </div>
 
 <% if @candidates.any? %>
-    <% @candidates.each do |candidate| %>
-        <%= render :partial => 'list_unit', :locals => { :candidate => candidate } %>
-    <% end %>
-    <%= will_paginate @candidates %>
+    <%# @candidates.each do |candidate| %>
+        <%#= render :partial => 'list_unit', :locals => { :candidate => candidate } %>
+    <%# end %>
+    <%#= will_paginate @candidates %>
+
+    <%= render :partial => 'list_unit' %>
 <% else %>
     <div class="card p-2">
         <div class="p-4 text-center">
