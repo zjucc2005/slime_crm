@@ -109,7 +109,7 @@ class Ability
     can :manage, Contract
     can :manage, Finance
 
-    can :read, LocationDatum
+    can :manage, LocationDatum
     can :read, Bank
     can :read, Industry
   end

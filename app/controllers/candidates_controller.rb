@@ -9,7 +9,6 @@ class CandidatesController < ApplicationController
     @hl_words = [] # 高亮关键词
     query = Candidate.expert
     # query code here >>
-    query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
     query = query.where('candidates.id' => params[:id].strip) if params[:id].present?
     query = query.where('candidates.name ILIKE :name OR candidates.nickname ILIKE :name', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
     query = query.where('candidates.phone LIKE :phone OR candidates.phone1 LIKE :phone', { :phone => "%#{params[:phone].strip}%" }) if params[:phone].present?
@@ -26,11 +25,11 @@ class CandidatesController < ApplicationController
         redirect_to candidates_path and return
       end
       and_conditions = []
-
       or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title candidate_experiences.description]
       @terms.each do |term|
         and_conditions << "(#{or_fields.map{|field| "#{field} ILIKE '%#{term}%'" }.join(' OR ') })"
       end
+      query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
       query = query.where(and_conditions.join(' AND '))
 
       # 只搜索当前公司
@@ -39,8 +38,9 @@ class CandidatesController < ApplicationController
       elsif params[:current_company] == 'false'
         query = query.where.not('candidate_experiences.ended_at' => nil)
       end
+      query = query.distinct  # 去重
     end
-    @candidates = query.distinct.order(:created_at => :desc).paginate(:page => params[:page], :per_page => @per_page)
+    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /candidates/:id
