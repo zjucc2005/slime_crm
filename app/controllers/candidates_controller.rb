@@ -16,7 +16,6 @@ class CandidatesController < ApplicationController
     query = query.where('candidates.email ILIKE :email OR candidates.email1 ILIKE :email', { :email => "%#{params[:email].strip}%" }) if params[:email].present?
     query = query.where('candidates.industry' => params[:industry].strip) if params[:industry].present?
     query = query.where('candidates.is_available' => params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
-    query = query.where('candidate_experiences.description ILIKE ?', "%#{params[:duty].strip}%") if params[:duty].present?
 
     # 专家说明
     if params[:description].present?

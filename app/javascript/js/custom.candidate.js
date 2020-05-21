@@ -67,21 +67,4 @@ function selectText(element) {
     } else {
         alert("none");
     }
-}
-
-window.addCandidatePhone = function(){
-    $('#candidate_phone1').parent().parent().show();
-    $('.phone-add-btn').parent().parent().hide();
-};
-window.delCandidatePhone = function(){
-    $('#candidate_phone1').parent().parent().hide();
-    $('.phone-add-btn').parent().parent().show();
-};
-window.addCandidateEmail = function(){
-    $('#candidate_email1').parent().parent().show();
-    $('.email-add-btn').parent().parent().hide();
-};
-window.delCandidateEmail = function(){
-    $('#candidate_email1').parent().parent().hide();
-    $('.email-add-btn').parent().parent().show();
 };

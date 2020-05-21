@@ -25,6 +25,13 @@ class LocationDataController < ApplicationController
     }
   end
 
+  # GET /candidates/show_phone_location.json
+  def show_phone_location
+    data = LocationDatum.mobile_location(params[:phone])
+    res = data.present? ? { status: '0', city: data[0], type: data[1] } : { status: '1' }
+    render :json => res.to_json
+  end
+
   private
   def load_each_level
     @parent = LocationDatum.find(params[:parent_id])

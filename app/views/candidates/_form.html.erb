@@ -41,8 +41,8 @@
         <%= f.text_field :phone1, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :city %>
-        <%= f.text_field :city, :class => 'form-control autocomplete-city' %>
+        <%= f.label :city %><span class="text-red">*</span>
+        <%= f.text_field :city, :required => true, :class => 'form-control autocomplete-city' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :industry %><span class="text-red">*</span>
@@ -84,3 +84,10 @@
 <script>
     $('.autocomplete-city').autocomplete({ source: '/location_data/autocomplete_city.json', delay: 500 });
 </script>
+
+<style>
+  .mobile-location{
+      position: absolute;
+      font-size: 12px;
+  }
+</style>
