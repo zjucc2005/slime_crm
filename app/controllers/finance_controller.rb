@@ -47,8 +47,8 @@ class FinanceController < ApplicationController
     begin
       load_project_task
 
-      @project_task.actual_price    = params[:project_task][:actual_status]
-      @project_task.shorthand_price = params[:project_task][:shorthand_status]
+      @project_task.actual_price    = params[:project_task][:actual_price]
+      @project_task.shorthand_price = params[:project_task][:shorthand_price]
       @project_task.charge_status   = params[:project_task][:charge_status]
       @project_task.payment_status  = params[:project_task][:payment_status]
       if @project_task.charge_status_changed?
