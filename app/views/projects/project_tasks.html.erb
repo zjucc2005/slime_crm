@@ -11,6 +11,12 @@
                     <span class="text-gray mr-3"><%= "# #{@project.uid}" %></span>
                     <span><%= @project.name %></span>
                 </h6>
+
+                <div class="btn-group btn-group-sm">
+                    <%= link_to add_project_task_project_path(@project, return_to: request.path), :class => 'btn btn-primary btn-xs' do %>
+                        <%= fa_icon_tag('plus') %> <%= t('action.add') %>
+                    <% end if can?(:add_project_task, Project) && @can_operate && @project.can_add_task? %>
+                </div>
             </div>
         </div>
 

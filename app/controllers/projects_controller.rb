@@ -191,7 +191,8 @@ class ProjectsController < ApplicationController
         @project_task = @project.project_tasks.new(project_task_params.merge(created_by: current_user.id))
         if @project_task.save
           flash[:success] = t(:operation_succeeded)
-          redirect_to project_path(@project)
+          redirect_with_return_to(project_path(@project))
+          # redirect_to project_path(@project)
         else
           render :add_project_task
         end

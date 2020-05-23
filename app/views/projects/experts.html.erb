@@ -17,6 +17,9 @@
                     <%= link_to '', :class => 'btn btn-default', :onclick => "expertTemplate(#{@project.id});" do %>
                         <%= fa_icon_tag('file-excel-o') %> <%= t('action.export_excel') %>
                     <% end %>
+                    <%= link_to candidates_path(project_id: @project.id, from_source: 'project'), :class => 'btn btn-primary btn-xs' do %>
+                        <%= fa_icon_tag('plus') %> <%= t('action.add') %>
+                    <% end if can?(:index, Candidate) && @can_operate && @project.can_edit? %>
                 </div>
             </div>
         </div>

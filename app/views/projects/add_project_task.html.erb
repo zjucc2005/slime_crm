@@ -1,11 +1,11 @@
 <div class="card">
     <div class="card-header">
         <h5><%= fa_icon_tag('map') %> <%= t('action.add_model', :model => mt(:project_task)) %></h5>
-        <%= link_to fa_icon_tag('close'), project_path(@project), :class => 'card-header-close' %>
+        <%= link_to fa_icon_tag('close'), return_to(project_path(@project)), :class => 'card-header-close' %>
     </div>
 
     <div class="card-body">
-        <%= form_for @project_task, :url => add_project_task_project_path(@project), :method => :put do |f| %>
+        <%= form_for @project_task, :url => add_project_task_project_path(@project, return_to: params[:return_to]), :method => :put do |f| %>
             <%= model_error_tag(@project_task) %>
 
             <div class="row">
@@ -47,7 +47,7 @@
             <div class="form-group mb-0 d-flex justify-content-between">
                 <div>
                     <%= submit_tag t('action.submit'), :class => 'btn btn-primary' %>
-                    <%= link_to t('action.back'), project_path(@project), :class => 'btn btn-secondary' %>
+                    <%= link_to t('action.back'), return_to(project_path(@project)), :class => 'btn btn-secondary' %>
                 </div>
                 <div>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
