@@ -23,8 +23,8 @@ window.cardTemplate = function(card_template_id, uid){
             }
         }
         params += '&card_template_id=' + card_template_id;
-        //window.location.href = '/candidates/gen_card?' + params;
-        window.open('/candidates/gen_card?' + params);
+        window.location.href = '/candidates/gen_card?' + params;
+        //window.open('/candidates/gen_card?' + params);
     }else{
         alert('参数错误');
     }

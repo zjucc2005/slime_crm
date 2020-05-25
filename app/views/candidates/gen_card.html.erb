@@ -9,5 +9,8 @@
 </div>
 
 <div class="float-bar">
+    <%= link_to 'javascript:history.go(-1);' do %>
+        <%= button_tag '', :type => 'button', :class => 'float-bar-btn fa fa-arrow-left' %>
+    <% end %>
     <%= button_tag '', :type => 'button', :class => 'float-bar-btn fa fa-clipboard', :onclick => "clipboard('candidate_card');" %>
 </div>
