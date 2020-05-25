@@ -22,6 +22,7 @@
                 <th><%= mt(:project, :started_at) %></th>
                 <th><%= mt(:project, :ended_at) %></th>
                 <th><%= mt(:project, :status) %></th>
+                <th><%= mt(:project, :created_by) %></th>
                 <th><%= mt(:project, :created_at) %></th>
             </tr>
             </thead>
@@ -38,6 +39,7 @@
                     <td><%= project.started_at.try(:strftime, '%F') %></td>
                     <td><%= project.ended_at.try(:strftime, '%F') %></td>
                     <td><%= project_status_badge(project.status) %></td>
+                    <td><%= project.creator.name_cn rescue 'NA' %></td>
                     <td><%= project.created_at.strftime('%F %T') %></td>
                 </tr>
             <% end %>

@@ -46,6 +46,10 @@ class ProjectTask < ApplicationRecord
     end
   end
 
+  def can_show?
+    %w[finished].include? status
+  end
+
   def can_cancel?
     %w[ongoing].include? status
   end

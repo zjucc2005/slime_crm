@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('file') %> <%= t('action.detail') %></h5>
+        <%= link_to fa_icon_tag('close'), 'javascript:history.go(-1);', :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-column flex-lg-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@project_task.uid}" %></span>
+                </h6>
+            </div>
+        </div>
+
+        <%= render :partial => 'project_tasks/show/main_info' %>
+        <%= render :partial => 'project_tasks/show/charge_info' %>
+        <%= render :partial => 'project_tasks/show/payment_info' %>
+    </div>
+</div>

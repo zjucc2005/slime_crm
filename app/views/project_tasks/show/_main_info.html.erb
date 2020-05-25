@@ -1,0 +1,105 @@
+<div class="form-group">
+    <span class="badge badge-light"><%= show_creator(@project_task) %></span>
+    <span class="badge badge-light"><%= show_timestamps(@project_task) %></span>
+</div>
+
+<div class="row border-bottom mb-3">
+    <div class="col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project, :name) %></span>
+        </div>
+        <%= content_tag :span, @project_task.project.name, :class => 'form-control' %>
+    </div>
+    <div class="col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project, :code) %></span>
+        </div>
+        <%= content_tag :span, @project_task.project.code, :class => 'form-control' %>
+    </div>
+    <div class="col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:company, :name) %></span>
+        </div>
+        <%= content_tag :span, @project_task.project.company.name, :class => 'form-control' %>
+    </div>
+    <div class="col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:company, :name_abbr) %></span>
+        </div>
+        <%= content_tag :span, @project_task.project.company.name_abbr, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :category) %></span>
+        </div>
+        <%= content_tag :span, project_task_category_badge(@project_task.category), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :interview_form) %></span>
+        </div>
+        <%= content_tag :span, project_task_interview_form_badge(@project_task.interview_form), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= t(:expert_id) %></span>
+        </div>
+        <%= content_tag :span, @project_task.expert.uid, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:expert) %></span>
+        </div>
+        <%= content_tag :span, :class => 'form-control' do %>
+                <%= link_to @project_task.expert.name, candidate_path(@project_task.expert_id), :target => '_blank' %>
+        <% end %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= t(:client_contact) %></span>
+        </div>
+        <%= content_tag :span, @project_task.client.name, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :pm) %></span>
+        </div>
+        <%= content_tag :span, @project_task.pm.name_cn, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :status) %></span>
+        </div>
+        <%= content_tag :span, ProjectTask::STATUS[@project_task.status], :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :expert_level) %></span>
+        </div>
+        <%= content_tag :span, ProjectTask::EXPERT_LEVEL[@project_task.expert_level], :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :started_at) %></span>
+        </div>
+        <%= content_tag :span, @project_task.started_at.strftime('%F %H:%M'), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :ended_at) %></span>
+        </div>
+        <%= content_tag :span, @project_task.ended_at.strftime('%F %H:%M'), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :duration) %></span>
+        </div>
+        <%= content_tag :span, "#{@project_task.duration} #{t(:minute)}", :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :f_flag) %></span>
+        </div>
+        <%= content_tag :span, boolean_display(@project_task.f_flag), :class => 'form-control' %>
+    </div>
+</div>

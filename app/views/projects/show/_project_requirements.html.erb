@@ -37,11 +37,11 @@
                                 <%= link_to finish_project_requirement_path(requirement), :method => :put, :class => 'btn btn-warning btn-xs',
                                             :data => { :confirm => t(:sure_to_finish)} do %>
                                     <%= fa_icon_tag('check') %> <%= t('action.finish') %>
-                                <% end if can?(:finish, ProjectRequirement) && @can_operate && requirement.can_edit? %>
+                                <% end if false && can?(:finish, ProjectRequirement) && @can_operate && requirement.can_edit? %>
                                 <%= link_to unfinish_project_requirement_path(requirement), :method => :put, :class => 'btn btn-danger btn-xs',
                                             :data => { :confirm => t(:sure_to_unfinish)} do %>
                                     <%= fa_icon_tag('remove') %> <%= t('action.unfinish') %>
-                                <% end if can?(:cancel, ProjectRequirement) && @can_operate && requirement.can_edit? %>
+                                <% end if false && can?(:cancel, ProjectRequirement) && @can_operate && requirement.can_edit? %>
                             </div>
                         </td>
                     </tr>

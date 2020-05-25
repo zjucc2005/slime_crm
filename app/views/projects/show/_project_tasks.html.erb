@@ -36,6 +36,9 @@
                             <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
                                 <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
                             <% end if can?(:edit, ProjectTask) && @can_operate && task.can_be_edited_by(current_user) %>
+                            <%= link_to project_task_path(task), :class => 'btn btn-primary btn-xs' do %>
+                                <%= fa_icon_tag('file') %> <%= t('action.detail') %>
+                            <% end if task.can_show? %>
                         </td>
                     </tr>
                 <% end %>
