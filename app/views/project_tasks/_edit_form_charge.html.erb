@@ -75,7 +75,8 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :shorthand_price %>
-        <%= f.number_field :shorthand_price, :min => 0, :step => 0.01, :class => 'form-control' %>
+        <%= f.text_field :shorthand_price, :disabled => true, :class => 'form-control' %>
+        <%#= f.number_field :shorthand_price, :min => 0, :step => 0.01, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :is_recorded %><span class="text-red">*</span>
@@ -104,7 +105,7 @@
         get_base_price();
     });
     $('#project_task_is_shorthand').change(function(){
-        get_shorthand_price();
+        get_base_price();
     });
     $('#project_task_expert_level').change(function(){
         get_expert_rate();
@@ -113,7 +114,9 @@
         let expert_rate = $('#project_task_expert_rate').val();
         let charge_duration = $('#project_task_charge_duration').val();
         let f_flag = $('#project_task_f_flag').val();
+        let is_shorthand = $('#project_task_is_shorthand').val();
         let base_price = $('#project_task_base_price');
+        let shorthand_price = $('#project_task_shorthand_price');
         let currency = $('#project_task_currency');
         let is_taxed = $('#project_task_is_taxed');
         let tax_rate = $('#tax_rate');
@@ -122,11 +125,12 @@
         $.ajax({
             type: 'get',
             url: '/project_tasks/' + <%= @project_task.id %> + '/get_base_price',
-            data: { duration: charge_duration, expert_rate: expert_rate, f: f_flag },
+            data: { duration: charge_duration, expert_rate: expert_rate, f: f_flag, is_shorthand: is_shorthand },
             async: false,
             dataType: 'json',
             success: function(data){
                 base_price.val(data.price);
+                shorthand_price.val(data.shorthand_price);
                 currency.val(data.currency);
                 is_taxed.val(data.is_taxed);
                 tax_rate.val(data.tax_rate);
@@ -134,15 +138,15 @@
             }
         })
     }
-    function get_shorthand_price(){
-        let is_shorthand = $('#project_task_is_shorthand');
-        let shorthand_price = $('#project_task_shorthand_price');
-        if(is_shorthand.val() === 'true'){
-            shorthand_price.attr('required', true);
-        }else{
-            shorthand_price.attr('required', false);
-        }
-    }
+//    function get_shorthand_price(){
+//        let is_shorthand = $('#project_task_is_shorthand');
+//        let shorthand_price = $('#project_task_shorthand_price');
+//        if(is_shorthand.val() === 'true'){
+//            shorthand_price.attr('required', true);
+//        }else{
+//            shorthand_price.attr('required', false);
+//        }
+//    }
     function get_expert_rate(){
         let expert_level = $('#project_task_expert_level')[0];
         let expert_rate = $('#project_task_expert_rate')[0];

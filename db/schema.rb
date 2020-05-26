@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_11_080933) do
+ActiveRecord::Schema.define(version: 2020_05_26_111041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_080933) do
     t.jsonb "financial_info", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.decimal "shorthand_rate", precision: 10, scale: 2
     t.index ["company_id"], name: "index_contracts_on_company_id"
   end
 

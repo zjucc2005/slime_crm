@@ -181,6 +181,7 @@ zh_cn:
         is_taxed: "含税"
         tax_rate: "税率"
         is_invoice_needed: "开票"
+        shorthand_rate: "速记费率"
         financial_info:
           name_cn: "联系人姓名(中文)"
           name_en: "联系人姓名(英文)"

@@ -152,6 +152,7 @@ en:
         is_taxed: "Is taxed"
         tax_rate: "Tax rate"
         is_invoice_needed: "Invoice needed"
+        shorthand_rate: "Shorthand rate"
         financial_info:
           name_cn: "Contact name(CN)"
           name_en: "Contact name(EN)"

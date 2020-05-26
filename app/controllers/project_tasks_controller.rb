@@ -91,14 +91,16 @@ class ProjectTasksController < ApplicationController
     load_project_task
     contract    = @project_task.active_contract
     f           = params[:f] == 'true'
-    Rails.logger.info "f.class: #{f.class}"
+    is_shorthand = params[:is_shorthand] == 'true'
     base_price  = contract.base_price(params[:duration].to_i, f)
+    shorthand_price = is_shorthand ? contract.shorthand_price(params[:duration].to_i) : 0
     expert_rate = params[:expert_rate].to_d
     render :json => {
              :price    => base_price * expert_rate,
              :currency => ApplicationRecord::CURRENCY[contract.currency],
              :is_taxed => t(contract.is_taxed.to_s),
-             :tax_rate => contract.tax_rate
+             :tax_rate => contract.tax_rate,
+             :shorthand_price => shorthand_price
            }
   end
 
@@ -131,7 +133,7 @@ class ProjectTasksController < ApplicationController
 
   def project_task_params
     params.require(:project_task).permit(:interview_form, :started_at, :expert_level, :expert_rate, :duration, :charge_duration,
-                                         :actual_price, :is_shorthand, :shorthand_price, :is_recorded, :memo, :f_flag)
+                                         :actual_price, :is_shorthand, :is_recorded, :memo, :f_flag)
   end
 
 end

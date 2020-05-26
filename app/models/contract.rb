@@ -10,7 +10,8 @@ class Contract < ApplicationRecord
   belongs_to :company, :class_name => 'Company'
 
   # Validations
-  validates_presence_of :file, :started_at, :ended_at, :base_duration, :progressive_duration, :payment_way
+  validates_presence_of :file, :started_at, :ended_at, :charge_rate, :currency, :base_duration, :progressive_duration
+  validates_presence_of :payment_days, :type_of_payment_day, :payment_way
   validates_format_of :base_duration, :with => /\A\d+(,\d+)*\Z/, :error => :invalid_format, :message => :invalid_format
 
   mount_uploader :file, FileUploader
@@ -25,6 +26,11 @@ class Contract < ApplicationRecord
   # 参数 duration - 参与计费市场, f - follow up标识, 为true时按递进时长计算
   def base_price(duration=0, f=false)
     (priced_duration(duration, f) / 60.0 * charge_rate).round  # 整数
+  end
+
+  # 用于计算速记费用
+  def shorthand_price(duration=0)
+    (shorthand_rate * duration / 60.0).round
   end
 
   # 用于计价的时长, 实际时长根据合同的 base/progressive_duration 规则得出
@@ -57,6 +63,7 @@ class Contract < ApplicationRecord
     self.started_at ||= Time.now
     self.type_of_payment_day ||= 'natural'
     self.tax_rate ||= 0
+    self.shorthand_rate ||= 0
   end
 
 end
