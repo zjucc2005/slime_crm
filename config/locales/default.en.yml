@@ -104,7 +104,7 @@ en:
     expense_translation: "Translation Fee"
     expense_others: "Others Fee"
     finance_summary: "Finance Summary Chart"
-    finance_statistics_annual: "%{year} Finance Statistics"
+    finance_statistics_annual: "%{year} Finance Statistics - %{currency}"
     unscheduled_projects: "Unscheduled Projects"
     ongoing_tasks: "Ongoing Tasks"
     ranking: "Ranking"

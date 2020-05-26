@@ -6,8 +6,8 @@ class StatisticsController < ApplicationController
   # GET /statistics/current_month_count_infos.js
   def current_month_count_infos
     current_month = Time.now.beginning_of_month
-    project_task_query = ProjectTask.where(status: 'finished').where('started_at >= ?', current_month)
-    project_task_cost_query = ProjectTaskCost.joins(:project_task).where('project_tasks.status': 'finished').
+    project_task_query = ProjectTask.where(status: 'finished', currency: 'RMB').where('started_at >= ?', current_month)
+    project_task_cost_query = ProjectTaskCost.joins(:project_task).where('project_tasks.status': 'finished', 'project_task_costs.currency': 'RMB').
       where('project_tasks.started_at >= ?', current_month).where('project_task_costs.category': 'expert')
 
     total_experts              = Candidate.expert.where('created_at >= ?', current_month).count
@@ -79,9 +79,10 @@ class StatisticsController < ApplicationController
   # GET /statistics/finance_summary
   def finance_summary
     current_year = Time.now.year
-    @year_options = (2019..current_year).to_a.reverse            # year options
-    @year = params[:year] || current_year                        # statistical year
-    @x_axis = %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月]     # X axis
+    @year_options = (2019..current_year).to_a.reverse              # year options
+    @year = params[:year] || current_year                          # statistical year
+    @currency = params[:currency] || 'RMB'                         # currency
+    @x_axis = %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月]  # X axis
 
     # annual total infos
     o_time = Time.local @year  # original time
@@ -94,8 +95,8 @@ class StatisticsController < ApplicationController
     expense_others      = []
 
 
-    project_task_query = ProjectTask.where(status: 'finished')
-    project_task_cost_query = ProjectTaskCost.joins(:project_task).where('project_tasks.status': 'finished')
+    project_task_query = ProjectTask.where(status: 'finished', currency: @currency)
+    project_task_cost_query = ProjectTaskCost.joins(:project_task).where('project_tasks.status': 'finished', 'project_task_costs.currency': @currency)
 
     12.times do |i|
       s_time = o_time + i.month  # start time
