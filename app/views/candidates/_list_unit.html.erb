@@ -1,6 +1,6 @@
 <% @candidates.each do |candidate| %>
 
-<div class="card px-5 py-3 mb-2">
+<div id="cid_<%= candidate.id %>" class="card px-5 py-3 mb-2">
     <div class="row">
         <div class="col-lg-4 d-flex flex-column text-center text-md-left">
             <div class="d-flex flex-column flex-lg-row align-items-center mb-1">
@@ -69,7 +69,7 @@
                 </div>
             <% end %>
             <div class="text-smaller">
-                <%= link_to new_candidate_comment_path(candidate_id: candidate.id, return_to: request.url) do %>
+                <%= link_to new_candidate_comment_path(candidate_id: candidate.id, return_to: "#{request.url}#cid_#{candidate.id}") do %>
                     <%= t('action.add_model', model: mt(:candidate_comment)) %>
                 <% end if can?(:new, CandidateComment) %>
             </div>

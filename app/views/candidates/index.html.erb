@@ -35,3 +35,17 @@
     <%= button_tag('', :type => 'button', :class => 'float-bar-btn fa fa-map', :title => t(:add_to_project), :onclick => 'addExpertToProject();') if can?(:add_experts, Project) %>
     <%= button_tag '', :type => 'button', :class => 'float-bar-btn fa fa-angle-up', :onclick => 'window.scrollTo(0, 0);' %>
 </div>
+
+<script>
+    // 返回锚点
+    $(function() {
+        var _id_ = window.location.hash;
+        if(_id_.startsWith('#')){
+            var m = $(_id_);
+            if(m.offset()){
+                y = m.offset().top - 60;
+                $("html,body").animate({ scrollTop: y }, 500);
+            }
+        }
+    });
+</script>

@@ -41,7 +41,6 @@
                         <th><%= mt(:candidate, :id) %></th>
                         <th><%= mt(:candidate, :name) %></th>
                         <th><%= mt(:candidate, :phone) %></th>
-                        <!--<th><%= mt(:candidate, :email) %></th>-->
                         <th><%= mt(:candidate_experience, :company) %></th>
                         <th><%= mt(:candidate_experience, :title) %></th>
                         <th><%= mt(:candidate, :task_count) %></th>
@@ -61,7 +60,6 @@
                                     <%= link_to '查看联系方式', show_phone_candidate_path(expert), :remote => true %>
                                 <% end %>
                             </td>
-                            <!--<td><%= expert.email %></td>-->
                             <td><%= expert.latest_work_experience.try(:org_cn) %></td>
                             <td><%= expert.latest_work_experience.try(:title) %></td>
                             <td><%= @project.project_tasks.where(expert_id: expert.id, status: 'finished').count %></td>
@@ -97,6 +95,10 @@
                                     <%= t('action.add_model', model: mt(:candidate_comment)) %>
                                 <% end if can?(:new, CandidateComment) %>
                             </td>
+                        </tr>
+                        <tr>
+                            <td colspan="1"></td>
+                            <td colspan="9"><%= truncate(expert.description, length: 90) %>&nbsp;</td>
                         </tr>
                     <% end %>
                     </tbody>
