@@ -74,7 +74,7 @@ class CandidatesController < ApplicationController
         end
 
         flash[:success] = t(:operation_succeeded)
-        redirect_to edit_candidate_path(@candidate)
+        redirect_to candidate_path(@candidate)
       else
         flash.now[:error] = t(:operation_failed)
         render :new

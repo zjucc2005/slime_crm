@@ -69,7 +69,7 @@
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :cpt %><span class="text-red">*</span>
-        <%= f.number_field :cpt, :required => true, :min => 0, :step => 1, :class => 'form-control' %>
+        <%= f.number_field :cpt, :required => true, :min => 0, :step => 1, :value => @candidate.cpt || 0, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 form-group">
         <%= f.label :currency %><span class="text-red">*</span>
