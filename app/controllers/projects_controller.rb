@@ -140,7 +140,7 @@ class ProjectsController < ApplicationController
         end
         flash[:success] = t(:operation_succeeded)
         if params[:commit] == t('action.submit_and_continue_to_add')
-          redirect_to candidates_path
+          redirect_to candidates_path(from_source: 'project', project_id: @project.id)
         else
           redirect_to project_path(@project)
         end

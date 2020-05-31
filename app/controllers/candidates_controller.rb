@@ -27,7 +27,6 @@ class CandidatesController < ApplicationController
       and_conditions = []
       or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title candidate_experiences.description]
       @terms.each do |term|
-        # and_conditions << "(#{or_fields.map{|field| "#{field} ILIKE '%#{term}%'" }.join(' OR ') })"
         and_conditions << "(#{or_fields.map{|field| "#{field} ~* '#{term}'" }.join(' OR ')})"
       end
       query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
