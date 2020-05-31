@@ -19,9 +19,9 @@
                     <div class="btn-group btn-group-sm">
                         <%= render :partial => 'candidates/widgets/related_projects', :locals => { :candidate => @candidate } %>
                     </div>
-                    <%= link_to 'javascript:void(0);', :class => 'btn btn-default', :onclick => "addExpertToProject(#{@candidate.id});" do %>
-                        <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
-                    <% end if can?(:add_experts, Project) %>
+                    <div class="btn-group btn-group-sm">
+                        <%= render :partial => 'candidates/widgets/add_to_project_modal', :locals => { :uid => @candidate.id } %>
+                    </div>
                     <%= link_to comments_candidate_path(@candidate), :class => 'btn btn-default' do %>
                         <%= fa_icon_tag('commenting') %> <%= "#{mt(:candidate_comment)}(#{@candidate.comments.count})" %>
                     <% end if can?(:comments, Candidate) %>

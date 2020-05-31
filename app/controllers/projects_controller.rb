@@ -100,54 +100,101 @@ class ProjectsController < ApplicationController
 
   # GET/PUT /projects/add_users
   def add_users
-    if request.put?
-      begin
-        @project = Project.find(params[:project_id])
-        raise t(:not_authorized) unless @project.can_edit?
+    # if request.put?
+    #   begin
+    #     @project = Project.find(params[:project_id])
+    #     raise t(:not_authorized) unless @project.can_edit?
+    #
+    #     ActiveRecord::Base.transaction do
+    #       # add pm
+    #       pm_users = User.where(id: params[:uids], role: 'pm')
+    #       pa_users = User.where(id: params[:uids], role: 'pa')
+    #       pm_users.each do |user|
+    #         @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
+    #       end
+    #       # add pa
+    #       pa_users.each do |user|
+    #         @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
+    #       end
+    #     end
+    #     flash[:success] = t(:operation_succeeded)
+    #     redirect_to project_path(@project)
+    #   rescue Exception => e
+    #     flash[:error] = e.message
+    #     redirect_to projects_path
+    #   end
+    # end
 
-        ActiveRecord::Base.transaction do
-          # add pm
-          pm_users = User.where(id: params[:uids], role: 'pm')
-          pa_users = User.where(id: params[:uids], role: 'pa')
-          pm_users.each do |user|
-            @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
-          end
-          # add pa
-          pa_users.each do |user|
-            @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
-          end
+    begin
+      @project = Project.find(params[:project_id])
+      raise t(:not_authorized) unless @project.can_edit?
+
+      ActiveRecord::Base.transaction do
+        # add pm
+        pm_users = User.where(id: params[:uids], role: 'pm')
+        pa_users = User.where(id: params[:uids], role: 'pa')
+        pm_users.each do |user|
+          @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
         end
-        flash[:success] = t(:operation_succeeded)
-        redirect_to project_path(@project)
-      rescue Exception => e
-        flash[:error] = e.message
-        redirect_to projects_path
+        # add pa
+        pa_users.each do |user|
+          @project.project_users.find_or_create_by!(category: user.role, user_id: user.id)
+        end
       end
+      flash[:success] = t(:operation_succeeded)
+      redirect_to project_path(@project)
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to projects_path
     end
   end
 
-  # GET/PUT /projects/add_experts
+  # GET/PUT /projects/add_experts.js
   def add_experts
-    if request.put?
-      begin
-        @project = Project.find(params[:project_id])
-        raise t(:not_authorized) unless @project.can_edit?
+    # if request.put?
+    #   begin
+    #     @project = Project.find(params[:project_id])
+    #     raise t(:not_authorized) unless @project.can_edit?
+    #
+    #     ActiveRecord::Base.transaction do
+    #       (params[:uids] || []).each do |candidate_id|
+    #         @project.project_candidates.expert.find_or_create_by!(candidate_id: candidate_id)
+    #       end
+    #     end
+    #     flash[:success] = t(:operation_succeeded)
+    #     if params[:commit] == t('action.submit_and_continue_to_add')
+    #       redirect_to candidates_path(from_source: 'project', project_id: @project.id)
+    #     else
+    #       redirect_to project_path(@project)
+    #     end
+    #   rescue Exception => e
+    #     flash[:error] = e.message
+    #     redirect_to projects_path
+    #   end
+    # end
 
-        ActiveRecord::Base.transaction do
-          (params[:uids] || []).each do |candidate_id|
-            @project.project_candidates.expert.find_or_create_by!(candidate_id: candidate_id)
-          end
+    begin
+      @project = Project.find(params[:project_id])
+      raise t(:not_authorized) unless @project.can_edit?
+
+      ActiveRecord::Base.transaction do
+        (params[:uids] || []).each do |candidate_id|
+          @project.project_candidates.expert.find_or_create_by!(candidate_id: candidate_id)
         end
-        flash[:success] = t(:operation_succeeded)
-        if params[:commit] == t('action.submit_and_continue_to_add')
-          redirect_to candidates_path(from_source: 'project', project_id: @project.id)
-        else
-          redirect_to project_path(@project)
-        end
-      rescue Exception => e
-        flash[:error] = e.message
-        redirect_to projects_path
       end
+      @notice = t(:operation_succeeded)
+
+      if params[:mode] == '0'
+        flash[:success] = t(:operation_succeeded)
+        redirect_to project_path(@project)
+      end
+    rescue Exception => e
+      @notice = e.message
+    end
+
+    respond_to do |f|
+      f.js
+      f.html
     end
   end
 

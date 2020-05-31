@@ -3,9 +3,7 @@
         <%= link_to new_user_path, :class => 'btn btn-primary' do %>
             <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:user)) %>
         <% end if can? :new, User %>
-        <%= link_to '', :class => 'btn btn-default', :onclick => 'addUserToProject();' do %>
-            <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
-        <% end %>
+        <%= render :partial => 'users/widgets/add_to_project_modal' %>
     </div>
     <%= render :partial => 'users/widgets/search_modal' %>
 </div>

@@ -1,35 +1,68 @@
-window.addUserToProject = function(uid){
-    if(uid){
-        window.location.href = '/projects/add_users?uids[]=' + uid;
+// mode: 0 - redirect, 1 - stay
+window.addUserToProject = function(mode, uid){
+    //if(uid){
+    //    window.location.href = '/projects/add_users?uids[]=' + uid;
+    //}else{
+    //    var uids = $("input[name='uids[]']:checked");
+    //    if(uids.length === 0){
+    //        alert('请至少选择一位用户');
+    //    }else{
+    //        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+    //        var project_id = $('#project_id').val();
+    //        if(project_id){
+    //            params = params + '&project_id=' + project_id;
+    //        }
+    //        window.location.href = '/projects/add_users?' + params;
+    //    }
+    //}
+    mode = mode || 0;
+    var uids = uid ? [uid] : $("input[name='uids[]']:checked").map(function(){ return this.value }).get();
+    var project_id = $('#project_id').val();
+    if(uids.length === 0){
+        alert('请至少选择一位用户');
+    }else if(project_id === undefined || project_id === ''){
+        alert('请选择一个项目');
     }else{
-        var uids = $("input[name='uids[]']:checked");
-        if(uids.length === 0){
-            alert('请至少选择一位用户');
-        }else{
-            var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
-            var project_id = $('#project_id').val();
-            if(project_id){
-                params = params + '&project_id=' + project_id;
-            }
-            window.location.href = '/projects/add_users?' + params;
-        }
+        var params = uids.map(function(uid){ return 'uids[]=' + uid }).join('&');
+        params = params + '&project_id=' + project_id;
+        params = params + '&mode=' + mode;
+        window.location.href = '/projects/add_users?' + params;
     }
 };
 
-window.addExpertToProject = function(uid){
-    if(uid){
-        window.location.href = '/projects/add_experts?uids[]=' + uid;
+// mode: 0 - redirect, 1 - stay
+window.addExpertToProject = function(mode, uid){
+    //if(uid){
+    //    window.location.href = '/projects/add_experts?uids[]=' + uid;
+    //}else{
+    //    var uids = $("input[name='uids[]']:checked");
+    //    if(uids.length === 0){
+    //        alert('请至少选择一位专家');
+    //    }else{
+    //        var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
+    //        var project_id = $('#project_id').val();
+    //        if(project_id){
+    //            params = params + '&project_id=' + project_id;
+    //        }
+    //        window.location.href = '/projects/add_experts?' + params;
+    //    }
+    //}
+
+    mode = mode || 0;
+    var uids = uid ? [uid] : $("input[name='uids[]']:checked").map(function(){ return this.value }).get();
+    var project_id = $('#project_id').val();
+    if(uids.length === 0){
+        alert('请至少选择一位专家');
+    }else if(project_id === undefined || project_id === ''){
+        alert('请选择一个项目');
     }else{
-        var uids = $("input[name='uids[]']:checked");
-        if(uids.length === 0){
-            alert('请至少选择一位专家');
-        }else{
-            var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
-            var project_id = $('#project_id').val();
-            if(project_id){
-                params = params + '&project_id=' + project_id;
-            }
+        var params = uids.map(function(uid){ return 'uids[]=' + uid }).join('&');
+        params = params + '&project_id=' + project_id;
+        params = params + '&mode=' + mode;
+        if(mode === 0){
             window.location.href = '/projects/add_experts?' + params;
+        }else{
+            $.get('/projects/add_experts.js?' + params);
         }
     }
 };
