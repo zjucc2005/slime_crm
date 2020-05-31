@@ -1,6 +1,6 @@
 <%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#addToProjectModal'} do %>
     <%= fa_icon_tag('map') %> <%= t(:add_to_project) %>
-<% end %>
+<% end if can?(:add_experts, Project) %>
 
 <div id="addToProjectModal" class="modal fade">
     <div class="modal-dialog">
