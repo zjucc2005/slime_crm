@@ -67,9 +67,11 @@ class CandidatesController < ApplicationController
       if @candidate.valid?
         ActiveRecord::Base.transaction do
           @candidate.save!
-
           (params[:work_exp] || {}).each do |key, val|
             @candidate.experiences.work.create!(val.permit(experience_fields))
+          end
+          unless @candidate.validates_presence_of_experiences
+            raise t(:operation_failed)
           end
         end
 
@@ -110,6 +112,9 @@ class CandidatesController < ApplicationController
         work_exp.each do |key, val|
           @candidate.experiences.work.create!(val.permit(experience_fields))   # create new experiences
         end
+        unless @candidate.validates_presence_of_experiences
+          raise t(:operation_failed)
+        end
       end
 
       if @candidate.update(candidate_params)                                   # update candidate
@@ -120,7 +125,7 @@ class CandidatesController < ApplicationController
       end
     rescue Exception => e
       flash[:error] = e.message
-      redirect_to candidates_path
+      render :edit
     end
   end
 

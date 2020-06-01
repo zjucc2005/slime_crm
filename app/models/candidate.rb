@@ -51,6 +51,16 @@ class Candidate < ApplicationRecord
     define_method(:"#{k}="){ |v| self.property[k] = v }
   end
 
+  def validates_presence_of_experiences
+    return true unless self.category == 'expert'
+    if self.experiences.work.count == 0
+      errors.add(:work_experiences, :blank)
+      false
+    else
+      true
+    end
+  end
+
   # English name form - Mr./Miss sb.
   def mr_name
     _mr_   = gender == 'female' ? 'Miss' : 'Mr.'
@@ -64,6 +74,10 @@ class Candidate < ApplicationRecord
   # uid + name
   def uid_name
     "#{uid} #{name}"
+  end
+
+  def work_experiences
+    experiences.work  # 定义属性
   end
 
   def latest_work_experience
@@ -121,7 +135,7 @@ class Candidate < ApplicationRecord
   end
 
   def validates_uniqueness_of_phone
-    return true if self.category == 'client'  # 只验证专家
+    return true unless self.category == 'expert'  # 只验证专家
     query = self.class.expert.where.not(id: self.id)
     if phone.present?
       errors.add(:phone, :taken) if query.exists?(phone: phone) || query.exists?(phone1: phone)

@@ -93,6 +93,7 @@ en:
         interview_task: "Interview task"
         wechat: "Wechat"
         task_count: "Task count"
+        work_experiences: "Work experience"
 
       candidate_experience:
         category: "Category"

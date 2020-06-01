@@ -122,6 +122,7 @@ zh_cn:
         interview_task: "访谈任务"
         wechat: "微信"
         task_count: "任务次数"
+        work_experiences: "工作经历"
 
       candidate_experience:
         category: "类型"
