@@ -38,6 +38,7 @@ class ProjectTask < ApplicationRecord
     ActiveRecord::Base.transaction do
       contract = active_contract
       self.status = 'finished'
+      self.actual_price ||= base_price                                                      # 实际收费
       self.charge_status = contract.payment_way == 'advance_payment' ? 'paid' : 'unbilled'  # 预付合同直接已收费
       self.save!
 
@@ -100,10 +101,9 @@ class ProjectTask < ApplicationRecord
       self.ended_at       = started_at + duration.to_i * 60                                            # 结束时间 = 开始时间 + 时长
       self.charge_rate    = contract.charge_rate                                                       # 收费倍率
       self.base_price     = contract.base_price(charge_duration.to_i, self.f_flag) * expert_rate.to_d  # 基础收费(根据收费时长)
-      self.actual_price ||= base_price                                                                 # 实际收费
       self.currency       = contract.currency                                                          # 货币
       self.is_taxed       = contract.is_taxed                                                          # 是否含税
-      self.tax            = is_taxed ? 0 : actual_price * contract.tax_rate                            # 税费 = 实际收费 * 税率
+      self.tax            = is_taxed ? 0 : actual_price.to_f * contract.tax_rate                       # 税费 = 实际收费 * 税率
       self.shorthand_price = is_shorthand ? contract.shorthand_price(charge_duration.to_i) : 0         # 速记费用
     end
     self.total_price     = actual_price.to_f + tax.to_f + shorthand_price.to_f                         # 总费用
