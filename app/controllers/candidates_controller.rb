@@ -112,17 +112,14 @@ class CandidatesController < ApplicationController
         work_exp.each do |key, val|
           @candidate.experiences.work.create!(val.permit(experience_fields))   # create new experiences
         end
+        @candidate.update!(candidate_params)                                   # update candidate
         unless @candidate.validates_presence_of_experiences
           raise t(:operation_failed)
         end
       end
 
-      if @candidate.update(candidate_params)                                   # update candidate
-        flash[:success] = t(:operation_succeeded)
-        redirect_to candidate_path(@candidate)
-      else
-        render :edit
-      end
+      flash[:success] = t(:operation_succeeded)
+      redirect_to candidate_path(@candidate)
     rescue Exception => e
       flash[:error] = e.message
       render :edit
