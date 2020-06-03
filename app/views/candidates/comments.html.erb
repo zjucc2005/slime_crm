@@ -14,7 +14,7 @@
                 <div class="btn-group btn-group-sm">
                     <%= link_to new_candidate_comment_path(candidate_id: @candidate.id), :class => 'btn btn-primary' do %>
                         <%= fa_icon_tag('plus') %> <%= t('action.add_model', :model => mt(:candidate_comment)) %>
-                    <% end %>
+                    <% end if can?(:new, CandidateComment) %>
                 </div>
             </div>
         </div>
@@ -24,9 +24,11 @@
                 <div class="candidate-comment-unit">
                     <span class="badge badge-light"><%= show_creator(comment) %></span>
                     <span class="badge badge-light"><%= show_timestamps(comment) %></span>
-                    <%= link_to t('action.edit'), edit_candidate_comment_path(comment), :class => 'btn btn-link btn-xs' %>
-                    <%= link_to t('action.delete'), candidate_comment_path(comment), :method => :delete, :class => 'btn btn-link btn-xs',
-                                :data => { :confirm => t(:sure_to_delete)} %>
+                    <% if can?(:edit, CandidateComment) %>
+                        <%= link_to t('action.edit'), edit_candidate_comment_path(comment), :class => 'btn btn-link btn-xs' %>
+                        <%= link_to t('action.delete'), candidate_comment_path(comment), :method => :delete, :class => 'btn btn-link btn-xs',
+                                    :data => { :confirm => t(:sure_to_delete)} %>
+                    <% end %>
                     <p class="content">
                         <%= content_tag(:i, nil, :class => 'fa fa-flag text-red') if comment.is_top? %>
                         <%= comment.content %>

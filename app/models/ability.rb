@@ -104,7 +104,7 @@ class Ability
 
   def finance_ability
     can_edit_my_account
-    can [:read, :gen_card, :project_tasks, :payment_infos], Candidate
+    can [:read, :gen_card, :project_tasks, :comments, :payment_infos], Candidate
     can :manage, Company
     can :manage, Contract
     can :manage, Finance
