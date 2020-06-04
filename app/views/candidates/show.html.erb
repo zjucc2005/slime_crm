@@ -32,13 +32,16 @@
                         <%= render :partial => 'candidates/widgets/add_to_project_modal', :locals => { :uid => @candidate.id } %>
                     </div>
                     <%= link_to comments_candidate_path(@candidate), :class => 'btn btn-default' do %>
-                        <%= fa_icon_tag('commenting') %> <%= "#{mt(:candidate_comment)}(#{@candidate.comments.count})" %>
+                        <%= fa_icon_tag('commenting') %> <%= "#{mt(:candidate_comment)}" %>
+                        <%= content_tag :span, @candidate.comments.count, :class => 'badge badge-success' if @candidate.comments.count > 0 %>
                     <% end if can?(:comments, Candidate) %>
                     <%= link_to project_tasks_candidate_path(@candidate), :class => 'btn btn-default' do %>
-                        <%= fa_icon_tag('list') %> <%= "#{mt(:candidate, :interview_task)}(#{@candidate.normal_project_task_count})" %>
+                        <%= fa_icon_tag('list') %> <%= "#{mt(:candidate, :interview_task)}" %>
+                        <%= content_tag :span, @candidate.normal_project_task_count, :class => 'badge badge-success' if @candidate.normal_project_task_count > 0 %>
                     <% end if can?(:project_tasks, Candidate) %>
                     <%= link_to payment_infos_candidate_path(@candidate), :class => 'btn btn-default' do %>
-                        <%= fa_icon_tag('user-circle') %> <%= "#{mt(:candidate_payment_info)}(#{@candidate.payment_infos.count})" %>
+                        <%= fa_icon_tag('user-circle') %> <%= "#{mt(:candidate_payment_info)}" %>
+                        <%= content_tag :span, @candidate.payment_infos.count, :class => 'badge badge-success' if @candidate.payment_infos.count > 0 %>
                     <% end if can?(:payment_infos, Candidate) %>
                     <%= link_to edit_candidate_path(@candidate), :class => 'btn btn-dark' do %>
                         <%= fa_icon_tag('edit') %> <%= t('action.edit_model', :model => mt(:expert)) %>
