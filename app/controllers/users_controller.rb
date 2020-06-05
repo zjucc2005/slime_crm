@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    query = User.all
+    query = User.where(role: %w[admin pm pa finance])
     query = query.where('created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     query = query.where('email LIKE ?', "%#{params[:email].strip}%") if params[:email].present?

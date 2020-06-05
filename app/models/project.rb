@@ -87,14 +87,14 @@ class Project < ApplicationRecord
 
   def can_delete_user?(user, operator)
     if self.created_by == user.id
-      operator.is_role?('admin')        # 创建者PM只能被ADMIN移除
+      operator.admin?                   # 创建者PM只能被ADMIN移除
     else
       operator.is_role?('admin', 'pm')  # PM/PA可以被ADMIN/PM移除
     end
   end
 
   def can_be_operated_by(user)
-    if user.is_role?('admin')
+    if user.admin?
       true
     else
       self.project_users.where(user_id: user.id).count > 0

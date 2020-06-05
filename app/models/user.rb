@@ -33,7 +33,7 @@ class User < ApplicationRecord
   STATUS = { :active => '激活', :inactive => '未激活' }.stringify_keys
 
   def admin?
-    role == 'admin'
+    %w[su admin].include? role
   end
 
   def is_role?(*args)

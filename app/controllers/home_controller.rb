@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user.is_role?('admin', 'finance')
+    if current_user.is_role?('su', 'admin', 'finance')
       load_dashboard_of_admin
     elsif current_user.is_role?('pm', 'pa')
       load_dashboard_of_pm
