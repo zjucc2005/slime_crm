@@ -134,7 +134,7 @@ module Utils
             break
           end
           res['list'].sort_by{|gd| gd['id']}.each do |g_data|
-            self.new(g_data).save  # rescue nil
+            self.new(g_data).save rescue nil
           end if res['list'].present?
           puts "#{Time.now} -- imported gllue_id range: #{_range_}"
         end
