@@ -154,7 +154,6 @@ module Utils
         gql << "id__gte=#{options[:id_ge]}" if options[:id_ge]
         gql << "id__lte=#{options[:id_le]}" if options[:id_le]
         gql << "#{options[:id_in].map{|id| "id=#{id}" }.join('|')}" if options[:id_in]
-        # gql = "id__gte=#{options[:id_ge]}&id__lte=#{options[:id_le]}"
 
         params << "private_token=#{private_token}"
         params << "page=#{options[:page]}"
