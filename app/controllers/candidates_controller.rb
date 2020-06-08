@@ -237,36 +237,21 @@ class CandidatesController < ApplicationController
     begin
       sheet = open_spreadsheet(params[:file])
 
-      # render :json => sheet.to_json and return
-
-      ActiveRecord::Base.transaction do
-        2.upto(sheet.last_row) do |i|
-          row = sheet.row(i)
-          name        = row[1].to_s.strip
-          next if name.blank?
-          description = row[2].to_s.strip
-          emails      = row[3].to_s.split
-          phones      = row[4].to_s.split
-          cpt         = row[5].to_s.match(/\d+/).to_s.to_i
-          currency    = row[5].to_s.match(/(RMB|USD)/).to_s
-          first_name, last_name = Candidate.name_split(name)
-          Candidate.expert.create!(
-              created_by: current_user.id,
-              data_source: 'excel',
-              first_name: first_name,
-              last_name: last_name,
-              phone: phones[0],
-              phone1: phones[1],
-              email: emails[0],
-              email1: emails[1],
-              description: description,
-              cpt: cpt,
-              currency: currency.present? ? currency : 'RMB',
-              is_available: true
-          )
+      succ_count = 0
+      fail_count = 0
+      2.upto(sheet.last_row) do |i|
+        parser = Utils::ExpertTemplateParser.new(sheet.row(i))
+        if parser.valid?
+          if parser.import
+            succ_count += 1
+          else
+            fail_count += 1
+          end
+        else
+          fail_count += 1
         end
       end
-      flash[:notice] = t(:operation_succeeded)
+      flash[:notice] = "导入excel结束, 成功 #{succ_count} 条, 失败 #{fail_count} 条"
       redirect_to candidates_path
     rescue Exception => e
       flash[:error] = e.message

@@ -22,7 +22,7 @@ module Utils
       1..159783,
       280604..403784,
       404752..413667,
-      628894..999999
+      628894..9999999
     ]
 
     def initialize(g_data={})
@@ -59,7 +59,16 @@ module Utils
                            else nil
                          end
         else
-          is_available = false
+          is_available = nil  # 数据结构不符的, 默认为 待定
+        end
+
+        email_arr = []
+        %w[email email1 email2].each do |field|
+          email_arr << @g_data[field] if @g_data[field].present?
+        end
+        phone_arr = []
+        %w[mobile mobile1 mobile2].each do |field|
+          phone_arr << @g_data[field] if @g_data[field].present?
         end
 
         candidate = Candidate.expert.create!(
@@ -67,10 +76,10 @@ module Utils
           first_name:    first_name,
           last_name:     last_name,
           nickname:      @g_data['englishName'],
-          email:         @g_data['email'],
-          email1:        @g_data['email1'],
-          phone:         @g_data['mobile'],
-          phone1:        @g_data['mobile1'],
+          email:         email_arr[0],
+          email1:        email_arr[1],
+          phone:         phone_arr[0],
+          phone1:        phone_arr[1],
           date_of_birth: @g_data['dateOfBirth'],
           gender:        gender,
           description:   @g_data['gllueextbkdetail'],
