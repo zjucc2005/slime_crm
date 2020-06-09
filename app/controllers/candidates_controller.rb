@@ -234,28 +234,26 @@ class CandidatesController < ApplicationController
 
   # POST /candidates/import_expert
   def import_expert
-    begin
-      sheet = open_spreadsheet(params[:file])
-
-      succ_count = 0
-      fail_count = 0
-      2.upto(sheet.last_row) do |i|
-        parser = Utils::ExpertTemplateParser.new(sheet.row(i))
-        if parser.valid?
-          if parser.import
-            succ_count += 1
-          else
-            fail_count += 1
-          end
-        else
-          fail_count += 1
+    @errors = []
+    if request.post?
+      begin
+        sheet = open_spreadsheet(params[:file])
+        @errors << 'excel表格里没有信息' if sheet.last_row < 2
+        @errors << 'excel不能超过10000行' if sheet.last_row > 10000
+        2.upto(sheet.last_row) do |i|
+          parser = Utils::ExpertTemplateParser.new(sheet.row(i), current_user.id)
+          @errors << "Row #{i}: #{parser.errors.join(', ')}" unless parser.import
         end
+      rescue Exception => e
+        @errors << e.message
       end
-      flash[:notice] = "导入excel结束, 成功 #{succ_count} 条, 失败 #{fail_count} 条"
-      redirect_to candidates_path
-    rescue Exception => e
-      flash[:error] = e.message
-      redirect_to candidates_path
+
+      if @errors.blank?
+        flash[:notice] = t(:operation_succeeded)
+        redirect_to candidates_path
+      else
+        render :import_expert
+      end
     end
   end
 

@@ -3,11 +3,12 @@ module Utils
   class ExpertTemplateParser
     # 解析专家导入模板
 
-    attr_accessor :errors, :row, :candidate_attr, :work_exp_attrs
+    attr_accessor :errors, :row, :created_by, :candidate_attr, :work_exp_attrs
 
-    def initialize(row)
+    def initialize(row, created_by=nil)
       @row = row.map(&method(:cell_strip))
       @errors = []
+      @created_by = created_by
       @candidate_attr = {}
       @work_exp_attrs = []
       set_candidate_attr
@@ -64,14 +65,18 @@ module Utils
 
       # validates_presence_of - name, phone, city, industry, email
       @errors << '姓名不能为空' if name.blank?
-      @errors << '电话不能为空' if phone.blank?
+      if phone.blank?
+        @errors << '电话不能为空'
+      elsif Candidate.expert.exists?(phone: phone) || Candidate.expert.exists?(phone1: phone)
+        @errors << '电话已被使用'
+      end
       @errors << '城市不能为空' if city.blank?
       @errors << '行业不能为空' if industry.blank?
       @errors << '邮箱不能为空' if email.blank?
 
       first_name, last_name = Candidate.name_split(name)
       @candidate_attr = {
-        data_source: 'excel', first_name: first_name, last_name: last_name,
+        data_source: 'excel', created_by: @created_by, first_name: first_name, last_name: last_name,
         nickname: nickname, gender: gender, date_of_birth: date_of_birth, phone: phone,
         phone1: phone1, city: city, industry: industry, email: email, email1: email1,
         wechat: wechat, is_available: is_available, cpt: cpt, currency: currency, description: description

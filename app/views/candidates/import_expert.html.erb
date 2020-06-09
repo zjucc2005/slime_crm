@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('user-circle') %> <%= t(:import_expert) %></h5>
+        <%= link_to fa_icon_tag('close'), candidates_path, :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-sm table-striped border nowrap card-text">
+                <thead>
+                <tr>
+                    <th><%= t(:error_message) %></th>
+                </tr>
+                </thead>
+                <tbody>
+                    <% @errors.each do |err| %>
+                    <tr>
+                        <td><%= err %></td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

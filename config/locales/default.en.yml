@@ -15,6 +15,7 @@ en:
   company_not_signed: "Not signed"
   contract_expired: "Contract expired"
   end: "End"
+  error_message: "Error message"
   expert_card: "Expert card"
   expert_description: "Expert description"
   expert_id: "Expert ID"

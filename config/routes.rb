@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get :edit_client,    on: :member
     put :update_client,  on: :member
 
+    get :import_expert,  on: :collection  # show importing result
     post :import_expert, on: :collection  # import experts with excel
 
     get :payment_infos,        on: :member

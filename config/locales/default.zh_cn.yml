@@ -15,6 +15,7 @@ zh_cn:
   company_not_signed: "未签约"
   contract_expired: "合同已过期"
   end: "结束"
+  error_message: "错误信息"
   expert_card: "专家卡片"
   expert_description: "专家说明"
   expert_id: "专家ID"
