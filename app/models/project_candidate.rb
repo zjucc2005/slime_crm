@@ -23,6 +23,14 @@ class ProjectCandidate < ApplicationRecord
   scope :expert, -> { where(category: 'expert') }
   scope :client, -> { where(category: 'client') }
 
+  after_save do
+    project.last_update
+  end
+
+  after_destroy do
+    project.last_update
+  end
+
   private
   def setup
     self.category ||= 'client'

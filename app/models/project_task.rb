@@ -31,6 +31,10 @@ class ProjectTask < ApplicationRecord
 
   before_validation :setup, :on => [:create, :update]
   after_update :sync_payment_status
+
+  after_save do
+    project.last_update
+  end
   # Scopes
   scope :interview, -> { where( category: 'interview') }
 

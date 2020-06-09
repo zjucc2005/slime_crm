@@ -13,6 +13,14 @@ class ProjectUser < ApplicationRecord
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys
 
+  after_save do
+    project.last_update
+  end
+
+  after_destroy do
+    project.last_update
+  end
+
   # Scopes
   scope :pm, -> { where(category: 'pm') }
   scope :pa, -> { where(category: 'pa') }

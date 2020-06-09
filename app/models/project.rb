@@ -139,6 +139,15 @@ class Project < ApplicationRecord
     "#{company.name_abbr} - #{code} - #{name}"
   end
 
+  def last_update
+    if self.update(updated_at: Time.now)
+
+    else
+      Rails.logger.info "CC TEST: #{self.errors.full_messages}"
+      raise
+    end
+  end
+
   private
   def setup
     self.status ||= 'initialized'

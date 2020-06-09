@@ -19,6 +19,10 @@ class ProjectRequirement < ApplicationRecord
 
   before_validation :setup, :on => :create
 
+  after_save do
+    project.last_update
+  end
+
   def can_edit?
     status == 'ongoing'
   end

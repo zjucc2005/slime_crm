@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
       query = query.joins(:company).where('companies.name ILIKE :company OR companies.name_abbr ILIKE :company', { company: "%#{params[:company].strip}%" })
     end
 
-    @projects = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    @projects = query.order(:updated_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /projects/new
@@ -236,11 +236,11 @@ class ProjectsController < ApplicationController
       if request.put?
         raise t(:not_authorized) unless @project.can_add_task?
 
-        @project_task = @project.project_tasks.new(project_task_params.merge(created_by: current_user.id))
+        # @project_task = @project.project_tasks.new(project_task_params.merge(created_by: current_user.id))
+        @project_task = ProjectTask.new(project_task_params.merge(project_id: @project.id, created_by: current_user.id))
         if @project_task.save
           flash[:success] = t(:operation_succeeded)
           redirect_with_return_to(project_path(@project))
-          # redirect_to project_path(@project)
         else
           render :add_project_task
         end
@@ -260,7 +260,8 @@ class ProjectsController < ApplicationController
       if request.put?
         raise t(:not_authorized) unless @project.can_add_requirement?
 
-        @project_requirement = @project.project_requirements.new(project_requirement_params.merge(created_by: current_user.id))
+        # @project_requirement = @project.project_requirements.new(project_requirement_params.to_h.merge(created_by: current_user.id))
+        @project_requirement = ProjectRequirement.new(project_requirement_params.merge(project_id: @project.id, created_by: current_user.id))
         if @project_requirement.save
           flash[:success] = t(:operation_succeeded)
           redirect_to project_path(@project)
