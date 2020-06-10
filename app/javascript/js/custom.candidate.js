@@ -43,6 +43,28 @@ window.expertTemplate = function(project_id){
     }
 };
 
+window.showPhoneLocation = function(obj_id){
+    var obj = $('#' + obj_id);
+    if(obj.val()){
+        $.ajax({
+            url: '/location_data/show_phone_location?',
+            type: 'get',
+            data: { phone: obj.val() },
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                if(data.status === '0'){
+                    $('#' + obj_id + '_location').text([data.city, data.type].join(', '));
+                    var city = $('#candidate_city');
+                    if(!city.val()){
+                        city.val(data.city);
+                    }
+                }
+            }
+        })
+    }
+};
+
 window.clipboard = function(element){
     selectText(element);
     document.execCommand('copy');
