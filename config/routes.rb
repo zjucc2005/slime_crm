@@ -123,4 +123,9 @@ Rails.application.routes.draw do
 
     get :finance_summary,            on: :collection
   end
+
+  resources :extras do
+    get :import_gllue_candidates,  on: :collection
+    post :import_gllue_candidates, on: :collection
+  end
 end

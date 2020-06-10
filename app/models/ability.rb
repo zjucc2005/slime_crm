@@ -63,6 +63,7 @@ class Ability
     can :manage, Bank
     can :manage, Industry
     can :manage, CardTemplate
+    can :manage, Extra
     # can :manage, Statistic
   end
 

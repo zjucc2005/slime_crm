@@ -140,12 +140,7 @@ class Project < ApplicationRecord
   end
 
   def last_update
-    if self.update(updated_at: Time.now)
-
-    else
-      Rails.logger.info "CC TEST: #{self.errors.full_messages}"
-      raise
-    end
+    self.update(updated_at: Time.now)
   end
 
   private

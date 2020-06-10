@@ -1,0 +1,24 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('wrench') %> <%= t(:import_gllue_candidates) %></h5>
+    </div>
+    <div class="card-body">
+        <%= form_tag import_gllue_candidates_extras_path, :method => :post do %>
+            <div class="form-group">
+                <%= label_tag :gid, t(:import_gllue_id) %>(单次导入最多100条)
+                <div class="form-group-range">
+                    <div class="form-group-range-input">
+                        <%= number_field_tag :gid_ge, params[:gid_ge], :min => 1, :required => true, :class => 'form-control', :placeholder => t(:begin) %>
+                    </div>
+                    <span class="form-group-range-divider"><i class="fa fa-arrow-right"></i></span>
+                    <div class="form-group-range-input">
+                        <%= number_field_tag :gid_le, params[:gid_le], :min => 1, :required => true, :class => 'form-control', :placeholder => t(:end) %>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-0">
+                <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+            </div>
+        <% end %>
+    </div>
+</div>
