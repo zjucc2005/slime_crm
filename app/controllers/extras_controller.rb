@@ -4,6 +4,8 @@ class ExtrasController < ApplicationController
   before_action :authenticate_user!
 
   def import_gllue_candidates
+    @max_gid = Candidate.maximum("CAST(property->>'gllue_id' AS INTEGER)") || 0
+
     if request.post?
       begin
         gid_ge = Integer params[:gid_ge]

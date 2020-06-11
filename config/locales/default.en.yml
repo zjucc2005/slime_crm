@@ -29,6 +29,7 @@ en:
   import_expert: "Import experts"
   import_gllue_candidates: "Import Gllue candidates"
   import_gllue_id: "Import Gllue ID"
+  imported_max_gllue_id: "Imported Max Gllue ID"
   inconsistent_password: "Two passwords must be consistent"
   invalid_current_password: "Invalid current password"
   invalid_file_format: "Invalid file format"

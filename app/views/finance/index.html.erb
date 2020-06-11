@@ -8,8 +8,8 @@
 </div>
 
 <% if @project_tasks.any? %>
-    <div class="card p-2 table-responsive">
-        <table class="table table-sm table-striped nowrap border-bottom card-text">
+    <div class="card p-2 mb-2 table-responsive">
+        <table class="table table-sm table-striped nowrap card-text">
             <thead>
             <tr>
                 <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
@@ -62,8 +62,8 @@
             <% end %>
             </tbody>
         </table>
-        <%= will_paginate @project_tasks %>
     </div>
+    <%= will_paginate @project_tasks %>
 <% else %>
     <div class="card p-2">
         <div class="p-4 text-center">

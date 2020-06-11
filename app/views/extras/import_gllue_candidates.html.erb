@@ -3,6 +3,13 @@
         <h5><%= fa_icon_tag('wrench') %> <%= t(:import_gllue_candidates) %></h5>
     </div>
     <div class="card-body">
+        <div class="row">
+            <div class="col-lg-6 col-12 form-group">
+                <%= label_tag :imported_max_gllue_id, t(:imported_max_gllue_id) %>
+                <%= text_field_tag :max_gid, @max_gid, :disabled => true, :class => 'form-control' %>
+            </div>
+        </div>
+
         <%= form_tag import_gllue_candidates_extras_path, :method => :post do %>
             <div class="form-group">
                 <%= label_tag :gid, t(:import_gllue_id) %>(单次导入最多100条)
