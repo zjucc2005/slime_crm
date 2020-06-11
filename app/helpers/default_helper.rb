@@ -59,9 +59,9 @@ module DefaultHelper
     end
   end
 
-  def content_raw(content)
-    content.to_s.gsub(/(\r\n)|\n/, '<br>').html_safe
-  end
+  # def content_raw(content)
+  #   content.to_s.gsub(/(\r\n)|\n/, '<br>').html_safe
+  # end
 
   def return_to(default_path)
     if params[:return_to].present?
