@@ -87,6 +87,10 @@
         <%= f.label :currency %><span class="text-red">*</span>
         <%= f.select :currency, currency_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :cpt_face_to_face %>
+        <%= f.number_field :cpt_face_to_face, :min => 0, :step => 1, :class => 'form-control' %>
+    </div>
     <div class="col-12 form-group">
         <%= f.label :description %>
         <%= f.text_area :description, :class => 'form-control', :rows => 4 %>

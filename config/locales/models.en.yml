@@ -81,7 +81,7 @@ en:
         gender: "Gender"
         description: "Description"
         is_available: "Available"
-        cpt: "Cost per time"
+        cpt: "CPT"
         currency: "Currency"
         bank: "Bank name"
         bank_card: "Bank card no."
@@ -92,6 +92,7 @@ en:
         seat: "Client seat"
         interview_task: "Interview task"
         wechat: "Wechat"
+        cpt_face_to_face: "Face-to-face CPT"
         task_count: "Task count"
         work_experiences: "Work experience"
 

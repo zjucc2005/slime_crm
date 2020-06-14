@@ -149,6 +149,13 @@
                 </div>
                 <%= content_tag :span, currency_display(@candidate.currency), :class => 'form-control' %>
             </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:candidate, :cpt_face_to_face) %></span>
+                </div>
+                <%= content_tag :span, @candidate.cpt_face_to_face, :class => 'form-control' %>
+            </div>
+
 
             <div class="col-12 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">

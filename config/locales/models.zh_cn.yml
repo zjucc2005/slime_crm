@@ -121,6 +121,7 @@ zh_cn:
         seat: "客户seat"
         interview_task: "访谈任务"
         wechat: "微信"
+        cpt_face_to_face: "面谈费率"
         task_count: "任务次数"
         work_experiences: "工作经历"
 
