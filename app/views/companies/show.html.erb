@@ -82,6 +82,15 @@
                 </div>
                 <%= text_area_tag :description, @company.description, :rows => 5, :disabled => true, :class => 'form-control bg-white' %>
             </div>
+            <div class="col-12 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <%= mt(:company, :compliance) %>&nbsp;
+                      <%= link_to @company.compliance_file.url do %><%= fa_icon_tag('download') %>  <%= t(:file) %><% end if @company.compliance_file.present? %>
+                    </span>
+                </div>
+                <%= text_area_tag :compliance, @company.compliance, :rows => 5, :disabled => true, :class => 'form-control bg-white' %>
+            </div>
         </div>
 
         <%= render :partial => 'companies/show/contracts',  :locals => { :contracts => @contracts } %>

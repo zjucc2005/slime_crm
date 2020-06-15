@@ -44,6 +44,15 @@
         <%= f.label :description %>
         <%= f.text_area :description, :rows => 5, :class => 'form-control' %>
     </div>
+    <div class="col-12 form-group">
+        <%= f.label :compliance %>
+        <%= f.text_area :compliance, :rows => 5, :class => 'form-control' %>
+    </div>
+    <div class="col-12 form-group">
+        <%= f.label :compliance_file %>
+        <%= link_to @company.compliance_file.url do %><%= fa_icon_tag('download') %> <%= t(:file) %><% end if @company.compliance_file.present? %>
+        <%= f.file_field :compliance_file, :class => 'form-control-file' %>
+    </div>
 
 </div>
 

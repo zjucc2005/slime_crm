@@ -166,6 +166,8 @@ zh_cn:
         linkman: "联系人"
         phone: "联系电话"
         description: "公司简介"
+        compliance: "合规"
+        compliance_file: "合规文件"
         is_signed: "是否签约"
 
       contract:

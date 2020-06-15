@@ -137,6 +137,8 @@ en:
         linkman: "Linkman"
         phone: "Phone"
         description: "Description"
+        compliance: "Compliance"
+        compliance_file: "Compliance file"
         is_signed: "Signed"
 
       contract:

@@ -14,6 +14,8 @@ class Company < ApplicationRecord
   validates_uniqueness_of :name
   validates_length_of :name, :minimum => 8
 
+  mount_uploader :compliance_file, FileUploader
+
   before_validation :setup, :on => :create
 
   # Scopes

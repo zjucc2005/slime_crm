@@ -5,7 +5,7 @@
     </div>
 
     <div class="card-body">
-        <%= form_for @company do |f| %>
+        <%= form_for @company, :html => { :multipart => true } do |f| %>
             <%= render :partial => 'form', :locals => { :f => f } %>
 
             <div class="form-group mb-0">
