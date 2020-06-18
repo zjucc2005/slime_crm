@@ -105,13 +105,21 @@ class Candidate < ApplicationRecord
       when :description  then self.description
       when :company      then self.latest_work_experience.try(:org_cn)
       when :title        then self.latest_work_experience.try(:title)
-      when :expert_level then self.cpt.to_i >= 1500 ? 'Premium Expert' : 'Standard Expert'
+      when :expert_level then self._c_t_expert_level
       when :rate         then self._c_t_rate_
       else nil
     end
   end
 
   # for card template use
+  def _c_t_expert_level
+    case currency
+      when 'RMB' then cpt.to_i >= 1500 ? 'Premium Expert' : 'Standard Expert'
+      when 'USD' then cpt.to_i >= 200 ? 'Premium Expert' : 'Standard Expert'
+      else 'Standard Expert'
+    end
+  end
+
   def _c_t_rate_
     case self.cpt
       when 0..1000 then 2800
