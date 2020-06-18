@@ -38,6 +38,7 @@ en:
   keywords_at_most: "%{limit} keywords at most"
   minute: "Minute(s)"
   my_account: "My account"
+  my_project: "My projects"
   not_authorized: "You are not authorized to access this page."
   not_found: "Not found"
   operation: "Operation"

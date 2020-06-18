@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     # query = current_user.is_role?('admin') ? Project.all : current_user.projects
-    query = Project.all
+    query = params[:my_project] == 'true' ? current_user.projects : Project.all
     query = query.where('created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     %w[name code].each do |field|

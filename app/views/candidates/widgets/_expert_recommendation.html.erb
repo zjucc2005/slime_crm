@@ -3,7 +3,7 @@
 </button>
 <div class="dropdown-menu">
     <%= link_to t('action.new'), new_candidate_path(recommender_id: candidate.id), :class => 'dropdown-item' %>
-    <%= link_to candidates_path(recommender_id: candidate.id), :class => 'dropdown-item' do %>
+    <%= link_to candidates_path(recommender_id: candidate.id, per_page: 100), :class => 'dropdown-item' do %>
         <%= t(:expert_recommended) %> <%= count_badge(candidate.recommended_experts.count) %>
     <% end %>
 </div>

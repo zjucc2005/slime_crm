@@ -38,6 +38,7 @@ zh_cn:
   keywords_at_most: "最多%{limit}个关键词"
   minute: "分钟"
   my_account: "我的帐号"
+  my_project: "我的项目"
   not_authorized: "没有访问权限或访问被限制"
   not_found: "未找到信息"
   operation: "操作"
