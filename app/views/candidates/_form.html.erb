@@ -72,6 +72,15 @@
         <%= f.label :wechat %>
         <%= f.text_field :wechat, :class => 'form-control' %>
     </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :recommender_id %>
+        <div class="input-group">
+            <%= f.text_field :recommender_id, :class => 'form-control', :onchange => 'showRecommenderName();' %>
+            <div class="input-group-append">
+                <span class="input-group-text" id="recommender_name"></span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row border-bottom mb-3">
@@ -99,4 +108,7 @@
 
 <script>
     $('.autocomplete-city').autocomplete({ source: '/location_data/autocomplete_city.json', delay: 500 });
+    $(function(){
+        $('#candidate_recommender_id').change();
+    })
 </script>

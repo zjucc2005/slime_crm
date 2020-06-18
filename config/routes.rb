@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     get :comments,             on: :member
 
     get :expert_info_for_clipboard, on: :member
+    get :recommender_info, on: :collection
   end
 
   resources :candidate_payment_infos

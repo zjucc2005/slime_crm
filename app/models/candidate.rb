@@ -8,6 +8,7 @@ class Candidate < ApplicationRecord
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
+  belongs_to :recommender, :class_name => 'Candidate', :foreign_key => :recommender_id, :optional => true
   belongs_to :company, :class_name => 'Company', :optional => true
   has_many :experiences, :class_name => 'CandidateExperience', :dependent => :destroy
   has_many :payment_infos, :class_name => 'CandidatePaymentInfo', :dependent => :destroy
@@ -17,6 +18,7 @@ class Candidate < ApplicationRecord
   has_many :projects, :class_name => 'Project', :through => :project_candidates
   has_many :project_tasks, :class_name => 'ProjectTask', :foreign_key => :expert_id
   has_many :candidate_access_logs, :class_name => 'CandidateAccessLog'
+  has_many :recommended_experts, :class_name => 'Candidate', :foreign_key => :recommender_id
 
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys

@@ -15,6 +15,9 @@ class CandidatesController < ApplicationController
     query = query.where('candidates.email ~* :email OR candidates.email1 ~* :email', { :email => params[:email].strip }) if params[:email].present?
     query = query.where('candidates.industry' => params[:industry].strip) if params[:industry].present?
     query = query.where('candidates.is_available' => params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
+    %w[recommender_id].each do |field|
+      query = query.where(field.to_sym => params[field].strip) if params[field].present?
+    end
 
     # 专家说明
     if params[:description].present?
@@ -56,7 +59,7 @@ class CandidatesController < ApplicationController
 
   # GET /candidates/new
   def new
-    @candidate = Candidate.new
+    @candidate = Candidate.new(recommender_id: params[:recommender_id])
   end
 
   # POST /candidates
@@ -331,6 +334,17 @@ class CandidatesController < ApplicationController
     render :json => { :data => "#{@candidate.name}|#{@candidate.phone}" }
   end
 
+  # GET /candidates/recommender_info?recommender_id=1
+  def recommender_info
+    begin
+      @recommender = Candidate.expert.where(id: params[:recommender_id]).first
+      raise "expert not found with id #{params[:id]}" if @recommender.nil?
+      render :json => { status: '0', name: @recommender.name }
+    rescue Exception => e
+      render :json => { status: '1', reason: e.message }
+    end
+  end
+
   private
   def load_candidate
     @candidate = Candidate.find(params[:id])
@@ -344,7 +358,7 @@ class CandidatesController < ApplicationController
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :nickname, :city, :email, :email1, :phone, :phone1,
                                       :industry, :title, :company_id, :date_of_birth, :gender, :description,
-                                      :is_available, :cpt, :currency, :wechat, :cpt_face_to_face)
+                                      :is_available, :cpt, :currency, :recommender_id, :wechat, :cpt_face_to_face)
   end
 
   def experience_fields

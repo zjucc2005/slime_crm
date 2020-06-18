@@ -95,6 +95,7 @@ en:
         cpt_face_to_face: "Face-to-face CPT"
         task_count: "Task count"
         work_experiences: "Work experience"
+        recommender_id: "Recommender ID"
 
       candidate_experience:
         category: "Category"

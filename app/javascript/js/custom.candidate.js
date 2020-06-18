@@ -51,18 +51,36 @@ window.showPhoneLocation = function(obj_id){
             type: 'get',
             data: { phone: obj.val() },
             dataType: 'json',
-            success: function(data){
-                console.log(data);
-                if(data.status === '0'){
-                    $('#' + obj_id + '_location').text([data.city, data.type].join(', '));
+            success: function(res){
+                console.log(res);
+                if(res.status === '0'){
+                    $('#' + obj_id + '_location').text([res.city, res.type].join(', '));
                     var city = $('#candidate_city');
                     if(!city.val()){
-                        city.val(data.city);
+                        city.val(res.city);
                     }
                 }
             }
         })
     }
+};
+
+window.showRecommenderName = function(obj_id){
+    obj_id = obj_id || 'candidate_recommender_id';
+    var recommender_id = $('#' + obj_id).val();
+    $.ajax({
+        url: '/candidates/recommender_info?recommender_id=' + recommender_id,
+        type: 'get',
+        dataType: 'json',
+        success: function(res){
+            console.log(res);
+            if(res.status === '0'){
+                $('#recommender_name').text(res.name);
+            }else{
+                $('#recommender_name').text('');
+            }
+        }
+    })
 };
 
 window.clipboard = function(element){

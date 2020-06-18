@@ -1,7 +1,7 @@
 module ProjectsHelper
 
   def project_options
-    query = current_user.is_role?('admin') ? Project.all : current_user.projects
+    query = current_user.admin? ? Project.all : current_user.projects
     query.where(status: %w[initialized ongoing]).order(:created_at => :desc).map{|p| [p.project_option_friendly, p.id]}
   end
 

@@ -20,6 +20,8 @@ en:
   expert_description: "Expert description"
   expert_id: "Expert ID"
   expert_payment: "Expert fee"
+  expert_recommendation: "Expert recommendation"
+  expert_recommended: "Recommended Experts"
   external_link: "External link"
   file: "File"
   global_search: "Global search"

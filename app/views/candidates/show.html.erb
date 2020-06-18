@@ -23,6 +23,9 @@
 
                 <div class="btn-group btn-group-sm">
                     <div class="btn-group btn-group-sm">
+                        <%= render :partial => 'candidates/widgets/expert_recommendation', :locals => { :candidate => @candidate } %>
+                    </div>
+                    <div class="btn-group btn-group-sm">
                         <%= render :partial => 'candidates/widgets/expert_card', :locals => { :uid => @candidate.id } %>
                     </div>
                     <div class="btn-group btn-group-sm">
@@ -33,15 +36,15 @@
                     </div>
                     <%= link_to comments_candidate_path(@candidate), :class => 'btn btn-default' do %>
                         <%= fa_icon_tag('commenting') %> <%= "#{mt(:candidate_comment)}" %>
-                        <%= content_tag :span, @candidate.comments.count, :class => 'badge badge-success' if @candidate.comments.count > 0 %>
+                        <%= count_badge(@candidate.comments.count) %>
                     <% end if can?(:comments, Candidate) %>
                     <%= link_to project_tasks_candidate_path(@candidate), :class => 'btn btn-default' do %>
                         <%= fa_icon_tag('list') %> <%= "#{mt(:candidate, :interview_task)}" %>
-                        <%= content_tag :span, @candidate.normal_project_task_count, :class => 'badge badge-success' if @candidate.normal_project_task_count > 0 %>
+                        <%= count_badge(@candidate.normal_project_task_count) %>
                     <% end if can?(:project_tasks, Candidate) %>
                     <%= link_to payment_infos_candidate_path(@candidate), :class => 'btn btn-default' do %>
                         <%= fa_icon_tag('user-circle') %> <%= "#{mt(:candidate_payment_info)}" %>
-                        <%= content_tag :span, @candidate.payment_infos.count, :class => 'badge badge-success' if @candidate.payment_infos.count > 0 %>
+                        <%= count_badge(@candidate.payment_infos.count) %>
                     <% end if can?(:payment_infos, Candidate) %>
                     <%= link_to edit_candidate_path(@candidate), :class => 'btn btn-dark' do %>
                         <%= fa_icon_tag('edit') %> <%= t('action.edit_model', :model => mt(:expert)) %>
@@ -127,6 +130,12 @@
                     <span class="input-group-text"><%= mt(:candidate, :wechat) %></span>
                 </div>
                 <%= content_tag :span, @candidate.property['wechat'], :class => 'form-control' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><%= mt(:candidate, :recommender_id) %></span>
+                </div>
+                <%= content_tag :span, @candidate.recommender.try(:uid_name), :class => 'form-control' %>
             </div>
         </div>
 

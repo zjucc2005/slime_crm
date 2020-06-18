@@ -20,6 +20,8 @@ zh_cn:
   expert_description: "专家说明"
   expert_id: "专家ID"
   expert_payment: "专家支出"
+  expert_recommendation: "专家推荐"
+  expert_recommended: "已推荐专家"
   external_link: "外部链接"
   file: "文件"
   global_search: "全局搜索"
