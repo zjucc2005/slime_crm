@@ -1,6 +1,7 @@
 <% if can?(:show, Project) %>
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         <%= fa_icon_tag('map') %> <%= t(:related_projects) %>
+        <%= count_badge(candidate.projects.count) %>
     </button>
     <div class="dropdown-menu">
         <% candidate.projects.each do |p| %>
