@@ -176,7 +176,7 @@
 
         <!-- 工作经历 -->
         <div class="badge badge-info mb-3 px-4"><%= t(:work_experience) %></div>
-        <table class="table table-sm table-striped nowrap card-text">
+        <table class="table table-sm table-striped card-text">
             <thead>
             <tr>
                 <th><%= mt(:candidate_experience, :duration) %></th>
@@ -189,7 +189,7 @@
             <tbody>
             <% @candidate.experiences.work.order(:started_at => :desc).each do |exp| %>
                 <tr>
-                    <td><%= exp.friendly_timestamp('%F') %></td>
+                    <td style="white-space: nowrap;"><%= exp.friendly_timestamp('%F') %></td>
                     <td><%= exp.org_cn %></td>
                     <td><%= exp.org_en %></td>
                     <td><%= exp.title %></td>
