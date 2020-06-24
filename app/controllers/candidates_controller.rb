@@ -10,9 +10,9 @@ class CandidatesController < ApplicationController
     query = Candidate.expert
     # query code here >>
     query = query.where('candidates.id' => params[:id].strip) if params[:id].present?
-    query = query.where('candidates.name ilike :name OR candidates.nickname ilike :name', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
-    query = query.where('candidates.phone ilike :phone OR candidates.phone1 ilike :phone', { :phone => "%#{params[:phone].strip}%" }) if params[:phone].present?
-    query = query.where('candidates.email ilike :email OR candidates.email1 ilike :email', { :email => "%#{params[:email].strip}%" }) if params[:email].present?
+    query = query.where('candidates.name ~* :name OR candidates.nickname ~* :name', { :name => params[:name].strip.shellescape }) if params[:name].present?
+    query = query.where('candidates.phone ~* :phone OR candidates.phone1 ~* :phone', { :phone => params[:phone].strip.shellescape }) if params[:phone].present?
+    query = query.where('candidates.email ~* :email OR candidates.email1 ~* :email', { :email => params[:email].strip.shellescape }) if params[:email].present?
     query = query.where('candidates.industry' => params[:industry].strip) if params[:industry].present?
     query = query.where('candidates.is_available' => params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
     %w[recommender_id].each do |field|
@@ -30,7 +30,7 @@ class CandidatesController < ApplicationController
       and_conditions = []
       or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title candidate_experiences.description]
       @terms.each do |term|
-        and_conditions << "(#{or_fields.map{|field| "#{field} ~* '#{term}'" }.join(' OR ')})"
+        and_conditions << "(#{or_fields.map{|field| "#{field} ~* '#{term.shellescape}'" }.join(' OR ')})"
       end
       query = query.joins('LEFT JOIN candidate_experiences on candidates.id = candidate_experiences.candidate_id')
       query = query.where(and_conditions.join(' AND '))
