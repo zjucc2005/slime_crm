@@ -138,8 +138,8 @@ class Candidate < ApplicationRecord
     self.first_name    = first_name.try(:strip)
     self.last_name     = last_name.try(:strip)
     self.name          = "#{last_name}#{first_name}"
-    self.phone         = phone.strip if phone
-    self.phone1        = phone1.strip if phone1
+    self.phone         = phone.to_s.gsub(/[^\d]/, '')  # remove non-numeric chars
+    self.phone1        = phone1.to_s.gsub(/[^\d]/, '')
     self.email         = email.strip if email
     self.email1        = email1.strip if email1
   end
