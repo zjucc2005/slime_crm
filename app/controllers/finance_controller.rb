@@ -182,7 +182,7 @@ class FinanceController < ApplicationController
       sheet.add_cell(row, 14, task.actual_price)                      # 总费用/Fee
       sheet.add_cell(row, 15, task.currency)                          # 币种/Currency
       sheet.add_cell(row, 16, task.memo)                              # 备注/Comment
-      sheet.add_cell(row, 17, task.is_shorthand ? 'Y' : 'N')          # 速记/Shorthand
+      sheet.add_cell(row, 17, task.shorthand_price)                   # 速记费/Shorthand Fee
       sheet.add_cell(row, 18, task.expert.new_expert? ? 'Y' : 'N')    # 新专家/New Expert
       sheet.add_cell(row, 19, task.pm.name_cn)                        # 项目经理/PM
       sheet.add_cell(row, 20, task.creator.name_cn)                   # 专家招募/Research(creator)
