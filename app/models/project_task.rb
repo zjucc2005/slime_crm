@@ -106,11 +106,11 @@ class ProjectTask < ApplicationRecord
       self.charge_rate    = contract.charge_rate                                                       # 收费倍率
       self.base_price     = contract.base_price(charge_duration.to_i, self.f_flag) * expert_rate.to_d  # 基础收费(根据收费时长)
       self.currency       = contract.currency                                                          # 货币
-      self.is_taxed       = contract.is_taxed                                                          # 是否含税
-      self.tax            = is_taxed ? 0 : actual_price.to_f * contract.tax_rate                       # 税费 = 实际收费 * 税率
       self.shorthand_price = is_shorthand ? contract.shorthand_price(charge_duration.to_i) : 0         # 速记费用
+      self.is_taxed       = contract.is_taxed                                                          # 是否含税
+      self.tax            = is_taxed ? 0 : (actual_price.to_f + shorthand_price.to_f) * contract.tax_rate  # 税费 = (实际收费 + 速记费) * 税率
     end
-    self.total_price     = actual_price.to_f + tax.to_f + shorthand_price.to_f                         # 总费用
+    self.total_price     = actual_price.to_f + shorthand_price.to_f + tax.to_f                         # 总费用
   end
 
   def sync_payment_status

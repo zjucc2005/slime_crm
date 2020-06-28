@@ -34,15 +34,15 @@
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
-            <span class="input-group-text"><%= mt(:project_task, :is_taxed) %></span>
-        </div>
-        <%= content_tag :span, boolean_display(@project_task.is_taxed), :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-        <div class="input-group-prepend">
             <span class="input-group-text"><%= mt(:project_task, :is_shorthand) %></span>
         </div>
         <%= content_tag :span, boolean_display(@project_task.is_shorthand), :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :is_taxed) %></span>
+        </div>
+        <%= content_tag :span, boolean_display(@project_task.is_taxed), :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
@@ -59,15 +59,15 @@
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
-            <span class="input-group-text"><%= mt(:project_task, :tax) %></span>
+          <span class="input-group-text"><%= mt(:project_task, :shorthand_price) %></span>
         </div>
-        <%= content_tag :span, @project_task.tax, :class => 'form-control text-bold' %>
+        <%= content_tag :span, @project_task.shorthand_price, :class => 'form-control text-bold' %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
-            <span class="input-group-text"><%= mt(:project_task, :shorthand_price) %></span>
+            <span class="input-group-text"><%= mt(:project_task, :tax) %></span>
         </div>
-        <%= content_tag :span, @project_task.shorthand_price, :class => 'form-control text-bold' %>
+        <%= content_tag :span, @project_task.tax, :class => 'form-control text-bold' %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
