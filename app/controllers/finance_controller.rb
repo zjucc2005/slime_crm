@@ -158,7 +158,7 @@ class FinanceController < ApplicationController
       sheet.add_cell(row, 1, task.project.name)                       # 项目名称/Project
       sheet.add_cell(row, 2, task.project.code)                       # 项目代码/Project code
       sheet.add_cell(row, 3, task.project.clients.first.try(:name))   # 负责人/Seat
-      sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M%p'))  # 日期/Date
+      sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M'))  # 日期/Date
       interview_form = case category
                          when 'cn' then ProjectTask::INTERVIEW_FORM[task.interview_form]
                          when 'en' then task.interview_form.capitalize
