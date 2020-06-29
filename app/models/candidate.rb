@@ -106,7 +106,7 @@ class Candidate < ApplicationRecord
       when :company      then self.latest_work_experience.try(:org_cn)
       when :title        then self.latest_work_experience.try(:title)
       when :expert_level then self._c_t_expert_level
-      when :rate         then self._c_t_rate_
+      when :gj_rate      then self._c_t_gj_rate_
       else nil
     end
   end
@@ -120,9 +120,10 @@ class Candidate < ApplicationRecord
     end
   end
 
-  def _c_t_rate_
+  def _c_t_gj_rate_
+    _rate_ = 0
     if currency == 'RMB'
-      case self.cpt
+      _rate_ = case self.cpt
         when 0 then 0
         when 0..1000 then 2800
         when 1000..1500 then 3360
@@ -131,9 +132,8 @@ class Candidate < ApplicationRecord
         when 2500..3000 then 5600
         else 'TBD'
       end
-    else
-      ''
     end
+    _rate_.zero? ? '' : "电话-#{_rate_}/小时"
   end
 
   private

@@ -5,6 +5,7 @@ en:
 
   add_to_project: "Add to project"
   advance_payment: "Advance payment"
+  available_interpolation: "Available interpolation"
   base_info: "Base info"
   begin: "Begin"
   browsing_history: "Browsing history"
@@ -37,6 +38,7 @@ en:
   invalid_file_format: "Invalid file format"
   keywords_at_most: "%{limit} keywords at most"
   minute: "Minute(s)"
+  model: "Model"
   my_account: "My account"
   my_project: "My projects"
   not_authorized: "You are not authorized to access this page."

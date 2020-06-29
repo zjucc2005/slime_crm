@@ -1,0 +1,38 @@
+<div id="tips_wrapper" class="d-inline-block">
+    <%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#tipsModal'} do %>
+        <%= fa_icon_tag('question-circle') %>
+    <% end %>
+
+    <div id="tipsModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"><%= t(:available_interpolation) %></h4>
+                    <button type="button" data-dismiss="modal" class="close">&times;</button>
+                </div>
+
+                <div class="modal-body p-0">
+                    <table class="table card-text">
+                    <thead>
+                    <tr>
+                        <th><%= t(:model) %></th>
+                        <th><%= t(:available_interpolation) %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% CardTemplate::CATEGORY.each do |k, v| %>
+                    <tr>
+                        <td><%= CardTemplate::CATEGORY_DESC[k] %></td>
+                        <td><%= v.join(', ') %></td>
+                    </tr>
+                    <% end %>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

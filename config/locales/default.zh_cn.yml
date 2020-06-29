@@ -5,6 +5,7 @@ zh_cn:
 
   add_to_project: "添加到项目"
   advance_payment: "是否垫付"
+  available_interpolation: "可用插值"
   base_info: "基本信息"
   begin: "开始"
   browsing_history: "浏览历史"
@@ -37,6 +38,7 @@ zh_cn:
   invalid_file_format: "文件格式错误"
   keywords_at_most: "最多%{limit}个关键词"
   minute: "分钟"
+  model: "模型"
   my_account: "我的帐号"
   my_project: "我的项目"
   not_authorized: "没有访问权限或访问被限制"
