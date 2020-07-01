@@ -1,7 +1,7 @@
 <div id="candidate_card" class="row">
     <% @candidates.ids.each do |uid| %>
         <div class="col-lg-12">
-            <div class="card px-5 py-3 candidate-card">
+            <div class="card px-5 py-3">
                 <%= html_safe @card_template.result(uid) %>
             </div>
         </div>
