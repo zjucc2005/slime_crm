@@ -5,6 +5,16 @@ class Candidate < ApplicationRecord
   CATEGORY = { :expert => '专家', :client => '客户' }.stringify_keys
   DATA_SOURCE = { :manual => '手工录入', :excel => 'Excel导入', :plugin => '插件采集', :api => 'API创建' }.stringify_keys
   GENDER = { :male => '男', :female => '女' }.stringify_keys
+  DATA_CHANNEL = {
+    :linkedin  => 'Linkedin',
+    :liepin    => '猎聘',
+    :search    => '搜索（谷歌，百度等）',
+    :social    => '社交（微博，脉脉）',
+    :recommend => '专家推荐',
+    :contact   => '通讯录',
+    :gllue     => '谷露导入',
+    :excel     => '批量导入'
+  }.stringify_keys
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true

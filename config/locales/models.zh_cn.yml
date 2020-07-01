@@ -95,6 +95,7 @@ zh_cn:
       candidate:
         category: "候选人类型"
         data_source: "数据来源"
+        data_channel: "数据渠道"
         name: "姓名"
         first_name: "名"
         last_name: "姓"

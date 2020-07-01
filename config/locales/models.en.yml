@@ -66,6 +66,7 @@ en:
       candidate:
         category: "Category"
         data_source: "Data source"
+        data_channel: "Data channel"
         name: "Name"
         first_name: "First name"
         last_name: "Last name"

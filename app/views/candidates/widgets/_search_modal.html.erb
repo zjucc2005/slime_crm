@@ -50,6 +50,10 @@
                                 <%= label_tag :recommender_id, mt(:candidate, :recommender_id) %>
                                 <%= text_field_tag :recommender_id, params[:recommender_id], :class => 'form-control' %>
                             </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :data_channel, mt(:candidate, :data_channel) %>
+                                <%= select_tag :data_channel, options_for_select(candidate_data_channel_options, params[:data_channel]), :prompt => default_prompt, :class => 'form-control select2' %>
+                            </div>
                         </div>
                     </div>
                     <%= hidden_field_tag :per_page, params[:per_page] %>

@@ -76,7 +76,7 @@ module Utils
 
       first_name, last_name = Candidate.name_split(name)
       @candidate_attr = {
-        data_source: 'excel', created_by: @created_by, first_name: first_name, last_name: last_name,
+        data_source: 'excel', data_channel: 'excel', created_by: @created_by, first_name: first_name, last_name: last_name,
         nickname: nickname, gender: gender, date_of_birth: date_of_birth, phone: phone,
         phone1: phone1, city: city, industry: industry, email: email, email1: email1,
         wechat: wechat, is_available: is_available, cpt: cpt, currency: currency, description: description

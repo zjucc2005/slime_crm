@@ -15,7 +15,7 @@ class CandidatesController < ApplicationController
     query = query.where('candidates.email ~* :email OR candidates.email1 ~* :email', { :email => params[:email].strip.shellescape }) if params[:email].present?
     query = query.where('candidates.industry' => params[:industry].strip) if params[:industry].present?
     query = query.where('candidates.is_available' => params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
-    %w[recommender_id].each do |field|
+    %w[recommender_id data_channel].each do |field|
       query = query.where(field.to_sym => params[field].strip) if params[field].present?
     end
 
@@ -358,7 +358,8 @@ class CandidatesController < ApplicationController
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :nickname, :city, :email, :email1, :phone, :phone1,
                                       :industry, :title, :company_id, :date_of_birth, :gender, :description,
-                                      :is_available, :cpt, :currency, :recommender_id, :wechat, :cpt_face_to_face)
+                                      :is_available, :cpt, :currency, :recommender_id, :wechat, :cpt_face_to_face,
+                                      :data_channel)
   end
 
   def experience_fields

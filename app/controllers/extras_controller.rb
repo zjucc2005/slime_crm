@@ -13,7 +13,7 @@ class ExtrasController < ApplicationController
         raise '每次最多导入100个Gllue ID' if gid_le - gid_ge >= 100
         raise '请填写有效的id范围' if gid_ge > gid_le
 
-        Utils::Gllue.import_by_range(gid_ge..gid_le)
+        Utils::Gllue.import_by_range(gid_ge..gid_le, current_user.id)
         flash[:success] = t(:operation_succeeded)
         redirect_to import_gllue_candidates_extras_path
       rescue Exception => e

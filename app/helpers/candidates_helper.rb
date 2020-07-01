@@ -40,6 +40,10 @@ module CandidatesHelper
     [[t(:true), 'true'], [t(:false), 'false'], [t(:pending), 'nil']]
   end
 
+  def candidate_data_channel_options
+    Candidate::DATA_CHANNEL.to_a.map(&:reverse)
+  end
+
   def work_exps
     params[:work_exp] || []
   end

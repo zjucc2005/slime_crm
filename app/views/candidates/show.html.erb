@@ -137,6 +137,12 @@
                 </div>
                 <%= content_tag :span, @candidate.recommender.try(:uid_name), :class => 'form-control' %>
             </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:candidate, :data_channel) %></span>
+                </div>
+                <%= content_tag :span, Candidate::DATA_CHANNEL[@candidate.data_channel] || @candidate.data_channel, :class => 'form-control' %>
+            </div>
         </div>
 
         <div class="row border-bottom mb-3">
