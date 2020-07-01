@@ -393,7 +393,7 @@ class CandidatesController < ApplicationController
 
   def session_cache_show_history
     begin
-      fifo = Utils::Fifo.new(session[:cache_show_history], len: 5, dup: false)
+      fifo = Utils::Fifo.new(session[:cache_show_history], len: 10, dup: false)
       fifo.push([@candidate.id, "##{@candidate.uid} #{@candidate.name}"])
       session[:cache_show_history] = fifo.to_a
     rescue
