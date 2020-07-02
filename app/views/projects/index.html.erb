@@ -21,11 +21,10 @@
                 <th><%= mt(:company, :name_abbr) %></th>
                 <th><%= mt(:project, :total_project_tasks) %></th>
                 <th><%= mt(:project, :total_charge_duration) %></th>
-                <th><%= mt(:project, :started_at) %></th>
-                <th><%= mt(:project, :ended_at) %></th>
                 <th><%= mt(:project, :status) %></th>
                 <th><%= mt(:project, :created_by) %></th>
                 <th><%= mt(:project, :created_at) %></th>
+                <th><%= mt(:project, :updated_at) %></th>
             </tr>
             </thead>
             <tbody>
@@ -40,11 +39,10 @@
                     <td><%= project.company.name_abbr %></td>
                     <td><%= project.total_project_tasks %></td>
                     <td><%= project.total_charge_duration %> <%= t(:hour) %></td>
-                    <td><%= project.started_at.try(:strftime, '%F') %></td>
-                    <td><%= project.ended_at.try(:strftime, '%F') %></td>
                     <td><%= project_status_badge(project.status) %></td>
                     <td><%= project.creator.name_cn rescue 'NA' %></td>
                     <td><%= project.created_at.strftime('%F %T') %></td>
+                    <td><%= project.updated_at.strftime('%F %T') %></td>
                 </tr>
             <% end %>
             </tbody>
