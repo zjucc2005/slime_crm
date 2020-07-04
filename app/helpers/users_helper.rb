@@ -33,4 +33,8 @@ module UsersHelper
     current_user.su? ? query : query.where(user_channel_id: current_user.user_channel_id)
   end
 
+  def user_channel_options
+    UserChannel.all.pluck(:name, :id)
+  end
+
 end

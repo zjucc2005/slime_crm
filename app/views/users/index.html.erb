@@ -19,8 +19,8 @@
                 <th><%= mt(:user, :name) %></th>
                 <th><%= mt(:user, :phone) %></th>
                 <th><%= mt(:user, :title) %></th>
-                <th><%= mt(:user, :role) %></th>
                 <th><%= mt(:user, :user_channel) %></th>
+                <th><%= mt(:user, :role) %></th>
                 <th><%= mt(:user, :status) %></th>
                 <th><%= mt(:user, :created_at) %></th>
             </tr>
@@ -34,8 +34,8 @@
                     <td><%= user.name_cn %></td>
                     <td><%= user.phone %></td>
                     <td><%= user.title %></td>
-                    <td><%= user_role_badge(user.role) %></td>
                     <td><%= user_channel_badge(user.user_channel.name) rescue '' %></td>
+                    <td><%= user_role_badge(user.role) %></td>
                     <td><%= user_status_badge(user.status) %></td>
                     <td><%= user.created_at.strftime('%F %T') %></td>
                 </tr>

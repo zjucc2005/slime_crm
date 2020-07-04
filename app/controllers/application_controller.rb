@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def user_channel_filter(query)
-    current_user.su? ? query : query.where(user_channel_id: current_user.user_channel_id)
+  def user_channel_filter(query, field='user_channel_id')
+    current_user.su? ? query : query.where(field => current_user.user_channel_id)
   end
 
   def redirect_with_return_to(default_path)

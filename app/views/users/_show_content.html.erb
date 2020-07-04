@@ -1,5 +1,6 @@
 <div class="row border-bottom mb-3">
     <div class="col-12 form-group">
+        <%= user_channel_badge(@user.user_channel.name) rescue '' %>
         <%= user_role_badge(@user.role) %>
         <%= user_status_badge(@user.status) %>
         <span class="badge badge-light"><%= show_timestamps(@user) %></span>
