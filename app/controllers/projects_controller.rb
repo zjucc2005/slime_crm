@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
     %w[name code].each do |field|
       query = query.where("#{field} LIKE ?", "%#{params[field].strip}%") if params[field].present?
     end
-    %w[id status].each do |field|
+    %w[id status user_channel_id].each do |field|
       query = query.where(field.to_sym => params[field]) if params[field].present?
     end
     if params[:company].present?

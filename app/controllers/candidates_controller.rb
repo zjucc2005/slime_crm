@@ -15,7 +15,7 @@ class CandidatesController < ApplicationController
     query = query.where('candidates.email ~* :email OR candidates.email1 ~* :email', { :email => params[:email].strip.shellescape }) if params[:email].present?
     query = query.where('candidates.industry' => params[:industry].strip) if params[:industry].present?
     query = query.where('candidates.is_available' => params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
-    %w[recommender_id data_channel].each do |field|
+    %w[recommender_id data_channel user_channel_id].each do |field|
       query = query.where(field.to_sym => params[field].strip) if params[field].present?
     end
 
