@@ -25,9 +25,10 @@ module Utils
       628894..9999999
     ]
 
-    def initialize(g_data={}, created_by=nil)
+    def initialize(g_data={}, created_by=nil, user_channel_id=nil)
       @g_data = g_data
       @created_by = created_by
+      @user_channel_id = user_channel_id
     end
 
     def time_parse(str='2020-01')
@@ -76,6 +77,7 @@ module Utils
           data_source:   'api',
           data_channel:  'gllue',
           created_by:    @created_by,
+          user_channel_id: @user_channel_id,
           first_name:    first_name,
           last_name:     last_name,
           nickname:      @g_data['englishName'],
@@ -134,7 +136,7 @@ module Utils
         end
       end
 
-      def import_by_range(range=0..0, created_by=nil)
+      def import_by_range(range=0..0, created_by=nil, user_channel_id=nil)
         # slice range per 1000
         limit = 1000
         range.step(limit).each do |i|
@@ -146,7 +148,7 @@ module Utils
             break
           end
           res['list'].sort_by{|gd| gd['id']}.each do |g_data|
-            self.new(g_data, created_by).save rescue nil
+            self.new(g_data, created_by, user_channel_id).save rescue nil
           end if res['list'].present?
           puts "#{Time.now} -- imported gllue_id range: #{_range_}"
         end

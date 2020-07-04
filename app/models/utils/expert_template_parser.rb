@@ -5,10 +5,11 @@ module Utils
 
     attr_accessor :errors, :row, :created_by, :candidate_attr, :work_exp_attrs
 
-    def initialize(row, created_by=nil)
+    def initialize(row, created_by=nil, user_channel_id=nil)
       @row = row.map(&method(:cell_strip))
       @errors = []
       @created_by = created_by
+      @user_channel_id = user_channel_id
       @candidate_attr = {}
       @work_exp_attrs = []
       set_candidate_attr
@@ -76,9 +77,9 @@ module Utils
 
       first_name, last_name = Candidate.name_split(name)
       @candidate_attr = {
-        data_source: 'excel', data_channel: 'excel', created_by: @created_by, first_name: first_name, last_name: last_name,
-        nickname: nickname, gender: gender, date_of_birth: date_of_birth, phone: phone,
-        phone1: phone1, city: city, industry: industry, email: email, email1: email1,
+        data_source: 'excel', data_channel: 'excel', created_by: @created_by, user_channel_id: @user_channel_id,
+        first_name: first_name, last_name: last_name, nickname: nickname, gender: gender, date_of_birth: date_of_birth,
+        phone: phone, phone1: phone1, city: city, industry: industry, email: email, email1: email1,
         wechat: wechat, is_available: is_available, cpt: cpt, currency: currency, description: description
       }
     end

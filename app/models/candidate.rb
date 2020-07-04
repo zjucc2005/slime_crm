@@ -96,8 +96,10 @@ class Candidate < ApplicationRecord
     experiences.work.order(:started_at => :desc).first
   end
 
-  def normal_project_task_count
-    project_tasks.where(status: %w[ongoing finished]).count
+  def normal_project_task_count(current_user)
+    query = project_tasks.where(status: %w[ongoing finished])
+    query = current_user.su? ? query : query.where(user_channel_id: current_user.user_channel_id)
+    query.count
   end
 
   # new expert has at most 1 task

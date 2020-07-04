@@ -6,6 +6,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :trackable
 
   # Associations
+  belongs_to :user_channel, :class_name => 'UserChannel', :optional => true
+
   has_many :project_users, :class_name => 'ProjectUser'
   has_many :projects, :class_name => 'Project', :through => :project_users  # 用户参与的项目
   has_many :candidate_access_logs, :class_name => 'CandidateAccessLog'
@@ -31,6 +33,10 @@ class User < ApplicationRecord
 
   ROLES = { :admin => '管理员', :pm => '项目经理', :pa => '项目助理', :finance => '财务' }.stringify_keys
   STATUS = { :active => '激活', :inactive => '未激活' }.stringify_keys
+
+  def su?
+    role == 'su'
+  end
 
   def admin?
     %w[su admin].include? role

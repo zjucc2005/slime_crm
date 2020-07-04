@@ -2,6 +2,7 @@ module ProjectsHelper
 
   def project_options
     query = current_user.admin? ? Project.all : current_user.projects
+    query = user_channel_filter(query)
     query.where(status: %w[initialized ongoing]).order(:updated_at => :desc).map{|p| [p.project_option_friendly, p.id]}
   end
 

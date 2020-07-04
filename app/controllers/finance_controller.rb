@@ -6,6 +6,7 @@ class FinanceController < ApplicationController
   # GET /finance
   def index
     query = ProjectTask.where(status: 'finished')
+    query = user_channel_filter(query)
     query = query.where('project_tasks.created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('project_tasks.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     %w[id project_id category interview_form charge_status payment_status].each do |field|
@@ -133,6 +134,7 @@ class FinanceController < ApplicationController
   private
   def load_project_task
     @project_task = ProjectTask.find(params[:id])
+    @can_operate = @project_task.user_channel_id == current_user.user_channel_id
   end
 
   def project_task_params

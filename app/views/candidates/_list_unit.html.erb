@@ -57,7 +57,7 @@
         <div class="col-lg-4 d-flex flex-column text-left">
             <div class="text-smaller mb-2">
                 <span>访谈次数： </span>
-                <span><%= candidate.normal_project_task_count %></span>，
+                <span><%= candidate.normal_project_task_count(current_user) %></span>，
                 <span>最近访谈时间： </span>
                 <span><%= candidate.project_tasks.where(status: 'finished').maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
             </div>

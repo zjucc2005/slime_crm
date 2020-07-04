@@ -6,11 +6,12 @@ class UsersController < ApplicationController
   # GET /users
   def index
     query = User.where(role: %w[admin pm pa finance])
+    query = user_channel_filter(query)
     query = query.where('created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     query = query.where('email LIKE ?', "%#{params[:email].strip}%") if params[:email].present?
     query = query.where('UPPER(name_cn) LIKE UPPER(:name) OR UPPER(name_en) LIKE UPPER(:name)', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
-    %w[id role status].each do |field|
+    %w[id role status user_channel_id].each do |field|
       query = query.where(field.to_sym => params[field]) if params[field].present?
     end
     @users = query.order(:created_at => :asc).paginate(:page => params[:page], :per_page => 20)
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
   # POST /users/admin_create
   def admin_create
     begin
-      @user = User.new(user_params)
+      @user = User.new(user_params.merge(user_channel_id: current_user.user_channel_id))
 
       raise "Invalid role[#{@user.role}]" unless @user.is_available_role?
       if @user.save
@@ -150,7 +151,7 @@ class UsersController < ApplicationController
   end
 
   def not_authorized_to_edit_admin
-    if @user.admin?
+    if @user.admin? || @user.user_channel_id != current_user.user_channel_id
       flash[:notice] = t(:not_authorized)
       redirect_to root_path
     end

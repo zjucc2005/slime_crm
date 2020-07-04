@@ -24,4 +24,13 @@ module UsersHelper
     content_tag :span, User::STATUS[status] || status, :class => "badge badge-#{dict[status] || 'secondary'}"
   end
 
+  # user channel display style
+  def user_channel_badge(channel)
+    content_tag :span, channel, :class => 'badge badge-dark'
+  end
+
+  def user_channel_filter(query)
+    current_user.su? ? query : query.where(user_channel_id: current_user.user_channel_id)
+  end
+
 end

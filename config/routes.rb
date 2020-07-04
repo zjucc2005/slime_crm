@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     get :edit_my_password,   on: :collection
     put :edit_my_password,   on: :collection
   end
+
+  resources :user_channels do
+    get :new_admin,     on: :member
+    post :create_admin, on: :member
+  end
   
   resources :candidates do
     put :update_is_available,  on: :member

@@ -5,6 +5,7 @@ en:
     created_at: "Created at"
     updated_at: "Updated at"
     created_by: "Created by"
+    user_channel: "User channel"
 
   # Default error messages to most models
   errors:
@@ -23,6 +24,7 @@ en:
     # Translate model names
     models:
       user: "User account"
+      user_channel: "User channel"
       candidate: "Candidate"
       candidate_comment: "Candidate comment"
       candidate_payment_info: "Candidate payment info"
@@ -62,6 +64,10 @@ en:
         sign_in_count: "Sign in count"
         current_sign_in_at: "Current sign in at"
         current_sign_in_ip: "Current sign in ip"
+
+      user_channel:
+        name: "Name"
+        user_count: "Number of users"
 
       candidate:
         category: "Category"

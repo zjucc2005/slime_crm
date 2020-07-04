@@ -5,6 +5,6 @@ module CardTemplateHelper
   end
 
   def card_template_options
-    CardTemplate.pluck(:name, :id)
+    CardTemplate.where(user_channel_id: current_user.user_channel_id).pluck(:name, :id)
   end
 end
