@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     put :edit_my_account,    on: :collection
     get :edit_my_password,   on: :collection
     put :edit_my_password,   on: :collection
+    get :edit_my_user_channel, on: :collection
+    put :edit_my_user_channel, on: :collection
   end
 
   resources :user_channels do

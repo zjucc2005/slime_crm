@@ -10,6 +10,9 @@
                     <span class="text-gray mr-3"><%= "# #{@user.uid}" %></span>
                 </h6>
                 <div class="btn-group btn-group-sm">
+                    <%= link_to edit_my_user_channel_users_path, :class => 'btn btn-default' do %>
+                        <%= fa_icon_tag('edit') %> <%= t('action.edit_model', :model => mt(:user_channel)) %>
+                    <% end if current_user.su? %>
                     <%= link_to edit_my_password_users_path, :class => 'btn btn-success' do %>
                         <%= fa_icon_tag('edit') %> <%= t('action.edit_model', :model => mt(:user, :password)) %>
                     <% end %>

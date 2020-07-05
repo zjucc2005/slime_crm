@@ -26,12 +26,7 @@
                     <td><%= check_box_tag :'uids[]', user_channel.id, false %></td>
                     <td><%= content_tag :span, "# #{user_channel.uid}", :class => 'text-gray' %></td>
                     <td><%= user_channel.name %></td>
-                    <td>
-                        <%= user_channel.users.count %>
-                        <%= link_to users_path(user_channel_id: user_channel.id), :class => 'btn btn-link btn-xs' do %>
-                            <%= t(:show_all) %>
-                        <% end if can?(:index, User) %>
-                    </td>
+                    <td><%= user_channel.users.count %></td>
                     <td><%= user_channel.created_at.strftime('%F %T') %></td>
                     <td><%= user_channel.updated_at.strftime('%F %T') %></td>
                     <td>

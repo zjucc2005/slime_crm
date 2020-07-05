@@ -135,6 +135,25 @@ class UsersController < ApplicationController
     end
   end
 
+  # GET/PUT /users/edit_my_user_channel
+  def edit_my_user_channel
+    if current_user.su?
+      @user = current_user
+
+      if request.put?
+        if @user.update(user_channel_id: params[:user_channel_id])
+          flash[:success] = t(:operation_succeeded)
+        else
+          flash[:error] = t(:operation_failed)
+        end
+        redirect_to my_account_users_path
+      end
+    else
+      flash[:notice] = t(:not_authorized)
+      redirect_to root_path
+    end
+  end
+
   private
   def load_user
     @user = User.find(params[:id])
