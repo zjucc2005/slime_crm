@@ -146,7 +146,7 @@ class UsersController < ApplicationController
         else
           flash[:error] = t(:operation_failed)
         end
-        redirect_to my_account_users_path
+        redirect_with_return_to(my_account_users_path)
       end
     else
       flash[:notice] = t(:not_authorized)

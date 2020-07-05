@@ -88,7 +88,8 @@ class StatisticsController < ApplicationController
     @year = params[:year] || current_year                          # statistical year
     @currency = params[:currency] || 'RMB'                         # currency
     @user_channel_id = params[:user_channel_id] || current_user.user_channel_id  # user_channel_id
-    @x_axis = %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月]  # X axis
+    @x_axis = I18n.locale == :zh_cn ?
+      %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月] : %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
 
     # annual total infos
     o_time = Time.local @year  # original time

@@ -22,7 +22,7 @@
                     <% if current_user.su? %>
                     <div class="form-group">
                         <%= label_tag :user_channel, mt(:user_channel) %>
-                        <%= select_tag :user_channel_id, options_for_select(user_channel_options, params[:user_channel_id]),
+                        <%= select_tag :user_channel_id, options_for_select(user_channel_options, params[:user_channel_id] || current_user.user_channel_id),
                                        :prompt => default_prompt, :class => 'form-control select2' %>
                     </div>
                     <% end %>

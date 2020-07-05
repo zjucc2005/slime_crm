@@ -9,36 +9,38 @@
 
 
 <% if @companies.any? %>
-    <div class="card p-2 mb-2 table-responsive">
-        <table class="table table-sm table-striped nowrap card-text">
-            <thead>
-            <tr>
-                <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
-                <th><%= mt(:company, :id) %></th>
-                <th><%= mt(:company, :name) %></th>
-                <th><%= mt(:company, :name_abbr) %></th>
-                <th><%= mt(:company, :city) %></th>
-                <th><%= mt(:company, :industry) %></th>
-                <th><%= mt(:company, :category) %></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @companies.each do |company| %>
+    <div class="card p-2 mb-2">
+        <div class="table-responsive">
+            <table class="table table-sm table-striped nowrap card-text">
+                <thead>
                 <tr>
-                    <td><%= check_box_tag :'uids[]', company.id, false %></td>
-                    <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
-                    <td><%= link_to company.name, company_path(company) %></td>
-                    <td><%= company.name_abbr %></td>
-                    <td><%= company.city %></td>
-                    <td><%= company.industry %></td>
-                    <td>
-                        <%= company_category_badge(company.category) %>
-                        <%= company_signed_badge(company.is_signed?) %>
-                    </td>
+                    <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
+                    <th><%= mt(:company, :id) %></th>
+                    <th><%= mt(:company, :name) %></th>
+                    <th><%= mt(:company, :name_abbr) %></th>
+                    <th><%= mt(:company, :city) %></th>
+                    <th><%= mt(:company, :industry) %></th>
+                    <th><%= mt(:company, :category) %></th>
                 </tr>
-            <% end %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <% @companies.each do |company| %>
+                    <tr>
+                        <td><%= check_box_tag :'uids[]', company.id, false %></td>
+                        <td><%= content_tag :span, "# #{company.uid}", :class => 'text-gray' %></td>
+                        <td><%= link_to company.name, company_path(company) %></td>
+                        <td><%= company.name_abbr %></td>
+                        <td><%= company.city %></td>
+                        <td><%= company.industry %></td>
+                        <td>
+                            <%= company_category_badge(company.category) %>
+                            <%= company_signed_badge(company.is_signed?) %>
+                        </td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
     <%= will_paginate @companies %>
 <% else %>

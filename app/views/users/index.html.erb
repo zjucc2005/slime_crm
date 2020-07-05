@@ -2,46 +2,48 @@
     <div>
         <%= link_to new_user_path, :class => 'btn btn-primary' do %>
             <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:user)) %>
-        <% end if can? :new, User %>
+        <% end if can?(:new, User) && current_user.user_channel_id.present? %>
         <%= render :partial => 'users/widgets/add_to_project_modal' %>
     </div>
     <%= render :partial => 'users/widgets/search_modal' %>
 </div>
 
 <% if @users.any? %>
-    <div class="card p-2 mb-2 table-responsive">
-        <table class="table table-sm table-striped nowrap card-text">
-            <thead>
-            <tr>
-                <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
-                <th><%= mt(:user, :id) %></th>
-                <th><%= mt(:user, :email) %></th>
-                <th><%= mt(:user, :name) %></th>
-                <th><%= mt(:user, :phone) %></th>
-                <th><%= mt(:user, :title) %></th>
-                <th><%= mt(:user, :user_channel) %></th>
-                <th><%= mt(:user, :role) %></th>
-                <th><%= mt(:user, :status) %></th>
-                <th><%= mt(:user, :created_at) %></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @users.each do |user| %>
+    <div class="card p-2 mb-2">
+        <div class="table-responsive">
+            <table class="table table-sm table-striped nowrap card-text">
+                <thead>
                 <tr>
-                    <td><%= check_box_tag :'uids[]', user.id, false %></td>
-                    <td><%= content_tag :span, "# #{user.uid}", :class => 'text-gray' %></td>
-                    <td><%= link_to user.email, user_path(user) %></td>
-                    <td><%= user.name_cn %></td>
-                    <td><%= user.phone %></td>
-                    <td><%= user.title %></td>
-                    <td><%= user_channel_badge(user.user_channel.name) rescue '' %></td>
-                    <td><%= user_role_badge(user.role) %></td>
-                    <td><%= user_status_badge(user.status) %></td>
-                    <td><%= user.created_at.strftime('%F %T') %></td>
+                    <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
+                    <th><%= mt(:user, :id) %></th>
+                    <th><%= mt(:user, :email) %></th>
+                    <th><%= mt(:user, :name) %></th>
+                    <th><%= mt(:user, :phone) %></th>
+                    <th><%= mt(:user, :title) %></th>
+                    <th><%= mt(:user, :user_channel) %></th>
+                    <th><%= mt(:user, :role) %></th>
+                    <th><%= mt(:user, :status) %></th>
+                    <th><%= mt(:user, :created_at) %></th>
                 </tr>
-            <% end %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <% @users.each do |user| %>
+                    <tr>
+                        <td><%= check_box_tag :'uids[]', user.id, false %></td>
+                        <td><%= content_tag :span, "# #{user.uid}", :class => 'text-gray' %></td>
+                        <td><%= link_to user.email, user_path(user) %></td>
+                        <td><%= user.name_cn %></td>
+                        <td><%= user.phone %></td>
+                        <td><%= user.title %></td>
+                        <td><%= user_channel_badge(user.user_channel.name) rescue '' %></td>
+                        <td><%= user_role_badge(user.role) %></td>
+                        <td><%= user_status_badge(user.status) %></td>
+                        <td><%= user.created_at.strftime('%F %T') %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
     <%= will_paginate @users %>
 <% else %>

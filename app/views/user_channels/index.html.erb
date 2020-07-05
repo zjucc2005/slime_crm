@@ -4,45 +4,50 @@
             <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => mt(:user_channel)) %>
         <% end if can? :new, UserChannel %>
     </div>
+    <div>
+        <%= render :partial => 'user_channels/widgets/user_channel_select' %>
+    </div>
 </div>
 
 <% if @user_channels.any? %>
-    <div class="card p-2 mb-2 table-responsive">
-        <table class="table table-sm table-striped nowrap card-text">
-            <thead>
-            <tr>
-                <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
-                <th><%= mt(:user_channel, :id) %></th>
-                <th><%= mt(:user_channel, :name) %></th>
-                <th><%= mt(:user_channel, :user_count) %></th>
-                <th><%= mt(:user_channel, :created_at) %></th>
-                <th><%= mt(:user_channel, :updated_at) %></th>
-                <th><%= t(:operation) %></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @user_channels.each do |user_channel| %>
+    <div class="card p-2 mb-2">
+        <div class="table-responsive">
+            <table class="table table-sm table-striped nowrap card-text">
+                <thead>
                 <tr>
-                    <td><%= check_box_tag :'uids[]', user_channel.id, false %></td>
-                    <td><%= content_tag :span, "# #{user_channel.uid}", :class => 'text-gray' %></td>
-                    <td><%= user_channel.name %></td>
-                    <td><%= user_channel.users.count %></td>
-                    <td><%= user_channel.created_at.strftime('%F %T') %></td>
-                    <td><%= user_channel.updated_at.strftime('%F %T') %></td>
-                    <td>
-                        <div class="btn-group">
-                            <%= link_to edit_user_channel_path(user_channel), :class => 'btn btn-edit btn-xs' do %>
-                                <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
-                            <% end if can?(:edit, UserChannel) %>
-                            <%= link_to new_admin_user_channel_path(user_channel), :class => 'btn btn-primary btn-xs' do %>
-                                <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => 'ADMIN') %>
-                            <% end if can?(:new_admin, UserChannel) %>
-                        </div>
-                    </td>
+                    <th><%= check_box_tag :selectAll, nil, nil, :onclick => 'selectAll(this);' %></th>
+                    <th><%= mt(:user_channel, :id) %></th>
+                    <th><%= mt(:user_channel, :name) %></th>
+                    <th><%= mt(:user_channel, :user_count) %></th>
+                    <th><%= mt(:user_channel, :created_at) %></th>
+                    <th><%= mt(:user_channel, :updated_at) %></th>
+                    <th><%= t(:operation) %></th>
                 </tr>
-            <% end %>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                <% @user_channels.each do |user_channel| %>
+                    <tr>
+                        <td><%= check_box_tag :'uids[]', user_channel.id, false %></td>
+                        <td><%= content_tag :span, "# #{user_channel.uid}", :class => 'text-gray' %></td>
+                        <td><%= user_channel.name %></td>
+                        <td><%= user_channel.users.count %></td>
+                        <td><%= user_channel.created_at.strftime('%F %T') %></td>
+                        <td><%= user_channel.updated_at.strftime('%F %T') %></td>
+                        <td>
+                            <div class="btn-group">
+                                <%= link_to edit_user_channel_path(user_channel), :class => 'btn btn-edit btn-xs' do %>
+                                    <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
+                                <% end if can?(:edit, UserChannel) %>
+                                <%= link_to new_admin_user_channel_path(user_channel), :class => 'btn btn-primary btn-xs' do %>
+                                    <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => 'ADMIN') %>
+                                <% end if can?(:new_admin, UserChannel) %>
+                            </div>
+                        </td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
     </div>
     <%= will_paginate @user_channels %>
 <% else %>

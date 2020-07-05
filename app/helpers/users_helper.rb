@@ -29,12 +29,16 @@ module UsersHelper
     content_tag :span, channel, :class => 'badge badge-dark'
   end
 
-  def user_channel_filter(query)
-    current_user.su? ? query : query.where(user_channel_id: current_user.user_channel_id)
+  def user_channel_filter(query, field='user_channel_id')
+    if current_user.su? && current_user.user_channel_id.blank?
+      query
+    else
+      query.where(field => current_user.user_channel_id)
+    end
   end
 
   def user_channel_options
-    UserChannel.all.pluck(:name, :id)
+    UserChannel.all.order(:id => :asc).pluck(:name, :id)
   end
 
 end
