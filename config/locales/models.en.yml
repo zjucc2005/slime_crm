@@ -137,7 +137,7 @@ en:
       company:
         category: "Category"
         name: "Company name"
-        name_abbr: "Company abbreviation"
+        name_abbr: "Company abbr."
         tax_id: "Tax ID"
         industry: "Industry"
         city: "City"
@@ -228,7 +228,7 @@ en:
         charge_rate: "Charge rate"
         base_price: "Base Fee"
         actual_price: "Actual Fee"
-        actual_price_excluding_tax: "Actual Fee excluding tax"
+        actual_price_excluding_tax: "Actual Fee"
         actual_price_including_tax: "Actual Fee including tax"
         currency: "Currency"
         is_taxed: "Is taxed"
