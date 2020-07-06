@@ -15,14 +15,14 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-lg-6 col-12 form-group">
-                                <%= label_tag :created_at, mt(:project_task, :created_at) %>
+                                <%= label_tag :started_at, mt(:project_task, :started_at) %>
                                 <div class="form-group-range">
                                     <div class="form-group-range-input">
-                                        <%= text_field_tag :created_at_ge, params[:created_at_ge], :class => 'form-control datepicker', :placeholder => t(:begin) %>
+                                        <%= text_field_tag :started_at_ge, params[:started_at_ge], :class => 'form-control datepicker', :placeholder => t(:begin) %>
                                     </div>
                                     <span class="form-group-range-divider"><i class="fa fa-arrow-right"></i></span>
                                     <div class="form-group-range-input">
-                                        <%= text_field_tag :created_at_le, params[:created_at_le], :class => 'form-control datepicker', :placeholder => t(:end) %>
+                                        <%= text_field_tag :started_at_le, params[:started_at_le], :class => 'form-control datepicker', :placeholder => t(:end) %>
                                     </div>
                                 </div>
                             </div>
