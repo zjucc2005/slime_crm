@@ -13,7 +13,7 @@ class CardTemplate < ApplicationRecord
   # Validations
   validates_inclusion_of :category, :in => CATEGORY.keys
   validates_presence_of :name, :content
-  validates_uniqueness_of :name
+  # validates_uniqueness_of :name
 
   before_validation :setup, :on => :create
 

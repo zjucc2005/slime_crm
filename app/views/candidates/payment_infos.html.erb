@@ -23,7 +23,7 @@
                     <th><%= mt(:candidate_payment_info, :sub_branch) %></th>
                     <th><%= mt(:candidate_payment_info, :account) %></th>
                     <th><%= mt(:candidate_payment_info, :username) %></th>
-                    <th><%= mt(:candidate_payment_info, :created_by) %></th>
+                    <!--<th><%= mt(:candidate_payment_info, :created_by) %></th>-->
                     <th><%= mt(:candidate_payment_info, :created_at) %></th>
                     <th class="action"><%= t(:operation) %></th>
                 </tr>
@@ -36,7 +36,7 @@
                         <td><%= payment_info.sub_branch %></td>
                         <td><%= payment_info.account %></td>
                         <td><%= payment_info.username %></td>
-                        <td><%= payment_info.creator.name_cn %></td>
+                        <!--<td><%= payment_info.creator.name_cn %></td>-->
                         <td><%= payment_info.created_at.strftime('%F %T') %></td>
                         <td class="action">
                             <div class="btn-group">
