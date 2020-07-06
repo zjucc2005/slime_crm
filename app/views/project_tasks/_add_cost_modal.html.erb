@@ -20,7 +20,7 @@
                                            :prompt => t('action.new_model', :model => mt(:candidate_payment_info)), :class => 'form-control select2' %>
                         </div>
                         <div class="col-lg-9 col-12 form-group">
-                            <%= label_tag :template_recommend, t(:select_payment_info) %>
+                            <%= label_tag :template_recommend, t(:select_payment_info) %>  <span class="text-gray"><%= "##{project_task.expert.recommender.uid_name}" rescue nil %></span>
                             <%= select_tag :template_recommend, options_for_select(project_task_cost_template_recommend_options(project_task)),
                                            :prompt => t('action.new_model', :model => mt(:candidate_payment_info)), :class => 'form-control select2' %>
                         </div>
