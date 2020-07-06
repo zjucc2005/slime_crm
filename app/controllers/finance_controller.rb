@@ -6,9 +6,10 @@ class FinanceController < ApplicationController
   # GET /finance
   def index
     query = ProjectTask.where(status: 'finished')
-    query = user_channel_filter(query)
-    query = query.where('project_tasks.created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
-    query = query.where('project_tasks.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
+    # query = query.where('project_tasks.created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
+    # query = query.where('project_tasks.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
+    query = query.where('project_tasks.started_at >= ?', params[:started_at_ge]) if params[:started_at_ge].present?
+    query = query.where('project_tasks.started_at <= ?', params[:started_at_le]) if params[:started_at_le].present?
     %w[id project_id category interview_form charge_status payment_status user_channel_id].each do |field|
       query = query.where("project_tasks.#{field}" => params[field].strip) if params[field].present?
     end
