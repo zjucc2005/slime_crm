@@ -43,10 +43,21 @@ module ProjectsHelper
     end.to_a.map(&:reverse)
   end
 
-  def project_task_cost_template_options(project_task)
+  def project_task_cost_template_expert_options(project_task)
     project_task.expert.payment_infos.map{|info|
       [ info.to_template, info.id ]
     }
+  end
+
+  def project_task_cost_template_recommend_options(project_task)
+    recommender = project_task.expert.recommender
+    if recommender
+      recommender.payment_infos.map{|info|
+        [ info.to_template, info.id ]
+      }
+    else
+      []
+    end
   end
 
   def project_task_category_badge(category)

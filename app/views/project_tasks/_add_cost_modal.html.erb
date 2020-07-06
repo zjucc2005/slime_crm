@@ -15,8 +15,13 @@
                                            :prompt => default_prompt, :required => true, :class => 'form-control select2' %>
                         </div>
                         <div class="col-lg-9 col-12 form-group">
-                            <%= label_tag :template, t(:select_payment_info) %>
-                            <%= select_tag :template, options_for_select(project_task_cost_template_options(project_task)),
+                            <%= label_tag :template_expert, t(:select_payment_info) %>
+                            <%= select_tag :template_expert, options_for_select(project_task_cost_template_expert_options(project_task)),
+                                           :prompt => t('action.new_model', :model => mt(:candidate_payment_info)), :class => 'form-control select2' %>
+                        </div>
+                        <div class="col-lg-9 col-12 form-group">
+                            <%= label_tag :template_recommend, t(:select_payment_info) %>
+                            <%= select_tag :template_recommend, options_for_select(project_task_cost_template_recommend_options(project_task)),
                                            :prompt => t('action.new_model', :model => mt(:candidate_payment_info)), :class => 'form-control select2' %>
                         </div>
                     </div>
@@ -81,17 +86,56 @@
         refresh_payment_info_category();
         refresh_cost_form();
     });
-    $('#category').change(function(){ refresh_template(); });
-    $('#template').change(function(){ refresh_payment_info_category(); });
-    $('#payment_info_category').change(function(){ refresh_cost_form(); });
+    $('#category').change(function(){ refresh_template(); });  // 费用类型change事件
+    $('#template_expert').change(function(){ refresh_payment_info_category(); });  // 专家支付信息模板change事件
+    $('#template_recommend').change(function(){ refresh_payment_info_category(); });  // 推荐专家支付信息模板change事件
+    $('#payment_info_category').change(function(){ refresh_cost_form(); }); // 支付类型change事件
+
+    // 1.费用类型触发, project_task_cost.category
+    function refresh_template(){
+        let category = $('#category');
+        let template_expert = $('#template_expert');
+        let template_recommend = $('#template_recommend');
+        let advance_payment = $('#advance_payment');
+        template_expert.parent().hide();
+        template_expert.val('').change();
+        template_recommend.parent().hide();
+        template_recommend.val('').change();
+        advance_payment.parent().hide();
+
+        if(category.val() === 'expert'){
+            template_expert.parent().show();
+            advance_payment.parent().show();
+        }else if(category.val() === 'recommend'){
+            template_recommend.parent().show();
+        }
+    }
+    // 2.支付信息模板触发, template of payment_info
+    function refresh_payment_info_category(){
+        let category = document.getElementById('category');
+        let template_expert = document.getElementById('template_expert');
+        let template_recommend = document.getElementById('template_recommend');
+        if(category.value === 'expert' && template_expert.value ){
+            $('#payment_info_category').val('').change();
+            form_deactivate('payment_info_category');
+        }else if(category.value === 'recommend' && template_recommend.value){
+            $('#payment_info_category').val('').change();
+            form_deactivate('payment_info_category');
+        } else{
+            form_activate('payment_info_category');
+        }
+
+    }
+
+    // 3.支付类型触发, payment_info.category
     function refresh_cost_form(){
         let payment_info_category = document.getElementById('payment_info_category');
-        if(payment_info_category.value == 'alipay'){
+        if(payment_info_category.value === 'alipay'){
             form_deactivate('payment_info_bank');
             form_deactivate('payment_info_sub_branch');
             form_activate('payment_info_account');
             form_activate('payment_info_username');
-        }else if(payment_info_category.value == 'unionpay'){
+        }else if(payment_info_category.value === 'unionpay'){
             form_activate('payment_info_bank');
             form_activate('payment_info_sub_branch');
             form_activate('payment_info_account');
@@ -102,28 +146,5 @@
             form_deactivate('payment_info_account');
             form_deactivate('payment_info_username');
         }
-    }
-    function refresh_template(){
-        let category = $('#category');
-        let template = $('#template');
-        if(category.val() == 'expert'){
-            template.parent().show();
-            $('#advance_payment').parent().show();
-        }else{
-            template.parent().hide();
-            template.val('').change();
-            $('#advance_payment').parent().hide();
-        }
-    }
-    function refresh_payment_info_category(){
-        let category = document.getElementById('category');
-        let template = document.getElementById('template');
-        if(category.value == 'expert' && template.value ){
-            $('#payment_info_category').val('').change();
-            form_deactivate('payment_info_category');
-        }else{
-            form_activate('payment_info_category');
-        }
-
     }
 </script>

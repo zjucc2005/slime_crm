@@ -52,24 +52,45 @@ class ProjectTasksController < ApplicationController
       cost.currency = params[:currency]
       cost.memo    = params[:memo]
 
-      template = @project_task.expert.payment_infos.where(id: params[:template]).first
-      if params[:category] == 'expert' && params[:advance_payment] == 'false'
-        if template
+      if params[:category] == 'expert' && params[:advance_payment] == 'false'  # expert fee
+        template_expert = @project_task.expert.payment_infos.where(id: params[:template_expert]).first
+        if template_expert
           cost.payment_info = {
-            category:   template.category,
-            bank:       template.bank,
-            sub_branch: template.sub_branch,
-            account:    template.account,
-            username:   template.username
+            category:   template_expert.category,
+            bank:       template_expert.bank,
+            sub_branch: template_expert.sub_branch,
+            account:    template_expert.account,
+            username:   template_expert.username
           }
         else
-          cost.payment_info = params[:payment_info]
+          cost.payment_info = params[:payment_info]  # general
           @project_task.expert.payment_infos.create!(
             params.require(:payment_info).permit(:category, :bank, :sub_branch, :account, :username).merge(created_by: current_user.id)
           )
         end
+      elsif params[:category] == 'recommend'  # recommend fee
+        recommender = @project_task.expert.recommender  # recommender expert
+        if recommender
+          template_recommend = recommender.payment_infos.where(id: params[:template_recommend]).first
+          if template_recommend
+            cost.payment_info = {
+              category:   template_recommend.category,
+              bank:       template_recommend.bank,
+              sub_branch: template_recommend.sub_branch,
+              account:    template_recommend.account,
+              username:   template_recommend.username
+            }
+          else
+            cost.payment_info = params[:payment_info]  # general
+            recommender.payment_infos.create!(
+              params.require(:payment_info).permit(:category, :bank, :sub_branch, :account, :username).merge(created_by: current_user.id)
+            )
+          end
+        else
+          cost.payment_info = params[:payment_info]  # general
+        end
       else
-        cost.payment_info = params[:payment_info]
+        cost.payment_info = params[:payment_info]  # general
       end
       cost.save!
     end
