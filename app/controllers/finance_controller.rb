@@ -13,15 +13,15 @@ class FinanceController < ApplicationController
       query = query.where("project_tasks.#{field}" => params[field].strip) if params[field].present?
     end
     if params[:project].present?
-      query = query.joins(:project).where('UPPER(projects.code) = UPPER(?) OR UPPER(projects.name) LIKE UPPER(?)',
-                                          params[:project].strip, "%#{params[:project].strip}%")
+      query = query.joins(:project).where('projects.code ILIKE :term OR projects.name ILIKE :term',
+                                          { term: "%#{params[:project].strip}%" })
     end
     if params[:company].present?
       companies = Company.where('name ILIKE :company OR name_abbr ILIKE :company', { company: "%#{params[:company].strip}%"})
       query = query.joins(:project).where('projects.company_id' => companies.ids)
     end
     if params[:expert].present?
-      query = query.joins(:expert).where('candidates.name LIKE ?', "%#{params[:expert].strip}%")
+      query = query.joins(:expert).where('candidates.name ILIKE ?', "%#{params[:expert].strip}%")
     end
     # export excel files
     case params[:commit]

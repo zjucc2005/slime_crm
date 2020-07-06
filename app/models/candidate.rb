@@ -140,7 +140,7 @@ class Candidate < ApplicationRecord
         else 'TBD'
       end
     end
-    _rate_.zero? ? '' : "电话-#{_rate_}/小时"
+    _rate_ == 0 ? '' : "电话-#{_rate_}/小时"
   end
 
   private

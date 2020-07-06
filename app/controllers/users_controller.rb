@@ -9,8 +9,8 @@ class UsersController < ApplicationController
     query = user_channel_filter(query)
     query = query.where('created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
-    query = query.where('email LIKE ?', "%#{params[:email].strip}%") if params[:email].present?
-    query = query.where('UPPER(name_cn) LIKE UPPER(:name) OR UPPER(name_en) LIKE UPPER(:name)', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
+    query = query.where('email ILIKE ?', "%#{params[:email].strip}%") if params[:email].present?
+    query = query.where('name_cn ILIKE :name OR name_en ILIKE :name', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
     %w[id role status user_channel_id].each do |field|
       query = query.where(field.to_sym => params[field]) if params[field].present?
     end

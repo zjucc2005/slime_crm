@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
     query = query.where('companies.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     query = query.where('UPPER(companies.name) LIKE UPPER(:name) OR UPPER(companies.name_abbr) LIKE UPPER(:name)', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
     %w[city industry].each do |field|
-      query = query.where("companies.#{field} LIKE ?", "%#{params[field].strip}%") if params[field].present?
+      query = query.where("companies.#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
     end
     %w[id status user_channel_id].each do |field|
       query = query.where("companies.#{field}" => params[field]) if params[field].present?
