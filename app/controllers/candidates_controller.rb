@@ -398,7 +398,13 @@ class CandidatesController < ApplicationController
   def session_cache_show_history
     begin
       fifo = Utils::Fifo.new(session[:cache_show_history], len: 10, dup: false)
-      fifo.push([@candidate.id, "##{@candidate.uid} #{@candidate.name}"])
+      exp = @candidate.latest_work_experience
+      if exp
+        text = "##{@candidate.uid} #{@candidate.name}, #{exp.org_cn}, #{exp.title}"  # include work experience info
+      else
+        text = "##{@candidate.uid} #{@candidate.name}"  # base info
+      end
+      fifo.push([@candidate.id, text])
       session[:cache_show_history] = fifo.to_a
     rescue
       session[:cache_show_history] = nil
