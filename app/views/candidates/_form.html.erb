@@ -82,8 +82,9 @@
         </div>
     </div>
     <div class="col-lg-3 col-6 form-group">
-        <%= f.label :data_channel %>
-        <%= f.select :data_channel, candidate_data_channel_options, { :include_blank => default_prompt}, :class => 'form-control select2' %>
+        <%= f.label :data_channel %><span class="text-red">*</span>
+        <%= f.select :data_channel, candidate_data_channel_options, { :include_blank => default_prompt },
+                     :required => true, :class => 'form-control select2', :onchange => 'requireRecommenderId();' %>
     </div>
 </div>
 
@@ -114,5 +115,11 @@
     $('.autocomplete-city').autocomplete({ source: '/location_data/autocomplete_city.json', delay: 500 });
     $(function(){
         $('#candidate_recommender_id').change();
-    })
+        $('#candidate_data_channel').change();
+    });
+    function requireRecommenderId(){
+        var data_channel = document.getElementById('candidate_data_channel');
+        var recommender_id = document.getElementById('candidate_recommender_id');
+        recommender_id.required = (data_channel.value === 'recommend');
+    }
 </script>
