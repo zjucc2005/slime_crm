@@ -198,7 +198,7 @@ class CandidatesController < ApplicationController
     begin
       @company = Company.find(params[:candidate][:company_id])
       @client = @company.candidates.client.new(
-          candidate_params.merge({created_by: current_user.id, city: @company.city, cpt: 0})
+          candidate_params.merge({created_by: current_user.id, user_channel_id: current_user.user_channel_id, city: @company.city, cpt: 0})
       )
       if @client.save
         flash[:success] = t(:operation_succeeded)
