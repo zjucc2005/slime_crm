@@ -38,6 +38,11 @@
                         <%= link_to mt(:user), users_path, :class => "nav-link #{yield :nav_users}" %>
                     </li>
                 <% end %>
+                <% if can? :index, UserChannel %>
+                    <li class="nav-item">
+                        <%= link_to mt(:user_channel), user_channels_path, :class => "nav-link #{yield :nav_user_channels}" %>
+                    </li>
+                <% end %>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="settings-drop" data-toggle="dropdown">
                         <%= t(:settings) %>

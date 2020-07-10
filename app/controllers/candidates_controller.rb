@@ -15,7 +15,7 @@ class CandidatesController < ApplicationController
     query = query.where('candidates.email ~* :email OR candidates.email1 ~* :email', { :email => params[:email].strip.shellescape }) if params[:email].present?
     query = query.where('candidates.industry' => params[:industry].strip) if params[:industry].present?
     query = query.where('candidates.is_available' => params[:is_available] == 'nil' ? nil : params[:is_available] ) if params[:is_available].present?
-    %w[recommender_id data_channel].each do |field|
+    %w[recommender_id data_channel user_channel_id].each do |field|
       query = query.where(field.to_sym => params[field].strip) if params[field].present?
     end
 
@@ -66,7 +66,7 @@ class CandidatesController < ApplicationController
   # POST /candidates
   def create
     begin
-      @candidate = Candidate.new(candidate_params.merge(created_by: current_user.id))
+      @candidate = Candidate.new(candidate_params.merge(created_by: current_user.id, user_channel_id: current_user.user_channel_id))
 
       if @candidate.valid?
         ActiveRecord::Base.transaction do
@@ -245,7 +245,7 @@ class CandidatesController < ApplicationController
         @errors << 'excel表格里没有信息' if sheet.last_row < 2
         @errors << 'excel不能超过10000行' if sheet.last_row > 10000
         2.upto(sheet.last_row) do |i|
-          parser = Utils::ExpertTemplateParser.new(sheet.row(i), current_user.id)
+          parser = Utils::ExpertTemplateParser.new(sheet.row(i), current_user.id, current_user.user_channel_id)
           @errors << "Row #{i}: #{parser.errors.join(', ')}" unless parser.import
         end
       rescue Exception => e
@@ -306,6 +306,7 @@ class CandidatesController < ApplicationController
     begin
       load_candidate
       query = @candidate.project_tasks.where(status: %w[ongoing finished])
+      query = user_channel_filter(query)
       @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 20)
     rescue Exception => e
       flash[:error] = e.message
@@ -317,7 +318,8 @@ class CandidatesController < ApplicationController
   def comments
     begin
       load_candidate
-      @candidate_comments = @candidate.comments.order(:is_top => :desc, :created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+      @candidate_comments = @candidate.comments.joins(:creator).where('users.user_channel_id': current_user.user_channel_id).
+        order(:is_top => :desc, :created_at => :desc).paginate(:page => params[:page], :per_page => 20)
     rescue Exception => e
       flash[:error] = e.message
       redirect_to candidates_path

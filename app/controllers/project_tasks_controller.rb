@@ -46,7 +46,7 @@ class ProjectTasksController < ApplicationController
     load_project_task
 
     ActiveRecord::Base.transaction do
-      cost = @project_task.costs.new
+      cost = @project_task.costs.new(user_channel_id: current_user.user_channel_id)
       cost.category = params[:category]
       cost.price    = params[:price]
       cost.currency = params[:currency]

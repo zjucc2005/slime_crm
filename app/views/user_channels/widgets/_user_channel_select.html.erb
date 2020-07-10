@@ -1,0 +1,7 @@
+<div class="btn-group">
+    <%= form_tag edit_my_user_channel_users_path(return_to: request.path), :method => :put, :id => 'editMyUserChannelForm' do %>
+        <%= select_tag :user_channel_id, options_for_select(user_channel_options, current_user.user_channel_id),
+                       :prompt => default_prompt, :onchange => "$('#editMyUserChannelForm').submit();",
+                       :class => 'form-control' %>
+    <% end %>
+</div>

@@ -94,10 +94,15 @@ class Project < ApplicationRecord
   end
 
   def can_be_operated_by(user)
-    if user.admin?
-      true
+    return true if user.su?
+    if self.user_channel_id == user.user_channel_id
+      if user.admin?
+        true
+      else
+        self.project_users.where(user_id: user.id).count > 0
+      end
     else
-      self.project_users.where(user_id: user.id).count > 0
+      false
     end
   end
 

@@ -7,8 +7,10 @@ class StatisticsController < ApplicationController
   def current_month_count_infos
     current_month = Time.now.beginning_of_month
     project_task_query = ProjectTask.where(status: 'finished', currency: 'RMB').where('started_at >= ?', current_month)
+    project_task_query = user_channel_filter(project_task_query)
     project_task_cost_query = ProjectTaskCost.joins(:project_task).where('project_tasks.status': 'finished', 'project_task_costs.currency': 'RMB').
       where('project_tasks.started_at >= ?', current_month).where('project_task_costs.category': 'expert')
+    project_task_cost_query = user_channel_filter(project_task_cost_query)
 
     total_experts              = Candidate.expert.where('created_at >= ?', current_month).count
     total_tasks                = project_task_query.count
@@ -40,6 +42,7 @@ class StatisticsController < ApplicationController
     current_month = Time.now.beginning_of_month
     result = []
     users = User.active.where(role: %w[admin pm pa])  # 激活中用户 + 角色admin/pm/pa
+    users = user_channel_filter(users)
     project_tasks = ProjectTask.where(status: 'finished').where('started_at >= ?', current_month)
     users.each do |user|
       pm_minutes = project_tasks.where(pm_id: user.id).sum(:charge_duration) * 0.5       # 权重 0.5
@@ -60,6 +63,7 @@ class StatisticsController < ApplicationController
   # GET /statistics/unscheduled_projects.js
   def unscheduled_projects
     query = Project.where(status: 'initialized').order(:created_at => :asc)
+    query = user_channel_filter(query)
     query = query.limit(params[:limit]) if params[:limit].present?
     @projects = query
 
@@ -71,6 +75,7 @@ class StatisticsController < ApplicationController
   # GET /statistics/ongoing_project_tasks
   def ongoing_project_tasks
     query = ProjectTask.where(status: 'ongoing').order(:created_at => :asc)
+    query = user_channel_filter(query)
     @count = query.count
     query = query.limit(params[:limit]) if params[:limit].present?
     @project_tasks = query
@@ -82,7 +87,9 @@ class StatisticsController < ApplicationController
     @year_options = (2019..current_year).to_a.reverse              # year options
     @year = params[:year] || current_year                          # statistical year
     @currency = params[:currency] || 'RMB'                         # currency
-    @x_axis = %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月]  # X axis
+    @user_channel_id = params[:user_channel_id] || current_user.user_channel_id  # user_channel_id
+    @x_axis = I18n.locale == :zh_cn ?
+      %w[1月 2月 3月 4月 5月 6月 7月 8月 9月 10月 11月 12月] : %w[Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec]
 
     # annual total infos
     o_time = Time.local @year  # original time
@@ -94,9 +101,12 @@ class StatisticsController < ApplicationController
     expense_translation = []
     expense_others      = []
 
-
     project_task_query = ProjectTask.where(status: 'finished', currency: @currency)
     project_task_cost_query = ProjectTaskCost.joins(:project_task).where('project_tasks.status': 'finished', 'project_task_costs.currency': @currency)
+    if @user_channel_id.present?
+      project_task_query = project_task_query.where(user_channel_id: @user_channel_id)
+      project_task_cost_query = project_task_cost_query.where(user_channel_id: @user_channel_id)
+    end
 
     12.times do |i|
       s_time = o_time + i.month  # start time

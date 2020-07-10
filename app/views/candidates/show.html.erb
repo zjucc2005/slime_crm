@@ -35,15 +35,15 @@
                         <%= render :partial => 'candidates/widgets/add_to_project_modal', :locals => { :uid => @candidate.id } %>
                     </div>
                     <%= link_to comments_candidate_path(@candidate), :class => 'btn btn-default' do %>
-                        <%= fa_icon_tag('commenting') %> <%= "#{mt(:candidate_comment)}" %>
-                        <%= count_badge(@candidate.comments.count) %>
+                        <%= fa_icon_tag('commenting') %> <%= t(:candidate_comment) %>
+                        <%= count_badge(@candidate.comments.joins(:creator).where('users.user_channel_id': current_user.user_channel_id).count) %>
                     <% end if can?(:comments, Candidate) %>
                     <%= link_to project_tasks_candidate_path(@candidate), :class => 'btn btn-default' do %>
-                        <%= fa_icon_tag('list') %> <%= "#{mt(:candidate, :interview_task)}" %>
-                        <%= count_badge(@candidate.normal_project_task_count) %>
+                        <%= fa_icon_tag('list') %> <%= mt(:candidate, :interview_task) %>
+                        <%= count_badge(normal_project_task_count(@candidate)) %>
                     <% end if can?(:project_tasks, Candidate) %>
                     <%= link_to payment_infos_candidate_path(@candidate), :class => 'btn btn-default' do %>
-                        <%= fa_icon_tag('user-circle') %> <%= "#{mt(:candidate_payment_info)}" %>
+                        <%= fa_icon_tag('user-circle') %> <%= t(:candidate_payment_info) %>
                         <%= count_badge(@candidate.payment_infos.count) %>
                     <% end if can?(:payment_infos, Candidate) %>
                     <%= link_to edit_candidate_path(@candidate), :class => 'btn btn-dark' do %>
@@ -59,7 +59,7 @@
             <div class="col-12 form-group">
                 <span class="badge badge-primary"><%= show_candidate_category %></span>
                 <span class="badge badge-warning"><%= show_candidate_data_source %></span>
-                <span class="badge badge-light"><%= show_creator(@candidate) %></span>
+                <span class="badge badge-light"><%= show_candidate_creator %></span>
                 <span class="badge badge-light"><%= show_timestamps(@candidate) %></span>
             </div>
 

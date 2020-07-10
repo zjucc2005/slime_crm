@@ -20,6 +20,17 @@ module CandidatesHelper
     Candidate::DATA_SOURCE[data_source]
   end
 
+  def show_candidate_creator
+    user_channel = @candidate.user_channel.name rescue 'NA'
+    creator = @candidate.creator.name_cn rescue 'NA'
+    if current_user.su? || current_user.user_channel_id == @candidate.user_channel_id
+      "#{mt(:candidate, :created_by)}: #{user_channel} - #{creator}"
+    else
+      "#{mt(:candidate, :created_by)}: #{user_channel}"
+    end
+
+  end
+
   def candidate_is_available_status(val)
     if val.nil?
       'pending'
@@ -54,6 +65,10 @@ module CandidatesHelper
       :unionpay => 'danger'
     }.stringify_keys
     content_tag :span, CandidatePaymentInfo::CATEGORY[category] || category, :class => "badge badge-#{dict[category] || 'secondary'}"
+  end
+
+  def normal_project_task_count(candidate)
+    user_channel_filter(candidate.project_tasks.where(status: %w[ongoing finished])).count
   end
 
   # ========================================

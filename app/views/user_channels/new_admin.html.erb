@@ -1,0 +1,63 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('user') %> <%= t('action.new_model', :model => 'ADMIN') %></h5>
+        <%= link_to fa_icon_tag('close'), user_channels_path, :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_for @user, :url => create_admin_user_channel_path(@user_channel) do |f| %>
+            <%= model_error_tag(@user) %>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <%= user_role_badge(@user.role) %>
+                    <%= user_status_badge(@user.status) %>
+                    <span class="badge badge-light"><%= show_timestamps(@user) %></span>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :email, mt(:user, :email) %><span class="text-red">*</span>
+                    <%= f.email_field :email, :required => true, :focus => true, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :password, mt(:user, :password) %><span class="text-red">*</span>
+                    <%= f.password_field :password, :required => true, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :password_confirmation, mt(:user, :password_confirmation) %><span class="text-red">*</span>
+                    <%= f.password_field :password_confirmation, :required => true, :class => 'form-control' %>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :name_cn, mt(:user, :name_cn) %><span class="text-red">*</span>
+                    <%= f.text_field :name_cn, :required => true, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :name_en, mt(:user, :name_en) %>
+                    <%= f.text_field :name_en, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :title, mt(:user, :title) %>
+                    <%= f.text_field :title, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :date_of_employment, mt(:user, :date_of_employment) %>
+                    <%= f.text_field :date_of_employment, :class => 'form-control datepicker' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :phone, mt(:user, :phone) %>
+                    <%= f.text_field :phone, :class => 'form-control' %>
+                </div>
+                <div class="col-lg-3 col-6 form-group">
+                    <%= f.label :date_of_birth, mt(:user, :date_of_birth) %>
+                    <%= f.text_field :date_of_birth, :class => 'form-control datepicker' %>
+                </div>
+            </div>
+
+            <div class="form-group mb-0">
+                <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), user_channels_path, :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>

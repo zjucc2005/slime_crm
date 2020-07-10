@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_110817) do
+ActiveRecord::Schema.define(version: 2020_07_04_051127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,8 +95,10 @@ ActiveRecord::Schema.define(version: 2020_07_01_110817) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "recommender_id"
     t.string "data_channel"
+    t.bigint "user_channel_id"
     t.index ["company_id"], name: "index_candidates_on_company_id"
     t.index ["recommender_id"], name: "index_candidates_on_recommender_id"
+    t.index ["user_channel_id"], name: "index_candidates_on_user_channel_id"
   end
 
   create_table "card_templates", force: :cascade do |t|
@@ -105,6 +107,8 @@ ActiveRecord::Schema.define(version: 2020_07_01_110817) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_channel_id"
+    t.index ["user_channel_id"], name: "index_card_templates_on_user_channel_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -123,6 +127,8 @@ ActiveRecord::Schema.define(version: 2020_07_01_110817) do
     t.string "linkman"
     t.string "compliance"
     t.string "compliance_file"
+    t.bigint "user_channel_id"
+    t.index ["user_channel_id"], name: "index_companies_on_user_channel_id"
   end
 
   create_table "contracts", force: :cascade do |t|
@@ -196,7 +202,9 @@ ActiveRecord::Schema.define(version: 2020_07_01_110817) do
     t.jsonb "payment_info", default: {}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_channel_id"
     t.index ["project_task_id"], name: "index_project_task_costs_on_project_task_id"
+    t.index ["user_channel_id"], name: "index_project_task_costs_on_user_channel_id"
   end
 
   create_table "project_tasks", force: :cascade do |t|
@@ -235,9 +243,11 @@ ActiveRecord::Schema.define(version: 2020_07_01_110817) do
     t.integer "charge_duration"
     t.bigint "pm_id"
     t.boolean "f_flag", default: false
+    t.bigint "user_channel_id"
     t.index ["client_id"], name: "index_project_tasks_on_client_id"
     t.index ["expert_id"], name: "index_project_tasks_on_expert_id"
     t.index ["project_id"], name: "index_project_tasks_on_project_id"
+    t.index ["user_channel_id"], name: "index_project_tasks_on_user_channel_id"
   end
 
   create_table "project_users", force: :cascade do |t|
@@ -261,7 +271,15 @@ ActiveRecord::Schema.define(version: 2020_07_01_110817) do
     t.datetime "ended_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_channel_id"
     t.index ["company_id"], name: "index_projects_on_company_id"
+    t.index ["user_channel_id"], name: "index_projects_on_user_channel_id"
+  end
+
+  create_table "user_channels", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -291,9 +309,11 @@ ActiveRecord::Schema.define(version: 2020_07_01_110817) do
     t.datetime "date_of_employment"
     t.datetime "date_of_resignation"
     t.integer "candidate_access_limit"
+    t.bigint "user_channel_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["user_channel_id"], name: "index_users_on_user_channel_id"
   end
 
 end

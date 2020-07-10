@@ -1,10 +1,11 @@
 <% if can?(:show, Project) %>
+    <% related_projects = user_channel_filter(candidate.projects) %>
     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
         <%= fa_icon_tag('map') %> <%= t(:related_projects) %>
-        <%= count_badge(candidate.projects.count) %>
+        <%= count_badge(related_projects.count) %>
     </button>
     <div class="dropdown-menu">
-        <% candidate.projects.each do |p| %>
+        <% related_projects.each do |p| %>
             <%= link_to "# #{p.uid} - #{p.name} - #{p.code}", project_path(p), :class => 'dropdown-item' %>
         <% end %>
     </div>

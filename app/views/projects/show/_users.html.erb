@@ -2,7 +2,7 @@
     <div class="card-header">
         <h5><%= fa_icon_tag('users') %> <%= mt(:user) %></h5>
         <span>
-            <%= link_to users_path(project_id: @project.id, from_source: 'project_add_user', role: %w[pm pa]), :class => 'btn btn-info btn-xs' do %>
+            <%= link_to users_path(project_id: @project.id, from_source: 'project_add_user', role: %w[pm pa]), :class => 'btn btn-primary btn-xs' do %>
                 <%= fa_icon_tag('plus') %> <%= t('action.add') %>
             <% end if can?(:index, User) && @can_operate && @project.can_edit? %>
         </span>

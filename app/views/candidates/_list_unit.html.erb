@@ -57,9 +57,9 @@
         <div class="col-lg-4 d-flex flex-column text-left">
             <div class="text-smaller mb-2">
                 <span>访谈次数： </span>
-                <span><%= candidate.normal_project_task_count %></span>，
+                <span><%= normal_project_task_count(candidate) %></span>，
                 <span>最近访谈时间： </span>
-                <span><%= candidate.project_tasks.where(status: 'finished').maximum(:started_at).try(:strftime, '%F %H:%M') %></span>
+                <span><%= user_channel_filter(candidate.project_tasks.where(status: 'finished')).maximum(:started_at).strftime('%F %H:%M') rescue nil %></span>
             </div>
             <% candidate.comments.order(:is_top => :desc, :created_at => :desc).limit(3).each do |comment| %>
                 <div class="text-smaller" title="<%= comment.content %>">

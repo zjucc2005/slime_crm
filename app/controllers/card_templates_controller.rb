@@ -5,7 +5,8 @@ class CardTemplatesController < ApplicationController
 
   # GET /card_templates
   def index
-    @card_templates = CardTemplate.all.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    query = user_channel_filter(CardTemplate.all)
+    @card_templates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /card_templates/:id
@@ -21,7 +22,7 @@ class CardTemplatesController < ApplicationController
   # POST /card_templates
   def create
     begin
-      @card_template = CardTemplate.new(card_template_params)
+      @card_template = CardTemplate.new(card_template_params.merge(user_channel_id: current_user.user_channel_id))
 
       if @card_template.save
         flash[:success] = t(:operation_succeeded)

@@ -7,12 +7,13 @@ class ProjectsController < ApplicationController
   def index
     # query = current_user.is_role?('admin') ? Project.all : current_user.projects
     query = params[:my_project] == 'true' ? current_user.projects : Project.all
+    query = user_channel_filter(query)
     query = query.where('created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     %w[name code].each do |field|
       query = query.where("#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
     end
-    %w[id status].each do |field|
+    %w[id status user_channel_id].each do |field|
       query = query.where(field.to_sym => params[field]) if params[field].present?
     end
     if params[:company].present?
@@ -31,7 +32,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     begin
-      @project = Project.new(project_params.merge(created_by: current_user.id))
+      @project = Project.new(project_params.merge(created_by: current_user.id, user_channel_id: current_user.user_channel_id))
 
       if @project.valid?
         ActiveRecord::Base.transaction do
@@ -235,9 +236,9 @@ class ProjectsController < ApplicationController
 
       if request.put?
         raise t(:not_authorized) unless @project.can_add_task?
-
-        # @project_task = @project.project_tasks.new(project_task_params.merge(created_by: current_user.id))
-        @project_task = ProjectTask.new(project_task_params.merge(project_id: @project.id, created_by: current_user.id))
+        @project_task = ProjectTask.new(project_task_params.merge(project_id: @project.id,
+                                                                  created_by: current_user.id,
+                                                                  user_channel_id: current_user.user_channel_id))
         if @project_task.save
           flash[:success] = t(:operation_succeeded)
           redirect_with_return_to(project_path(@project))
@@ -376,7 +377,7 @@ class ProjectsController < ApplicationController
   private
   def load_project
     @project = Project.find(params[:id])
-    @can_operate =  @project.can_be_operated_by(current_user)
+    @can_operate = @project.can_be_operated_by(current_user)
   end
 
   def project_params
@@ -397,6 +398,6 @@ class ProjectsController < ApplicationController
 
   # 加载客户公司
   def load_signed_company_options
-    @signed_company_options = Company.signed.pluck(:name, :id)
+    @signed_company_options = user_channel_filter(Company.signed).pluck(:name, :id)
   end
 end

@@ -6,36 +6,6 @@
         <%= render :partial => 'home/widgets/pm_summary' %>
         <%= render :partial => 'home/widgets/ongoing_tasks' %>
     <% else %>
-        <% 4.times do %>
-            <div class="col-lg-6 col-12 mb-3">
-                <div class="card">
-                    <div class="card-header">
-                        <h6 class="mb-0">
-                            格式占位框
-                        </h6>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-sm card-text border-bottom">
-                            <thead>
-                            <tr>
-                                <th class="pl-3">Indicators</th>
-                                <th>Fields</th>
-                                <th>Values</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <% 6.times do %>
-                                <tr>
-                                    <th class="pl-3">some indicators</th>
-                                    <td>some fields</td>
-                                    <td>some values</td>
-                                </tr>
-                            <% end %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        <% end %>
+
     <% end %>
 </div>

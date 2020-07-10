@@ -5,6 +5,6 @@ module CardTemplateHelper
   end
 
   def card_template_options
-    CardTemplate.pluck(:name, :id)
+    user_channel_filter(CardTemplate.all).pluck(:name, :id)
   end
 end

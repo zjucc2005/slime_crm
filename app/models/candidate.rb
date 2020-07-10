@@ -18,6 +18,7 @@ class Candidate < ApplicationRecord
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
+  belongs_to :user_channel, :class_name => 'UserChannel', :optional => true
   belongs_to :recommender, :class_name => 'Candidate', :foreign_key => :recommender_id, :optional => true
   belongs_to :company, :class_name => 'Company', :optional => true
   has_many :experiences, :class_name => 'CandidateExperience', :dependent => :destroy
@@ -94,10 +95,6 @@ class Candidate < ApplicationRecord
 
   def latest_work_experience
     experiences.work.order(:started_at => :desc).first
-  end
-
-  def normal_project_task_count
-    project_tasks.where(status: %w[ongoing finished]).count
   end
 
   # new expert has at most 1 task

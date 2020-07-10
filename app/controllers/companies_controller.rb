@@ -5,14 +5,14 @@ class CompaniesController < ApplicationController
 
   # GET /companies
   def index
-    query = Company.all
+    query = user_channel_filter(Company.all)
     query = query.where('companies.created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('companies.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     query = query.where('UPPER(companies.name) LIKE UPPER(:name) OR UPPER(companies.name_abbr) LIKE UPPER(:name)', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
     %w[city industry].each do |field|
       query = query.where("companies.#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
     end
-    %w[id status].each do |field|
+    %w[id status user_channel_id].each do |field|
       query = query.where("companies.#{field}" => params[field]) if params[field].present?
     end
     if params[:is_signed] == 'true'
@@ -38,7 +38,7 @@ class CompaniesController < ApplicationController
   # POST /companies
   def create
     begin
-      @company = Company.new(company_params.merge(created_by: current_user.id))
+      @company = Company.new(company_params.merge(created_by: current_user.id, user_channel_id: current_user.user_channel_id))
 
       if @company.save
         flash[:success] = t(:operation_succeeded)

@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-header">
+        <h5><%= fa_icon_tag('users') %> <%= "#{t('action.new_model', :model => mt(:user_channel))}" %></h5>
+        <%= link_to fa_icon_tag('close'), user_channels_path, :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_for @user_channel do |f| %>
+            <%= model_error_tag(@user_channel) %>
+
+            <div class="row">
+                <div class="col-12 form-group">
+                    <%= f.label :name %><span class="text-red">*</span>
+                    <%= f.text_field :name, :required => true, :focus => true, :class => 'form-control' %>
+                </div>
+            </div>
+            <div class="form-group mb-0">
+                <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), user_channels_path, :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>

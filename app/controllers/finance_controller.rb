@@ -10,7 +10,7 @@ class FinanceController < ApplicationController
     # query = query.where('project_tasks.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
     query = query.where('project_tasks.started_at >= ?', params[:started_at_ge]) if params[:started_at_ge].present?
     query = query.where('project_tasks.started_at <= ?', params[:started_at_le]) if params[:started_at_le].present?
-    %w[id project_id category interview_form charge_status payment_status].each do |field|
+    %w[id project_id category interview_form charge_status payment_status user_channel_id].each do |field|
       query = query.where("project_tasks.#{field}" => params[field].strip) if params[field].present?
     end
     if params[:project].present?
@@ -135,6 +135,7 @@ class FinanceController < ApplicationController
   private
   def load_project_task
     @project_task = ProjectTask.find(params[:id])
+    @can_operate = @project_task.user_channel_id == current_user.user_channel_id
   end
 
   def project_task_params

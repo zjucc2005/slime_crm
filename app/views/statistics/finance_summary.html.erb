@@ -19,6 +19,13 @@
                         <%= label_tag :currency, mt(:project_task, :currency) %>
                         <%= select_tag :currency, options_for_select(currency_options, params[:currency]), :class => 'form-control select2' %>
                     </div>
+                    <% if current_user.su? %>
+                    <div class="form-group">
+                        <%= label_tag :user_channel, mt(:user_channel) %>
+                        <%= select_tag :user_channel_id, options_for_select(user_channel_options, params[:user_channel_id] || current_user.user_channel_id),
+                                       :prompt => default_prompt, :class => 'form-control select2' %>
+                    </div>
+                    <% end %>
                     <div class="form-group">
                         <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
                     </div>
@@ -78,8 +85,8 @@
 
         let finance_option = {
             title: {
-                text: '<%= t('dashboard.finance_statistics_annual', year: @year, currency: @currency) %>',
-                subtext: 'Monthly Statistics'
+                text: '<%= t('dashboard.finance_statistics_annual', year: @year) %>',
+                subtext:  '<%= "Monthly Statistics - #{@currency}" %>'
             },
             tooltip: {
                 trigger: 'axis',
