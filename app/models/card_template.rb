@@ -44,7 +44,7 @@ class CardTemplate < ApplicationRecord
 
   # 文本解析分割
   def text_parser(text, &block)
-    m = text.match /(#{STAG}\s+\w+\s+#{ETAG})/
+    m = text.match /(#{STAG}\s+\w+\s+#{ETAG})/  # {%[\s]keyword[\s]%}, \s is necessary
     if m.present?
       @container << m.pre_match
       m.to_s.match(/#{STAG}\s+(\w+)\s+#{ETAG}/)
@@ -63,6 +63,11 @@ class CardTemplate < ApplicationRecord
   # 验证参数是否合法, 避免代码注入
   def valid_field?(field)
     CATEGORY[category].include?(field)
+  end
+
+  # 范例
+  def self.example
+    "{% expert_level %} \#{% uid %}\r\n【公司】{% company %}\r\n【职位】{% title %}\r\n【背景】{% description %}"
   end
 
   private

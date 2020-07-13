@@ -12,22 +12,27 @@
                 </div>
 
                 <div class="modal-body p-0">
-                    <table class="table card-text">
-                    <thead>
-                    <tr>
-                        <th><%= t(:model) %></th>
-                        <th><%= t(:available_interpolation) %></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <% CardTemplate::CATEGORY.each do |k, v| %>
-                    <tr>
-                        <td><%= CardTemplate::CATEGORY_DESC[k] %></td>
-                        <td><%= v.join(', ') %></td>
-                    </tr>
-                    <% end %>
-                    </tbody>
+                    <table class="table border-bottom">
+                        <thead>
+                        <tr>
+                            <th><%= t(:model) %></th>
+                            <th><%= t(:available_interpolation) %></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% CardTemplate::CATEGORY.each do |k, v| %>
+                        <tr>
+                            <td><%= CardTemplate::CATEGORY_DESC[k] %></td>
+                            <td><%= v.join(', ') %></td>
+                        </tr>
+                        <% end %>
+                        </tbody>
                     </table>
+
+                    <div class="form-group px-3">
+                        <%= label_tag :example, t(:example) %>
+                        <%= text_area_tag :example, CardTemplate.example, :class => 'form-control', :style => 'resize: none;', :rows => 4, :readonly => true %>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
