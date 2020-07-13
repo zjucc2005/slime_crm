@@ -61,7 +61,7 @@
                 <span>最近访谈时间： </span>
                 <span><%= user_channel_filter(candidate.project_tasks.where(status: 'finished')).maximum(:started_at).strftime('%F %H:%M') rescue nil %></span>
             </div>
-            <% candidate.comments.order(:is_top => :desc, :created_at => :desc).limit(3).each do |comment| %>
+            <% candidate.comments.joins(:creator).where('users.user_channel_id': current_user.user_channel_id).order(:is_top => :desc, :created_at => :desc).limit(3).each do |comment| %>
                 <div class="text-smaller" title="<%= comment.content %>">
                     <span class="text-gray mr-1"><%= comment.created_at.strftime('%F') %></span>
                     <span>[<%= comment.creator.name_cn %>]</span>
