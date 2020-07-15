@@ -91,7 +91,7 @@ window.batchUpdatePaymentStatus = function(s){
 
 window.exportFinanceExcel = function(mode){
     var uids = $("input[name='uids[]']:checked");
-    if(!['en', 'cn'].includes(mode)){
+    if(!['en', 'cn', 'expert_fee'].includes(mode)){
         alert('参数错误');
         return false;
     }

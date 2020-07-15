@@ -27,8 +27,9 @@ class FinanceController < ApplicationController
     end
     # export excel files
     case params[:commit]
-      when '中文模板' then export_project_tasks(query.order(:started_at => :desc), category='cn') and return
-      when '英文模板' then export_project_tasks(query.order(:started_at => :desc), category='en') and return
+      when '中文模板' then export_project_tasks(query, category='cn') and return
+      when '英文模板' then export_project_tasks(query, category='en') and return
+      when '专家费打款' then export_project_tasks(query, category='expert_fee') and return
       else nil
     end
 
@@ -121,10 +122,11 @@ class FinanceController < ApplicationController
   # GET /finance/export_finance_excel?mode=cn&uids[]=
   def export_finance_excel
     begin
-      query = ProjectTask.where(id: params[:uids]).order(:started_at => :desc)
+      query = ProjectTask.where(id: params[:uids])
       case params[:mode]
         when 'cn' then export_project_tasks(query, 'cn')
         when 'en' then export_project_tasks(query, 'en')
+        when 'expert_fee' then export_project_tasks(query, 'expert_fee')
         else raise('params error')
       end
     rescue Exception => e
@@ -150,13 +152,33 @@ class FinanceController < ApplicationController
       redirect_to finance_index_path and return
     end
 
-    template_path = 'public/templates/finance_template.xlsx'
-    raise 'template file not found' unless File.exist?(template_path)
+    template_path = case category
+                      when 'cn' then 'public/templates/finance_template.xlsx'
+                      when 'en' then 'public/templates/finance_template.xlsx'
+                      when 'expert_fee' then 'public/templates/finance_template_expert_fee.xlsx'
+                      else ''
+                    end
 
+    raise 'template file not found' unless File.exist?(template_path)
     book = ::RubyXL::Parser.parse(template_path)                      # read from template file
     sheet = book[0]
 
-    query.each_with_index do |task, index|
+    case category
+      when 'cn' then set_sheet_cn_en(sheet, query, 'cn')
+      when 'en' then set_sheet_cn_en(sheet, query, 'en')
+      when 'expert_fee' then set_sheet_expert_fee(sheet, query)
+      else raise("invalid category[#{category}]")
+    end
+
+    file_dir = "public/export/#{Time.now.strftime('%y%m%d')}"
+    FileUtils.mkdir_p file_dir unless File.exist? file_dir
+    file_path = "#{file_dir}/finance_#{category}_#{current_user.id}_#{Time.now.strftime('%H%M%S')}.xlsx"
+    book.write file_path
+    send_file file_path
+  end
+
+  def set_sheet_cn_en(sheet, query, category='cn')
+    query.order(:started_at => :desc).each_with_index do |task, index|
       row = index + 2
       sheet.add_cell(row, 0, task.project.company.name_abbr)          # 客户(公司)/Client
       sheet.add_cell(row, 1, task.project.name)                       # 项目名称/Project
@@ -171,10 +193,10 @@ class FinanceController < ApplicationController
       sheet.add_cell(row, 5, interview_form)                          # 访谈类型
       sheet.add_cell(row, 6, "##{task.expert.uid}")                   # 专家编号/Expert UID
       expert_name = case category
-                         when 'cn' then task.expert.name
-                         when 'en' then task.expert.mr_name
-                         else task.expert.name
-                       end
+                      when 'cn' then task.expert.name
+                      when 'en' then task.expert.mr_name
+                      else task.expert.name
+                    end
       sheet.add_cell(row, 7, expert_name)                             # 专家姓名/Expert name
       exp = task.expert.latest_work_experience
       sheet.add_cell(row, 8, exp.try(:org_cn))                        # 专家公司名称/Expert company
@@ -214,12 +236,39 @@ class FinanceController < ApplicationController
       end
       sheet.add_cell(row, 33, '')                                           # 备注/Remark
     end
+  end
 
-    file_dir = "public/export/#{Time.now.strftime('%y%m%d')}"
-    FileUtils.mkdir_p file_dir unless File.exist? file_dir
-    file_path = "#{file_dir}/finance_#{category}_#{current_user.id}_#{Time.now.strftime('%H%M%S')}.xlsx"
-    book.write file_path
-    send_file file_path
+  def set_sheet_expert_fee(sheet, query)
+    sheet.sheet_name = Time.now.strftime('%Y.%m')
+    sum_price = 0
+    query = query.joins("LEFT JOIN project_task_costs ON project_task_costs.project_task_id = project_tasks.id AND project_task_costs.category = 'expert' ").
+      order("project_task_costs.payment_info ->> 'category' ASC")
+
+    query.each_with_index do |task, index|
+      cost = task.costs.where(category: 'expert').first
+      row = index + 1
+      if cost.nil?
+        10.times{|i| sheet.add_cell(row, i, '') }
+        next
+      end
+      sheet.add_cell(row, 0, '')                                                             # 序号
+      sheet.add_cell(row, 1, '')                                                             # 是否兴业银行
+      sheet.add_cell(row, 2, CandidatePaymentInfo::CATEGORY[cost.payment_info['category']])  # 支付宝/银联
+      sheet.add_cell(row, 3, cost.payment_info['account'])                                   # 收款账号
+      sheet.add_cell(row, 4, cost.payment_info['username'])                                  # 收款户名
+      sheet.add_cell(row, 5, '')
+      if cost.payment_info['category'] == 'unionpay'
+        sheet.add_cell(row, 5, [cost.payment_info['bank'], cost.payment_info['sub_branch']].join)  # 收款银行及营业网点
+      end
+      sheet.add_cell(row, 6, '')                                                             # 是否同城
+      sheet.add_cell(row, 7, '')                                                             # 汇入地址
+      sheet.add_cell(row, 8, cost.price)                                                     # 转账金额
+      sheet.add_cell(row, 9, '')                                                             # 转账用途
+
+      sum_price += cost.price
+    end
+    sheet.add_cell(query.count + 1, 8, sum_price)                                            # 金额汇总
+    sheet.add_cell(query.count + 1, 9, (sum_price / 0.95).round(2))                          # 金额汇总 / 0.95
   end
 
 end
