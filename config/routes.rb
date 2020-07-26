@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  resource :api do
-    post :createExpert
+  resources :api, :only => [] do
+    post :createExpert, on: :collection
   end
 
   resources :users do

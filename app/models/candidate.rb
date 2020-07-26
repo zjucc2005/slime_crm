@@ -13,7 +13,8 @@ class Candidate < ApplicationRecord
     :recommend => '专家推荐',
     :contact   => '通讯录',
     :gllue     => '谷露导入',
-    :excel     => '批量导入'
+    :excel     => '批量导入',
+    :plugin    => '插件采集'
   }.stringify_keys
 
   # Associations
