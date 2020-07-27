@@ -26,13 +26,13 @@ class Api::Candidate
         }
         @work_exp_attrs = []
         params['work_experience'].each_with_index do |exp_params, index|
-          started_at  = exp_params['start'].to_time rescue nil
-          ended_at    = exp_params['end'].to_time rescue nil
+          started_at  = exp_params['started_at'].to_time rescue nil
+          ended_at    = exp_params['ended_at'].to_time rescue nil
           org_cn      = exp_params['company']
           org_en      = exp_params['company_en']
           title       = exp_params['title']
           description = exp_params['description']
-          raise "work_experience[#{index}].start 不能为空" if started_at.blank?
+          raise "work_experience[#{index}].started_at 不能为空" if started_at.blank?
           raise "work_experience[#{index}].company 不能为空" if org_cn.blank?
           @work_exp_attrs << { started_at: started_at, ended_at: ended_at, org_cn: org_cn, org_en: org_en,
                               title: title, description: description }
