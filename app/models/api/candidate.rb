@@ -11,7 +11,7 @@ class Api::Candidate
         %w[last_name city phone email industry expert_rate currency work_experience].each do |field|
           raise "#{field} 不能为空" if params[field].blank?
         end
-        date_of_birth = params['date_of_birth'].to_time rescue nil
+        date_of_birth = time_parse(params['date_of_birth'])
         cpt           = params['expert_rate'].to_f
         currency      = case params['currency'].to_s.upcase when 'USD' then 'USD' else 'RMB' end
         phone         = params['phone'].to_s.gsub(/[^\d]/, '')
@@ -26,8 +26,8 @@ class Api::Candidate
         }
         @work_exp_attrs = []
         params['work_experience'].each_with_index do |exp_params, index|
-          started_at  = exp_params['started_at'].to_time rescue nil
-          ended_at    = exp_params['ended_at'].to_time rescue nil
+          started_at  = time_parse(exp_params['started_at'])
+          ended_at    = time_parse(exp_params['ended_at'])
           org_cn      = exp_params['company']
           org_en      = exp_params['company_en']
           title       = exp_params['title']
@@ -48,6 +48,21 @@ class Api::Candidate
         { status: true, msg: '创建成功' }
       rescue Exception => e
         { status: false, msg: e.message }
+      end
+    end
+
+    # 解析时间文本
+    def time_parse(str)
+      str = str.to_s.strip
+      if str.match(/[^\d]/)
+        arr = str.to_s.strip.split(/[^\d]/)
+        Time.mktime(*arr) rescue nil
+      else
+        begin
+          Time.parse(str) rescue Time.parse("#{str}01")
+        rescue
+          nil
+        end
       end
     end
   end
