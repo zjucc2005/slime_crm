@@ -7,7 +7,7 @@ class CandidatesController < ApplicationController
   def index
     set_per_page
     @hl_words = [] # 高亮关键词
-    query = Candidate.expert
+    query = user_channel_filter(Candidate.expert)
     # query code here >>
     query = query.where('candidates.id' => params[:id].strip) if params[:id].present?
     query = query.where('candidates.name ~* :name OR candidates.nickname ~* :name', { :name => params[:name].strip }) if params[:name].present?
