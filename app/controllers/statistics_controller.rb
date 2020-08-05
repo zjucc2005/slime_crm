@@ -12,7 +12,7 @@ class StatisticsController < ApplicationController
       where('project_tasks.started_at >= ?', current_month).where('project_task_costs.category': 'expert')
     project_task_cost_query = user_channel_filter(project_task_cost_query)
 
-    total_experts              = Candidate.expert.where('created_at >= ?', current_month).count
+    total_experts              = user_channel_filter(Candidate.expert.where('created_at >= ?', current_month)).count
     total_tasks                = project_task_query.count
     total_charge_duration_hour = (project_task_query.sum(:charge_duration) / 60.0).round(1)
     total_income               = project_task_query.sum(:actual_price)
