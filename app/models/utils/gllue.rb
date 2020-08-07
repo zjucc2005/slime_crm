@@ -4,10 +4,10 @@ module Utils
 
     VERSION = '1.0'
     # URL     = 'http://172.16.81.245'  # 局域网 IP
-    URL     = 'http://116.62.206.67'
-    AES_KEY = 'e36258956d57846e'
-    AES_IV  = '0' * 16
-    EMAIL   = 'eric.ling@atkins-associates.com'
+    URL     = Settings.gllue.url
+    AES_KEY = Settings.gllue.aes_key
+    AES_IV  = Settings.gllue.aes_iv
+    EMAIL   = Settings.gllue.email
 
     DEFAULT_TIMESTAMP = '1900-01-01'  # 默认时间点, 用来代替空值
 

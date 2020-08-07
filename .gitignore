@@ -45,4 +45,5 @@ yarn-debug.log*
 
 # Ignore database config
 /config/database.yml
+/config/settings.yml
 /uploads
