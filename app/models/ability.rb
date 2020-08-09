@@ -85,6 +85,7 @@ class Ability
     can :manage, LocationDatum
     can :manage, Bank
     can :read, Industry
+    can [:import_gllue_candidates], Extra
   end
 
   def pa_ability
@@ -103,6 +104,7 @@ class Ability
     can :manage, LocationDatum
     can :manage, Bank
     can :read, Industry
+    can [:import_gllue_candidates], Extra
   end
 
   def finance_ability
