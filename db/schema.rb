@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_051127) do
+ActiveRecord::Schema.define(version: 2020_08_17_012637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_051127) do
     t.string "compliance"
     t.string "compliance_file"
     t.bigint "user_channel_id"
+    t.jsonb "property", default: {}
     t.index ["user_channel_id"], name: "index_companies_on_user_channel_id"
   end
 

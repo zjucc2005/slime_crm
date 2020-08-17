@@ -148,6 +148,7 @@ en:
         compliance: "Compliance"
         compliance_file: "Compliance file"
         is_signed: "Signed"
+        salesman: "Salesman"
 
       contract:
         file: "File"

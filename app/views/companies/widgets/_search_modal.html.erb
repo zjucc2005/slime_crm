@@ -43,6 +43,10 @@
                                 <%= select_tag :industry, options_for_select(company_industry_options, params[:industry]), :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :salesman, mt(:company, :salesman) %>
+                                <%= text_field_tag :salesman, params[:salesman], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :is_signed, mt(:company, :is_signed) %>
                                 <%= select_tag :is_signed, options_for_select(boolean_options, params[:is_signed]),
                                                :prompt => default_prompt, :class => 'from-control select2' %>

@@ -8,12 +8,15 @@ class CompaniesController < ApplicationController
     query = user_channel_filter(Company.all)
     query = query.where('companies.created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('companies.created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
-    query = query.where('UPPER(companies.name) LIKE UPPER(:name) OR UPPER(companies.name_abbr) LIKE UPPER(:name)', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
+    query = query.where('companies.name ILIKE :name OR companies.name_abbr ILIKE :name', { :name => "%#{params[:name].strip}%" }) if params[:name].present?
     %w[city industry].each do |field|
       query = query.where("companies.#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
     end
     %w[id status user_channel_id].each do |field|
       query = query.where("companies.#{field}" => params[field]) if params[field].present?
+    end
+    %w[salesman].each do |field|
+      query = query.where("companies.property->>'#{field}' = ?", params[field].strip) if params[field].present?
     end
     if params[:is_signed] == 'true'
       query = query.signed
@@ -112,7 +115,7 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name, :name_abbr, :tax_id, :industry, :city, :address, :linkman, :phone,
+    params.require(:company).permit(:name, :name_abbr, :tax_id, :industry, :city, :address, :linkman, :phone, :salesman,
                                     :description, :compliance, :compliance_file)
   end
 

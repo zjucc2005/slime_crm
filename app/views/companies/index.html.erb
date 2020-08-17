@@ -20,6 +20,7 @@
                     <th><%= mt(:company, :name_abbr) %></th>
                     <th><%= mt(:company, :city) %></th>
                     <th><%= mt(:company, :industry) %></th>
+                    <th><%= mt(:company, :salesman) %></th>
                     <th><%= mt(:company, :category) %></th>
                 </tr>
                 </thead>
@@ -32,6 +33,7 @@
                         <td><%= company.name_abbr %></td>
                         <td><%= company.city %></td>
                         <td><%= company.industry %></td>
+                        <td><%= company.salesman %></td>
                         <td>
                             <%= company_category_badge(company.category) %>
                             <%= company_signed_badge(company.is_signed?) %>
