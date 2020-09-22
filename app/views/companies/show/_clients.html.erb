@@ -39,7 +39,7 @@
                             <% end %>
                             <%= link_to candidate_path(client), :method => :delete, :class => 'btn btn-danger btn-xs', :data => { :confirm => t(:sure_to_delete) } do %>
                                 <%= fa_icon_tag('trash') %> <%= t('action.delete', :model => nil) %>
-                            <% end %>
+                            <% end if can?(:destroy, Candidate) && client.can_delete? %>
                         </td>
                     </tr>
                 <% end %>

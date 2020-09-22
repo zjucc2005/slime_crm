@@ -144,13 +144,14 @@ class CandidatesController < ApplicationController
     begin
       load_candidate
 
+      raise t(:cannot_delete) unless @candidate.can_delete?
       @candidate.destroy!
       flash[:success] = t(:operation_succeeded)
-      redirect_back(fallback_location: root_path)
+      redirect_with_return_to(candidates_path)
     rescue Exception => e
       logger.info "delete candidate failed: #{e.message}"
-      flash[:error] = t(:operation_failed)
-      redirect_back(fallback_location: root_path)
+      flash[:error] = e.message
+      redirect_with_return_to(candidates_path)
     end
   end
 
