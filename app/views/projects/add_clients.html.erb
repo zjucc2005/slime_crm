@@ -48,9 +48,11 @@
             </tr>
             </thead>
             <tbody>
+            <% client_ids = @project.clients.ids %>
             <% @clients.each do |client| %>
                 <tr>
-                    <td><%= check_box_tag :'uids[]', client.id, @project.clients.include?(client) %></td>
+                    <td><%= check_box_tag :'uids[]', client.id, client_ids.include?(client.id) %></td>
+                    <% client_ids.delete(client.id) %>
                     <td><%= content_tag :span, "# #{client.uid}", :class => 'text-gray' %></td>
                     <td><%= client.name %></td>
                     <td><%= client.nickname %></td>
@@ -60,6 +62,9 @@
                     <td><%= client.created_at.strftime('%F %T') %></td>
                     <td><%= link_to t('action.edit'), edit_client_candidate_path(client, return_to: request.path), :class => 'btn btn-edit btn-xs' %></td>
                 </tr>
+            <% end %>
+            <% client_ids.each do |client_id| %>
+                <%= check_box_tag :'uids[]', client_id, true, :class => 'd-none' %>
             <% end %>
             <tr>
                 <td colspan="9" align="center">
