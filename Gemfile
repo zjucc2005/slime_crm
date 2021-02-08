@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # 
 gem 'devise', '~> 4.7'
 gem 'pg'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'will_paginate', '~> 3.2', '>= 3.2.1'
 gem 'roo', '~> 2.8', '>= 2.8.2'
 gem 'rubyXL', '~> 3.4', '>= 3.4.12'
