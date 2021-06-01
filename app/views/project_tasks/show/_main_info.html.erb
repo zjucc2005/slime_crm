@@ -51,20 +51,26 @@
             <span class="input-group-text"><%= mt(:expert) %></span>
         </div>
         <%= content_tag :span, :class => 'form-control' do %>
-                <%= link_to @project_task.expert.name, candidate_path(@project_task.expert_id), :target => '_blank' %>
+            <%= link_to @project_task.expert.name, candidate_path(@project_task.expert_id), :target => '_blank' %>
         <% end %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
             <span class="input-group-text"><%= t(:client_contact) %></span>
         </div>
-        <%= content_tag :span, @project_task.client.name, :class => 'form-control' %>
+        <%= content_tag :span, @project_task.client.uid_name, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
             <span class="input-group-text"><%= mt(:project_task, :pm) %></span>
         </div>
-        <%= content_tag :span, @project_task.pm.name_cn, :class => 'form-control' %>
+        <%= content_tag :span, @project_task.pm.uid_name, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :pa) %></span>
+        </div>
+        <%= content_tag :span, @project_task.pa.uid_name, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">

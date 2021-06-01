@@ -277,6 +277,7 @@ zh_cn:
         charge_duration: "收费时长"
         charge_duration_min: "收费时长(分钟)"
         pm: "项目经理"
+        pa: "项目助理"
         f_flag: "是否跟进"
 
       project_task_cost:

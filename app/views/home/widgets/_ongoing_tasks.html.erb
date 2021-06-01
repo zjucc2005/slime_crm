@@ -48,7 +48,7 @@
                             <td><%= boolean_display(task.is_recorded) %></td>
                             <td><%= project_task_status_badge(task.status) %></td>
                             <td><%= task.pm.name_cn %></td>
-                            <td><%= task.creator.name_cn %></td>
+                            <td><%= task.pa.name_cn %></td>
                             <td class="action">
                                 <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
                                     <%= fa_icon_tag('edit') %> <%= t('action.edit') %>

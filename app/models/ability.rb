@@ -95,7 +95,7 @@ class Ability
     can :manage, CandidatePaymentInfo
     can [:new_client], Company
     can [:index, :show, :add_users, :delete_user, :add_clients, :delete_client, :add_experts, :delete_expert,
-         :add_project_task, :project_tasks, :experts], Project
+         :project_tasks, :experts], Project
     can :manage, ProjectCandidate
     can :manage, ProjectRequirement
     can [:show, :edit, :update, :get_base_price, :add_cost, :remove_cost, :cancel], ProjectTask

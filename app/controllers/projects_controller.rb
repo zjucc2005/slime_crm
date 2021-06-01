@@ -237,7 +237,7 @@ class ProjectsController < ApplicationController
       if request.put?
         raise t(:not_authorized) unless @project.can_add_task?
         @project_task = ProjectTask.new(project_task_params.merge(project_id: @project.id,
-                                                                  created_by: current_user.id,
+                                                                  created_by: current_user.id, pm_id: current_user.id,
                                                                   user_channel_id: current_user.user_channel_id))
         if @project_task.save
           flash[:success] = t(:operation_succeeded)
@@ -389,7 +389,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:category, :expert_id, :client_id, :pm_id, :interview_form, :started_at)
+    params.require(:project_task).permit(:category, :expert_id, :client_id, :pa_id, :interview_form, :started_at)
   end
 
   def project_requirement_params
