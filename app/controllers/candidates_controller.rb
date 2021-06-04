@@ -145,11 +145,11 @@ class CandidatesController < ApplicationController
 
       @candidate.destroy!
       flash[:success] = t(:operation_succeeded)
-      redirect_back(fallback_location: root_path)
+      redirect_with_return_to(candidates_path)
     rescue Exception => e
       logger.info "delete candidate failed: #{e.message}"
       flash[:error] = t(:operation_failed)
-      redirect_back(fallback_location: root_path)
+      redirect_with_return_to(candidates_path)
     end
   end
 

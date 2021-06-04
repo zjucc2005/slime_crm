@@ -65,6 +65,14 @@ class Candidate < ApplicationRecord
     define_method(:"#{k}="){ |v| self.property[k] = v }
   end
 
+  def can_delete?
+    if self.category == 'client'
+      self.projects.count == 0  # 未参与项目
+    elsif self.category == 'expert'
+      self.projects.count == 0 && self.recommended_experts.count == 0  # 未参与项目 & 未推荐过其他专家
+    end
+  end
+
   def validates_presence_of_experiences
     return true unless self.category == 'expert'
     if self.experiences.work.count == 0

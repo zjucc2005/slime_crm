@@ -49,6 +49,9 @@
                     <%= link_to edit_candidate_path(@candidate), :class => 'btn btn-dark' do %>
                         <%= fa_icon_tag('edit') %> <%= t('action.edit_model', :model => mt(:expert)) %>
                     <% end if can?(:edit, Candidate) %>
+                    <%= link_to candidate_path(@candidate), :method => :delete, :class => 'btn btn-danger', :data => { :confirm => t(:sure_to_delete) } do %>
+                        <%= fa_icon_tag('trash') %> <%= t('action.delete_model', :model => mt(:expert)) %>
+                    <% end if can?(:destroy, Candidate) && @candidate.can_delete? && current_user.admin? %>
                 </div>
             </div>
         </div>
