@@ -1,9 +1,7 @@
 <div class="badge badge-danger mb-3 px-4"><%= t(:charge_info) %></div>
-<div class="row border-bottom mb-3">
-    <div class="col-lg-3 col-12 form-group">
-        <%= f.label :category %><span class="text-red">*</span>
-        <%= f.text_field :category, :value => ProjectTask::CATEGORY[@project_task.category], :disabled => true, :class => 'form-control' %>
-    </div>
+<%= project_task_category_badge(@project_task.category) %>
+<div class="row border-bottom mb-3" style="position: relative;">
+    <%= content_tag :div, nil, :class => 'shade-cover' unless can?(:update, ProjectTask) %>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :expert, mt(:expert) %><span class="text-red">*</span>
         <%= f.text_field :expert_id, :value => @project_task.expert.uid_name, :disabled => true, :class => 'form-control' %>
@@ -15,6 +13,10 @@
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :pm %><span class="text-red">*</span>
         <%= f.text_field :pm_id, :value => @project_task.pm.uid_name, :disabled => true, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :pa %><span class="text-red">*</span>
+        <%= f.text_field :pa_id, :value => @project_task.pa.uid_name, :disabled => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :interview_form %><span class="text-red">*</span>

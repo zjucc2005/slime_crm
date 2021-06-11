@@ -18,13 +18,16 @@
 
             <div class="form-group mb-0 d-flex justify-content-between">
                 <div>
-                    <%= submit_tag t('action.save_draft'), :class => 'btn btn-info' %>
-                    <%= submit_tag t('action.submit_and_confirm'), :data => { :confirm => t(:sure_to_submit) }, :class => 'btn btn-primary' %>
+                    <% if can?(:update, ProjectTask) %>
+                        <%= submit_tag t('action.save_draft'), :class => 'btn btn-info' %>
+                        <%= submit_tag t('action.submit_and_confirm'), :data => { :confirm => t(:sure_to_submit) }, :class => 'btn btn-primary' %>
+                    <% end %>
                     <%= link_to t('action.back'), 'javascript:history.go(-1);', :class => 'btn btn-secondary' %>
                 </div>
                 <div>
-                    <%= link_to t('action.cancel'), cancel_project_task_path(@project_task), :method => :put,
-                                :data => { :confirm => t('sure_to_cancel') }, :class => 'btn btn-danger' %>
+                    <% if can?(:cancel, ProjectTask) %>
+                        <%= link_to t('action.cancel'), cancel_project_task_path(@project_task), :method => :put, :data => { :confirm => t('sure_to_cancel') }, :class => 'btn btn-danger' %>
+                    <% end %>
                 </div>
             </div>
         <% end %>

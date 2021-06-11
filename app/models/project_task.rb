@@ -20,6 +20,7 @@ class ProjectTask < ApplicationRecord
   belongs_to :expert, :class_name => 'Candidate', :foreign_key => :expert_id
   belongs_to :client, :class_name => 'Candidate', :foreign_key => :client_id
   belongs_to :pm, :class_name => 'User', :foreign_key => :pm_id
+  belongs_to :pa, :class_name => 'User', :foreign_key => :pa_id
 
   has_many :costs, :class_name => 'ProjectTaskCost'
 
@@ -64,7 +65,7 @@ class ProjectTask < ApplicationRecord
   end
 
   def can_be_edited_by(user)
-    status == 'ongoing' && created_by == user.id
+    status == 'ongoing' && (pm_id == user.id || pa_id == user.id)
   end
 
   # 当前执行中的合同(最新), 用于获取价格计算规则

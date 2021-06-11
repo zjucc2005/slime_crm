@@ -45,8 +45,8 @@ class StatisticsController < ApplicationController
     users = user_channel_filter(users)
     project_tasks = ProjectTask.where(status: 'finished').where('started_at >= ?', current_month)
     users.each do |user|
-      pm_minutes = project_tasks.where(pm_id: user.id).sum(:charge_duration) * 0.5       # 权重 0.5
-      pa_minutes = project_tasks.where(created_by: user.id).sum(:charge_duration) * 0.5  # 权重 0.5
+      pm_minutes = project_tasks.where(pm_id: user.id).sum(:charge_duration) * 0.5  # 权重 0.5
+      pa_minutes = project_tasks.where(pa_id: user.id).sum(:charge_duration) * 0.5  # 权重 0.5
       total_minutes = pm_minutes + pa_minutes
       if total_minutes > 0
         result << { :username => user.name_cn, :pm_minutes => pm_minutes, :pa_minutes => pa_minutes, :total_minutes => total_minutes }

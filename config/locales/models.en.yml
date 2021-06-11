@@ -249,6 +249,7 @@ en:
         charge_duration: "Charge duration"
         charge_duration_min: "Charge duration(min)"
         pm: "PM"
+        pa: "PA"
         f_flag: "Follow up"
 
       project_task_cost:

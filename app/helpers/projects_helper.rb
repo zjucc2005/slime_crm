@@ -37,6 +37,10 @@ module ProjectsHelper
     @project.pm_users.map{|u| [u.uid_name, u.id] }
   end
 
+  def project_task_pa_options
+    @project.pa_users.map{|u| [u.uid_name, u.id] }
+  end
+
   def project_task_cost_category_options(project_task)
     ProjectTaskCost::CATEGORY.select do |k, v|
       project_task.costs.where(category: k).count < ProjectTaskCost::CATEGORY_LIMIT[k]
