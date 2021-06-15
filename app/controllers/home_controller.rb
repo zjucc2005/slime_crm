@@ -23,7 +23,7 @@ class HomeController < ApplicationController
     @total_tasks                = ProjectTask.where(status: 'finished', created_by: current_user.id).count
     @total_charge_duration_hour = (ProjectTask.where(status: 'finished', created_by: current_user.id).sum(:charge_duration) / 60.0).round(1)
 
-    query = ProjectTask.where('pm_id = :uid OR pa_id = :uid', uid: current_user.id)
+    query = ProjectTask.where('pm_id = :uid OR pa_id = :uid', uid: current_user.id).where(status: 'ongoing')
     @project_tasks = query.order(:status => :desc, :started_at => :desc).paginate(:page => params[:page], :per_page => 50)
   end
 end
