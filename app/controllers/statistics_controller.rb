@@ -74,7 +74,7 @@ class StatisticsController < ApplicationController
 
   # GET /statistics/ongoing_project_tasks
   def ongoing_project_tasks
-    query = ProjectTask.where(status: 'ongoing').order(:created_at => :asc)
+    query = ProjectTask.where(status: 'ongoing').order(:started_at => :asc)
     query = user_channel_filter(query)
     @count = query.count
     query = query.limit(params[:limit]) if params[:limit].present?
