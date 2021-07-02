@@ -17,6 +17,7 @@
                     <th><%= mt(:candidate, :title) %></th>
                     <th><%= mt(:candidate, :phone) %></th>
                     <th><%= mt(:candidate, :email) %></th>
+                    <th><%= mt(:candidate, :memo) %></th>
                     <th><%= mt(:candidate, :created_by) %></th>
                     <th><%= mt(:candidate, :created_at) %></th>
                     <th class="action"><%= t(:operation) %></th>
@@ -31,6 +32,7 @@
                         <td><%= client.title %></td>
                         <td><%= client.phone %></td>
                         <td><%= client.email %></td>
+                        <td><%= client.memo %></td>
                         <td><%= client.creator.name_cn %></td>
                         <td><%= client.created_at.strftime('%F %T') %></td>
                         <td class="action">

@@ -129,6 +129,7 @@ zh_cn:
         interview_task: "访谈任务"
         wechat: "微信"
         cpt_face_to_face: "面谈费率"
+        memo: "备注"
         task_count: "任务次数"
         work_experiences: "工作经历"
         recommender_id: "推荐人ID"
