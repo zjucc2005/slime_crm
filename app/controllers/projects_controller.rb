@@ -206,7 +206,7 @@ class ProjectsController < ApplicationController
       load_project
       query = @project.company.candidates
       %w[name nickname title phone email].each do |field|
-        query = query.where("#{field} LIKE ?", "%#{params[field].strip}%") if params[field].present?
+        query = query.where("#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
       end
       @clients = query.order(:created_at => :desc)
 
@@ -389,7 +389,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:category, :expert_id, :client_id, :pa_id, :interview_form, :started_at, :expert_level, :expert_rate)
+    params.require(:project_task).permit(:category, :expert_id, :client_id, :pa_id, :interview_form, :started_at, :expert_level, :expert_rate, :is_shorthand)
   end
 
   def project_requirement_params

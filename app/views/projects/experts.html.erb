@@ -43,6 +43,7 @@
                         <th><%= mt(:candidate, :phone) %></th>
                         <th><%= mt(:candidate_experience, :company) %></th>
                         <th><%= mt(:candidate_experience, :title) %></th>
+                        <th><%= mt(:candidate, :cpt) %></th>
                         <th><%= mt(:candidate, :task_count) %></th>
                         <th><%= mt(:candidate, :is_available) %> <%= fa_icon_tag('caret-down') %></th>
                         <th><%= mt(:project_candidate, :mark) %> <%= fa_icon_tag('caret-down') %></th>
@@ -62,6 +63,7 @@
                             </td>
                             <td><%= expert.latest_work_experience.try(:org_cn) %></td>
                             <td><%= expert.latest_work_experience.try(:title) %></td>
+                            <td><%= expert.cpt %></td>
                             <td><%= @project.project_tasks.where(expert_id: expert.id, status: 'finished').count %></td>
                             <td>
                                 <div class="dropdown">
