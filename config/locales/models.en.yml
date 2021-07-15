@@ -237,8 +237,10 @@ en:
         tax: "Tax Fee"
         tax_rate: "Tax rate"
         is_shorthand: "Is shorthand"
+        is_shorthand_s: "Shorthand"
         shorthand_price: "Shorthand Fee"
         is_recorded: "Is recorded"
+        is_recorded_s: "Recorded"
         billed_at: "Billed at"
         charged_at: "Charged at"
         charge_days: "Charge days"
@@ -252,6 +254,7 @@ en:
         pm: "PM"
         pa: "PA"
         f_flag: "Follow up"
+        f_flag_s: "Follow up"
 
       project_task_cost:
         category: "Cost category"

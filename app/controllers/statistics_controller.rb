@@ -39,11 +39,19 @@ class StatisticsController < ApplicationController
 
   # GET /statistics/current_month_task_ranking?limit=10
   def current_month_task_ranking
+    # 最近12个月份
     current_month = Time.now.beginning_of_month
+    @month_options = []
+    12.times do |i|
+      _month_ = current_month - i.month
+      @month_options << [_month_.strftime('%Y-%m'), _month_.strftime('%F')]
+    end
+
+    s_month = (params[:month].to_time rescue nil) || current_month  # 统计月份
     result = []
     users = User.active.where(role: %w[admin pm pa])  # 激活中用户 + 角色admin/pm/pa
     users = user_channel_filter(users)
-    project_tasks = ProjectTask.where(status: 'finished').where('started_at >= ?', current_month)
+    project_tasks = ProjectTask.where(status: 'finished').where('started_at >= ? AND started_at < ?', s_month, s_month + 1.month)
     users.each do |user|
       pm_minutes = project_tasks.where(pm_id: user.id).sum(:charge_duration) * 0.5  # 权重 0.5
       pa_minutes = project_tasks.where(pa_id: user.id).sum(:charge_duration) * 0.5  # 权重 0.5

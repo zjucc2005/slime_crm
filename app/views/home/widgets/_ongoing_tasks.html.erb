@@ -1,11 +1,28 @@
-<div class="col-12 mb-3">
+<div class="col-lg-3 col-12 mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <%= fa_icon_tag('sort-amount-desc') %>
+                <%= t('dashboard.current_month_charge_duration_ranking') %> TOP 10
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="current_month_task_duration_ranking_wrapper">
+            </div>
+            <div class="text-center text-bold">
+                <%= link_to '···', current_month_task_ranking_statistics_path, :title => t(:show_all) %>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-9 col-12 mb-3">
     <div class="card">
         <div class="card-header">
             <h6 class="mb-0"><%= t('dashboard.ongoing_tasks') %></h6>
         </div>
-        <div class="card-body">
+        <div class="card-body p-0">
             <% if @project_tasks.any? %>
-                <table class="table table-sm table-striped border card-text">
+                <table class="table table-sm table-striped border nowrap card-text">
                     <thead>
                     <tr>
                         <th><%= mt(:project_task, :id) %></th>
@@ -17,12 +34,10 @@
                         <th><%= mt(:project_task, :started_at) %></th>
                         <th><%= mt(:project_task, :duration) %></th>
                         <th><%= mt(:project_task, :charge_duration) %></th>
-                        <th><%= mt(:project_task, :expert_level) %></th>
                         <th><%= mt(:project_task, :expert_rate) %></th>
-                        <th><%= mt(:project_task, :f_flag) %></th>
-                        <th><%= mt(:project_task, :is_shorthand) %></th>
-                        <th><%= mt(:project_task, :is_recorded) %></th>
-                        <th><%= mt(:project_task, :status) %></th>
+                        <th><%= mt(:project_task, :f_flag_s) %></th>
+                        <th><%= mt(:project_task, :is_shorthand_s) %></th>
+                        <th><%= mt(:project_task, :is_recorded_s) %></th>
                         <th><%= mt(:project, :pm) %></th>
                         <th><%= mt(:project, :pa) %></th>
                         <th class="action"><%= t(:operation) %></th>
@@ -41,12 +56,10 @@
                             <td><%= task.started_at.strftime('%F %H:%M') %></td>
                             <td><%= task.duration %></td>
                             <td><%= task.charge_duration %></td>
-                            <td><%= ProjectTask::EXPERT_LEVEL[task.expert_level] %></td>
                             <td><%= task.expert_rate %></td>
                             <td><%= boolean_display(task.f_flag) %></td>
                             <td><%= boolean_display(task.is_shorthand) %></td>
                             <td><%= boolean_display(task.is_recorded) %></td>
-                            <td><%= project_task_status_badge(task.status) %></td>
                             <td><%= task.pm.name_cn %></td>
                             <td><%= task.pa.name_cn %></td>
                             <td class="action">
@@ -70,3 +83,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $.get('statistics/current_month_task_ranking.js?limit=10&mode=1');
+    });
+</script>

@@ -266,8 +266,10 @@ zh_cn:
         tax: "税费"
         tax_rate: "税率"
         is_shorthand: "是否速记"
+        is_shorthand_s: "速记"
         shorthand_price: "速记费"
         is_recorded: "是否录音"
+        is_recorded_s: "录音"
         billed_at: "出账时间"
         charged_at: "收费时间"
         charge_days: "账期(天数)"
@@ -281,6 +283,7 @@ zh_cn:
         pm: "项目经理"
         pa: "项目助理"
         f_flag: "是否跟进"
+        f_flag_s: "跟进"
 
       project_task_cost:
         category: "费用类型"

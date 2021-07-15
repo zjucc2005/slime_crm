@@ -6,26 +6,44 @@
         </h5>
         <%= link_to fa_icon_tag('close'), root_path, :class => 'card-header-close' %>
     </div>
-    <div class="card-body p-0">
-        <table class="table table-sm card-text border-bottom">
-            <thead>
-            <tr>
-                <th class="pl-3"><%= t('dashboard.ranking') %></th>
-                <th><%= mt(:user, :name_cn) %></th>
-                <th><%= t('dashboard.total_hours') %></th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @current_month_task_ranking.each_with_index do |info, index| %>
-                <tr>
-                    <th class="pl-3"><%= index + 1 %></th>
-                    <td><%= info[:username] %></td>
-                    <td><%= (info[:total_minutes] / 60.0).round(1) %> h</td>
-                    <td>pm: <%= info[:pm_minutes] %> min, pa: <%= info[:pa_minutes] %> min</td>
-                </tr>
-            <% end %>
-            </tbody>
-        </table>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-3 col-12">
+                <%= form_tag request.path, :method => :get do %>
+                    <div class="form-group">
+                        <%= label_tag :month, t('dashboard.statistical_month') %>
+                        <%= select_tag :month, options_for_select(@month_options, params[:month]), :class => 'form-control select2' %>
+                    </div>
+                    <div class="form-group">
+                        <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="col-lg-9 col-12">
+                <table class="table table-sm card-text border-bottom">
+                    <thead>
+                    <tr>
+                        <th class="pl-3"><%= t('dashboard.ranking') %></th>
+                        <th><%= mt(:user, :name_cn) %></th>
+                        <th><%= t('dashboard.total_hours') %></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @current_month_task_ranking.each_with_index do |info, index| %>
+                        <tr>
+                            <th class="pl-3"><%= index + 1 %></th>
+                            <td><%= info[:username] %></td>
+                            <td><%= (info[:total_minutes] / 60.0).round(1) %> h</td>
+                            <td>pm: <%= info[:pm_minutes] %> min, pa: <%= info[:pa_minutes] %> min</td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
     </div>
 </div>
