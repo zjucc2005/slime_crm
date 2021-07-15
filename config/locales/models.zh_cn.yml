@@ -55,7 +55,7 @@ zh_cn:
       user: "用户帐号"
       user_channel: "用户渠道"
       candidate: "候选人"
-      candidate_comment: "专家备注"
+      candidate_comment: "备注"
       candidate_payment_info: "支付信息"
       expert: "专家"
       client: "客户"

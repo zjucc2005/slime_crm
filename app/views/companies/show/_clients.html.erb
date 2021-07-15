@@ -17,9 +17,9 @@
                     <th><%= mt(:candidate, :title) %></th>
                     <th><%= mt(:candidate, :phone) %></th>
                     <th><%= mt(:candidate, :email) %></th>
-                    <th><%= mt(:candidate, :memo) %></th>
                     <th><%= mt(:candidate, :created_by) %></th>
                     <th><%= mt(:candidate, :created_at) %></th>
+                    <th><%= t(:memo) %></th>
                     <th class="action"><%= t(:operation) %></th>
                 </tr>
                 </thead>
@@ -32,9 +32,24 @@
                         <td><%= client.title %></td>
                         <td><%= client.phone %></td>
                         <td><%= client.email %></td>
-                        <td><%= client.memo %></td>
                         <td><%= client.creator.name_cn %></td>
                         <td><%= client.created_at.strftime('%F %T') %></td>
+                        <td>
+                            <% comment = client.comments.first %>
+                            <% if comment %>
+                                <div class="text-smaller" title="<%= comment.content %>">
+                                    <span class="text-gray mr-1"><%= comment.updated_at.strftime('%F') %></span>
+                                    <span><%= truncate(comment.content, length: 10) %></span>
+                                    <%= link_to edit_candidate_comment_path(comment, return_to: request.url) do %>
+                                        <%= t('action.edit') %>
+                                    <% end if can?(:edit, CandidateComment) %>
+                                </div>
+                            <% else %>
+                                <%= link_to new_candidate_comment_path(candidate_id: client.id, return_to: request.url) do %>
+                                    <%= t('action.add_model', model: mt(:candidate_comment)) %>
+                                <% end if can?(:new, CandidateComment) %>
+                            <% end %>
+                        </td>
                         <td class="action">
                             <%= link_to edit_client_candidate_path(client, return_to: request.path), :class => 'btn btn-edit btn-xs' do %>
                                 <%= fa_icon_tag('edit') %> <%= t('action.edit', :model => nil) %>

@@ -60,7 +60,7 @@ class Candidate < ApplicationRecord
   end
 
   # property fields
-  %w[wechat cpt_face_to_face memo].each do |k|
+  %w[wechat cpt_face_to_face].each do |k|
     define_method(:"#{k}"){ self.property[k] }
     define_method(:"#{k}="){ |v| self.property[k] = v }
   end

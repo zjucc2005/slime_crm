@@ -364,7 +364,7 @@ class CandidatesController < ApplicationController
   def candidate_params
     params.require(:candidate).permit(:first_name, :last_name, :nickname, :city, :email, :email1, :phone, :phone1,
                                       :industry, :title, :company_id, :date_of_birth, :gender, :description,
-                                      :is_available, :cpt, :currency, :recommender_id, :wechat, :cpt_face_to_face, :memo,
+                                      :is_available, :cpt, :currency, :recommender_id, :wechat, :cpt_face_to_face,
                                       :data_channel)
   end
 
