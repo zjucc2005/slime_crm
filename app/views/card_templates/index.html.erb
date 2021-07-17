@@ -15,6 +15,7 @@
             <thead>
             <tr>
                 <th><%= mt(:card_template, :id) %></th>
+                <th><%= mt(:card_template, :category) %></th>
                 <th><%= mt(:card_template, :name) %></th>
                 <th><%= mt(:card_template, :content) %></th>
                 <th><%= mt(:card_template, :created_at) %></th>
@@ -24,6 +25,7 @@
             <% @card_templates.each do |template| %>
                 <tr>
                     <td><%= content_tag :span, "# #{template.uid}", :class => 'text-gray' %></td>
+                    <td><%= CardTemplate::CATEGORY_DESC[template.category] %></td>
                     <td><%= link_to template.name, edit_card_template_path(template) %></td>
                     <td><%= truncate(template.content, length: 50) %></td>
                     <td><%= template.created_at.strftime('%F %T') %></td>

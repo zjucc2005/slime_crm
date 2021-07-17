@@ -1,5 +1,5 @@
 <div id="tips_wrapper" class="d-inline-block">
-    <%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#tipsModal'} do %>
+    <%= button_tag :type => 'button', :class => 'btn btn-default', :title => t(:available_interpolation), :data => { :toggle => 'modal', :target => '#tipsModal'} do %>
         <%= fa_icon_tag('question-circle') %>
     <% end %>
 
@@ -15,7 +15,7 @@
                     <table class="table border-bottom">
                         <thead>
                         <tr>
-                            <th><%= t(:model) %></th>
+                            <th><%= mt(:card_template, :category) %></th>
                             <th><%= t(:available_interpolation) %></th>
                         </tr>
                         </thead>

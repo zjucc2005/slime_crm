@@ -138,6 +138,23 @@ class ProjectTasksController < ApplicationController
     redirect_to project_path(@project_task.project)
   end
 
+  # GET /project_tasks/:id/gen_card
+  def gen_card
+    load_project_task
+
+    if @project_task.status == 'finished'
+      @company = @project_task.project.company
+      @card_template_id = params[:card_template_id] || @company.card_template_id
+      @card_template = CardTemplate.where(category: 'ProjectTask', id: @card_template_id).first
+      if params[:set_as_default] == 'true'
+        @company.update(card_template_id: @card_template.id)  # 保存为默认模板
+      end
+    else
+      flash[:error] = t(:operation_failed)
+      redirect_to root_path
+    end
+  end
+
   private
   def load_project_task
     @project_task = ProjectTask.find(params[:id])

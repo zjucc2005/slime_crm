@@ -3,7 +3,7 @@
     <%= fa_icon_tag('drivers-license-o') %> <%= t(:expert_card) %>
 </button>
 <div class="dropdown-menu">
-    <% card_template_options.each do |option| %>
+    <% card_template_options('Candidate').each do |option| %>
         <%= link_to option[0], 'javascript:void(0);', :class => 'dropdown-item', :onclick => "cardTemplate(#{option[1]}, #{uid});" %>
     <% end %>
 </div>

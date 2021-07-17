@@ -75,7 +75,7 @@ class CardTemplatesController < ApplicationController
 
   private
   def card_template_params
-    params.require(:card_template).permit(:name, :content)
+    params.require(:card_template).permit(:name, :content, :category)
   end
 
   def load_card_template

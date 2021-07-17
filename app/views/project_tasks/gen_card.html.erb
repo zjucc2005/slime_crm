@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fa fa-drivers-license-o"></i> <%= t(:card) %></h5>
+        <%= link_to fa_icon_tag('close'), "javascript:window.opener=null;self.open('', '_self');window.close();",
+                    :id => 'btn_close', :class => 'card-header-close', :style => 'display: none;' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_tag request.path, :method => :get do %>
+            <div class="row">
+
+                <div class="col-6 form-group">
+                    <%= label_tag :card_template, mt(:card_template) %>
+                    <%= select_tag :card_template_id, options_for_select(card_template_options('ProjectTask'), @card_template_id),
+                                   :prompt => default_prompt, :required => true, :class => 'form-control select2' %>
+                </div>
+                <div class="col-3 form-group">
+                    <%= label_tag :set_as_default, t(:set_as_default) %>
+                    <%= select_tag :set_as_default, options_for_select(boolean_options, params[:set_as_default] || 'false'), :class => 'form-control select2' %>
+                </div>
+                <div class="col-3 form-group">
+                    <label>&nbsp;</label>
+                    <%= button_tag :type => 'submit', :class => 'btn btn-default btn-form-control w-100' do %>
+                        <%= fa_icon_tag('check') %> <%= content_tag :span, t('action.submit') %>
+                    <% end %>
+                </div>
+            </div>
+        <% end %>
+        <hr>
+
+        <div id="card_content">
+            <%= html_safe @card_template.result(@project_task.id) if @card_template %>
+        </div>
+    </div>
+</div>
+
+<div class="float-bar">
+    <%= button_tag '', :type => 'button', :class => 'float-bar-btn fa fa-clipboard', :onclick => "clipboard('card_content');" %>
+</div>
+
+<script>
+    $(function(){
+        if(window.opener){ $('#btn_close').show(); }
+    })
+</script>

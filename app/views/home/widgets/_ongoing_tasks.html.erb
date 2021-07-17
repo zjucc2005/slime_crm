@@ -20,7 +20,7 @@
         <div class="card-header">
             <h6 class="mb-0"><%= t('dashboard.ongoing_tasks') %></h6>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body pt-0 px-0">
             <% if @project_tasks.any? %>
                 <table class="table table-sm table-striped border nowrap card-text">
                     <thead>
@@ -64,10 +64,10 @@
                             <td><%= task.pa.name_cn %></td>
                             <td class="action">
                                 <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
-                                    <%= fa_icon_tag('edit') %> <%= t('action.edit') %>
+                                    <%= fa_icon_tag('edit') %>
                                 <% end if can?(:edit, ProjectTask) && task.can_be_edited_by(current_user) %>
                                 <%= link_to project_task_path(task), :class => 'btn btn-primary btn-xs' do %>
-                                    <%= fa_icon_tag('file') %> <%= t('action.detail') %>
+                                    <%= fa_icon_tag('file') %>
                                 <% end if task.can_show? %>
                             </td>
                         </tr>

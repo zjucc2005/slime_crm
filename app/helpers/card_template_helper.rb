@@ -4,7 +4,10 @@ module CardTemplateHelper
     content.gsub(/(\r\n)|\n/, '<br>').html_safe
   end
 
-  def card_template_options
-    user_channel_filter(CardTemplate.all).pluck(:name, :id)
+  # 卡片模板
+  # category: 'Candidate/ProjectTask'
+  def card_template_options(category)
+    user_channel_filter(CardTemplate.where(category: category)).pluck(:name, :id)
   end
+
 end

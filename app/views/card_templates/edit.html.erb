@@ -11,6 +11,7 @@
             <div class="form-group mb-0">
                 <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
                 <%= link_to t('action.back'), card_templates_path, :class => 'btn btn-back' %>
+                <%= render :partial => 'card_templates/widgets/tips_modal' %>
             </div>
         <% end %>
     </div>

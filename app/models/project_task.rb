@@ -94,6 +94,24 @@ class ProjectTask < ApplicationRecord
     cost ? cost.price : nil
   end
 
+  def card_template_params(field)
+    case field.to_sym
+      when :uid            then self.uid
+      when :seat           then self.client.name
+      when :pa             then self.pa.name_cn
+      when :start_time     then (self.started_at.strftime('%F %H:%M') rescue nil)
+      when :end_time       then (self.ended_at.strftime('%F %H:%M') rescue nil)
+      when :expert_level   then self.expert_level == 'premium' ? 'Premium Expert' : 'Standard Expert'
+      when :expert_uid     then self.expert.uid
+      when :expert_mr_name then self.expert.mr_name
+      when :expert_company then self.expert.latest_work_experience.try(:org_cn)
+      when :expert_title   then self.expert.latest_work_experience.try(:title)
+      when :expert_rate    then self.expert_rate
+      when :expert_unit_price then self.charge_rate
+      else nil
+    end
+  end
+
   private
   def setup
     self.status         ||= 'ongoing'   # init

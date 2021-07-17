@@ -103,8 +103,9 @@ Rails.application.routes.draw do
     get :get_base_price, on: :member  # 计算基础价格(实时)
     post :add_cost,      on: :member  # 添加支出信息
     delete :remove_cost, on: :member  # 删除支出信息
-
     put :cancel,         on: :member  # 取消任务
+
+    get :gen_card,       on: :member  # 生成卡片模板
   end
 
   resources :finance do
