@@ -6,6 +6,12 @@ class CardTemplatesController < ApplicationController
   # GET /card_templates
   def index
     query = user_channel_filter(CardTemplate.all)
+    %w[category].each do |field|
+      query = query.where(field.to_sym => params[field].strip) if params[field].present?
+    end
+    %w[name].each do |field|
+      query = query.where("#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
+    end
     @card_templates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
