@@ -98,11 +98,13 @@ class ProjectTask < ApplicationRecord
     case field.to_sym
       when :uid            then self.uid
       when :seat           then self.client.name
+      when :interview_form then self.interview_form.capitalize
       when :pa             then self.pa.name_cn
       when :start_time     then (self.started_at.strftime('%F %H:%M') rescue nil)
       when :end_time       then (self.ended_at.strftime('%F %H:%M') rescue nil)
       when :expert_level   then self.expert_level == 'premium' ? 'Premium Expert' : 'Standard Expert'
       when :expert_uid     then self.expert.uid
+      when :expert_name    then self.expert.name
       when :expert_mr_name then self.expert.mr_name
       when :expert_company then self.expert.latest_work_experience.try(:org_cn)
       when :expert_title   then self.expert.latest_work_experience.try(:title)
