@@ -142,7 +142,7 @@ class ProjectTasksController < ApplicationController
   def gen_card
     load_project_task
 
-    if @project_task.status == 'finished'
+    if %w[ongoing finished].include?(@project_task.status)
       @company = @project_task.project.company
       @card_template_id = params[:card_template_id] || @company.card_template_id
       @card_template = CardTemplate.where(category: 'ProjectTask', id: @card_template_id).first

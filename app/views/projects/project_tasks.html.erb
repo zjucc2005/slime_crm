@@ -67,12 +67,12 @@
                                 <td><%= project_task_status_badge(task.status) %></td>
                                 <td class="action">
                                     <div class="btn-group">
+                                        <%= link_to gen_card_project_task_path(task), :class => 'btn btn-default btn-xs', :target => '_blank' do %>
+                                            <i class="fa fa-drivers-license-o"></i> <%= t(:card) %>
+                                        <% end %>
                                         <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
                                             <i class="fa fa-edit"></i> <%= t('action.edit') %>
                                         <% end if can?(:edit, ProjectTask) && task.can_be_edited_by(current_user) %>
-                                        <%= link_to gen_card_project_task_path(task), :class => 'btn btn-default btn-xs', :target => '_blank' do %>
-                                            <i class="fa fa-drivers-license-o"></i> <%= t(:card) %>
-                                        <% end if task.can_show? %>
                                         <%= link_to project_task_path(task), :class => 'btn btn-primary btn-xs' do %>
                                             <i class="fa fa-file"></i> <%= t('action.detail') %>
                                         <% end if task.can_show? %>
