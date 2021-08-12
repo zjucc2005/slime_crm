@@ -110,7 +110,7 @@ class ProjectTask < ApplicationRecord
       when :expert_title   then self.expert.latest_work_experience.try(:title)
       when :expert_description then self.expert.description
       when :expert_rate    then self.expert_rate
-      when :expert_unit_price then self._expert_unit_price_
+      when :expert_unit_price then self._expert_unit_price_.to_i
       else nil
     end
   end
