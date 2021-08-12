@@ -34,12 +34,12 @@
                         <td><%= task.duration %></td>
                         <td class="action">
                             <div class="btn-group">
+                                <%= link_to gen_card_project_task_path(task), :class => 'btn btn-default btn-xs', :target => '_blank', :title => t(:card) do %>
+                                    <i class="fa fa-drivers-license-o"></i>
+                                <% end %>
                                 <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs', :title => t('action.edit') do %>
                                     <i class="fa fa-edit"></i>
                                 <% end if can?(:edit, ProjectTask) && @can_operate && task.can_be_edited_by(current_user) %>
-                                <%= link_to gen_card_project_task_path(task), :class => 'btn btn-default btn-xs', :target => '_blank', :title => t(:card) do %>
-                                    <i class="fa fa-drivers-license-o"></i>
-                                <% end if task.can_show? %>
                                 <%= link_to project_task_path(task), :class => 'btn btn-primary btn-xs', :title => t('action.detail') do %>
                                     <i class="fa fa-file"></i>
                                 <% end if task.can_show? %>

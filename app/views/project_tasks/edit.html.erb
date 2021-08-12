@@ -5,6 +5,21 @@
     </div>
 
     <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-column flex-lg-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@project_task.project.uid}" %></span>
+                    <span><%= @project_task.project.name %></span>
+                </h6>
+
+                <div class="btn-group btn-group-sm">
+                    <%= link_to gen_card_project_task_path(@project_task), :class => 'btn btn-default', :target => '_blank' do %>
+                        <i class="fa fa-drivers-license-o"></i> <%= t(:card) %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
         <%= form_for @project_task do |f| %>
             <%= model_error_tag(@project_task) %>
 
