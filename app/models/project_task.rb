@@ -117,7 +117,7 @@ class ProjectTask < ApplicationRecord
 
   def _expert_unit_price_
     if charge_rate
-      res = charge_rate
+      res = charge_rate * expert_rate.to_d
     else
       contract = active_contract
       res = contract ? contract.charge_rate * expert_rate.to_d : 0
