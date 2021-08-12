@@ -110,18 +110,19 @@ class ProjectTask < ApplicationRecord
       when :expert_title   then self.expert.latest_work_experience.try(:title)
       when :expert_description then self.expert.description
       when :expert_rate    then self.expert_rate
-      when :expert_unit_price then self._expert_unit_price_.to_i
+      when :expert_unit_price then self._expert_unit_price_
       else nil
     end
   end
 
   def _expert_unit_price_
     if charge_rate
-      charge_rate
+      res = charge_rate
     else
       contract = active_contract
-      contract ? contract.charge_rate * expert_rate.to_d : nil
+      res = contract ? contract.charge_rate * expert_rate.to_d : 0
     end
+    res == res.ceil ? res.to_i : res
   end
 
   private
