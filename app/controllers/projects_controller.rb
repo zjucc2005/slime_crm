@@ -1,4 +1,10 @@
 # encoding: utf-8
+require 'rubyXL/convenience_methods/cell'
+require 'rubyXL/convenience_methods/color'
+require 'rubyXL/convenience_methods/font'
+require 'rubyXL/convenience_methods/workbook'
+require 'rubyXL/convenience_methods/worksheet'
+
 class ProjectsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
@@ -374,6 +380,20 @@ class ProjectsController < ApplicationController
     @project_tasks = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
+  # POST /projects/:id/export_billing_excel?template=1&close_or_not=false
+  def export_billing_excel
+    load_project
+    begin
+      case params[:template]
+        when 'atkins_insights_usage_report' then export_atkins_insights_usage_report(@project)
+        else raise('params error')
+      end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to project_path(@project)
+    end
+  end
+
   private
   def load_project
     @project = Project.find(params[:id])
@@ -399,5 +419,74 @@ class ProjectsController < ApplicationController
   # 加载客户公司
   def load_signed_company_options
     @signed_company_options = user_channel_filter(Company.signed).pluck(:name, :id)
+  end
+
+  def export_atkins_insights_usage_report(project)
+    template_path = 'public/templates/atkins_insights_usage_report_template.xlsx'
+    raise 'template file not found' unless File.exist?(template_path)
+    query = project.project_tasks.where(status: 'finished').order(:started_at => :asc)
+    raise 'project task not found' if query.count == 0
+
+    book = ::RubyXL::Parser.parse(template_path)  # read from template file
+    sheet = book[0]
+
+    # 主体
+    row = 1
+    query.each do |task|
+      sheet.add_cell(row, 0, task.project.company.name)                                       # A, Client
+      sheet.add_cell(row, 1, task.project.name)                                               # B, Project
+      sheet.add_cell(row, 2, task.project.code)                                               # C, Project Code
+      sheet.add_cell(row, 3, task.client.name)                                                # D, Seat
+      sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M'))                            # E, Date
+      sheet.add_cell(row, 5, {'face-to-face' => 'F2F contact'}[task.interview_form] || task.interview_form.capitalize)  # F, Type of Activity
+      sheet.add_cell(row, 6, task.expert.mr_name)                                             # G, Expert
+      exp = task.expert.latest_work_experience
+      if exp
+        sheet.add_cell(row, 7, exp.org_cn)                                                    # H, Expert Company
+        sheet.add_cell(row, 8, exp.title)                                                     # I, Expert Title
+      end
+      sheet.add_cell(row, 9, task.expert_level.capitalize)                                    # J, Expert Level
+      sheet.add_cell(row, 10, task.expert_rate)                                               # K, Rate
+      sheet.add_cell(row, 11, task.duration)                                                  # L, Duration/mins
+      sheet.add_cell(row, 12, (task.charge_duration / 60.0).round(2))                         # M, Charge Hour
+      sheet.add_cell(row, 13, task.base_price)                                                # N, Fee
+      sheet.add_cell(row, 14, {'RMB' => 'CNY'}[task.currency] || task.currency)               # O, Currency
+      sheet.add_cell(row, 15, '')                                                             # P, Comment
+      sheet.add_cell(row, 16, task.shorthand_price > 0 ? task.shorthand_price.to_i : '')      # Q, Shorthand
+
+      # 格式设定
+      (0..16).each {|i|
+        sheet[row][i].change_border(:bottom, :thin)
+        sheet[row][i].change_border(:right, :thin)
+      }
+      row += 1
+    end
+
+    # 汇总 - 左边
+    sheet.add_cell(row+2, 12, '')
+    sheet.add_cell(row+3, 12, 'Shorthand')
+    sheet.add_cell(row+4, 12, ' +Tax(VAT)')
+    sheet.add_cell(row+5, 12, 'Total')
+    # 汇总 - 右边
+    sheet.add_cell(row+2, 13, '', "SUM(N2:N#{row})")
+    sheet.add_cell(row+3, 13, '', "SUM(Q2:Q#{row})")
+    sheet.add_cell(row+4, 13, '', "SUM(N#{row+2}:N#{row+3})*0.06")
+    sheet.add_cell(row+5, 13, '', "SUM(N#{row+2}:N#{row+4})")
+    # 汇总 - 格式设定
+    (12..13).each {|i|
+      sheet[row+2][i].change_border(:top, :thin)
+      sheet[row+5][i].change_border(:top, :thin)
+      sheet[row+5][i].change_border(:bottom, :thin)
+    }
+    (2..5).each {|i|
+      sheet[row+i][12].change_border(:left, :thin)
+      sheet[row+i][13].change_border(:right, :thin)
+    }
+
+    file_dir = "public/export/#{Time.now.strftime('%y%m%d')}"
+    FileUtils.mkdir_p file_dir unless File.exist? file_dir
+    file_path = "#{file_dir}/atkins_insights_usage_report_#{project.code}_#{Time.now.strftime('%Y%m%d')}.xlsx"
+    book.write file_path
+    send_file file_path
   end
 end

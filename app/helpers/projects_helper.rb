@@ -1,5 +1,9 @@
 module ProjectsHelper
 
+  def project_export_billing_template_options
+    [['Atkins Insights usage report', 'atkins_insights_usage_report']]
+  end
+
   def project_options
     query = current_user.admin? ? Project.all : current_user.projects
     query = user_channel_filter(query)

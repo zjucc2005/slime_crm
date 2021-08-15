@@ -13,6 +13,10 @@
                 </h6>
                 <% if can?(:edit, Project) && @can_operate %>
                     <div class="btn-group btn-group-sm">
+                        <div class="btn-group btn-group-sm">
+                            <%= render :partial => 'projects/widgets/export_billing_modal', :locals => { :project => @project } %>
+                        </div>
+
                         <%= link_to start_project_path(@project), :method => :put, :class => 'btn btn-success', :data => { :confirm => t(:sure)}  do %>
                             <%= fa_icon_tag('edit') %> <%= mt(:project, :start) %>
                         <% end if can?(:start, Project) && @project.can_start? %>
