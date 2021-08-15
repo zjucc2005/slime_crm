@@ -88,6 +88,8 @@ Rails.application.routes.draw do
 
     get :experts,       on: :member
     get :project_tasks, on: :member
+
+    post :export_billing_excel, on: :member
   end
 
   resources :project_requirements do

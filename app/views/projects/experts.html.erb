@@ -19,7 +19,7 @@
                     <% end %>
                     <%= link_to candidates_path(project_id: @project.id, from_source: 'project'), :class => 'btn btn-primary btn-xs' do %>
                         <%= fa_icon_tag('plus') %> <%= t('action.add') %>
-                    <% end if can?(:index, Candidate) && @can_operate && @project.can_edit? %>
+                    <% end if can?(:index, Candidate) && can?(:add_experts, Project) && @can_operate && @project.can_edit? %>
                 </div>
             </div>
         </div>

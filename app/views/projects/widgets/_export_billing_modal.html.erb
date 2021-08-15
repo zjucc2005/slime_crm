@@ -1,0 +1,35 @@
+<%= button_tag :type => 'button', :class => 'btn btn-default', :data => { :toggle => 'modal', :target => '#exportBillingModal'} do %>
+    <%= fa_icon_tag('file-excel-o') %> <%= t(:project_billing_excel) %>
+<% end %>
+
+<div id="exportBillingModal" class="modal fade" tabindex="-1" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%= t(:project_billing_excel) %></h4>
+                <button type="button" data-dismiss="modal" class="close">&times;</button>
+            </div>
+
+            <%= form_tag export_billing_excel_project_path(project), :method => :post do %>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12 col-12 form-group">
+                            <%= label_tag :template, t(:template) %><span class="text-red">*</span>
+                            <%= select_tag :template, options_for_select(project_export_billing_template_options, params[:template]),
+                                           :prompt => default_prompt, :required => true, :class => 'form-control select2' %>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+<script>
+    $('button[data-dismiss=modal]').click(function(){
+        window.location = '<%= request.url %>';
+    })
+</script>
