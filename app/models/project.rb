@@ -98,6 +98,8 @@ class Project < ApplicationRecord
     if self.user_channel_id == user.user_channel_id
       if user.admin?
         true
+      elsif user.role == 'finance'
+        true
       else
         self.project_users.where(user_id: user.id).count > 0
       end
