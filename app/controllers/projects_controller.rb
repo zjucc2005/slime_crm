@@ -470,8 +470,8 @@ class ProjectsController < ApplicationController
     # 汇总 - 右边
     sheet.add_cell(row+2, 13, '', "SUM(N2:N#{row})")
     sheet.add_cell(row+3, 13, '', "SUM(Q2:Q#{row})")
-    sheet.add_cell(row+4, 13, '', "SUM(N#{row+2}:N#{row+3})*0.06")
-    sheet.add_cell(row+5, 13, '', "SUM(N#{row+2}:N#{row+4})")
+    sheet.add_cell(row+4, 13, '', "(N#{row+3}+N#{row+4})*0.06")
+    sheet.add_cell(row+5, 13, '', "SUM(N#{row+3}:N#{row+5})")
     # 汇总 - 格式设定
     (12..13).each {|i|
       sheet[row+2][i].change_border(:top, :thin)
