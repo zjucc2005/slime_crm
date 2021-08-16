@@ -98,6 +98,11 @@ class Candidate < ApplicationRecord
     "#{uid} #{name}"
   end
 
+  # nickname 优先
+  def if_nickname
+    nickname.present? ? nickname : name
+  end
+
   def work_experiences
     experiences.work  # 定义属性
   end

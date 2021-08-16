@@ -183,8 +183,8 @@ class FinanceController < ApplicationController
       sheet.add_cell(row, 0, task.project.company.name_abbr)          # 客户(公司)/Client
       sheet.add_cell(row, 1, task.project.name)                       # 项目名称/Project
       sheet.add_cell(row, 2, task.project.code)                       # 项目代码/Project code
-      sheet.add_cell(row, 3, task.project.clients.first.try(:name))   # 负责人/Seat
-      sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M'))  # 日期/Date
+      sheet.add_cell(row, 3, task.project.clients.first.try(:if_nickname))  # 负责人/Seat
+      sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M'))    # 日期/Date
       interview_form = case category
                          when 'cn' then ProjectTask::INTERVIEW_FORM[task.interview_form]
                          when 'en' then task.interview_form.capitalize
@@ -211,7 +211,7 @@ class FinanceController < ApplicationController
       sheet.add_cell(row, 17, task.shorthand_price)                   # 速记费/Shorthand Fee
       sheet.add_cell(row, 18, task.expert.new_expert? ? 'Y' : 'N')    # 新专家/New Expert
       sheet.add_cell(row, 19, task.pm.name_cn)                        # 项目经理/PM
-      sheet.add_cell(row, 20, task.creator.name_cn)                   # 专家招募/Research(creator)
+      sheet.add_cell(row, 20, task.pa.name_cn)                        # 专家招募/Research(creator)
       sheet.add_cell(row, 21, task.expert.cpt)                        # 专家基础费率
       # 支出信息
       expert_cost = task.costs.where(category: 'expert').first
@@ -244,31 +244,33 @@ class FinanceController < ApplicationController
     query = query.joins("LEFT JOIN project_task_costs ON project_task_costs.project_task_id = project_tasks.id AND project_task_costs.category = 'expert' ").
       order("project_task_costs.payment_info ->> 'category' ASC")
 
+    sum_price = 0
+    row = 1
     query.each_with_index do |task, index|
-      cost = task.costs.where(category: 'expert').first
-      row = index + 1
-      if cost.nil?
-        10.times{|i| sheet.add_cell(row, i, '') }
-        next
-      end
-      sheet.add_cell(row, 0, '')                                                             # 序号
-      sheet.add_cell(row, 1, '')                                                             # 是否兴业银行
-      sheet.add_cell(row, 2, CandidatePaymentInfo::CATEGORY[cost.payment_info['category']])  # 支付宝/银联
-      sheet.add_cell(row, 3, cost.payment_info['account'])                                   # 收款账号
-      sheet.add_cell(row, 4, cost.payment_info['username'])                                  # 收款户名
-      sheet.add_cell(row, 5, '')
-      if cost.payment_info['category'] == 'unionpay'
-        sheet.add_cell(row, 5, [cost.payment_info['bank'], cost.payment_info['sub_branch']].join)  # 收款银行及营业网点
-      end
-      sheet.add_cell(row, 6, '')                                                             # 是否同城
-      sheet.add_cell(row, 7, '')                                                             # 汇入地址
-      sheet.add_cell(row, 8, cost.price)                                                     # 转账金额
-      sheet.add_cell(row, 9, '')                                                             # 转账用途
+      task.costs.each do |cost|
+        sheet.add_cell(row, 0, '')                                                             # A, 序号
+        sheet.add_cell(row, 1, '')                                                             # B, 是否兴业银行
+        sheet.add_cell(row, 2, CandidatePaymentInfo::CATEGORY[cost.payment_info['category']])  # C, 支付宝/银联
+        sheet.add_cell(row, 3, cost.payment_info['account'])                                   # D, 收款账号
+        sheet.add_cell(row, 4, cost.payment_info['username'])                                  # E, 收款户名
+        sheet.add_cell(row, 5, '')
+        if cost.payment_info['category'] == 'unionpay'
+          sheet.add_cell(row, 5, [cost.payment_info['bank'], cost.payment_info['sub_branch']].join)  # F, 收款银行及营业网点
+        end
+        sheet.add_cell(row, 6, '')                                                             # G, 是否同城
+        sheet.add_cell(row, 7, '')                                                             # H, 汇入地址
+        sheet.add_cell(row, 8, cost.price)                                                     # I, 转账金额
+        sheet.add_cell(row, 9, '')                                                             # J, 转账用途
+        sheet.add_cell(row, 10, task.started_at.strftime('%F'))                                # K, 访谈日期
+        sheet.add_cell(row, 11, task.pm.name_cn)                                               # L, 项目助理
+        sheet.add_cell(row, 12, task.expert.phone)                                             # M, 手机号
 
-      sum_price += cost.price
+        sum_price += cost.price
+        row += 1
+      end
     end
-    sheet.add_cell(query.count + 1, 8, sum_price)                                            # 金额汇总
-    sheet.add_cell(query.count + 1, 9, (sum_price / 0.95).round(2))                          # 金额汇总 / 0.95
+    sheet.add_cell(row, 8, sum_price)                                                          # 金额汇总
+    sheet.add_cell(row, 9, (sum_price / 0.95).round(2))                                        # 金额汇总 / 0.95
   end
 
 end

@@ -436,7 +436,7 @@ class ProjectsController < ApplicationController
       sheet.add_cell(row, 0, task.project.company.name)                                       # A, Client
       sheet.add_cell(row, 1, task.project.name)                                               # B, Project
       sheet.add_cell(row, 2, task.project.code)                                               # C, Project Code
-      sheet.add_cell(row, 3, task.client.name)                                                # D, Seat
+      sheet.add_cell(row, 3, task.client.if_nickname)                                         # D, Seat
       sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M'))                            # E, Date
       sheet.add_cell(row, 5, {'face-to-face' => 'F2F contact'}[task.interview_form] || task.interview_form.capitalize)  # F, Type of Activity
       sheet.add_cell(row, 6, task.expert.mr_name)                                             # G, Expert
