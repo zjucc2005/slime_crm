@@ -264,7 +264,7 @@ class FinanceController < ApplicationController
         sheet.add_cell(row, 10, task.started_at.strftime('%F'))                                # K, 访谈日期
         sheet.add_cell(row, 11, task.pm.name_cn)                                               # L, 项目助理
         sheet.add_cell(row, 12, task.expert.phone)                                             # M, 手机号
-        sheet.add_cell(row, 12, task.expert.mr_name)                                           # N, 专家姓名
+        sheet.add_cell(row, 13, task.expert.mr_name)                                           # N, 专家姓名
 
         sum_price += cost.price
         row += 1
