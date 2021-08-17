@@ -46,7 +46,7 @@ class CandidatesController < ApplicationController
       end
       query = query.distinct  # 去重
     end
-    @candidates = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => @per_page)
+    @candidates = query.order('is_available DESC nulls last, created_at DESC').paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /candidates/:id
