@@ -101,6 +101,7 @@ class ProjectTask < ApplicationRecord
       when :interview_form then self.interview_form.capitalize
       when :pa             then self.pa.name_cn
       when :start_time     then (self.started_at.strftime('%F %H:%M') rescue nil)
+      when :start_time_fwt then self._start_time_fwt_
       when :end_time       then (self.ended_at.strftime('%F %H:%M') rescue nil)
       when :expert_level   then self.expert_level == 'premium' ? 'Premium Expert' : 'Standard Expert'
       when :expert_uid     then self.expert.uid
@@ -123,6 +124,15 @@ class ProjectTask < ApplicationRecord
       res = contract ? contract.charge_rate * expert_rate.to_d : 0
     end
     res == res.ceil ? res.to_i : res
+  end
+
+  def _start_time_fwt_
+    begin
+      wday = %w[周日 周一 周二 周三 周四 周五 周六][started_at.wday]
+      started_at.strftime("%Y年%m月%d日(#{wday})%H:%M")
+    rescue
+      nil
+    end
   end
 
   private
