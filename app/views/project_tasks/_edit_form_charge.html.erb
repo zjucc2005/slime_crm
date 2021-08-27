@@ -16,7 +16,12 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :pa %><span class="text-red">*</span>
-        <%= f.text_field :pa_id, :value => @project_task.pa.uid_name, :disabled => true, :class => 'form-control' %>
+        <% if current_user.id == @project_task.pm_id %>
+            <% @project = @project_task.project %>
+            <%= f.select :pa_id, project_task_pa_options, { :include_blank => false }, :class => 'form-control select2' %>
+        <% else %>
+            <%= f.text_field :pa_id, :value => @project_task.pa.uid_name, :disabled => true, :class => 'form-control' %>
+        <% end %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :interview_form %><span class="text-red">*</span>
