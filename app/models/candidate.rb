@@ -26,7 +26,7 @@ class Candidate < ApplicationRecord
   has_many :payment_infos, :class_name => 'CandidatePaymentInfo', :dependent => :destroy
   has_many :comments, :class_name => 'CandidateComment', :dependent => :destroy
 
-  has_many :project_candidates, :class_name => 'ProjectCandidate'
+  has_many :project_candidates, :class_name => 'ProjectCandidate', :dependent => :destroy
   has_many :projects, :class_name => 'Project', :through => :project_candidates
   has_many :project_tasks, :class_name => 'ProjectTask', :foreign_key => :expert_id
   has_many :candidate_access_logs, :class_name => 'CandidateAccessLog'
@@ -69,7 +69,7 @@ class Candidate < ApplicationRecord
     if self.category == 'client'
       self.projects.count == 0  # 未参与项目
     elsif self.category == 'expert'
-      self.projects.count == 0 && self.recommended_experts.count == 0  # 未参与项目 & 未推荐过其他专家
+      project_tasks.count.zero? && self.recommended_experts.count == 0  # 未参与项目 & 未推荐过其他专家
     end
   end
 
