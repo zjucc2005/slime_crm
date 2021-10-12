@@ -27,6 +27,7 @@ class ProjectTasksController < ApplicationController
       load_project_task
 
       if @project_task.update(project_task_params)
+        @project_task.project.last_update
         if params[:commit] == t('action.submit_and_confirm')
           @project_task.finished!
         end
@@ -131,6 +132,7 @@ class ProjectTasksController < ApplicationController
 
     if @project_task.can_cancel?
       @project_task.update(status: 'cancelled')
+      @project_task.project.last_update
       flash[:success] = t(:operation_succeeded)
     else
       flash[:error] = t(:operation_failed)

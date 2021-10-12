@@ -33,7 +33,7 @@ class ProjectTask < ApplicationRecord
   before_validation :setup, :on => [:create, :update]
   after_update :sync_payment_status
 
-  after_save do
+  after_create do
     project.last_update
   end
   # Scopes

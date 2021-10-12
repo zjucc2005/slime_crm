@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
       query = query.joins(:company).where('companies.name ILIKE :company OR companies.name_abbr ILIKE :company', { company: "%#{params[:company].strip}%" })
     end
 
-    @projects = query.order(:created_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    @projects = query.order(:updated_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /projects/new
