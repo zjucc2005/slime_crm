@@ -449,7 +449,7 @@ class ProjectsController < ApplicationController
       sheet.add_cell(row, 10, task.expert_rate)                                               # K, Rate
       sheet.add_cell(row, 11, task.duration)                                                  # L, Duration/mins
       sheet.add_cell(row, 12, (task.charge_duration / 60.0).round(2))                         # M, Charge Hour
-      sheet.add_cell(row, 13, task.base_price)                                                # N, Fee
+      sheet.add_cell(row, 13, task.actual_price)                                              # N, Fee
       sheet.add_cell(row, 14, {'RMB' => 'CNY'}[task.currency] || task.currency)               # O, Currency
       sheet.add_cell(row, 15, '')                                                             # P, Comment
       sheet.add_cell(row, 16, task.shorthand_price > 0 ? task.shorthand_price.to_i : '')      # Q, Shorthand
