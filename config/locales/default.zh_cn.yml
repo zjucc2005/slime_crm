@@ -54,6 +54,7 @@ zh_cn:
   payment_info: "支出信息"
   project_billing_excel: "导出项目财务表格"
   project_can_only_have_one_pm: "项目中只能存在一位项目经理"
+  project_code_blank: "项目编码为空"
   project_id: "项目ID"
   related_projects: "关联项目"
   reset_password: "重置密码"

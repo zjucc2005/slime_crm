@@ -54,6 +54,7 @@ en:
   payment_info: "Payment info"
   project_billing_excel: "Export Project Billing Excel"
   project_can_only_have_one_pm: "Project can only have one PM"
+  project_code_blank: "Project code is blank"
   project_id: "Project ID"
   related_projects: "Related projects"
   reset_password: "Reset password"

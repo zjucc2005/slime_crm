@@ -36,7 +36,12 @@
                         <td><%= content_tag :span, nil, :class => 'status valid' if project.project_users.exists?(user_id: current_user.id) %></td>
                         <td><%= link_to project.name, project_path(project) %></td>
                         <td><%= project.clients.first.name rescue '' %></td>
-                        <td><%= project.code %></td>
+                        <td style="position: relative;">
+                            <%= project.code %>
+                            <%= content_tag :span, class: 'bubble-list' do %>
+                                <i class="fa fa-warning"></i> <%= t(:project_code_blank) %>
+                            <% end if project.code.blank? %>
+                        </td>
                         <td><%= project.company.name_abbr %></td>
                         <td><%= project.total_project_tasks %></td>
                         <td><%= project.total_charge_duration %> <%= t(:hour) %></td>

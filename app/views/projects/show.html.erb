@@ -62,6 +62,9 @@
                     <span class="input-group-text"><%= mt(:project, :code) %></span>
                 </div>
                 <%= content_tag :span, @project.code, :class => 'form-control' %>
+                <%= content_tag :span, class: 'bubble' do %>
+                    <i class="fa fa-warning"></i> <%= t(:project_code_blank) %>
+                <% end if @project.code.blank? %>
             </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
@@ -93,3 +96,9 @@
 
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+</script>

@@ -50,6 +50,15 @@ a {
 
 .bg-red { background-color: #F0404C !important; }
 
+.bubble { color: #dc3545; font-size: 14px; border-radius: 0.5rem; padding: 3px 12px;
+  background: rgba(255,182,193, .7); position: absolute; top: -16px; right: 0;
+}
+.bubble:after { content:''; position:absolute; top:100%; left: 0; width:16px; height: 8px; border-width: 0; border-style: solid;
+  border-color: transparent; margin-top: 0; border-right-width: 6px; border-right-color: currentColor;
+  border-radius:0 0 32px 0; color: rgba(255,182,193, .7); }
+.bubble-list { color: #dc3545; font-size: 12px; border-radius: 0.5rem; padding: 3px 6px;
+  background: rgba(255,182,193, .7); }
+
 .dropdown-menu.fa-fixed .fa {
     width: 24px;
 }
