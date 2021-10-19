@@ -46,8 +46,8 @@ class CandidatesController < ApplicationController
       end
       query = query.distinct  # 去重
     end
-    is_available_order = '(CASE WHEN is_available=TRUE THEN 2 WHEN is_available IS NULL THEN 1 ELSE 0 END) DESC'
-    @candidates = query.order("#{is_available_order}, created_at DESC").paginate(:page => params[:page], :per_page => @per_page)
+    # is_available_order = '(CASE WHEN is_available=TRUE THEN 2 WHEN is_available IS NULL THEN 1 ELSE 0 END) DESC'
+    @candidates = query.order("created_at DESC").paginate(:page => params[:page], :per_page => @per_page)
   end
 
   # GET /candidates/:id
