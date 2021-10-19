@@ -29,7 +29,7 @@ class CandidatesController < ApplicationController
       end
       and_conditions = []
       # or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title candidate_experiences.description]
-      or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_comments.content]
+      or_fields = %w[candidates.description candidate_experiences.org_cn candidate_experiences.org_en candidate_experiences.title candidate_comments.content]
       @terms.each do |term|
         # and_conditions << "(#{or_fields.map{|field| "#{field} ~* '#{term}'" }.join(' OR ')})"
         and_conditions << "(#{or_fields.map{|f| "coalesce(#{f},'')" }.join(' || ')} ~* '#{term}')"
