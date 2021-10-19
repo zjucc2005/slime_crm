@@ -40,7 +40,7 @@
                             <%= project.code %>
                             <%= content_tag :span, class: 'bubble-list' do %>
                                 <i class="fa fa-warning"></i> <%= t(:project_code_blank) %>
-                            <% end if project.code.blank? %>
+                            <% end if project.code.blank? && project.company.name_abbr == 'BCG' %>
                         </td>
                         <td><%= project.company.name_abbr %></td>
                         <td><%= project.total_project_tasks %></td>

@@ -64,7 +64,7 @@
                 <%= content_tag :span, @project.code, :class => 'form-control' %>
                 <%= content_tag :span, class: 'bubble' do %>
                     <i class="fa fa-warning"></i> <%= t(:project_code_blank) %>
-                <% end if @project.code.blank? %>
+                <% end if @project.code.blank? && @project.company.name_abbr == 'BCG' %>
             </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
