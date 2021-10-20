@@ -220,6 +220,7 @@ zh_cn:
       project:
         name: "项目名称"
         code: "项目编码"
+        code_area: "编码归属地"
         company: "客户公司"
         status: "状态"
         industry: "行业"

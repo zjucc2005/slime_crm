@@ -39,6 +39,10 @@
                                 <%= text_field_tag :code, params[:code], :class => 'form-control' %>
                             </div>
                             <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :code_area, mt(:project, :code_area) %>
+                                <%= text_field_tag :code_area, params[:code_area], :class => 'form-control' %>
+                            </div>
+                            <div class="col-lg-3 col-6 form-group">
                                 <%= label_tag :status, mt(:project, :status) %>
                                 <%= select_tag :status, options_for_select(Project::STATUS.to_a.map(&:reverse), params[:status]),
                                                :prompt => default_prompt, :class => 'form-control select2' %>

@@ -57,7 +57,7 @@
                 </div>
                 <%= content_tag :span, @project.name, :class => 'form-control' %>
             </div>
-            <div class="col-lg-6 col-12 input-group input-group-sm input-group-align">
+            <div class="col-lg-3 col-12 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><%= mt(:project, :code) %></span>
                 </div>
@@ -65,6 +65,12 @@
                 <%= content_tag :span, class: 'bubble' do %>
                     <i class="fa fa-warning"></i> <%= t(:project_code_blank) %>
                 <% end if @project.code.blank? && @project.company.name_abbr == 'BCG' %>
+            </div>
+            <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><%= mt(:project, :code_area) %></span>
+                </div>
+                <%= content_tag :span, @project.code_area, :class => 'form-control' %>
             </div>
             <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
                 <div class="input-group-prepend">

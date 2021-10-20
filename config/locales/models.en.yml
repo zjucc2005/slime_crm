@@ -191,6 +191,7 @@ en:
       project:
         name: "Project name"
         code: "Project code"
+        code_area: "Code Area"
         company: "Client company"
         status: "Status"
         industry: "Industry"

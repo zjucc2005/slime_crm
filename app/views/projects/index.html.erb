@@ -19,6 +19,7 @@
                     <th><%= mt(:project, :name) %></th>
                     <th><%= t(:client_contact) %></th>
                     <th><%= mt(:project, :code) %></th>
+                    <th><%= mt(:project, :code_area) %></th>
                     <th><%= mt(:company, :name_abbr) %></th>
                     <th><%= mt(:project, :total_project_tasks) %></th>
                     <th><%= mt(:project, :total_charge_duration) %></th>
@@ -42,6 +43,7 @@
                                 <i class="fa fa-warning"></i> <%= t(:project_code_blank) %>
                             <% end if project.code.blank? && project.company.name_abbr == 'BCG' %>
                         </td>
+                        <td><%= project.code_area %></td>
                         <td><%= project.company.name_abbr %></td>
                         <td><%= project.total_project_tasks %></td>
                         <td><%= project.total_charge_duration %> <%= t(:hour) %></td>

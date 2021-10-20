@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_17_041917) do
+ActiveRecord::Schema.define(version: 2021_10_20_120808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -275,6 +275,7 @@ ActiveRecord::Schema.define(version: 2021_07_17_041917) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_channel_id"
+    t.string "code_area"
     t.index ["company_id"], name: "index_projects_on_company_id"
     t.index ["user_channel_id"], name: "index_projects_on_user_channel_id"
   end

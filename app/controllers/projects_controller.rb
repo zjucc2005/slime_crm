@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     query = user_channel_filter(query)
     query = query.where('created_at >= ?', params[:created_at_ge]) if params[:created_at_ge].present?
     query = query.where('created_at <= ?', params[:created_at_le]) if params[:created_at_le].present?
-    %w[name code].each do |field|
+    %w[name code code_area].each do |field|
       query = query.where("#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
     end
     %w[id status user_channel_id].each do |field|
@@ -401,11 +401,11 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:company_id, :name, :code, :industry)
+    params.require(:project).permit(:company_id, :name, :code, :code_area, :industry)
   end
 
   def project_params_update
-    params.require(:project).permit(:name, :code, :industry, :requirement, :started_at, :ended_at)
+    params.require(:project).permit(:name, :code, :code_area, :industry, :requirement, :started_at, :ended_at)
   end
 
   def project_task_params
