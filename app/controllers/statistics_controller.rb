@@ -88,6 +88,9 @@ class StatisticsController < ApplicationController
       company = Company.find(item.company_id)
       { id: company.id, name: company.name, name_abbr: company.name_abbr, count: item.count }
     end
+    if @result.blank?
+      @result = [{ name: 'NO DATA', name_abbr: 'NO DATA', count: 0 }]  # friendly show for chart
+    end
     # test data
     # @result = [
     #     { name: '昆仑', name_abbr: '昆仑', count: 100 },
