@@ -60,8 +60,10 @@ class StatisticsController < ApplicationController
         result << { :username => user.name_cn, :pm_minutes => pm_minutes, :pa_minutes => pa_minutes, :total_minutes => total_minutes }
       end
     end
-
     @current_month_task_ranking = result.sort_by{|e| e[:total_minutes]}.reverse
+    if params[:limit].present?
+      @current_month_task_ranking = @current_month_task_ranking[0, params[:limit]]
+    end
     respond_to do |f|
       f.js
       f.html
@@ -84,7 +86,7 @@ class StatisticsController < ApplicationController
     end
     @result = group_data.map do |item|
       company = Company.find(item.company_id)
-      { name: company.name, name_abbr: company.name_abbr, count: item.count }
+      { id: company.id, name: company.name, name_abbr: company.name_abbr, count: item.count }
     end
     # test data
     # @result = [
