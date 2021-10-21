@@ -115,6 +115,7 @@ en:
     category: "Category"
     current_month_increase: "Current Month Increase"
     current_month_charge_duration_ranking: "Current Month Charge Duration Ranking"
+    current_month_call_ranking_by_company: "Current Month Call Ranking"
     detail: "Detail"
     expense: "Expense"
     expense_expert: "Expert Fee"

@@ -68,6 +68,43 @@ class StatisticsController < ApplicationController
     end
   end
 
+  # GET /statistics/current_month_call_ranking?limit=10
+  def current_month_call_ranking
+    current_month = Time.now.beginning_of_month
+    @month_options = []
+    12.times do |i|
+      _month_ = current_month - i.month
+      @month_options << [_month_.strftime('%Y-%m'), _month_.strftime('%F')]
+    end
+    s_month = (params[:month].to_time rescue nil) || current_month  # 统计月份
+    query = ProjectTask.joins(:project).where('project_tasks.status': 'finished').where('project_tasks.started_at BETWEEN ? AND ?', s_month, s_month + 1.month)
+    group_data = query.select('projects.company_id AS company_id, COUNT(*) AS count').group('company_id').order('count DESC')
+    if params[:limit].present?
+      group_data = group_data.limit(params[:limit])
+    end
+    @result = group_data.map do |item|
+      company = Company.find(item.company_id)
+      { name: company.name, name_abbr: company.name_abbr, count: item.count }
+    end
+    # test data
+    # @result = [
+    #     { name: '昆仑', name_abbr: '昆仑', count: 100 },
+    #     { name: '淡水泉', name_abbr: '淡水泉', count: 88 },
+    #     { name: 'RB', name_abbr: 'RB', count: 76 },
+    #     { name: '锶钟', name_abbr: '锶钟', count: 32 },
+    #     { name: '安永', name_abbr: '安永', count: 28 },
+    #     { name: '东方证券', name_abbr: '东方证券', count: 16 },
+    #     { name: 'WIW', name_abbr: 'WIW', count: 7 },
+    #     { name: 'L.E.K.', name_abbr: 'L.E.K.', count: 2 },
+    #     { name: 'LLL', name_abbr: 'LLL', count: 2 },
+    #     { name: 'C.C.', name_abbr: 'C.C.', count: 2 }
+    # ]
+    respond_to do |f|
+      f.js
+      f.html
+    end
+  end
+
   # GET /statistics/unscheduled_projects.js
   def unscheduled_projects
     query = Project.where(status: 'initialized').order(:created_at => :asc)

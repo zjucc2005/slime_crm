@@ -1,0 +1,71 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">
+            <%= fa_icon_tag('sort-amount-desc') %>
+            <%= t('dashboard.current_month_call_ranking_by_company') %>
+        </h5>
+        <%= link_to fa_icon_tag('close'), root_path, :class => 'card-header-close' %>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-3 col-12">
+                <%= form_tag request.path, :method => :get do %>
+                    <div class="form-group">
+                        <%= label_tag :month, t('dashboard.statistical_month') %>
+                        <%= select_tag :month, options_for_select(@month_options, params[:month]), :class => 'form-control select2' %>
+                    </div>
+                    <div class="form-group">
+                        <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                    </div>
+                <% end %>
+            </div>
+
+            <div class="col-lg-9 col-12">
+                <div id="chart" style="height: 600px;">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        let chart = echarts.init(document.getElementById('chart'), 'light');
+        let option = {
+            title: {
+                text: '<%= t('dashboard.current_month_call_ranking_by_company') %>',
+                subtext:  'Monthly Statistics'
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '0%',
+                right: '3%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                position: 'top',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                type: 'category',
+                data: <%= @result.map{|e| e[:name_abbr]}.reverse.to_json.html_safe %>,
+            },
+            series: [
+                {
+                    type: 'bar',
+                    data: <%= @result.map{|e| e[:count]}.reverse.to_json.html_safe %>
+                }
+            ]
+        };
+        chart.setOption(option);
+    });
+</script>

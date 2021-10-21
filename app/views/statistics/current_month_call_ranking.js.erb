@@ -1,0 +1,36 @@
+$(document).ready(function(){
+    let chart = echarts.init(document.getElementById('current_month_call_ranking_chart'), 'light');
+    let option = {
+        title: {
+        },
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        grid: {
+            top: '2%',
+            left: '1%',
+            right: '3%',
+            bottom: '2%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'value',
+            position: 'top',
+            boundaryGap: [0, 0.01]
+        },
+        yAxis: {
+            type: 'category',
+            data: <%= @result.map{|e| e[:name_abbr]}.reverse.to_json.html_safe %>,
+        },
+        series: [
+            {
+                type: 'bar',
+                data: <%= @result.map{|e| e[:count]}.reverse.to_json.html_safe %>
+            }
+        ]
+    };
+    chart.setOption(option);
+});

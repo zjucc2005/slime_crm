@@ -115,6 +115,7 @@ zh_cn:
     category: "类型"
     current_month_increase: "本月新增"
     current_month_charge_duration_ranking: "本月收费小时数排名"
+    current_month_call_ranking_by_company: "本月客户出Call量排名"
     detail: "详情"
     expense: "费用支出"
     expense_expert: "专家费用"
