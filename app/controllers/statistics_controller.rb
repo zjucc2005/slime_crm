@@ -62,7 +62,7 @@ class StatisticsController < ApplicationController
     end
     @current_month_task_ranking = result.sort_by{|e| e[:total_minutes]}.reverse
     if params[:limit].present?
-      @current_month_task_ranking = @current_month_task_ranking[0, params[:limit]]
+      @current_month_task_ranking = @current_month_task_ranking[0, params[:limit].to_i]
     end
     respond_to do |f|
       f.js
