@@ -125,6 +125,7 @@ Rails.application.routes.draw do
   resources :banks
   resources :industries
   resources :card_templates
+  resources :project_code_areas
 
   resources :statistics do
     get :current_month_count_infos,  on: :collection

@@ -60,6 +60,9 @@
                         <%= link_to industries_path, :class => 'dropdown-item' do %>
                             <%= fa_icon_tag('industry') %> <%= mt(:industry) %>
                         <% end if can?(:index, Industry) %>
+                        <%= link_to project_code_areas_path, class: 'dropdown-item' do %>
+                            <i class="fa fa-location-arrow"></i> <%= mt(:project_code_area) %>
+                        <% end if can?(:index, ProjectCodeArea) %>
                         <%= link_to import_gllue_candidates_extras_path, :class => 'dropdown-item' do %>
                             <%= fa_icon_tag('wrench') %> <%= t(:import_gllue_candidates) %>
                         <% end if can?(:import_gllue_candidates, Extra) %>

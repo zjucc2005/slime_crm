@@ -64,6 +64,7 @@ class Ability
     can :manage, LocationDatum
     can :manage, Bank
     can :manage, Industry
+    can :manage, ProjectCodeArea
     can :manage, CardTemplate
     can :manage, Extra
     # can :manage, Statistic
@@ -85,6 +86,7 @@ class Ability
     can :manage, LocationDatum
     can :manage, Bank
     can :read, Industry
+    can :manage, ProjectCodeArea
     can [:import_gllue_candidates], Extra
   end
 
@@ -104,6 +106,7 @@ class Ability
     can :manage, LocationDatum
     can :manage, Bank
     can :read, Industry
+    can :manage, ProjectCodeArea
     can [:import_gllue_candidates], Extra
   end
 
@@ -118,6 +121,7 @@ class Ability
     can :manage, LocationDatum
     can :read, Bank
     can :read, Industry
+    can :read, ProjectCodeArea
   end
 
   private

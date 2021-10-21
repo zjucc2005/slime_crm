@@ -24,6 +24,6 @@
     </div>
     <div class="col-lg-6 col-12 form-group">
         <%= f.label :code_area, mt(:project, :code_area) %>
-        <%= f.text_field :code_area, :class => 'form-control' %>
+        <%= f.select :code_area, project_code_area_options, { :include_blank => default_prompt }, :class => 'form-control select2' %>
     </div>
 </div>

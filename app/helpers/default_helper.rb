@@ -25,6 +25,10 @@ module DefaultHelper
     Industry.all.order(:name).pluck(:name)
   end
 
+  def project_code_area_options
+    ProjectCodeArea.all.order(:name).pluck(:name)
+  end
+
   def company_industry_options
     %w[咨询公司 公募基金 PE/VC 券商 企业客户]
   end

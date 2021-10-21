@@ -67,6 +67,7 @@ zh_cn:
       project: "项目"
       project_requirement: "项目需求"
       project_task: "项目任务"
+      project_code_area: "项目编码归属地"
       finance: "财务"
       card_template: "卡片模板"
 
@@ -294,3 +295,6 @@ zh_cn:
         payment_way: "支付类型"
         payment_status: "支付状态"
         payment_info: "支付信息"
+
+      project_code_area:
+        name: "名称"

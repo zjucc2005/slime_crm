@@ -38,6 +38,7 @@ en:
       project: "Project"
       project_requirement: "Project requirement"
       project_task: "Project task"
+      project_code_area: "Project code areas"
       finance: "Finance"
       card_template: "Card template"
 
@@ -265,3 +266,6 @@ en:
         payment_way: "Payment way"
         payment_status: "Payment status"
         payment_info: "Payment Info"
+
+      project_code_area:
+        name: "Name"
