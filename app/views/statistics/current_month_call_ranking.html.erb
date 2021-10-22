@@ -61,6 +61,11 @@
             series: [
                 {
                     type: 'bar',
+                    label: {
+                        show: true,
+                        position: 'right',
+                        valueAnimation: true
+                    },
                     data: <%= @result.map{ |e| e[:count][0] }.reverse.to_json.html_safe %>
                 }
             ]
