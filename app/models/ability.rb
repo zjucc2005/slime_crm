@@ -115,7 +115,7 @@ class Ability
     can [:read, :gen_card, :project_tasks, :comments, :payment_infos], Candidate
     can :manage, Company
     can :manage, Contract
-    can [:index, :show, :edit, :project_tasks, :experts, :export_billing_excel], Project
+    can [:index, :show, :edit, :update, :project_tasks, :experts, :export_billing_excel], Project
     can :manage, Finance
 
     can :manage, LocationDatum
