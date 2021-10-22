@@ -1,7 +1,19 @@
 <%= model_error_tag(@project_code_area) %>
 <div class="row">
-    <div class="col-12 form-group">
+    <div class="col-lg-4 form-group">
         <%= f.label :name %><span class="text-red">*</span>
-        <%= f.text_field :name, :class => 'form-control' %>
+        <%= f.text_field :name, required: true, class: 'form-control' %>
+    </div>
+    <div class="col-lg-4 form-group">
+        <%= f.label :company_name %>
+        <%= f.text_field :company_name, class: 'form-control' %>
+    </div>
+    <div class="col-lg-4 form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: 'form-control' %>
+    </div>
+    <div class="col-12 form-group">
+        <%= f.label :address %>
+        <%= f.text_area :address, rows: 4, class: 'form-control' %>
     </div>
 </div>

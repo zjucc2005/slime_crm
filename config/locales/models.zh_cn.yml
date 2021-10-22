@@ -298,3 +298,6 @@ zh_cn:
 
       project_code_area:
         name: "名称"
+        company_name: "公司名称"
+        address: "地址"
+        email: "邮箱"

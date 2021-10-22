@@ -30,6 +30,9 @@
             <tr>
                 <th><%= mt(:project_code_area, :id) %></th>
                 <th><%= mt(:project_code_area, :name) %></th>
+                <th><%= mt(:project_code_area, :company_name) %></th>
+                <th><%= mt(:project_code_area, :address) %></th>
+                <th><%= mt(:project_code_area, :email) %></th>
                 <th><%= mt(:project_code_area, :created_at) %></th>
                 <th><%= t(:operation) %></th>
             </tr>
@@ -39,6 +42,9 @@
                 <tr>
                     <td><%= content_tag :span, "# #{project_code_area.uid}", :class => 'text-gray' %></td>
                     <td><%= project_code_area.name %></td>
+                    <td><%= project_code_area.company_name %></td>
+                    <td style="white-space: pre-wrap;"><%= project_code_area.address %></td>
+                    <td><%= project_code_area.email %></td>
                     <td><%= project_code_area.created_at.strftime('%F %T') %></td>
                     <td>
                         <div class="btn-group">

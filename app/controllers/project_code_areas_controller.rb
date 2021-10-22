@@ -55,7 +55,7 @@ class ProjectCodeAreasController < ApplicationController
   private
 
   def project_code_area_params
-    params.require(:project_code_area).permit(:name)
+    params.require(:project_code_area).permit(:name, :company_name, :address, :email)
   end
 
   def load_project_code_area

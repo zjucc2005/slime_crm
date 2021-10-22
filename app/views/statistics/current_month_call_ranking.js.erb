@@ -28,8 +28,31 @@ $(document).ready(function(){
         series: [
             {
                 type: 'bar',
-                data: <%= @result.map{|e| e[:count]}.reverse.to_json.html_safe %>
-            }
+                name: '本月',
+                barWidth: '60%',
+                barGap: '10%',
+                label: {
+                    show: true,
+                    position: 'right',
+                    valueAnimation: true
+                },
+                data: <%= @result.map{ |e| e[:count][0] }.reverse.to_json.html_safe %>
+            },
+            {
+                type: 'bar',
+                name: '上月',
+                barWidth: '15%',
+                barGap: '10%',
+                label: {
+                    show: true,
+                    position: 'right',
+                    valueAnimation: true
+                },
+                itemStyle: {
+                    color: '#6c757d'
+                },
+                data: <%= @result.map{ |e| e[:count][1] }.reverse.to_json.html_safe %>
+            },
         ]
     };
     chart.setOption(option);

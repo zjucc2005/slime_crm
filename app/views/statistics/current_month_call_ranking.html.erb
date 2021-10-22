@@ -61,7 +61,7 @@
             series: [
                 {
                     type: 'bar',
-                    data: <%= @result.map{|e| e[:count]}.reverse.to_json.html_safe %>
+                    data: <%= @result.map{ |e| e[:count][0] }.reverse.to_json.html_safe %>
                 }
             ]
         };

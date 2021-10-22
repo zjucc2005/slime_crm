@@ -121,7 +121,7 @@ class Ability
     can :manage, LocationDatum
     can :read, Bank
     can :read, Industry
-    can :read, ProjectCodeArea
+    can :manage, ProjectCodeArea
   end
 
   private

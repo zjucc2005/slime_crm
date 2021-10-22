@@ -70,7 +70,8 @@ class StatisticsController < ApplicationController
     end
   end
 
-  # GET /statistics/current_month_call_ranking?limit=10
+  # GET /statistics/current_month_call_ranking?limit=10&mode=b
+  # mode: b, 双月比较模式
   def current_month_call_ranking
     current_month = Time.now.beginning_of_month
     @month_options = []
@@ -86,23 +87,30 @@ class StatisticsController < ApplicationController
     end
     @result = group_data.map do |item|
       company = Company.find(item.company_id)
-      { id: company.id, name: company.name, name_abbr: company.name_abbr, count: item.count }
+      { id: company.id, name: company.name, name_abbr: company.name_abbr, count: [item.count] }
+    end
+    if params[:mode] == 'b'
+      @result.each do |item|
+        prev_count = ProjectTask.joins(:project).where('project_tasks.status': 'finished', 'projects.company_id': item[:id]).
+            where('project_tasks.started_at BETWEEN ? AND ?', s_month - 1.month, s_month).count
+        item[:count] << prev_count
+      end
     end
     if @result.blank?
-      @result = [{ name: 'NO DATA', name_abbr: 'NO DATA', count: 0 }]  # friendly show for chart
+      @result = [{ name: 'NO DATA', name_abbr: 'NO DATA', count: [0] }]  # friendly show for chart
     end
     # test data
     # @result = [
-    #     { name: '昆仑', name_abbr: '昆仑', count: 100 },
-    #     { name: '淡水泉', name_abbr: '淡水泉', count: 88 },
-    #     { name: 'RB', name_abbr: 'RB', count: 76 },
-    #     { name: '锶钟', name_abbr: '锶钟', count: 32 },
-    #     { name: '安永', name_abbr: '安永', count: 28 },
-    #     { name: '东方证券', name_abbr: '东方证券', count: 16 },
-    #     { name: 'WIW', name_abbr: 'WIW', count: 7 },
-    #     { name: 'L.E.K.', name_abbr: 'L.E.K.', count: 2 },
-    #     { name: 'LLL', name_abbr: 'LLL', count: 2 },
-    #     { name: 'C.C.', name_abbr: 'C.C.', count: 2 }
+    #     { name: '昆仑', name_abbr: '昆仑', count: [100, 121] },
+    #     { name: '淡水泉', name_abbr: '淡水泉', count: [88, 80] },
+    #     { name: 'RB', name_abbr: 'RB', count: [76, 30] },
+    #     { name: '锶钟', name_abbr: '锶钟', count: [32, 80], prev: 80 },
+    #     { name: '安永', name_abbr: '安永', count: [28, 2], prev: 2 },
+    #     { name: '东方证券', name_abbr: '东方证券', count: [16, 20], prev: 20 },
+    #     { name: 'WIW', name_abbr: 'WIW', count: [7, 5], prev: 5 },
+    #     { name: 'L.E.K.', name_abbr: 'L.E.K.', count: [2, 0], prev: 0 },
+    #     { name: 'LLL', name_abbr: 'LLL', count: [2, 2], prev: 2 },
+    #     { name: 'C.C.', name_abbr: 'C.C.', count: [2, 1], prev: 1 }
     # ]
     respond_to do |f|
       f.js
@@ -111,16 +119,16 @@ class StatisticsController < ApplicationController
   end
 
   # GET /statistics/unscheduled_projects.js
-  def unscheduled_projects
-    query = Project.where(status: 'initialized').order(:created_at => :asc)
-    query = user_channel_filter(query)
-    query = query.limit(params[:limit]) if params[:limit].present?
-    @projects = query
-
-    respond_to do |f|
-      f.js
-    end
-  end
+  # def unscheduled_projects
+  #   query = Project.where(status: 'initialized').order(:created_at => :asc)
+  #   query = user_channel_filter(query)
+  #   query = query.limit(params[:limit]) if params[:limit].present?
+  #   @projects = query
+  #
+  #   respond_to do |f|
+  #     f.js
+  #   end
+  # end
 
   # GET /statistics/ongoing_project_tasks
   def ongoing_project_tasks
