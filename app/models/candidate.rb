@@ -67,7 +67,7 @@ class Candidate < ApplicationRecord
 
   def can_delete?
     if self.category == 'client'
-      self.projects.count == 0  # 未参与项目
+      ProjectTask.where(client_id: id).count.zero? # 未参与项目
     elsif self.category == 'expert'
       project_tasks.count.zero? && self.recommended_experts.count == 0  # 未参与项目 & 未推荐过其他专家
     end
@@ -186,6 +186,9 @@ class Candidate < ApplicationRecord
       end
       if phone1.present?
         errors.add(:phone1, :taken) if query.exists?(phone: phone1) || query.exists?(phone1: phone1)
+      end
+      if email.present?
+        errors.add(:email, :taken) if query.exists?(email: email)
       end
     else
       true

@@ -240,6 +240,21 @@ class CandidatesController < ApplicationController
     end
   end
 
+  def delete_client
+    begin
+      load_client
+      raise t(:cannot_delete) unless @client.can_delete?
+      @company = @client.company
+      @client.destroy!
+      flash[:success] = t(:operation_succeeded)
+      redirect_with_return_to company_path(@company)
+    rescue Exception => e
+      logger.info "delete client failed: #{e.message}"
+      flash[:error] = e.message
+      redirect_with_return_to(root_path)
+    end
+  end
+
   # POST /candidates/import_expert
   def import_expert
     @errors = []

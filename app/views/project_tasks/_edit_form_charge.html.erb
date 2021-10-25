@@ -70,7 +70,7 @@
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :shorthand_price %>
-        <%= f.text_field :shorthand_price, :disabled => true, :class => 'form-control' %>
+        <%= f.text_field :shorthand_price, :readonly => true, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
         <%= f.label :is_taxed %>
@@ -98,6 +98,8 @@
 <script>
     $(function(){
         get_expert_rate();
+        get_shorthand();
+        get_base_price();
     });
     $('#project_task_charge_duration').change(function(){
         get_base_price(); // 计算价格
@@ -112,10 +114,12 @@
         get_base_price();
     });
     $('#project_task_is_shorthand').change(function(){
+        get_shorthand();
         get_base_price();
     });
     $('#project_task_expert_level').change(function(){
         get_expert_rate();
+        get_base_price();
     });
     function get_base_price(){
         let expert_rate = $('#project_task_expert_rate').val();
@@ -137,7 +141,9 @@
             dataType: 'json',
             success: function(data){
                 base_price.val(data.price);
-                shorthand_price.val(data.shorthand_price);
+                if(shorthand_price.val() == 0){
+                    shorthand_price.val(data.shorthand_price);
+                }
                 currency.val(data.currency);
                 is_taxed.val(data.is_taxed);
                 tax_rate.val(data.tax_rate);
@@ -149,12 +155,22 @@
     function get_expert_rate(){
         let expert_level = $('#project_task_expert_level')[0];
         let expert_rate = $('#project_task_expert_rate')[0];
-        if(expert_level.value == 'standard'){
+        if(expert_level.value === 'standard'){
             expert_rate.readOnly = true;
             expert_rate.value = 1;
-        }else if(expert_level.value == 'premium'){
+        }else if(expert_level.value === 'premium'){
             expert_rate.readOnly = false;
         }
-        get_base_price();
+        // get_base_price();
+    }
+    function get_shorthand(){
+        let is_shorthand = $('#project_task_is_shorthand')[0];
+        let shorthand_price = $('#project_task_shorthand_price')[0];
+        if(is_shorthand.value === 'true') {
+            shorthand_price.readOnly = false;
+        } else {
+            shorthand_price.readOnly = true;
+            shorthand_price.value = 0;
+        }
     }
 </script>

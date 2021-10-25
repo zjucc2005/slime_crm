@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     post :create_client, on: :collection
     get :edit_client,    on: :member
     put :update_client,  on: :member
+    post :delete_client, on: :member
 
     get :import_expert,  on: :collection  # show importing result
     post :import_expert, on: :collection  # import experts with excel
