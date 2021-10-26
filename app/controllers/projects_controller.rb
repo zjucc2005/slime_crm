@@ -75,7 +75,9 @@ class ProjectsController < ApplicationController
     begin
       load_project
 
+      updated_at_was = @project.updated_at
       if @project.update(project_params_update)
+        @project.update(updated_at: updated_at_was) if current_user.role == 'finance' # 财务不刷新更新时间
         flash[:success] = t(:operation_succeeded)
         redirect_to project_path(@project)
       else
