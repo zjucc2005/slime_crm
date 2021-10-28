@@ -6,6 +6,7 @@
                 <button type="button" data-dismiss="modal" class="close">&times;</button>
             </div>
 
+            <%= hidden_field_tag :expert_cpt, project_task.expert.cpt %>
             <%= form_tag add_cost_project_task_path(project_task), :method => :post, :remote => true do %>
                 <div class="modal-body">
                     <div class="row">
@@ -109,6 +110,7 @@
         }else if(category.val() === 'recommend'){
             template_recommend.parent().show();
         }
+        refresh_price_tips();
     }
     // 2.支付信息模板触发, template of payment_info
     function refresh_payment_info_category(){
@@ -145,6 +147,20 @@
             form_deactivate('payment_info_sub_branch');
             form_deactivate('payment_info_account');
             form_deactivate('payment_info_username');
+        }
+    }
+
+    // 显示费用参考值
+    function refresh_price_tips(){
+        let category = $('#category').val();
+        let price = $('#price');
+        let duration = $('#project_task_duration').val();
+        let expert_cpt = $('#expert_cpt').val();
+        if(category === 'expert'){
+            var refer_fee = (parseFloat(expert_cpt) * parseInt(duration) / 60).toFixed(1);
+            price.val(refer_fee);
+        } else {
+            price.val('');
         }
     }
 </script>

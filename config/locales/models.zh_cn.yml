@@ -279,6 +279,7 @@ zh_cn:
         paid_at: "支付时间"
         expert_level: "专家级别"
         expert_rate: "专家倍率"
+        expert_alias: "专家化名"
         memo: "备注"
         charge_duration: "收费时长"
         charge_duration_min: "收费时长(分钟)"

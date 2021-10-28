@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_22_111413) do
+ActiveRecord::Schema.define(version: 2021_10_28_124343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,6 +256,7 @@ ActiveRecord::Schema.define(version: 2021_10_22_111413) do
     t.boolean "f_flag", default: false
     t.bigint "user_channel_id"
     t.bigint "pa_id"
+    t.string "expert_alias"
     t.index ["client_id"], name: "index_project_tasks_on_client_id"
     t.index ["expert_id"], name: "index_project_tasks_on_expert_id"
     t.index ["project_id"], name: "index_project_tasks_on_project_id"

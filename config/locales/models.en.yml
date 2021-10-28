@@ -250,6 +250,7 @@ en:
         paid_at: "Paid at"
         expert_level: "Expert level"
         expert_rate: "Expert rate"
+        expert_alias: "Expert alias"
         memo: "Memo"
         charge_duration: "Charge duration"
         charge_duration_min: "Charge duration(min)"

@@ -411,7 +411,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:category, :expert_id, :client_id, :pa_id, :interview_form, :started_at, :expert_level, :expert_rate, :is_shorthand)
+    params.require(:project_task).permit(:category, :expert_id, :client_id, :pa_id, :interview_form, :started_at, :expert_level, :expert_rate, :is_shorthand, :expert_alias)
   end
 
   def project_requirement_params
@@ -441,7 +441,8 @@ class ProjectsController < ApplicationController
       sheet.add_cell(row, 3, task.client.if_nickname)                                         # D, Seat
       sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M'))                            # E, Date
       sheet.add_cell(row, 5, {'face-to-face' => 'F2F contact'}[task.interview_form] || task.interview_form.capitalize)  # F, Type of Activity
-      sheet.add_cell(row, 6, task.expert.mr_name)                                             # G, Expert
+      expert_name = task.expert_alias.present? ? task.expert_alias : task.expert.name
+      sheet.add_cell(row, 6, expert_name)                                                     # G, Expert
       exp = task.expert.latest_work_experience
       if exp
         sheet.add_cell(row, 7, exp.org_cn)                                                    # H, Expert Company

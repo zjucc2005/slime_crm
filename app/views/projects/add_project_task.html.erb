@@ -60,6 +60,10 @@
                     <%= f.label :is_shorthand %><span class="text-red">*</span>
                     <%= f.select :is_shorthand, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
                 </div>
+                <div class="col-lg-3 col-12 form-group">
+                    <%= f.label :expert_alias %>
+                    <%= f.text_field :expert_alias, class: 'form-control' %>
+                </div>
             </div>
 
             <div class="form-group mb-0 d-flex justify-content-between">
