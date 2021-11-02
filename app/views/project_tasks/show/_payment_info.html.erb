@@ -10,6 +10,7 @@
         <th><%= mt(:candidate_payment_info, :sub_branch) %></th>
         <th><%= mt(:candidate_payment_info, :account) %></th>
         <th><%= mt(:candidate_payment_info, :username) %></th>
+        <th><%= mt(:candidate_payment_info, :id_number) %></th>
         <th><%= mt(:project_task_cost, :memo) %></th>
     </tr>
     </thead>
@@ -23,6 +24,7 @@
             <td><%= cost.payment_info['sub_branch'] %></td>
             <td><%= cost.payment_info['account'] %></td>
             <td><%= cost.payment_info['username'] %></td>
+            <td><%= cost.payment_info['id_number'] %></td>
             <td><%= cost.memo %></td>
         </tr>
     <% end %>

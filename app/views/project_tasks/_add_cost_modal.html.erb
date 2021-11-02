@@ -64,6 +64,10 @@
                             <%= label_tag :payment_info_username, mt(:candidate_payment_info, :username) %><span class="text-red">*</span>
                             <%= text_field_tag :'payment_info[username]', nil, :required => true, :class => 'form-control' %>
                         </div>
+                        <div class="col-lg-6 col-12 form-group">
+                            <%= label_tag :payment_info_id_number, mt(:candidate_payment_info, :id_number) %>
+                            <%= text_field_tag :'payment_info[id_number]', nil, :class => 'form-control' %>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12 form-group">
@@ -137,16 +141,19 @@
             form_deactivate('payment_info_sub_branch');
             form_activate('payment_info_account');
             form_activate('payment_info_username');
+            form_show('payment_info_id_number');
         }else if(payment_info_category.value === 'unionpay'){
             form_activate('payment_info_bank');
             form_activate('payment_info_sub_branch');
             form_activate('payment_info_account');
             form_activate('payment_info_username');
+            form_show('payment_info_id_number');
         }else{
             form_deactivate('payment_info_bank');
             form_deactivate('payment_info_sub_branch');
             form_deactivate('payment_info_account');
             form_deactivate('payment_info_username');
+            form_hide('payment_info_id_number');
         }
     }
 

@@ -61,6 +61,17 @@ window.form_deactivate = function(field){
     ele.parent().hide();
 };
 
+window.form_show = function(field){
+    let ele = $('#' + field);
+    ele.parent().show();
+};
+
+window.form_hide = function(field){
+    let ele = $('#' + field);
+    ele.val('');
+    ele.parent().hide();
+};
+
 // forbid mouse wheel scroll event
 window.disableMouseWheelScroll = function(e){
     e = e || window.event;

@@ -155,6 +155,7 @@ zh_cn:
         sub_branch: "支行"
         account: "帐号/卡号"
         username: "用户名"
+        id_number: "身份证号"
 
       candidate_comment:
         content: "内容"

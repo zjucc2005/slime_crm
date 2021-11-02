@@ -8,6 +8,7 @@
         <th><%= mt(:candidate_payment_info, :sub_branch) %></th>
         <th><%= mt(:candidate_payment_info, :account) %></th>
         <th><%= mt(:candidate_payment_info, :username) %></th>
+        <th><%= mt(:candidate_payment_info, :id_number) %></th>
         <th><%= mt(:project_task_cost, :memo) %></th>
         <th class="action"><%= t(:operation) %></th>
     </tr>
@@ -22,6 +23,7 @@
         <td><%= cost.payment_info['sub_branch'] %></td>
         <td><%= cost.payment_info['account'] %></td>
         <td><%= cost.payment_info['username'] %></td>
+        <td><%= cost.payment_info['id_number'] %></td>
         <td><%= cost.memo %></td>
         <td class="action">
             <%= link_to remove_cost_project_task_path(project_task, project_task_cost_id: cost.id), :method => :delete, :remote => true,

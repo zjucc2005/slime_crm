@@ -24,6 +24,10 @@
         <%= f.label :username %><span class="text-red">*</span>
         <%= f.text_field :username, :required => true, :class => 'form-control' %>
     </div>
+    <div class="col-lg-3 col-6 form-group">
+        <%= f.label :id_number %>
+        <%= f.text_field :id_number, class: 'form-control' %>
+    </div>
 </div>
 
 <script>
@@ -36,16 +40,19 @@
             form_deactivate('candidate_payment_info_sub_branch');
             form_activate('candidate_payment_info_account');
             form_activate('candidate_payment_info_username');
+            form_show('candidate_payment_info_id_number');
         }else if(category.value == 'unionpay'){
             form_activate('candidate_payment_info_bank');
             form_activate('candidate_payment_info_sub_branch');
             form_activate('candidate_payment_info_account');
             form_activate('candidate_payment_info_username');
+            form_show('candidate_payment_info_id_number');
         }else{
             form_deactivate('candidate_payment_info_bank');
             form_deactivate('candidate_payment_info_sub_branch');
             form_deactivate('candidate_payment_info_account');
             form_deactivate('candidate_payment_info_username');
+            form_hide('candidate_payment_info_id_number');
         }
     }
 </script>

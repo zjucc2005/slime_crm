@@ -126,6 +126,7 @@ en:
         sub_branch: "Sub branch"
         account: "Account"
         username: "Username"
+        id_number: "ID number"
 
       candidate_comment:
         content: "Content"

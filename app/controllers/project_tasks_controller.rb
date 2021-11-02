@@ -61,12 +61,13 @@ class ProjectTasksController < ApplicationController
             bank:       template_expert.bank,
             sub_branch: template_expert.sub_branch,
             account:    template_expert.account,
-            username:   template_expert.username
+            username:   template_expert.username,
+            id_number:  template_expert.id_number
           }
         else
           cost.payment_info = params[:payment_info]  # general
           @project_task.expert.payment_infos.create!(
-            params.require(:payment_info).permit(:category, :bank, :sub_branch, :account, :username).merge(created_by: current_user.id)
+            params.require(:payment_info).permit(:category, :bank, :sub_branch, :account, :username, :id_number).merge(created_by: current_user.id)
           )
         end
       elsif params[:category] == 'recommend'  # recommend fee
@@ -79,12 +80,13 @@ class ProjectTasksController < ApplicationController
               bank:       template_recommend.bank,
               sub_branch: template_recommend.sub_branch,
               account:    template_recommend.account,
-              username:   template_recommend.username
+              username:   template_recommend.username,
+              id_number:  template_recommend.id_number
             }
           else
             cost.payment_info = params[:payment_info]  # general
             recommender.payment_infos.create!(
-              params.require(:payment_info).permit(:category, :bank, :sub_branch, :account, :username).merge(created_by: current_user.id)
+              params.require(:payment_info).permit(:category, :bank, :sub_branch, :account, :username, :id_number).merge(created_by: current_user.id)
             )
           end
         else

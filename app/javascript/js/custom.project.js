@@ -73,7 +73,7 @@ window.batchUpdateChargeStatus = function(s){
         alert('请至少选择一个条目');
     }else{
         var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
-        params = params + '&status=' + s;
+        params = params + '&status=' + s + '&return_to=' + window.location.href;
         window.location.href = '/finance/batch_update_charge_status?' + params;
     }
 };
@@ -84,7 +84,7 @@ window.batchUpdatePaymentStatus = function(s){
         alert('请至少选择一个条目');
     }else{
         var params = uids.map(function(){ return 'uids[]=' + this.value }).get().join('&');
-        params = params + '&status=' + s;
+        params = params + '&status=' + s + '&return_to=' + window.location.href;
         window.location.href = '/finance/batch_update_payment_status?' + params;
     }
 };

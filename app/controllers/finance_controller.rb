@@ -33,7 +33,7 @@ class FinanceController < ApplicationController
       else nil
     end
 
-    @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 20)
+    @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 1)
   end
 
   # GET /finance/:id
@@ -103,7 +103,7 @@ class FinanceController < ApplicationController
       end
     end
     flash[:success] = t(:operation_succeeded)
-    redirect_to finance_index_path
+    redirect_with_return_to(finance_index_path)
   end
 
   # GET /finance/batch_update_payment_status
@@ -116,7 +116,7 @@ class FinanceController < ApplicationController
       end
     end
     flash[:success] = t(:operation_succeeded)
-    redirect_to finance_index_path
+    redirect_with_return_to(finance_index_path)
   end
 
   # GET /finance/export_finance_excel?mode=cn&uids[]=

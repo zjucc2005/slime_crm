@@ -81,19 +81,19 @@ class StatisticsController < ApplicationController
     end
     s_month = (params[:month].to_time rescue nil) || current_month  # 统计月份
     query = ProjectTask.joins(:project).where('project_tasks.status': 'finished').where('project_tasks.started_at BETWEEN ? AND ?', s_month, s_month + 1.month)
-    group_data = query.select('projects.company_id AS company_id, COUNT(*) AS count').group('company_id').order('count DESC')
+    group_data = query.select('projects.company_id AS company_id, SUM(project_tasks.charge_duration) AS duration').group('company_id').order('duration DESC')
     if params[:limit].present?
       group_data = group_data.limit(params[:limit])
     end
     @result = group_data.map do |item|
       company = Company.find(item.company_id)
-      { id: company.id, name: company.name, name_abbr: company.name_abbr, count: [item.count] }
+      { id: company.id, name: company.name, name_abbr: company.name_abbr, count: [(item.duration / 60.0).round(2)] }
     end
     if params[:mode] == 'b'
       @result.each do |item|
-        prev_count = ProjectTask.joins(:project).where('project_tasks.status': 'finished', 'projects.company_id': item[:id]).
-            where('project_tasks.started_at BETWEEN ? AND ?', s_month - 1.month, s_month).count
-        item[:count] << prev_count
+        prev_duration = ProjectTask.joins(:project).where('project_tasks.status': 'finished', 'projects.company_id': item[:id]).
+            where('project_tasks.started_at BETWEEN ? AND ?', s_month - 1.month, s_month).sum(:charge_duration)
+        item[:count] << (prev_duration / 60.0).round(2)
       end
     end
     if @result.blank?
@@ -101,7 +101,7 @@ class StatisticsController < ApplicationController
     end
     # test data
     # @result = [
-    #     { name: '昆仑', name_abbr: '昆仑', count: [100, 121] },
+    #     { name: '昆仑', name_abbr: '昆仑', count: [100.1, 121] },
     #     { name: '淡水泉', name_abbr: '淡水泉', count: [88, 80] },
     #     { name: 'RB', name_abbr: 'RB', count: [76, 30] },
     #     { name: '锶钟', name_abbr: '锶钟', count: [32, 80], prev: 80 },
