@@ -1,0 +1,82 @@
+<div class="col-lg-3 col-12 mb-3">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <i class="fa fa-long-arrow-up text-green"></i>
+                <%= t('dashboard.current_month_increase') %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="current_month_count_infos_wrapper">
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <i class="fa fa-bell-o text-red text-wobble"></i>
+                <%= t('dashboard.finance_tips') %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-sm card-text border-bottom">
+                <thead>
+                <tr>
+                    <th class="pl-3"><%= t('dashboard.category') %></th>
+                    <th><%= t('dashboard.value') %></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @finance_tips.each do |item| %>
+                <tr>
+                    <td class="pl-3"><%= item[:name] %></td>
+                    <td><%= item[:value] %></td>
+                    <td><%= link_to(t('dashboard.detail'), item[:url]) if item[:url].present? %></td>
+                </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-9 col-12 mb-3">
+    <div class="card mb-3">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <%= fa_icon_tag('sort-amount-desc') %>
+                <%= t('dashboard.current_month_call_ranking_by_company') %> TOP 10
+                <%= link_to 'More', current_month_call_ranking_statistics_path, class: 'text-smaller' %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="current_month_call_ranking_chart" style="height: 300px;"></div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <%= t('dashboard.ongoing_tasks') %>
+                <%= content_tag :span, 0, :class => 'badge badge-success', :id => 'ongoing_project_tasks_count' %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <div id="ongoing_project_tasks_wrapper" class="table-responsive"></div>
+            <div class="text-center text-bold">
+                <%= link_to '···', ongoing_project_tasks_statistics_path, :title => t(:show_all) %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $.get('statistics/current_month_count_infos.js');
+        // $.get('statistics/current_month_task_ranking.js?limit=10');
+        $.get('statistics/current_month_call_ranking.js?limit=10&mode=b');
+        $.get('statistics/ongoing_project_tasks.js?limit=10');
+    });
+</script>

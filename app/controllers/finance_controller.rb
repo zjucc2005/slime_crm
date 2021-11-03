@@ -25,6 +25,9 @@ class FinanceController < ApplicationController
     if params[:expert].present?
       query = query.joins(:expert).where('candidates.name ILIKE ?', "%#{params[:expert].strip}%")
     end
+    if params[:overdue_charge] == 'true'
+      query = query.where('project_tasks.charge_status': 'billed').where('project_tasks.charge_deadline < ?', Time.now)
+    end
     # export excel files
     case params[:commit]
       when '中文模板' then export_project_tasks(query, category='cn') and return
@@ -33,7 +36,7 @@ class FinanceController < ApplicationController
       else nil
     end
 
-    @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 1)
+    @project_tasks = query.order(:started_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
 
   # GET /finance/:id
@@ -56,7 +59,7 @@ class FinanceController < ApplicationController
       @project_task.charge_status   = params[:project_task][:charge_status]
       @project_task.payment_status  = params[:project_task][:payment_status]
       if @project_task.charge_status_changed?
-        @project_task.set_charge_timestamp
+        @project_task.set_charge_timestamp(current_user.id)
       end
       if @project_task.save
         flash[:success] = t(:operation_succeeded)
@@ -89,7 +92,7 @@ class FinanceController < ApplicationController
       ActiveRecord::Base.transaction do
         ProjectTask.where(id: params[:uids], charge_status: 'unbilled').each do |task|
           task.charge_status = 'billed'
-          task.set_charge_timestamp
+          task.set_charge_timestamp(current_user.id)
           task.save!
         end
       end
@@ -97,7 +100,7 @@ class FinanceController < ApplicationController
       ActiveRecord::Base.transaction do
         ProjectTask.where(id: params[:uids], charge_status: 'billed').each do |task|
           task.charge_status = 'paid'
-          task.set_charge_timestamp
+          task.set_charge_timestamp(current_user.id)
           task.save!
         end
       end

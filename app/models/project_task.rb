@@ -78,13 +78,15 @@ class ProjectTask < ApplicationRecord
     (charge_duration / 60.0).round(2)
   end
 
-  def set_charge_timestamp
+  def set_charge_timestamp(operator_id)
     case charge_status
       when 'billed' then
         self.billed_at = Time.now
         self.charge_deadline = billed_at + charge_days.to_i.days
+        self.billed_by = operator_id
       when 'paid'   then
         self.charged_at = Time.now
+        self.charged_by = operator_id
       else nil
     end
   end
@@ -133,6 +135,10 @@ class ProjectTask < ApplicationRecord
     rescue
       nil
     end
+  end
+
+  def is_overdue_charge?
+    charge_status == 'billed' && charge_deadline < Time.now
   end
 
   private

@@ -1,7 +1,10 @@
 <div class="row">
-    <% if current_user.is_role?('su', 'admin', 'finance') %>
+    <% if current_user.is_role?('su', 'admin') %>
         <%= render :partial => 'home/widgets/admin_summary' %>
         <%= render :partial => 'home/widgets/admin_statistics_info' %>
+    <% elsif current_user.is_role?('finance') %>
+        <%= render :partial => 'home/widgets/admin_summary' %>
+        <%= render :partial => 'home/widgets/finance_statistics_info' %>
     <% elsif current_user.is_role?('pm', 'pa') %>
         <%= render :partial => 'home/widgets/pm_summary' %>
         <%= render :partial => 'home/widgets/pm_statistics_info' %>

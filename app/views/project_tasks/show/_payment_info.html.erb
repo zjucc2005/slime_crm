@@ -44,4 +44,11 @@
         </div>
         <%= content_tag :span, @project_task.paid_at.try(:strftime, '%F'), :class => 'form-control' %>
     </div>
+     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :paid_by) %></span>
+        </div>
+        <%= content_tag :span, User.find_by(id: @project_task.paid_by).try(:name_cn), :class => 'form-control' %>
+    </div>
+
 </div>

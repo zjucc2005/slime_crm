@@ -81,7 +81,7 @@ class StatisticsController < ApplicationController
     end
     s_month = (params[:month].to_time rescue nil) || current_month  # 统计月份
     query = ProjectTask.joins(:project).where('project_tasks.status': 'finished').where('project_tasks.started_at BETWEEN ? AND ?', s_month, s_month + 1.month)
-    group_data = query.select('projects.company_id AS company_id, SUM(project_tasks.charge_duration) AS duration').group('company_id').order('duration DESC')
+    group_data = user_channel_filter(query).select('projects.company_id AS company_id, SUM(project_tasks.charge_duration) AS duration').group('company_id').order('duration DESC')
     if params[:limit].present?
       group_data = group_data.limit(params[:limit])
     end

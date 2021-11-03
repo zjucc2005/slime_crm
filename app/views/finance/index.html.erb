@@ -52,7 +52,10 @@
                         <td><%= task.actual_price %></td>
                         <!--<td><%= task.shorthand_price %></td>-->
                         <td><%= currency_display(task.currency) %></td>
-                        <td><%= project_task_charge_status_badge(task.charge_status) %></td>
+                        <td>
+                            <%= project_task_charge_status_badge(task.charge_status) %>
+                            <%= content_tag :i, nil, class: 'fa fa-exclamation-circle text-red', title: 'overdue' if task.is_overdue_charge? %>
+                        </td>
                         <td><%= project_task_payment_status_badge(task.payment_status) %></td>
                         <th class="action">
                             <%= link_to finance_path(task), :class => 'btn btn-primary btn-xs' do %>

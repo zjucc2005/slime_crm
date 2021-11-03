@@ -66,6 +66,10 @@
                                 <%= select_tag :payment_status, options_for_select(ProjectTask::PAYMENT_STATUS.to_a.map(&:reverse), params[:payment_status]),
                                                :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :overdue, t('dashboard.overdue_tasks') %>
+                                <%= select_tag :overdue_charge, options_for_select(boolean_options, params[:overdue_charge]), prompt: default_prompt, class: 'form-control select2' %>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

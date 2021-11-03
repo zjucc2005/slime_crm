@@ -3,8 +3,10 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user.is_role?('su', 'admin', 'finance')
+    if current_user.is_role?('su', 'admin')
       load_dashboard_of_admin
+    elsif current_user.is_role?('finance')
+      load_dashboard_of_finance
     elsif current_user.is_role?('pm', 'pa')
       load_dashboard_of_pm
     end
@@ -16,6 +18,15 @@ class HomeController < ApplicationController
     @total_signed_companies     = user_channel_filter(Company.signed).count
     @total_tasks                = user_channel_filter(ProjectTask.where(status: 'finished')).count
     @total_charge_duration_hour = (user_channel_filter(ProjectTask.where(status: 'finished')).sum(:charge_duration) / 60.0).round(1)
+  end
+
+  def load_dashboard_of_finance
+    load_dashboard_of_admin
+    overdue_task_count = user_channel_filter(ProjectTask.where(status: 'finished', charge_status: 'billed').where('charge_deadline < ?', Time.now)).count
+    overdue_task_url = overdue_task_count.zero? ? nil : finance_index_path(overdue_charge: true)
+    @finance_tips = [
+        { name: t('dashboard.overdue_tasks'), value: overdue_task_count, url: overdue_task_url }
+    ]
   end
 
   def load_dashboard_of_pm
