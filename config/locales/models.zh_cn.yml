@@ -231,7 +231,7 @@ zh_cn:
         client: "客户联系人"
         expert: "专家"
         start: "启动项目"
-        close: "结束项目"
+        close: "出账/结束项目"
         reopen: "重新打开项目"
         pm: "项目经理"
         pa: "项目助理"

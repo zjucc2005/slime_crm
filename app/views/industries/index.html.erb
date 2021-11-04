@@ -30,6 +30,7 @@
             <tr>
                 <th><%= mt(:industry, :id) %></th>
                 <th><%= mt(:industry, :name) %></th>
+                <th><%= mt(:expert) %></th>
                 <th><%= mt(:industry, :created_at) %></th>
                 <th><%= t(:operation) %></th>
             </tr>
@@ -39,6 +40,7 @@
                 <tr>
                     <td><%= content_tag :span, "# #{industry.uid}", :class => 'text-gray' %></td>
                     <td><%= industry.name %></td>
+                    <td><%= industry.expert_count %></td>
                     <td><%= industry.created_at.strftime('%F %T') %></td>
                     <td>
                         <div class="btn-group">

@@ -5,6 +5,10 @@ class Industry < ApplicationRecord
 
   before_validation :setup, :on => [:create, :update]
 
+  def expert_count
+    Candidate.expert.where(industry: name).count
+  end
+
   private
   def setup
     self.name = name.try(:strip)

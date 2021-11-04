@@ -21,7 +21,7 @@
                             <%= fa_icon_tag('edit') %> <%= mt(:project, :start) %>
                         <% end if can?(:start, Project) && @project.can_start? %>
                         <%= link_to close_project_path(@project), :method => :put, :class => 'btn btn-warning', :data => { :confirm => t(:sure)}  do %>
-                            <%= fa_icon_tag('edit') %> <%= mt(:project, :close) %>
+                            <%= fa_icon_tag('share') %> <%= mt(:project, :close) %>
                         <% end if can?(:close, Project) && @project.can_close? %>
                         <%= link_to reopen_project_path(@project), :method => :put, :class => 'btn btn-warning', :data => { :confirm => t(:sure)}  do %>
                             <%= fa_icon_tag('edit') %> <%= mt(:project, :reopen) %>

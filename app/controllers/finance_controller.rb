@@ -102,6 +102,7 @@ class FinanceController < ApplicationController
           task.charge_status = 'paid'
           task.set_charge_timestamp(current_user.id)
           task.save!
+          task.project.check_finished
         end
       end
     end

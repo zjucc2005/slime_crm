@@ -202,7 +202,7 @@ en:
         client: "Client"
         expert: "Expert"
         start: "Start project"
-        close: "Close project"
+        close: "Bill/Close project"
         reopen: "Reopen project"
         pm: "PM"
         pa: "PA"

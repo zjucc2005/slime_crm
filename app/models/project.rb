@@ -4,6 +4,7 @@ class Project < ApplicationRecord
   STATUS = {
       :initialized => '新项目',
       :ongoing     => '进展中',
+      :billing     => '出账中',
       :finished    => '已结束',
       :cancelled   => '已取消'
   }.stringify_keys
@@ -65,11 +66,19 @@ class Project < ApplicationRecord
   end
 
   def can_close?
-    %w[ongoing].include?(status)
+    %w[ongoing].include?(status) && project_tasks.where(status: 'ongoing').count.zero?
+  end
+
+  def is_finished
+    project_tasks.where(status: 'finished').where.not(charge_status: 'paid').count.zero?
+  end
+
+  def check_finished
+    self.update!(status: 'finished') if is_finished # 如果项目符合结束条件则更新为已结束
   end
 
   def can_reopen?
-    %w[finished].include?(status)
+    %w[billing finished].include?(status)
   end
 
   def can_add_requirement?
@@ -115,7 +124,7 @@ class Project < ApplicationRecord
   end
 
   def close!
-    self.status = 'finished'
+    self.status = is_finished ? 'finished' : 'billing'
     self.ended_at ||= Time.now
     self.save!
   end
