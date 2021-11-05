@@ -119,16 +119,17 @@ class Candidate < ApplicationRecord
   # card template params setting
   def card_template_params(field)
     case field.to_sym
-      when :uid          then self.uid
-      when :name         then self.name
-      when :city         then self.city
-      when :phone        then self.phone
-      when :description  then self.description
-      when :company      then self.latest_work_experience.try(:org_cn)
-      when :title        then self.latest_work_experience.try(:title)
-      when :expert_level then self._c_t_expert_level
-      when :gj_rate      then self._c_t_gj_rate_
-      else nil
+    when :uid          then uid
+    when :name         then name
+    when :city         then city
+    when :phone        then phone
+    when :description  then description
+    when :company      then latest_work_experience.try(:org_cn)
+    when :title        then latest_work_experience.try(:title)
+    when :expert_level then _c_t_expert_level
+    when :gj_rate      then _c_t_gj_rate_
+    when :mszq_rate    then _c_t_mszq_rate_
+    else nil
     end
   end
 
@@ -142,9 +143,9 @@ class Candidate < ApplicationRecord
   end
 
   def _c_t_gj_rate_
-    _rate_ = 0
+    rate = 0
     if currency == 'RMB'
-      _rate_ = case self.cpt
+      rate = case self.cpt
         when 0 then 0
         when 0..1000 then 2800
         when 1000..1500 then 3360
@@ -154,7 +155,21 @@ class Candidate < ApplicationRecord
         else 'TBD'
       end
     end
-    _rate_ == 0 ? '' : "电话-#{_rate_}/小时"
+    rate == 0 ? '' : "电话-#{rate}/小时"
+  end
+
+  def _c_t_mszq_rate_
+    rate = 0
+    if currency == 'RMB'
+      if cpt >= 1000 && cpt < 1200
+        rate = 2880
+      elsif cpt >= 1200 && cpt < 1500
+        rate = 3456
+      elsif cpt >= 1500 && cpt < 2000
+        rate = 4320
+      end
+    end
+    rate.zero? ? '' : "电话-#{rate}/小时"
   end
 
   private
