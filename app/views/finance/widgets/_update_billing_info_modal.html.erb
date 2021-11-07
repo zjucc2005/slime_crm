@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-12 form-group">
                             <%= label_tag :billed_at, mt(:project_task, :billed_at) %><span class="text-red">*</span>
-                            <%= text_field_tag :billed_at, project_task.billed_at.strftime('%F %T'), required: true, class: 'form-control datetimepicker' %>
+                            <%= text_field_tag :billed_at, project_task.billed_at.try(:strftime, '%F %T'), required: true, class: 'form-control datetimepicker' %>
                         </div>
                         <div class="col-lg-6 col-12 form-group">
                             <%= label_tag :reviewer, mt(:project_task, :reviewer) %>
@@ -35,3 +35,7 @@
         </div>
     </div>
 </div>
+
+<%= button_tag type: 'button', class: 'btn btn-default', data: { toggle: 'modal', target: '#updateBillingInfoModal'} do %>
+    <i class="fa fa-edit"></i>
+<% end %>

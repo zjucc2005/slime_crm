@@ -86,11 +86,9 @@
             <span class="input-group-text"><%= mt(:project_task, :billed_at) %></span>
         </div>
         <%= content_tag :span, @project_task.billed_at.try(:strftime, '%F %H:%M'), :class => 'form-control' %>
-        <% if can?(:update_billing_info, Finance) && controller.controller_name == 'finance' %>
+        <% if can?(:update_billing_info, Finance) && controller.controller_name == 'finance' && %w[billed paid].include?(@project_task.charge_status) %>
         <div class="input-group-append">
-            <%= button_tag type: 'button', class: 'btn btn-default', data: { toggle: 'modal', target: '#updateBillingInfoModal'} do %>
-                <i class="fa fa-edit"></i>
-            <% end %>
+            <%= render partial: 'finance/widgets/update_billing_info_modal', locals: { project_task: @project_task } %>
         </div>
         <% end %>
     </div>
