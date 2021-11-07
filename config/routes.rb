@@ -113,6 +113,7 @@ Rails.application.routes.draw do
 
   resources :finance do
     put :return_back, on: :member
+    post :update_billing_info, on: :member
 
     get :batch_update_charge_status,  on: :collection
     get :batch_update_payment_status, on: :collection

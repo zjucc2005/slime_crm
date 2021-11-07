@@ -86,6 +86,29 @@ class FinanceController < ApplicationController
     redirect_to finance_index_path
   end
 
+  def update_billing_info
+    begin
+      load_project_task
+      raise t(:not_authorized) if @project_task.status == 'unbilled' # 未出账不能更新
+      if params[:update_to_project] == 'true'
+        # 更新整个项目下的任务
+        @project_task.project.project_tasks.where(status: 'finished', charge_status: %w[billed paid]).each do |project_task|
+          project_task.attributes = update_billing_info_params
+          project_task.charge_deadline = project_task.billed_at + project_task.charge_days.to_i.days
+          project_task.save!
+        end
+      else
+        @project_task.attributes = update_billing_info_params
+        @project_task.charge_deadline = @project_task.billed_at + @project_task.charge_days.to_i.days
+        @project_task.save!
+      end
+      redirect_with_return_to(finance_path(@project_task))
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to finance_index_path
+    end
+  end
+
   # GET /finance/batch_update_charge_status
   def batch_update_charge_status
     if params[:status] == 'billed'
@@ -147,6 +170,10 @@ class FinanceController < ApplicationController
 
   def project_task_params
     params.require(:project_task).permit(:actual_price, :shorthand_price, :charge_status, :payment_status)
+  end
+
+  def update_billing_info_params
+    params.permit(:billed_at, :reviewer, :reviewer_email)
   end
 
   def export_project_tasks(query, category='cn')

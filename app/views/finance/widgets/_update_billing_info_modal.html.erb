@@ -1,0 +1,37 @@
+<div id="updateBillingInfoModal" class="modal fade" tabindex="-1" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%= '更新出账信息' %></h4>
+                <button type="button" data-dismiss="modal" class="close">&times;</button>
+            </div>
+
+            <%= form_tag update_billing_info_finance_path(project_task), method: :post do %>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-12 form-group">
+                            <%= label_tag :billed_at, mt(:project_task, :billed_at) %><span class="text-red">*</span>
+                            <%= text_field_tag :billed_at, project_task.billed_at.strftime('%F %T'), required: true, class: 'form-control datetimepicker' %>
+                        </div>
+                        <div class="col-lg-6 col-12 form-group">
+                            <%= label_tag :reviewer, mt(:project_task, :reviewer) %>
+                            <%= text_field_tag :reviewer, project_task.reviewer, class: 'form-control' %>
+                        </div>
+                        <div class="col-lg-6 col-12 form-group">
+                            <%= label_tag :reviewer_email, mt(:project_task, :reviewer_email) %>
+                            <%= text_field_tag :reviewer_email, project_task.reviewer_email, class: 'form-control' %>
+                        </div>
+                        <div class="col-lg-6 col-12 form-group">
+                            <%= label_tag :update_to_project, t(:update_to_project) %>
+                            <%= select_tag :update_to_project, options_for_select(boolean_options.reverse, 'false'), class: 'form-control select2' %>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-back"><%= t('action.close') %></button>
+                    <%= submit_tag t('action.submit'), :class => 'btn btn-submit' %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>

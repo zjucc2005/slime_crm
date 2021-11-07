@@ -83,33 +83,38 @@
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :billed_at) %></span>
+        </div>
+        <%= content_tag :span, @project_task.billed_at.try(:strftime, '%F %H:%M'), :class => 'form-control' %>
+        <div class="input-group-append">
+            <%= button_tag type: 'button', class: 'btn btn-default', data: { toggle: 'modal', target: '#updateBillingInfoModal'} do %>
+                <i class="fa fa-edit"></i>
+            <% end %>
+        </div>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :reviewer) %></span>
+        </div>
+        <%= content_tag :span, @project_task.reviewer, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
+            <span class="input-group-text"><%= mt(:project_task, :reviewer_email) %></span>
+        </div>
+        <%= content_tag :span, @project_task.reviewer_email, :class => 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
+        <div class="input-group-prepend">
             <span class="input-group-text"><%= mt(:project_task, :charge_days) %></span>
         </div>
         <%= content_tag :span, @project_task.charge_days, :class => 'form-control' %>
     </div>
     <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">
-            <span class="input-group-text"><%= mt(:project_task, :billed_at) %></span>
-        </div>
-        <%= content_tag :span, @project_task.billed_at.try(:strftime, '%F'), :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><%= mt(:project_task, :billed_by) %></span>
-        </div>
-        <%= content_tag :span, User.find_by(id: @project_task.billed_by).try(:name_cn), :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-        <div class="input-group-prepend">
             <span class="input-group-text"><%= mt(:project_task, :charged_at) %></span>
         </div>
-        <%= content_tag :span, @project_task.charged_at.try(:strftime, '%F'), :class => 'form-control' %>
-    </div>
-    <div class="col-lg-3 col-6 input-group input-group-sm input-group-align">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><%= mt(:project_task, :charged_by) %></span>
-        </div>
-        <%= content_tag :span, User.find_by(id: @project_task.charged_by).try(:name_cn), :class => 'form-control' %>
+        <%= content_tag :span, @project_task.charged_at.try(:strftime, '%F %H:%M'), :class => 'form-control' %>
     </div>
     <div class="col-12 input-group input-group-sm input-group-align">
         <div class="input-group-prepend">

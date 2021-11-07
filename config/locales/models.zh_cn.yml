@@ -291,6 +291,8 @@ zh_cn:
         pa: "项目助理"
         f_flag: "是否跟进"
         f_flag_s: "跟进"
+        reviewer: "客户审批人"
+        reviewer_email: "客户审批人邮箱"
 
       project_task_cost:
         category: "费用类型"

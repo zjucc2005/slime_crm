@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_02_115026) do
+ActiveRecord::Schema.define(version: 2021_11_07_031718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(version: 2021_11_02_115026) do
     t.bigint "billed_by"
     t.bigint "charged_by"
     t.bigint "paid_by"
+    t.jsonb "property", default: {}
     t.index ["client_id"], name: "index_project_tasks_on_client_id"
     t.index ["expert_id"], name: "index_project_tasks_on_expert_id"
     t.index ["project_id"], name: "index_project_tasks_on_project_id"

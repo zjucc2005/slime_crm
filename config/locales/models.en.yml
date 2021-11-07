@@ -262,6 +262,8 @@ en:
         pa: "PA"
         f_flag: "Follow up"
         f_flag_s: "Follow up"
+        reviewer: "Reviewer"
+        reviewer_email: "Reviewer email"
 
       project_task_cost:
         category: "Cost category"

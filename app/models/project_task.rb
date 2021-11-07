@@ -39,6 +39,12 @@ class ProjectTask < ApplicationRecord
   # Scopes
   scope :interview, -> { where( category: 'interview') }
 
+  # property fields
+  %w[reviewer reviewer_email].each do |k|
+    define_method(:"#{k}"){ self.property[k] }
+    define_method(:"#{k}="){ |v| self.property[k] = v }
+  end
+
   def finished!
     ActiveRecord::Base.transaction do
       contract = active_contract
@@ -98,23 +104,24 @@ class ProjectTask < ApplicationRecord
 
   def card_template_params(field)
     case field.to_sym
-      when :uid            then self.uid
-      when :seat           then self.client.name
-      when :interview_form then self.interview_form.capitalize
-      when :pa             then self.pa.name_cn
-      when :start_time     then (self.started_at.strftime('%F %H:%M') rescue nil)
-      when :start_time_fwt then self._start_time_fwt_
-      when :end_time       then (self.ended_at.strftime('%F %H:%M') rescue nil)
-      when :expert_level   then self.expert_level == 'premium' ? 'Premium Expert' : 'Standard Expert'
-      when :expert_uid     then self.expert.uid
-      when :expert_name    then self.expert.name
-      when :expert_mr_name then self.expert.mr_name
-      when :expert_company then self.expert.latest_work_experience.try(:org_cn)
-      when :expert_title   then self.expert.latest_work_experience.try(:title)
-      when :expert_description then self.expert.description
-      when :expert_rate    then self.expert_rate
-      when :expert_unit_price then self._expert_unit_price_
-      else nil
+    when :uid                then self.uid
+    when :seat               then self.client.name
+    when :interview_form     then self.interview_form.capitalize
+    when :pa                 then self.pa.name_cn
+    when :start_time         then (self.started_at.strftime('%F %H:%M') rescue nil)
+    when :start_time_fwt     then self._start_time_fwt_
+    when :end_time           then (self.ended_at.strftime('%F %H:%M') rescue nil)
+    when :expert_level       then self.expert_level == 'premium' ? 'Premium Expert' : 'Standard Expert'
+    when :expert_uid         then self.expert.uid
+    when :expert_name        then self.expert.name
+    when :expert_mr_name     then self.expert.mr_name
+    when :expert_company     then self.expert.latest_work_experience.try(:org_cn)
+    when :expert_title       then self.expert.latest_work_experience.try(:title)
+    when :expert_description then self.expert.description
+    when :expert_rate        then self.expert_rate
+    when :expert_unit_price  then self._expert_unit_price_
+    when :expert_alias       then expert_alias.present? ? expert_alias : 'name'
+    else nil
     end
   end
 
