@@ -46,13 +46,15 @@
     <div class="card mb-3">
         <div class="card-header">
             <h6 class="mb-0">
-                <%= fa_icon_tag('sort-amount-desc') %>
-                <%= t('dashboard.current_month_call_ranking_by_company') %> TOP 10
-                <%= link_to 'More', current_month_call_ranking_statistics_path, class: 'text-smaller' %>
+                <%= t('dashboard.billing_projects') %>
+                <%= content_tag :span, 0, :class => 'badge badge-success', :id => 'billing_projects_count' %>
             </h6>
         </div>
         <div class="card-body p-0">
-            <div id="current_month_call_ranking_chart" style="height: 300px;"></div>
+            <div id="billing_projects_wrapper" class="table-responsive"></div>
+            <div class="text-center text-bold">
+                <%= link_to '···', billing_projects_statistics_path, :title => t(:show_all) %>
+            </div>
         </div>
     </div>
 
@@ -75,8 +77,7 @@
 <script>
     $(document).ready(function(){
         $.get('statistics/current_month_count_infos.js');
-        // $.get('statistics/current_month_task_ranking.js?limit=10');
-        $.get('statistics/current_month_call_ranking.js?limit=10&mode=b');
+        $.get('statistics/billing_projects.js?limit=10');
         $.get('statistics/ongoing_project_tasks.js?limit=10');
     });
 </script>

@@ -228,6 +228,10 @@ zh_cn:
         industry: "行业"
         started_at: "开始时间"
         ended_at: "结束时间"
+        billed_at: "出账时间"
+        reviewed_at: "过审时间"
+        invoice_no: "发票号码"
+        invoice_issue_date: "开票日期"
         client: "客户联系人"
         expert: "专家"
         start: "启动项目"
@@ -238,6 +242,7 @@ zh_cn:
         total_project_tasks: "任务总数"
         total_duration: "总时长"
         total_charge_duration: "总收费时长"
+        total_price: "总金额"
 
       project_requirement:
         status: "状态"

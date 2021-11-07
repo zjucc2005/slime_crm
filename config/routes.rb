@@ -78,6 +78,7 @@ Rails.application.routes.draw do
     put :add_project_task, on: :member
     get :add_project_requirement, on: :member
     put :add_project_requirement, on: :member
+    get :edit_invoice_info, on: :member
 
     delete :delete_user,   on: :member  # 删除项目参与人
     delete :delete_expert, on: :member  # 删除专家
@@ -135,6 +136,7 @@ Rails.application.routes.draw do
     get :current_month_call_ranking, on: :collection
     # get :unscheduled_projects,       on: :collection
     get :ongoing_project_tasks,      on: :collection
+    get :billing_projects,           on: :collection
 
     get :finance_summary,            on: :collection
   end

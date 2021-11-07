@@ -132,11 +132,17 @@ class StatisticsController < ApplicationController
 
   # GET /statistics/ongoing_project_tasks
   def ongoing_project_tasks
-    query = ProjectTask.where(status: 'ongoing').order(:started_at => :asc)
-    query = user_channel_filter(query)
+    query = user_channel_filter(ProjectTask.where(status: 'ongoing').order(started_at: :asc))
     @count = query.count
     query = query.limit(params[:limit]) if params[:limit].present?
     @project_tasks = query
+  end
+
+  def billing_projects
+    query = user_channel_filter(Project.where(status: 'billing').order(ended_at: :asc))
+    @count = query.count
+    query = query.limit(params[:limit]) if params[:limit].present?
+    @projects = query
   end
 
   # GET /statistics/finance_summary

@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">
+            <%= t('dashboard.billing_projects') %>
+            <%= content_tag :span, @count, :class => 'badge badge-success' %>
+        </h5>
+        <%= link_to fa_icon_tag('close'), root_path, :class => 'card-header-close' %>
+    </div>
+    <div class="card-body">
+        <% if @projects.any? %>
+            <%= render partial: 'billing_projects_content' %>
+        <% else %>
+            <div class="p-2 text-center">
+                <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -70,6 +70,10 @@ class ProjectsController < ApplicationController
     load_signed_company_options
   end
 
+  def edit_invoice_info
+    load_project
+  end
+
   # PUT /projects/:id
   def update
     begin
@@ -79,7 +83,7 @@ class ProjectsController < ApplicationController
       if @project.update(project_params_update)
         @project.update(updated_at: updated_at_was) if current_user.role == 'finance' # 财务不刷新更新时间
         flash[:success] = t(:operation_succeeded)
-        redirect_to project_path(@project)
+        redirect_with_return_to(project_path(@project))
       else
         load_signed_company_options
         render :edit
@@ -407,7 +411,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params_update
-    params.require(:project).permit(:name, :code, :code_area, :industry, :requirement, :started_at, :ended_at)
+    params.require(:project).permit(:name, :code, :code_area, :invoice_no)
   end
 
   def project_task_params

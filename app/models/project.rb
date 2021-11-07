@@ -151,6 +151,14 @@ class Project < ApplicationRecord
     (project_tasks.where(status: 'finished').sum(:charge_duration) / 60.0).round(1)
   end
 
+  def total_price
+    project_tasks.where(status: 'finished').sum(:actual_price)
+  end
+
+  def reviewed_at
+    project_tasks.where(status: 'finished').maximum(:billed_at)
+  end
+
   def project_option_friendly
     "#{company.name_abbr} - #{code} - #{name}"
   end

@@ -40,6 +40,7 @@ en:
   inconsistent_password: "Two passwords must be consistent"
   invalid_current_password: "Invalid current password"
   invalid_file_format: "Invalid file format"
+  invoice: "Invoice"
   keywords_at_most: "%{limit} keywords at most"
   memo: "Memo"
   minute: "Minute(s)"
@@ -113,6 +114,7 @@ en:
 
   dashboard:
     annual_total: "Annual Total"
+    billing_projects: "Billing project"
     category: "Category"
     current_month_increase: "Current Month Increase"
     current_month_charge_duration_ranking: "Current Month Charge Duration Ranking"

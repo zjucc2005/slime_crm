@@ -1,0 +1,28 @@
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fa fa-cny"></i> <%= t(:invoice) %></h5>
+        <%= link_to fa_icon_tag('close'), return_to(root_path), :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <%= form_for @project do |f| %>
+            <%= hidden_field_tag :return_to, root_path %>
+            <%= model_error_tag(@project) %>
+            <div class="row">
+                <div class="col-12 form-group">
+                    <span class="badge badge-light"><%= show_creator(@project) %></span>
+                    <span class="badge badge-light"><%= show_timestamps(@project) %></span>
+                </div>
+                <div class="col-lg-6 col-12 form-group">
+                    <%= f.label :invoice_no %><span class="text-red">*</span>
+                    <%= f.text_field :invoice_no, required: true, class: 'form-control' %>
+                </div>
+            </div>
+
+            <div class="form-group mb-0">
+                <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), return_to(root_path), :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>

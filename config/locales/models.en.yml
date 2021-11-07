@@ -199,6 +199,10 @@ en:
         industry: "Industry"
         started_at: "Started at"
         ended_at: "Ended at"
+        billed_at: "Billed at"
+        reviewed_at: "Reviewed at"
+        invoice_no: "Invoice No."
+        invoice_issue_date: "Invoice issue date"
         client: "Client"
         expert: "Expert"
         start: "Start project"
@@ -209,6 +213,7 @@ en:
         total_project_tasks: "Total tasks"
         total_duration: "Total duration"
         total_charge_duration: "Total charge duration"
+        total_price: "Total price"
 
       project_requirement:
         status: "Status"
