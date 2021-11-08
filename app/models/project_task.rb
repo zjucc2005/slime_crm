@@ -10,6 +10,7 @@ class ProjectTask < ApplicationRecord
     :'face-to-face' => '面谈',
     :data           => '数据',
     :roadshow       => '路演',
+    :daifu          => '代付费',
     :others         => '其他'
   }.stringify_keys
   EXPERT_LEVEL = { :standard => 'Standard', :premium  => 'Premium' }.stringify_keys
