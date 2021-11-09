@@ -182,7 +182,10 @@ class CandidatesController < ApplicationController
   # GET /candidates/gen_card
   def gen_card
     @card_template = CardTemplate.find(params[:card_template_id])
-    @candidates = Candidate.where(id: params[:uids])
+    @candidate_ids = []
+    params[:uids].each do |uid|
+      @candidate_ids << uid if Candidate.exists?(id: uid)
+    end
   end
 
   # GET /candidates/expert_template

@@ -1,12 +1,10 @@
-<table class="table table-sm table-striped border nowrap card-text">
+<table class="table table-sm table-striped border-bottom nowrap card-text">
     <thead>
     <tr>
         <th><%= mt(:project_task, :id) %></th>
         <th><%= mt(:project, :name) %></th>
-        <th><%= mt(:project, :code) %></th>
-        <th><%= mt(:company, :name_abbr) %></th>
-        <th><%= mt(:project_task, :category) %></th>
         <th><%= mt(:project_task, :interview_form) %></th>
+        <th><%= mt(:candidate_experience, :current_company) %></th>
         <th><%= mt(:expert) %></th>
         <th><%= mt(:project_task, :started_at) %></th>
         <th><%= mt(:project_task, :duration) %></th>
@@ -20,11 +18,9 @@
         <% project = task.project %>
         <tr>
             <td><%= content_tag :span, "# #{task.uid}", :class => 'text-gray' %></td>
-            <td title="<%= project.name %>"><%= truncate(project.name, length: 8) %></td>
-            <td><%= project.code %></td>
-            <td><%= project.company.name_abbr %></td>
-            <td><%= project_task_category_badge(task.category) %></td>
+            <td title="<%= "#{project.company.name_abbr} - #{project.name}" %>"><%= truncate("#{project.company.name_abbr} - #{project.name}", length: 21) %></td>
             <td><%= project_task_interview_form_badge(task.interview_form) %></td>
+            <td title="<%= task.expert.latest_work_experience.try(:org_cn) %>"><%= truncate(task.expert.latest_work_experience.try(:org_cn) || '', length: 15)  %></td>
             <td><%= task.expert.name %></td>
             <td><%= task.started_at.strftime('%F %H:%M') %></td>
             <td><%= task.duration %></td>
