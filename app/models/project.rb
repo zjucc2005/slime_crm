@@ -175,7 +175,7 @@ class Project < ApplicationRecord
 
   def validation_add
     if company.check_project_code_dup # 检查项目code重复性
-      if code.present? && self.class.where.not(id: id).exists?(code: code)
+      if code.present? && self.class.where.not(id: id).exists?(status: %w[new ongoing], code: code)
         errors.add(:code, :taken)
       end
     end
