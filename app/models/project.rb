@@ -23,7 +23,8 @@ class Project < ApplicationRecord
   validates_presence_of :name
   validates_inclusion_of :status, :in => STATUS.keys
 
-  before_validation :setup, :on => :create
+  before_validation :setup, on: :create
+  before_validation :validation_add, on: [:create, :update]
 
   # has_many :clients / :experts 作为 has_many :candidates 的补充, 依据 project_candidates.category
   # 和 candidates.client / candidates.expert 有区别, 只读
@@ -170,6 +171,14 @@ class Project < ApplicationRecord
   private
   def setup
     self.status ||= 'initialized'
+  end
+
+  def validation_add
+    if company.check_project_code_dup # 检查项目code重复性
+      if code.present? && self.class.where.not(id: id).exists?(code: code)
+        errors.add(:code, :taken)
+      end
+    end
   end
 
 end

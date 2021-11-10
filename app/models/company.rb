@@ -24,7 +24,7 @@ class Company < ApplicationRecord
   scope :not_signed, -> { joins(:contracts).where('contracts.started_at > :now AND contracts.ended_at < :now', { :now => Time.now }).distinct }
 
   # property fields
-  %w[salesman].each do |k|
+  %w[salesman check_project_code_blank check_project_code_dup].each do |k|
     define_method(:"#{k}"){ self.property[k] }
     define_method(:"#{k}="){ |v| self.property[k] = v }
   end
