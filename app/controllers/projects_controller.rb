@@ -349,7 +349,9 @@ class ProjectsController < ApplicationController
     begin
       load_project
       raise t(:not_authorized) unless @project.can_close?
+      updated_at_was = @project.updated_at
       @project.close!
+      @project.update(updated_at: updated_at_was) if current_user.role == 'finance' # 财务不刷新更新时间
       flash[:success] = t(:operation_succeeded)
       redirect_to project_path(@project)
     rescue Exception => e
@@ -363,7 +365,9 @@ class ProjectsController < ApplicationController
     begin
       load_project
       raise t(:not_authorized) unless @project.can_reopen?
+      updated_at_was = @project.updated_at
       @project.reopen!
+      @project.update(updated_at: updated_at_was) if current_user.role == 'finance' # 财务不刷新更新时间
       flash[:success] = t(:operation_succeeded)
       redirect_to project_path(@project)
     rescue Exception => e
