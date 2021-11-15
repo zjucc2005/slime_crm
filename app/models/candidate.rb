@@ -165,8 +165,12 @@ class Candidate < ApplicationRecord
         rate = 2880
       elsif cpt >= 1200 && cpt < 1500
         rate = 3456
-      elsif cpt >= 1500 && cpt < 2000
+      elsif cpt >= 1500 && cpt <= 2000
         rate = 4320
+      elsif cpt > 2000 && cpt <= 2500
+        rate = 5760
+      elsif cpt > 2500 && cpt <= 3000
+        rate = 6336
       end
     end
     rate.zero? ? '' : "电话-#{rate}/小时"
