@@ -100,9 +100,11 @@
 
 <script>
     $(function(){
+        let shorthand_price = $('#project_task_shorthand_price').val();
         get_expert_rate();
         get_shorthand();
         get_base_price();
+        $('#project_task_shorthand_price').val(shorthand_price); // 页面加载时保留原速记费
     });
     $('#project_task_charge_duration').change(function(){
         get_base_price(); // 计算价格
@@ -144,9 +146,9 @@
             dataType: 'json',
             success: function(data){
                 base_price.val(data.price);
-                if(shorthand_price.val() == 0){
+                // if(shorthand_price.val() == 0){
                     shorthand_price.val(data.shorthand_price);
-                }
+                // }
                 currency.val(data.currency);
                 is_taxed.val(data.is_taxed);
                 tax_rate.val(data.tax_rate);
