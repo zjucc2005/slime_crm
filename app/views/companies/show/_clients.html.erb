@@ -17,6 +17,7 @@
                     <th><%= mt(:candidate, :title) %></th>
                     <th><%= mt(:candidate, :phone) %></th>
                     <th><%= mt(:candidate, :email) %></th>
+                    <th><%= mt(:candidate, :job_status) %></th>
                     <th><%= mt(:candidate, :created_by) %></th>
                     <th><%= mt(:candidate, :created_at) %></th>
                     <th><%= t(:memo) %></th>
@@ -32,6 +33,7 @@
                         <td><%= client.title %></td>
                         <td><%= client.phone %></td>
                         <td><%= client.email %></td>
+                        <td><%= candidate_job_status_badge(client.job_status) %></td>
                         <td><%= client.creator.name_cn %></td>
                         <td><%= client.created_at.strftime('%F %T') %></td>
                         <td>
@@ -43,6 +45,9 @@
                                     <%= link_to edit_candidate_comment_path(comment, return_to: request.url) do %>
                                         <%= t('action.edit') %>
                                     <% end if can?(:edit, CandidateComment) %>
+                                    <%= link_to candidate_comment_path(comment, return_to: request.url), method: :delete, data: { confirm: t(:sure_to_delete) } do %>
+                                        <%= t('action.delete') %>
+                                    <% end if can?(:destroy, CandidateComment) %>
                                 </div>
                             <% else %>
                                 <%= link_to new_candidate_comment_path(candidate_id: client.id, return_to: request.url) do %>

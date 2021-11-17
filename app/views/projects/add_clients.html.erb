@@ -43,6 +43,7 @@
                 <th><%= mt(:candidate, :title) %></th>
                 <th><%= mt(:candidate, :phone) %></th>
                 <th><%= mt(:candidate, :email) %></th>
+                <th><%= mt(:candidate, :job_status) %></th>
                 <th><%= mt(:candidate, :created_at) %></th>
                 <th><%= t(:memo) %></th>
                 <th><%= t(:operation) %></th>
@@ -60,6 +61,7 @@
                     <td><%= client.title %></td>
                     <td><%= client.phone %></td>
                     <td><%= client.email %></td>
+                    <td><%= candidate_job_status_badge(client.job_status) %></td>
                     <td><%= client.created_at.strftime('%F %T') %></td>
                     <td>
                         <% comment = client.comments.first %>
@@ -84,7 +86,7 @@
                 <%= check_box_tag :'uids[]', client_id, true, :class => 'd-none' %>
             <% end %>
             <tr>
-                <td colspan="9" align="center">
+                <td colspan="11" align="center">
                     <%= link_to new_client_company_path(@project.company, return_to: request.path), :class => 'btn btn-primary btn-xs' do %>
                         <%= fa_icon_tag('plus') %> <%= t('action.new_model', :model => t(:client_contact)) %>
                     <% end if can?(:manage, Project) %>

@@ -105,6 +105,7 @@ en:
         task_count: "Task count"
         work_experiences: "Work experience"
         recommender_id: "Recommender ID"
+        job_status: "Job status"
 
       candidate_experience:
         category: "Category"

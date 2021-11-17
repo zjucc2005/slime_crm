@@ -99,8 +99,7 @@ class ProjectTask < ApplicationRecord
   end
 
   def expert_cost_friendly
-    cost = costs.expert.first
-    cost ? cost.price : nil
+    costs.expert.sum(:price)
   end
 
   def card_template_params(field)

@@ -220,7 +220,7 @@ class ProjectsController < ApplicationController
       %w[name nickname title phone email].each do |field|
         query = query.where("#{field} ILIKE ?", "%#{params[field].strip}%") if params[field].present?
       end
-      @clients = query.order(:created_at => :desc)
+      @clients = query.order(job_status: :desc, created_at: :desc)
 
       if request.put?
         raise t(:not_authorized) unless @project.can_edit?

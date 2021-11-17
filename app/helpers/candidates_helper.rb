@@ -55,6 +55,15 @@ module CandidatesHelper
     Candidate::DATA_CHANNEL.to_a.map(&:reverse)
   end
 
+  def candidate_job_status_options
+    Candidate::JOB_STATUS.to_a.map(&:reverse)
+  end
+
+  def candidate_job_status_badge(status)
+    dict = { on: 'success', off: 'secondary' }.stringify_keys
+    content_tag :span, Candidate::JOB_STATUS[status] || status, :class => "badge badge-#{dict[status] || 'secondary'}"
+  end
+
   def work_exps
     params[:work_exp] || []
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_07_080124) do
+ActiveRecord::Schema.define(version: 2021_11_17_130846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 2021_11_07_080124) do
     t.bigint "recommender_id"
     t.string "data_channel"
     t.bigint "user_channel_id"
+    t.string "job_status"
     t.index ["company_id"], name: "index_candidates_on_company_id"
     t.index ["recommender_id"], name: "index_candidates_on_recommender_id"
     t.index ["user_channel_id"], name: "index_candidates_on_user_channel_id"

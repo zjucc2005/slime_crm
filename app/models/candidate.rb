@@ -16,6 +16,7 @@ class Candidate < ApplicationRecord
     :excel     => '批量导入',
     :plugin    => '插件采集'
   }.stringify_keys
+  JOB_STATUS = { on: '在职', off: '离职' }.stringify_keys
 
   # Associations
   belongs_to :creator, :class_name => 'User', :foreign_key => :created_by, :optional => true
