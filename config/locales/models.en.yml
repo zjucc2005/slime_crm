@@ -132,6 +132,8 @@ en:
       candidate_comment:
         content: "Content"
         is_top: "Is top"
+        feedback: "Feedback"
+        contact: "Contact"
 
       card_template:
         category: "Category"

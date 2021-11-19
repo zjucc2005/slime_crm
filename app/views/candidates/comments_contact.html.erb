@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fa fa-phone"></i> <%= mt(:candidate_comment, :contact) %></h5>
+        <%= link_to fa_icon_tag('close'), candidate_path(@candidate), :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-column flex-lg-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
+                    <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
+                </h6>
+                <div class="btn-group btn-group-sm">
+                    <%= link_to new_contact_candidate_comments_path(candidate_id: @candidate.id, return_to: request.path), :class => 'btn btn-primary' do %>
+                        <%= fa_icon_tag('plus') %> <%= t('action.add') %>
+                    <% end if can?(:new_contact, CandidateComment) %>
+                </div>
+            </div>
+        </div>
+
+        <div class="candidate-comment-group-sm my-3">
+            <% @candidate_comments.each do |comment| %>
+                <div class="candidate-comment-unit">
+                    <div class="content"><%= comment.content %></div>
+                    <div class="timestamp">
+                        <span class="badge badge-light"><%= show_creator(comment) %></span>
+                        <span class="badge badge-light"><%= show_timestamps(comment) %></span>
+                        <% if can?(:edit_contact, CandidateComment) %>
+                            <%= link_to t('action.edit'), edit_contact_candidate_comment_path(comment, return_to: request.path), :class => 'btn btn-link btn-xs' %>
+                            <%= link_to t('action.delete'), candidate_comment_path(comment, return_to: request.path), :method => :delete, :class => 'btn btn-link btn-xs',
+                                        :data => { :confirm => t(:sure_to_delete)} %>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <%= will_paginate @candidate_comments %>
+    </div>
+</div>

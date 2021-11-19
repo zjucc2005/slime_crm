@@ -36,7 +36,7 @@
                     </div>
                     <%= link_to comments_candidate_path(@candidate), :class => 'btn btn-default' do %>
                         <%= fa_icon_tag('commenting') %> <%= t(:candidate_comment) %>
-                        <%= count_badge(@candidate.comments.joins(:creator).where('users.user_channel_id': current_user.user_channel_id).count) %>
+                        <%= count_badge(@candidate.comments.where(category: 'general').count) %>
                     <% end if can?(:comments, Candidate) %>
                     <%= link_to project_tasks_candidate_path(@candidate), :class => 'btn btn-default' do %>
                         <%= fa_icon_tag('list') %> <%= mt(:candidate, :interview_task) %>
@@ -182,6 +182,8 @@
                 <%= text_area_tag :description, @candidate.description, :rows => 5, :disabled => true, :class => 'form-control bg-white' %>
             </div>
         </div>
+
+        <%= render partial: 'candidates/show/comments' %>
 
         <!-- 工作经历 -->
         <div class="badge badge-info mb-3 px-4"><%= t(:work_experience) %></div>

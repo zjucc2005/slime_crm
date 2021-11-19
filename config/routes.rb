@@ -50,13 +50,22 @@ Rails.application.routes.draw do
     post :create_payment_info, on: :member
     get :project_tasks,        on: :member
     get :comments,             on: :member
+    get :comments_feedback,    on: :member
+    get :comments_contact,     on: :member
 
     get :expert_info_for_clipboard, on: :member
     get :recommender_info, on: :collection
   end
 
   resources :candidate_payment_infos
-  resources :candidate_comments
+  resources :candidate_comments do
+    get :new_feedback,  on: :collection
+    get :edit_feedback, on: :member
+    post :activate_feedback, on: :member
+
+    get :new_contact,   on: :collection
+    get :edit_contact,  on: :member
+  end
 
   resources :companies do
     get :new_contract,        on: :member

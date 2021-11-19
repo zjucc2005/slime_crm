@@ -58,6 +58,20 @@
         }
     }
 }
+.candidate-comment-group-sm {
+    .candidate-comment-unit {
+        &:nth-of-type(odd) { background-color: rgba(0, 0, 0, 0.05); }
+        padding: 0.2rem 0.4rem;
+        border-bottom: 1px solid #e5e9ef;
+        .content {
+            font-size: 0.8rem;
+        }
+        .timestamp {
+            text-align: right;
+        }
+    }
+}
+
 .summary-item {
     display: block;
 

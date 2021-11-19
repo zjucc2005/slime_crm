@@ -68,9 +68,51 @@ class CandidateCommentsController < ApplicationController
     end
   end
 
+  # GET /candidate_comments/new_feedback?candidate_id=1
+  def new_feedback
+    @candidate = Candidate.find(params[:candidate_id])
+    @candidate_comment = @candidate.comments.new
+  end
+
+  def edit_feedback
+    begin
+      load_candidate_comment
+      @candidate = @candidate_comment.candidate
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to root_path
+    end
+  end
+
+  def new_contact
+    @candidate = Candidate.find(params[:candidate_id])
+    @candidate_comment = @candidate.comments.new
+  end
+
+  def edit_contact
+    begin
+      load_candidate_comment
+      @candidate = @candidate_comment.candidate
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to root_path
+    end
+  end
+
+  def activate_feedback
+    begin
+      load_candidate_comment
+      @candidate_comment.activate!
+      redirect_with_return_to comments_feedback_candidate_path(@candidate_comment.candidate)
+    rescue => e
+      flash[:error] = e.message
+      redirect_to root_path
+    end
+  end
+
   private
   def candidate_comment_params
-    params.require(:candidate_comment).permit(:content, :is_top)
+    params.require(:candidate_comment).permit(:category, :content, :is_top)
   end
 
   def load_candidate_comment

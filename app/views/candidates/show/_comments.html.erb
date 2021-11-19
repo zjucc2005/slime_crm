@@ -1,0 +1,82 @@
+<div class="row border-bottom mb-3">
+    <div class="col-lg-8 col-12">
+        <div class="card card-inner mb-3" id="comments_feedback">
+            <div class="card-header">
+                <h5><i class="fa fa-tags"></i> <%= mt(:candidate_comment, :feedback) %></h5>
+                <%= link_to new_feedback_candidate_comments_path(candidate_id: @candidate.id, return_to: request.path), :class => 'btn btn-primary btn-xs' do %>
+                    <i class="fa fa-plus"></i> <%= t('action.add') %>
+                <% end if can?(:new_feedback, CandidateComment) %>
+            </div>
+            <div class="card-body">
+                <% if @candidate.comments.feedback.any? %>
+                    <div class="candidate-comment-group-sm">
+                        <% @candidate.comments.feedback.order(created_at: :desc).limit(5).each do |comment| %>
+                            <div class="candidate-comment-unit">
+                                <div class="content" title="<%= comment.content %>">
+                                    <% if comment.is_active? %>
+                                        <i class="fa fa-toggle-on text-success"></i>
+                                    <% else %>
+                                        <%= link_to activate_feedback_candidate_comment_path(comment, return_to: "#{request.path}#comments_feedback"), method: :post do %>
+                                            <i class="fa fa-toggle-off text-secondary"></i>
+                                        <% end %>
+                                    <% end %>
+                                    <%= truncate(comment.content, length: 68) %>
+                                </div>
+                                <div class="timestamp">
+                                    <span class="badge badge-light"><%= show_creator(comment) %></span>
+                                    <span class="badge badge-light"><%= "#{mt(:user, :created_at)}: #{comment.created_at.strftime('%F %T')}" %></span>
+                                    <% if can?(:edit_feedback, CandidateComment) %>
+                                        <%= link_to t('action.edit'), edit_feedback_candidate_comment_path(comment, return_to: request.path), :class => 'btn btn-link btn-xs' %>
+                                        <%= link_to t('action.delete'), candidate_comment_path(comment, return_to: request.path), :method => :delete, :class => 'btn btn-link btn-xs',
+                                                    :data => { :confirm => t(:sure_to_delete)} %>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                        <div class="text-center"><%= link_to '...', comments_feedback_candidate_path(@candidate), :title => t(:show_all) %></div>
+                    </div>
+                <% else %>
+                    <div class="p-2 text-center">
+                        <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-12">
+        <div class="card card-inner mb-3">
+            <div class="card-header">
+                <h5><i class="fa fa-phone"></i> <%= mt(:candidate_comment, :contact) %></h5>
+                <%= link_to new_contact_candidate_comments_path(candidate_id: @candidate.id, return_to: request.path), :class => 'btn btn-primary btn-xs' do %>
+                    <i class="fa fa-plus"></i> <%= t('action.add') %>
+                <% end %>
+            </div>
+            <div class="card-body">
+                <% if @candidate.comments.contact.any? %>
+                    <div class="candidate-comment-group-sm">
+                        <% @candidate.comments.contact.order(updated_at: :desc).limit(5).each do |comment| %>
+                            <div class="candidate-comment-unit">
+                                <div class="content" title="<%= comment.content %>"><%= truncate(comment.content, length: 34) %></div>
+                                <div class="timestamp">
+                                    <span class="badge badge-light"><%= show_creator(comment) %></span>
+                                    <span class="badge badge-light"><%= "#{mt(:user, :created_at)}: #{comment.created_at.strftime('%F %T')}" %></span>
+                                    <% if can?(:edit, CandidateComment) %>
+                                        <%= link_to t('action.edit'), edit_contact_candidate_comment_path(comment, return_to: request.path), :class => 'btn btn-link btn-xs' %>
+                                        <%= link_to t('action.delete'), candidate_comment_path(comment, return_to: request.path), :method => :delete, :class => 'btn btn-link btn-xs',
+                                                    :data => { :confirm => t(:sure_to_delete)} %>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                        <div class="text-center"><%= link_to '...', comments_contact_candidate_path(@candidate), :title => t(:show_all) %></div>
+                    </div>
+                <% else %>
+                    <div class="p-2 text-center">
+                        <h5 class="text-gray mb-0"><%= t(:not_found) %></h5>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -130,6 +130,7 @@ class Candidate < ApplicationRecord
     when :expert_level then _c_t_expert_level
     when :gj_rate      then _c_t_gj_rate_
     when :mszq_rate    then _c_t_mszq_rate_
+    when :feedback     then comments.feedback.where(is_active: true).order(created_at: :desc).pluck(:content)[0]
     else nil
     end
   end

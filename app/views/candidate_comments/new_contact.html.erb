@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fa fa-phone"></i> <%= t('action.add_model', model: mt(:candidate_comment, :contact)) %></h5>
+        <%= link_to fa_icon_tag('close'), 'javascript:history.go(-1);', :class => 'card-header-close' %>
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12 d-flex flex-column flex-lg-row justify-content-between">
+                <h6>
+                    <span class="text-gray mr-3"><%= "# #{@candidate.uid}" %></span>
+                    <span><%= @candidate.last_name %> <%= @candidate.first_name %></span>
+                </h6>
+            </div>
+        </div>
+
+        <%= form_for @candidate_comment do |f| %>
+            <%= f.hidden_field :category, value: 'contact' %>
+            <%= render partial: 'form_feedback', :locals => { :f => f } %>
+
+            <div class="form-group mb-0">
+                <%= f.submit t('action.submit'), :class => 'btn btn-submit' %>
+                <%= link_to t('action.back'), 'javascript:history.go(-1);', :class => 'btn btn-back' %>
+            </div>
+        <% end %>
+    </div>
+</div>
