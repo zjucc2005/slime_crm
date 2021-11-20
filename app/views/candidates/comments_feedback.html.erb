@@ -23,10 +23,10 @@
             <% @candidate_comments.each do |comment| %>
                 <div class="candidate-comment-unit">
                     <div class="content">
-                        <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true do %>
+                        <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true, class: 'content-l' do %>
                             <%= content_tag :i, nil, class: comment.is_active? ? 'fa fa-toggle-on text-success' : 'fa fa-toggle-off text-secondary', data: { class: 'feedback-active', id: comment.id } %>
                         <% end %>
-                        <%= comment.content %>
+                        <div class="content-r"><%= comment.content %></div>
                     </div>
                     <div class="timestamp">
                         <span class="badge badge-light"><%= show_creator(comment) %></span>

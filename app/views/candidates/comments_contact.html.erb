@@ -22,7 +22,9 @@
         <div class="candidate-comment-group-sm my-3">
             <% @candidate_comments.each do |comment| %>
                 <div class="candidate-comment-unit">
-                    <div class="content"><%= comment.content %></div>
+                    <div class="content">
+                        <div class="content-r"><%= comment.content %></div>
+                    </div>
                     <div class="timestamp">
                         <span class="badge badge-light"><%= show_creator(comment) %></span>
                         <span class="badge badge-light"><%= show_timestamps(comment) %></span>

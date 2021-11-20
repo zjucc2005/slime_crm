@@ -12,11 +12,11 @@
                     <div class="candidate-comment-group-sm">
                         <% @candidate.comments.feedback.order(created_at: :desc).limit(5).each do |comment| %>
                             <div class="candidate-comment-unit">
-                                <div class="content" title="<%= comment.content %>">
-                                    <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true do %>
+                                <div class="content">
+                                    <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true, class: 'content-l' do %>
                                         <%= content_tag :i, nil, class: comment.is_active? ? 'fa fa-toggle-on text-success' : 'fa fa-toggle-off text-secondary', data: { class: 'feedback-active', id: comment.id } %>
                                     <% end %>
-                                    <%= truncate(comment.content, length: 68) %>
+                                    <div class="content-r" title="<%= comment.content %>"><%= truncate(comment.content, length: 68) %></div>
                                 </div>
                                 <div class="timestamp">
                                     <span class="badge badge-light"><%= show_creator(comment) %></span>
@@ -50,9 +50,11 @@
             <div class="card-body">
                 <% if @candidate.comments.contact.any? %>
                     <div class="candidate-comment-group-sm">
-                        <% @candidate.comments.contact.order(updated_at: :desc).limit(5).each do |comment| %>
+                        <% @candidate.comments.contact.order(created_at: :desc).limit(5).each do |comment| %>
                             <div class="candidate-comment-unit">
-                                <div class="content" title="<%= comment.content %>"><%= truncate(comment.content, length: 34) %></div>
+                                <div class="content">
+                                    <div class="content-r" title="<%= comment.content %>"><%= truncate(comment.content, length: 34) %></div>
+                                </div>
                                 <div class="timestamp">
                                     <span class="badge badge-light"><%= show_creator(comment) %></span>
                                     <span class="badge badge-light"><%= "#{mt(:user, :created_at)}: #{comment.created_at.strftime('%F %T')}" %></span>

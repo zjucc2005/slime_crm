@@ -65,6 +65,14 @@
         border-bottom: 1px solid #e5e9ef;
         .content {
             font-size: 0.8rem;
+            display: flex;
+            flex-direction: row;
+            .content-l {
+                padding-right: 5px;
+            }
+            .content-r {
+                white-space: pre-line;
+            }
         }
         .timestamp {
             text-align: right;
