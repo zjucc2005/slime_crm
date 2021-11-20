@@ -23,9 +23,13 @@ class CandidateComment < ApplicationRecord
   end
 
   def activate!
-    self.update!(is_active: true)
-    instances = candidate.comments.feedback.where(is_active: true).where.not(id: id)
-    instances.map { |instance| instance.update!(is_active: false) }
+    if is_active?
+      self.update!(is_active: false)
+    else
+      self.update!(is_active: true)
+      instances = candidate.comments.feedback.where(is_active: true).where.not(id: id)
+      instances.map { |instance| instance.update!(is_active: false) }
+    end
   end
 
   private

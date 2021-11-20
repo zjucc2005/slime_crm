@@ -1,0 +1,2 @@
+$('[data-class=feedback-active]').attr('class', 'fa fa-toggle-off text-secondary'); // init
+$('[data-class=feedback-active][data-id=<%= @candidate_comment.id %>]').attr('class', '<%= @candidate_comment.is_active? ? 'fa fa-toggle-on text-success' : 'fa fa-toggle-off text-secondary' %>');

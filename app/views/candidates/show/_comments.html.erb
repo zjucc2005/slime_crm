@@ -13,12 +13,8 @@
                         <% @candidate.comments.feedback.order(created_at: :desc).limit(5).each do |comment| %>
                             <div class="candidate-comment-unit">
                                 <div class="content" title="<%= comment.content %>">
-                                    <% if comment.is_active? %>
-                                        <i class="fa fa-toggle-on text-success"></i>
-                                    <% else %>
-                                        <%= link_to activate_feedback_candidate_comment_path(comment, return_to: "#{request.path}#comments_feedback"), method: :post do %>
-                                            <i class="fa fa-toggle-off text-secondary"></i>
-                                        <% end %>
+                                    <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true do %>
+                                        <%= content_tag :i, nil, class: comment.is_active? ? 'fa fa-toggle-on text-success' : 'fa fa-toggle-off text-secondary', data: { class: 'feedback-active', id: comment.id } %>
                                     <% end %>
                                     <%= truncate(comment.content, length: 68) %>
                                 </div>

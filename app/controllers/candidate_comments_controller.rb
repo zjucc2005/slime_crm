@@ -100,14 +100,10 @@ class CandidateCommentsController < ApplicationController
   end
 
   def activate_feedback
-    begin
-      load_candidate_comment
-      @candidate_comment.activate!
-      redirect_with_return_to comments_feedback_candidate_path(@candidate_comment.candidate)
-    rescue => e
-      flash[:error] = e.message
-      redirect_to root_path
-    end
+    load_candidate_comment
+    @candidate_comment.activate!
+    respond_to{ |f| f.js }
+    # redirect_with_return_to comments_feedback_candidate_path(@candidate_comment.candidate)
   end
 
   private
