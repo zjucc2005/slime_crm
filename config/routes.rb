@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     get :comments,             on: :member
     get :comments_feedback,    on: :member
     get :comments_contact,     on: :member
+    get :comments_client,      on: :member
 
     get :expert_info_for_clipboard, on: :member
     get :recommender_info, on: :collection
