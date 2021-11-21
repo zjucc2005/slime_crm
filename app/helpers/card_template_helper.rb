@@ -7,7 +7,7 @@ module CardTemplateHelper
   # 卡片模板
   # category: 'Candidate/ProjectTask'
   def card_template_options(category)
-    user_channel_filter(CardTemplate.where(category: category)).pluck(:name, :id)
+    user_channel_filter(CardTemplate.where(category: category).order(seq: :desc, created_at: :asc)).pluck(:name, :id)
   end
 
 end
