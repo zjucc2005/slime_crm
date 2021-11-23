@@ -101,6 +101,7 @@ class CandidateCommentsController < ApplicationController
 
   def activate_feedback
     load_candidate_comment
+    @candidate = @candidate_comment.candidate
     @candidate_comment.activate!
     respond_to{ |f| f.js }
     # redirect_with_return_to comments_feedback_candidate_path(@candidate_comment.candidate)

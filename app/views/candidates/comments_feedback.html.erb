@@ -24,7 +24,7 @@
                 <div class="candidate-comment-unit">
                     <div class="content">
                         <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true, class: 'content-l' do %>
-                            <%= content_tag :i, nil, class: comment.is_active? ? 'fa fa-toggle-on text-success' : 'fa fa-toggle-off text-secondary', data: { class: 'feedback-active', id: comment.id } %>
+                            <%= content_tag :i, nil, class: comment.is_active? ? 'fa fa-toggle-on text-success' : 'fa fa-toggle-off text-secondary', data: { class: "feedback-active-#{@candidate.id}", id: comment.id } %>
                         <% end %>
                         <div class="content-r"><%= comment.content %></div>
                     </div>
