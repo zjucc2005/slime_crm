@@ -64,7 +64,7 @@
             <% candidate.comments.where(category: 'feedback').order(created_at: :desc).limit(3).each do |comment| %>
                 <div class="text-smaller" title="<%= comment.content %>">
                     <span class="text-gray mr-1"><%= comment.created_at.strftime('%F') %></span>
-                    <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true, class: 'content-l' do %>
+                    <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true, class: 'text-decoration-none' do %>
                         <%= content_tag :i, nil, class: comment.is_active? ? 'fa fa-toggle-on text-success' : 'fa fa-toggle-off text-secondary', data: { class: "feedback-active-#{candidate.id}", id: comment.id } %>
                     <% end %>
                     <span>[<%= comment.creator.name_cn %>]</span>
