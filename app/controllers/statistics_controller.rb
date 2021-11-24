@@ -89,13 +89,13 @@ class StatisticsController < ApplicationController
       company = Company.find(item.company_id)
       { id: company.id, name: company.name, name_abbr: company.name_abbr, count: [(item.duration / 60.0).round(2)] }
     end
-    if params[:mode] == 'b'
+    # if params[:mode] == 'b'
       @result.each do |item|
         prev_duration = ProjectTask.joins(:project).where('project_tasks.status': 'finished', 'projects.company_id': item[:id]).
             where('project_tasks.started_at BETWEEN ? AND ?', s_month - 1.month, s_month).sum(:charge_duration)
         item[:count] << (prev_duration / 60.0).round(2)
       end
-    end
+    # end
     if @result.blank?
       @result = [{ name: 'NO DATA', name_abbr: 'NO DATA', count: [0] }]  # friendly show for chart
     end

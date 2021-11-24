@@ -55,7 +55,7 @@ $(document).ready(function(){
                     color: '#6c757d'
                 },
                 data: <%= @result.map{ |e| e[:count][1] }.reverse.to_json.html_safe %>
-            },
+            }
         ]
     };
     chart.setOption(option);
