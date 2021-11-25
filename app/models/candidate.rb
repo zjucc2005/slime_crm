@@ -163,17 +163,14 @@ class Candidate < ApplicationRecord
   def _c_t_mszq_rate_
     rate = 0
     if currency == 'RMB'
-      if cpt >= 1000 && cpt < 1200
-        rate = 2880
-      elsif cpt >= 1200 && cpt < 1500
-        rate = 3456
-      elsif cpt >= 1500 && cpt <= 2000
-        rate = 4320
-      elsif cpt > 2000 && cpt <= 2500
-        rate = 5760
-      elsif cpt > 2500 && cpt <= 3000
-        rate = 6336
-      end
+      rate = case cpt
+             when 1000..1300 then 2880
+             when 1300..1600 then 3456
+             when 1600..2000 then 4320
+             when 2000..2500 then 5184
+             when 2500..3000 then 5760
+             else 0
+             end
     end
     rate.zero? ? '' : "电话-#{rate}/小时"
   end
