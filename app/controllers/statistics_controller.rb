@@ -20,8 +20,8 @@ class StatisticsController < ApplicationController
     total_income_billed        = project_task_query.where('project_tasks.charge_status' => 'billed').sum(:actual_price)
     total_expert_fee           = project_task_cost_query.sum('project_task_costs.price')
     total_expert_fee_unpaid    = project_task_cost_query.where('project_tasks.payment_status' => 'unpaid').sum('project_task_costs.price')
-    average_expert_fee         = total_expert_fee / total_tasks
-    average_income             = total_income / total_tasks
+    average_expert_fee         = (total_expert_fee / total_tasks).round(2)
+    average_income             = (total_income / total_tasks).round(2)
 
     @current_month_count_infos = [
       { name: t('dashboard.total_experts'),              value: total_experts,              url: nil },
