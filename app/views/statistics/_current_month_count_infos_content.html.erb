@@ -10,7 +10,7 @@
     <% @current_month_count_infos.each do |info| %>
         <tr>
             <td class="pl-3"><%= info[:name] %></td>
-            <td>+ <%= info[:value] %></td>
+            <td><%= info[:value] %></td>
             <td>
                 <%= link_to(t('dashboard.detail'), info[:url]) if info[:url].present? %>
             </td>

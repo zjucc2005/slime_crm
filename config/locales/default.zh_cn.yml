@@ -114,6 +114,8 @@ zh_cn:
 
   dashboard:
     annual_total: "全年总计"
+    average_expert_fee: "专家平均成本"
+    average_income: "客户平均收费"
     billing_projects: "出账中的项目"
     category: "类型"
     current_month_increase: "本月新增"

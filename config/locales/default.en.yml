@@ -114,6 +114,8 @@ en:
 
   dashboard:
     annual_total: "Annual Total"
+    average_expert_fee: "Average expert fee"
+    average_income: "Average income"
     billing_projects: "Billing project"
     category: "Category"
     current_month_increase: "Current Month Increase"

@@ -61,7 +61,7 @@
                 <span>最近访谈时间： </span>
                 <span><%= user_channel_filter(candidate.project_tasks.where(status: 'finished')).maximum(:started_at).strftime('%F %H:%M') rescue nil %></span>
             </div>
-            <% candidate.comments.where(category: 'feedback').order(created_at: :desc).limit(3).each do |comment| %>
+            <% candidate.comments.where(category: 'feedback').order(created_at: :desc).limit(2).each do |comment| %>
                 <div class="text-smaller" title="<%= comment.content %>">
                     <span class="text-gray mr-1"><%= comment.created_at.strftime('%F') %></span>
                     <%= link_to activate_feedback_candidate_comment_path(comment), method: :post, remote: true, class: 'text-decoration-none' do %>
@@ -75,6 +75,18 @@
                 <%= link_to new_feedback_candidate_comments_path(candidate_id: candidate.id, return_to: "#{request.url}#cid_#{candidate.id}") do %>
                     <%= t('action.add_model', model: mt(:candidate_comment, :feedback)) %>
                 <% end if can?(:new_feedback, CandidateComment) %>
+            </div>
+            <% candidate.comments.where(category: 'contact').order(created_at: :desc).limit(2).each do |comment| %>
+                <div class="text-smaller" title="<%= comment.content %>">
+                    <span class="text-gray mr-1"><%= comment.created_at.strftime('%F') %></span>
+                    <span>[<%= comment.creator.name_cn %>]</span>
+                    <span><%= hl(truncate(comment.content, length: 20), @hl_words) %></span>
+                </div>
+            <% end %>
+            <div class="text-smaller">
+                <%= link_to new_contact_candidate_comments_path(candidate_id: candidate.id, return_to: "#{request.url}#cid_#{candidate.id}") do %>
+                    <%= t('action.add_model', model: mt(:candidate_comment, :contact)) %>
+                <% end if can?(:new_contact, CandidateComment) %>
             </div>
         </div>
     </div>
