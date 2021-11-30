@@ -11,6 +11,7 @@
         <th><%= mt(:project_task, :charge_duration) %></th>
         <th><%= mt(:project, :pm) %></th>
         <th><%= mt(:project, :pa) %></th>
+        <th class="action"><%= t(:operation) %></th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +28,11 @@
             <td><%= task.charge_duration %></td>
             <td><%= task.pm.name_cn %></td>
             <td><%= task.pa.name_cn %></td>
+            <td class="action">
+                <%= link_to edit_project_task_path(task), :class => 'btn btn-dark btn-xs' do %>
+                    <%= fa_icon_tag('edit') %>
+                <% end if can?(:edit, ProjectTask) && task.can_be_edited_by(current_user) %>
+            </td>
         </tr>
     <% end %>
     </tbody>
