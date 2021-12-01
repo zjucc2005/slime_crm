@@ -62,6 +62,7 @@ class FinanceController < ApplicationController
         @project_task.set_charge_timestamp(current_user.id)
       end
       if @project_task.save
+        @project_task.project.check_finished
         flash[:success] = t(:operation_succeeded)
         redirect_to finance_path(@project_task)
       else

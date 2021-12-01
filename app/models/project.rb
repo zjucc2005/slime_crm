@@ -75,7 +75,11 @@ class Project < ApplicationRecord
   end
 
   def check_finished
-    self.update!(status: 'finished') if is_finished # 如果项目符合结束条件则更新为已结束
+    if is_finished # 如果项目符合结束条件则更新为已结束
+      updated_at_was = updated_at
+      self.update!(status: 'finished')
+      self.update!(updated_at: updated_at_was)
+    end
   end
 
   def can_reopen?
