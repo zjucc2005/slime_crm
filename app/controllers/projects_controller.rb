@@ -419,7 +419,9 @@ class ProjectsController < ApplicationController
   end
 
   def project_task_params
-    params.require(:project_task).permit(:category, :expert_id, :client_id, :pa_id, :interview_form, :started_at, :expert_level, :expert_rate, :is_shorthand, :expert_alias)
+    params.require(:project_task).permit(
+        :category, :expert_id, :client_id, :pa_id, :interview_form, :started_at, :expert_level, :expert_rate,
+        :is_shorthand, :expert_alias, :expert_company, :expert_title)
   end
 
   def project_requirement_params
@@ -446,16 +448,18 @@ class ProjectsController < ApplicationController
       sheet.add_cell(row, 0, task.project.company.name)                                       # A, Client
       sheet.add_cell(row, 1, task.project.name)                                               # B, Project
       sheet.add_cell(row, 2, task.project.code)                                               # C, Project Code
-      sheet.add_cell(row, 3, task.client.if_nickname)                                         # D, Seat
+      sheet.add_cell(row, 3, task.client.client_alias)                                        # D, Seat
       sheet.add_cell(row, 4, task.started_at.strftime('%F %H:%M'))                            # E, Date
       sheet.add_cell(row, 5, {'face-to-face' => 'F2F contact'}[task.interview_form] || task.interview_form.capitalize)  # F, Type of Activity
       expert_name = task.expert_alias.present? ? task.expert_alias : task.expert.name
       sheet.add_cell(row, 6, expert_name)                                                     # G, Expert
-      exp = task.expert.latest_work_experience
-      if exp
-        sheet.add_cell(row, 7, exp.org_cn)                                                    # H, Expert Company
-        sheet.add_cell(row, 8, exp.title)                                                     # I, Expert Title
-      end
+      sheet.add_cell(row, 7, task.expert_company)                                             # H, Expert Company
+      sheet.add_cell(row, 8, task.expert_title)                                               # I, Expert Title
+      # exp = task.expert.latest_work_experience
+      # if exp
+      #   sheet.add_cell(row, 7, exp.org_cn)                                                    # H, Expert Company
+      #   sheet.add_cell(row, 8, exp.title)                                                     # I, Expert Title
+      # end
       sheet.add_cell(row, 9, task.expert_level.capitalize)                                    # J, Expert Level
       sheet.add_cell(row, 10, task.expert_rate)                                               # K, Rate
       sheet.add_cell(row, 11, task.duration)                                                  # L, Duration/mins

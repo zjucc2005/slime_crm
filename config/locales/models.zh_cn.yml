@@ -135,6 +135,7 @@ zh_cn:
         work_experiences: "工作经历"
         recommender_id: "推荐人ID"
         job_status: "在职状态"
+        client_alias: "Seat称谓"
 
       candidate_experience:
         category: "类型"
@@ -291,7 +292,9 @@ zh_cn:
         paid_by: "支付操作人"
         expert_level: "专家级别"
         expert_rate: "专家倍率"
-        expert_alias: "专家化名"
+        expert_alias: "专家称谓"
+        expert_company: "专家推荐公司"
+        expert_title: "专家推荐职位"
         memo: "备注"
         charge_duration: "收费时长"
         charge_duration_min: "收费时长(分钟)"

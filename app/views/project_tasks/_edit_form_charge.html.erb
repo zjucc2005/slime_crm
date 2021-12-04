@@ -89,10 +89,18 @@
         <%= f.select :is_recorded, boolean_options, { :include_blank => false }, :class => 'form-control select2' %>
     </div>
     <div class="col-lg-3 col-12 form-group">
-        <%= f.label :expert_alias %>
-        <%= f.text_field :expert_alias, class: 'form-control' %>
+        <%= f.label :expert_alias %><span class="text-red">*</span>
+        <%= f.text_field :expert_alias, required: 'true', class: 'form-control' %>
     </div>
-    <div class="col-lg-9 col-12 form-group">
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :expert_company %><span class="text-red">*</span>
+        <%= f.text_field :expert_company, required: true, class: 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
+        <%= f.label :expert_title %><span class="text-red">*</span>
+        <%= f.text_field :expert_title, required: true, class: 'form-control' %>
+    </div>
+    <div class="col-lg-3 col-12 form-group">
         <%= f.label :memo %>
         <%= f.text_field :memo, :class => 'form-control' %>
     </div>

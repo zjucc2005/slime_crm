@@ -41,7 +41,7 @@ class ProjectTask < ApplicationRecord
   scope :interview, -> { where( category: 'interview') }
 
   # property fields
-  %w[reviewer reviewer_email].each do |k|
+  %w[reviewer reviewer_email expert_company expert_title].each do |k|
     define_method(:"#{k}"){ self.property[k] }
     define_method(:"#{k}="){ |v| self.property[k] = v }
   end
@@ -105,7 +105,7 @@ class ProjectTask < ApplicationRecord
   def card_template_params(field)
     case field.to_sym
     when :uid                then self.uid
-    when :seat               then self.client.name
+    when :seat               then self.client.client_alias
     when :interview_form     then self.interview_form.capitalize
     when :pa                 then self.pa.name_cn
     when :start_time         then (self.started_at.strftime('%F %H:%M') rescue nil)
@@ -115,8 +115,8 @@ class ProjectTask < ApplicationRecord
     when :expert_uid         then self.expert.uid
     when :expert_name        then self.expert.name
     when :expert_mr_name     then self.expert.mr_name
-    when :expert_company     then self.expert.latest_work_experience.try(:org_cn)
-    when :expert_title       then self.expert.latest_work_experience.try(:title)
+    when :expert_company     then self.expert_company
+    when :expert_title       then self.expert_title
     when :expert_description then self.expert.description
     when :expert_rate        then self.expert_rate
     when :expert_unit_price  then self._expert_unit_price_

@@ -106,6 +106,7 @@ en:
         work_experiences: "Work experience"
         recommender_id: "Recommender ID"
         job_status: "Job status"
+        client_alias: "Seat Alias"
 
       candidate_experience:
         category: "Category"
@@ -263,6 +264,8 @@ en:
         expert_level: "Expert level"
         expert_rate: "Expert rate"
         expert_alias: "Expert alias"
+        expert_company: "Expert company"
+        expert_title: "Expert title"
         memo: "Memo"
         charge_duration: "Charge duration"
         charge_duration_min: "Charge duration(min)"
