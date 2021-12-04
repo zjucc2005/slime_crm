@@ -29,6 +29,7 @@ class ProjectTasksController < ApplicationController
       if @project_task.update(project_task_params)
         @project_task.project.last_update
         if params[:commit] == t('action.submit_and_confirm')
+          @project_task.check_profit!
           @project_task.finished!
         end
         flash[:success] = t(:operation_succeeded)

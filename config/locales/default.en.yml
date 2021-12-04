@@ -23,6 +23,7 @@ en:
   example: "Example"
   expert_card: "Expert card"
   expert_description: "Expert description"
+  expert_fee_greater_than_price: "Expert fee is greater than total price"
   expert_id: "Expert ID"
   expert_payment: "Expert fee"
   expert_recommendation: "Recommend"

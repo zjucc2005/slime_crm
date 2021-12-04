@@ -46,6 +46,12 @@ class ProjectTask < ApplicationRecord
     define_method(:"#{k}="){ |v| self.property[k] = v }
   end
 
+  def check_profit!
+    if costs.expert.sum(:price) > total_price
+      raise I18n.t(:expert_fee_greater_than_price)
+    end
+  end
+
   def finished!
     ActiveRecord::Base.transaction do
       contract = active_contract

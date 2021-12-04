@@ -23,6 +23,7 @@ zh_cn:
   example: "范例"
   expert_card: "专家卡片"
   expert_description: "专家说明"
+  expert_fee_greater_than_price: "专家费 > 收取费用"
   expert_id: "专家ID"
   expert_payment: "专家支出"
   expert_recommendation: "专家推荐"
