@@ -35,7 +35,7 @@ class ProjectTask < ApplicationRecord
   after_update :sync_payment_status
 
   after_create do
-    project.last_update
+    project.update(updated_at: Time.now, last_task_created_at: created_at)
   end
   # Scopes
   scope :interview, -> { where( category: 'interview') }

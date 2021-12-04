@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header">
             <h6 class="mb-0">
                 <%= fa_icon_tag('sort-amount-desc') %>
@@ -25,6 +25,35 @@
             <div class="text-center text-bold">
                 <%= link_to '···', current_month_task_ranking_statistics_path, :title => t(:show_all) %>
             </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h6 class="mb-0">
+                <i class="fa fa-bell-o text-red text-wobble"></i>
+                <%= t('dashboard.tips') %>
+            </h6>
+        </div>
+        <div class="card-body p-0">
+            <table class="table table-sm card-text border-bottom">
+                <thead>
+                <tr>
+                    <th class="pl-3"><%= t('dashboard.category') %></th>
+                    <th><%= t('dashboard.value') %></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @tips.each do |item| %>
+                    <tr>
+                        <td class="pl-3"><%= item[:name] %></td>
+                        <td><%= item[:value] %></td>
+                        <td><%= link_to(t('dashboard.detail'), item[:url]) if item[:url].present? %></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

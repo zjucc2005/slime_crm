@@ -56,6 +56,10 @@
                                 <%= select_tag :my_project, options_for_select([[t(:true), 'true']], params[:my_project]),
                                                :prompt => default_prompt, :class => 'form-control select2' %>
                             </div>
+                            <div class="col-lg-3 col-6 form-group">
+                                <%= label_tag :is_idle, t('dashboard.idle_projects') %>
+                                <%= select_tag :is_idle, options_for_select(boolean_options, params[:is_idle]), prompt: default_prompt, class: 'form-control select2' %>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">

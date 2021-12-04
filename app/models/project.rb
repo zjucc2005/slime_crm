@@ -175,6 +175,7 @@ class Project < ApplicationRecord
   private
   def setup
     self.status ||= 'initialized'
+    self.payment_way ||= active_contract.payment_way
   end
 
   def validation_add

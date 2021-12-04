@@ -25,6 +25,9 @@ class ProjectsController < ApplicationController
     if params[:company].present?
       query = query.joins(:company).where('companies.name ILIKE :company OR companies.name_abbr ILIKE :company', { company: "%#{params[:company].strip}%" })
     end
+    if params[:is_idle] == 'true'
+      query = query.where(status: 'ongoing').where.not(payment_way: 'advance_payment').where('last_task_created_at < ?', Time.now - 30.days).where('created_at > ?', '2021-05-01')
+    end
 
     @projects = query.order(:updated_at => :desc).paginate(:page => params[:page], :per_page => 20)
   end
