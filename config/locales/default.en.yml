@@ -132,6 +132,7 @@ en:
     finance_statistics_annual: "%{year} Finance Statistics"
     finance_tips: "Finance Tips"
     idle_projects: "Idle Projects"
+    idle_projects_admin: "Idle Projects(Admin Ver.)"
     unscheduled_projects: "Unscheduled Projects"
     ongoing_tasks: "Ongoing Tasks"
     overdue_tasks: "Overdue Tasks"

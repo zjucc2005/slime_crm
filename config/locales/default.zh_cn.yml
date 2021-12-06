@@ -132,6 +132,7 @@ zh_cn:
     finance_statistics_annual: "%{year}年财务统计"
     finance_tips: "财务提示"
     idle_projects: "空闲项目(30天无新任务)"
+    idle_projects_admin: "空闲项目(Admin版本)"
     unscheduled_projects: "未安排访谈的项目"
     ongoing_tasks: "进展中的任务"
     overdue_tasks: "逾期收款的任务"

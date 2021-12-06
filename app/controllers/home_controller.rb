@@ -39,11 +39,16 @@ class HomeController < ApplicationController
   def load_tips
     query = Project.where(status: 'ongoing').where.not(payment_way: 'advance_payment').
         where('last_task_created_at < ?', Time.now - 30.days).where('created_at > ?', '2021-05-01')
-    idle_project_count = user_channel_filter(query).count
-    idle_project_url = idle_project_count.zero? ? nil : projects_path(is_idle: true)
+    idle_project_count = user_channel_filter(query.where(created_by: current_user.id)).count
+    idle_project_url = idle_project_count.zero? ? nil : projects_path(is_idle: true, created_by: current_user.id)
     @tips = [
         { name: t('dashboard.idle_projects'), value: idle_project_count, url: idle_project_url }
     ]
+    if current_user.admin?
+      idle_project_admin_count = user_channel_filter(query).count
+      idle_project_admin_url = idle_project_admin_count.zero? ? nil : projects_path(is_idle: true)
+      @tips << { name: t('dashboard.idle_projects_admin'), value: idle_project_admin_count, url: idle_project_admin_url }
+    end
   end
 
   def load_finance_tips
