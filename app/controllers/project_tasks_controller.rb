@@ -29,8 +29,10 @@ class ProjectTasksController < ApplicationController
       if @project_task.update(project_task_params)
         @project_task.project.last_update
         if params[:commit] == t('action.submit_and_confirm')
-          @project_task.check_profit!
-          @project_task.finished!
+          ActiveRecord::Base.transaction do
+            @project_task.finished!
+            @project_task.check_profit!
+          end
         end
         flash[:success] = t(:operation_succeeded)
         redirect_to project_path(@project_task.project)

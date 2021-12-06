@@ -48,12 +48,13 @@ class ProjectTask < ApplicationRecord
 
   def check_profit!
     if costs.expert.sum(:price) > total_price
+      self.actual_price = nil
       raise I18n.t(:expert_fee_greater_than_price)
     end
   end
 
   def finished!
-    ActiveRecord::Base.transaction do
+    # ActiveRecord::Base.transaction do
       contract = active_contract
       self.status = 'finished'
       self.actual_price ||= base_price                                                      # 实际收费
@@ -62,7 +63,7 @@ class ProjectTask < ApplicationRecord
 
       project_candidate = ProjectCandidate.where(project_id: project_id, candidate_id: expert_id).first
       project_candidate.update!(mark: 'interviewed') if project_candidate  # 自动更新专家项目中标识为已访谈
-    end
+    # end
   end
 
   def can_show?

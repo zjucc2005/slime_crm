@@ -86,7 +86,7 @@ class Ability
     can :manage, LocationDatum
     can :manage, Bank
     can :read, Industry
-    can :manage, ProjectCodeArea
+    # can :manage, ProjectCodeArea
     can [:import_gllue_candidates], Extra
   end
 
@@ -106,13 +106,13 @@ class Ability
     can :manage, LocationDatum
     can :manage, Bank
     can :read, Industry
-    can :manage, ProjectCodeArea
+    # can :manage, ProjectCodeArea
     can [:import_gllue_candidates], Extra
   end
 
   def finance_ability
     can_edit_my_account
-    can [:read, :gen_card, :project_tasks, :comments, :payment_infos], Candidate
+    can [:read, :gen_card, :project_tasks, :comments, :payment_infos, :create_client, :edit_client, :update_client], Candidate
     can :manage, Company
     can :manage, Contract
     can [:index, :show, :edit, :update, :project_tasks, :experts, :export_billing_excel, :edit_invoice_info, :close, :reopen], Project
